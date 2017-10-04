@@ -5,7 +5,8 @@ import org.junit.Test;
 public class CandidateRegistrationManagerTest {
 
     @Test
-    public void getNoEmailsWhenNoEmailsAdded() {
+    public void getNoEmailWhenNoEmailAdded() {
         Assert.assertEquals("", new CandidateRegistrationManager("").getEmails());
     }
+
 }

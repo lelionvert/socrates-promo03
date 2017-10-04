@@ -3,25 +3,25 @@ import java.util.List;
 
 public class CandidateRegistrationManager {
 
-    List<String> candidates;
+    List<Email> candidates;
 
-    public CandidateRegistrationManager(List<String> existingCandidates) {
+    public CandidateRegistrationManager(List<Email> existingCandidates) {
         this.candidates = existingCandidates;
     }
 
     public CandidateRegistrationManager() {
-        this.candidates = new ArrayList<String>();
+        this.candidates = new ArrayList<Email>();
     }
 
-    public List<String> findAllEmail() {
+    public List<Email> findAllEmail() {
         return candidates;
     }
 
-    public void add(List<String> emails) {
+    public void addAll(List<Email> emails) {
         candidates.addAll(emails);
     }
 
-    public void add(String email) {
+    public void add(Email email) {
         candidates.add(email);
     }
 }

@@ -7,12 +7,14 @@ import java.util.List;
 public class CandidateRegistrationManagerTest {
 
     private CandidateRegistrationManager candidateRegistrationManager;
-    private List<String> candidatesEmail;
+    private List<Email> candidatesEmail;
 
     @Before
     public void setUp() throws Exception {
         candidateRegistrationManager = new CandidateRegistrationManager();
-        candidatesEmail = new ArrayList<String>();
+        candidatesEmail = new ArrayList<Email>();
+        candidatesEmail.add(new Email("test@test.fr"));
+        candidatesEmail.add(new Email("test1@test.fr"));
     }
 
     @Test
@@ -22,20 +24,16 @@ public class CandidateRegistrationManagerTest {
 
     @Test
     public void noExistingAndAddingOneCandidate() {
-        candidatesEmail.add("test@test.fr");
-
-        candidateRegistrationManager.add(candidatesEmail);
+        Email email = new Email("test@test.fr");
+        candidateRegistrationManager.add(email);
         Assertions.assertThat(candidateRegistrationManager.findAllEmail())
                   .hasSize(1)
-                  .containsAll(candidatesEmail);
+                  .contains(email);
     }
 
     @Test
     public void noExistingAndAddingTwoCandidates() {
-        candidatesEmail.add("test@test.fr");
-        candidatesEmail.add("test1@test.fr");
-
-        candidateRegistrationManager.add(candidatesEmail);
+        candidateRegistrationManager.addAll(candidatesEmail);
         Assertions.assertThat(candidateRegistrationManager.findAllEmail())
                   .hasSize(2)
                   .containsAll(candidatesEmail);
@@ -43,12 +41,10 @@ public class CandidateRegistrationManagerTest {
 
     @Test
     public void twoExistingAndAddingOneCandidate(){
-        candidatesEmail.add("test@test.fr");
-        candidatesEmail.add("test1@test.fr");
         candidateRegistrationManager = new CandidateRegistrationManager(candidatesEmail);
-
-        String newCandidateEmail = "test2@test.fr";
+        Email newCandidateEmail = new Email("test2@test.fr");
         candidateRegistrationManager.add(newCandidateEmail);
+
         Assertions.assertThat(candidateRegistrationManager.findAllEmail())
             .hasSize(3)
             .containsAll(candidatesEmail)

@@ -1,11 +1,11 @@
-import org.junit.Assert;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 public class CandidateRegistrationManagerTest {
 
     @Test
-    public void shouldReturnOneCandidateEmail(){
-        String email = "test@test.fr";
-        Assert.assertEquals(email, new CandidateRegistrationManager().add(email));
+    public void noExistingAndAddingZeroCandidate() {
+        CandidateRegistrationManager candidateRegistrationManager = new CandidateRegistrationManager();
+        Assertions.assertThat(candidateRegistrationManager.findAllEmail()).isEmpty();
     }
 }

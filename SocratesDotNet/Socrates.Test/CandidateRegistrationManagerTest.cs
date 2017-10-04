@@ -11,27 +11,28 @@ namespace Socrates.Test
     [TestFixture]
     public class CandidateRegistrationManagerTest
     {
-       [Test]
-        public void ShouldRetournOneCandidateWhenAdded()
+        [Test]
+        public void ShouldReturnNoCandidate()
         {
-          
-            string emailCandidate = "regis.dubois@socrates.com" ;
             var candidateRegistrationManager = new CandidateRegistrationManager();
-            Assert.AreEqual(candidateRegistrationManager.Add(emailCandidate), "regis.dubois@socrates.com");
+
+            var listCandidates = candidateRegistrationManager.getEmails();
+
+            Check.That(listCandidates).IsNull();
         }
 
-    }
 
-    internal class CandidateRegistrationManager
-    {
-        public CandidateRegistrationManager()
+        internal class CandidateRegistrationManager
         {
+            public CandidateRegistrationManager()
+            {
 
-        }
+            }
 
-        internal string Add(string emailCandidate)
-        {
-            return "regis.dubois@socrates.com";
+            internal object getEmails()
+            {
+                return null;
+            }
         }
     }
 }

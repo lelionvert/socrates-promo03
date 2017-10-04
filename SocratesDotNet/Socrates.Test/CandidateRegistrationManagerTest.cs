@@ -18,20 +18,39 @@ namespace Socrates.Test
 
             var listCandidates = candidateRegistrationManager.getEmails();
 
-            Check.That(listCandidates).IsNull();
+            Check.That(listCandidates).HasSize(0);
         }
 
+        [Test]
+        public void ShouldReturnOneCandidateWhenInitializedCandidateList()
+        {
+            var candidateRegistrationManager = new CandidateRegistrationManager("regis.dubois@socrates.com");
 
+            var listCandidates = candidateRegistrationManager.getEmails();
+
+            Check.That(listCandidates).HasSize(1);
+            Check.That(listCandidates[0]).IsEqualTo("regis.dubois@socrates.com");
+        }
+
+        
         internal class CandidateRegistrationManager
         {
+            private IList<string> array = new List<string>();
+
             public CandidateRegistrationManager()
             {
-
+               
             }
 
-            internal object getEmails()
+            public CandidateRegistrationManager(string v)
             {
-                return null;
+
+                this.array.Add(v);
+            }
+
+            internal IList<string> getEmails()
+            {
+                return this.array;
             }
         }
     }

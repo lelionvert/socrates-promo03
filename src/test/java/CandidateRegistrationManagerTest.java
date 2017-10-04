@@ -40,4 +40,18 @@ public class CandidateRegistrationManagerTest {
                   .hasSize(2)
                   .containsAll(candidatesEmail);
     }
+
+    @Test
+    public void twoExistingAndAddingOneCandidate(){
+        candidatesEmail.add("test@test.fr");
+        candidatesEmail.add("test1@test.fr");
+        candidateRegistrationManager.add(candidatesEmail);
+
+        String newEmail = "test2@test.fr";
+        candidateRegistrationManager.add(newEmail);
+        candidatesEmail.add(newEmail);
+        Assertions.assertThat(candidateRegistrationManager.findAllEmail())
+            .hasSize(3)
+            .containsAll(candidatesEmail);
+    }
 }

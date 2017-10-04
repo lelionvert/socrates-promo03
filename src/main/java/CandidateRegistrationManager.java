@@ -12,4 +12,8 @@ public class CandidateRegistrationManager {
     public void add(List<String> emails) {
         candidates.addAll(emails);
     }
+
+    public void add(String email) {
+        candidates.add(email);
+    }
 }

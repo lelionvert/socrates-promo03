@@ -1,14 +1,6 @@
-import java.util.ArrayList;
-
-public class CandidateRegistrationManager {
-
-    private String emails;
-
-    public CandidateRegistrationManager(String emails) {
-        this.emails = emails;
-    }
-
-    public String getEmails() {
-        return this.emails;
-    }
+/**
+ * Created by lenovo_1 on 04/10/2017.
+ */
+public interface CandidateRegistrationManager {
+    String getEmails();
 }

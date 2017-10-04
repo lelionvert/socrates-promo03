@@ -9,7 +9,7 @@ public class CandidateRegistrationManager {
         return candidates;
     }
 
-    public void add(String email) {
-        candidates.add(email);
+    public void add(List<String> emails) {
+        candidates.addAll(emails);
     }
 }

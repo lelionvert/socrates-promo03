@@ -3,7 +3,15 @@ import java.util.List;
 
 public class CandidateRegistrationManager {
 
-    List<String> candidates = new ArrayList<String>();
+    List<String> candidates;
+
+    public CandidateRegistrationManager(List<String> existingCandidates) {
+        this.candidates = existingCandidates;
+    }
+
+    public CandidateRegistrationManager() {
+        this.candidates = new ArrayList<String>();
+    }
 
     public List<String> findAllEmail() {
         return candidates;

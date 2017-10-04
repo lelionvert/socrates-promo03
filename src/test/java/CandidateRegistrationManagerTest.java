@@ -45,13 +45,13 @@ public class CandidateRegistrationManagerTest {
     public void twoExistingAndAddingOneCandidate(){
         candidatesEmail.add("test@test.fr");
         candidatesEmail.add("test1@test.fr");
-        candidateRegistrationManager.add(candidatesEmail);
+        candidateRegistrationManager = new CandidateRegistrationManager(candidatesEmail);
 
-        String newEmail = "test2@test.fr";
-        candidateRegistrationManager.add(newEmail);
-        candidatesEmail.add(newEmail);
+        String newCandidateEmail = "test2@test.fr";
+        candidateRegistrationManager.add(newCandidateEmail);
         Assertions.assertThat(candidateRegistrationManager.findAllEmail())
             .hasSize(3)
-            .containsAll(candidatesEmail);
+            .containsAll(candidatesEmail)
+            .contains(newCandidateEmail);
     }
 }

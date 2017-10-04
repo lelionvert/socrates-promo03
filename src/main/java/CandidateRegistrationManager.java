@@ -1,12 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by lenovo_13 on 04/10/2017.
- */
 public class CandidateRegistrationManager {
 
+    List<String> candidates = new ArrayList<String>();
+
     public List<String> findAllEmail() {
-        return new ArrayList<String>();
+        return candidates;
+    }
+
+    public void add(String email) {
+        candidates.add(email);
     }
 }

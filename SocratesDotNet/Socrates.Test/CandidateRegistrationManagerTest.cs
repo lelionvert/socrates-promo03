@@ -94,6 +94,12 @@ namespace Socrates.Test
             var listCandidatesEmails = candidateRegistrationManager.GetEmails();
             Check.That(listCandidatesEmails).Contains(Email.Of(RegisDubois), Email.Of(FannyDubois), Email.Of(firstCandidateEmail), Email.Of(secondCandidateEmail)).Only().Once();
         }
+
+        [Test]
+        public void ShouldTestTheNextIssue()
+        {
+
+        }
     }
     
     public class Email

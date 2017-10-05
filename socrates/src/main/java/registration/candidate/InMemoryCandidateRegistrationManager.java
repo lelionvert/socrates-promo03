@@ -1,5 +1,6 @@
 package registration.candidate;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -7,8 +8,13 @@ public class InMemoryCandidateRegistrationManager implements CandidateRegistrati
 
     private Collection<String> emails;
 
+    public InMemoryCandidateRegistrationManager() {
+        emails = new ArrayList<String>();
+    }
+
     protected InMemoryCandidateRegistrationManager(Collection existingCandidates) {
-        this.emails = existingCandidates;
+        this();
+        this.emails.addAll(existingCandidates);
     }
 
     public Collection<String> getEmails() {

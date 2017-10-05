@@ -1,6 +1,7 @@
 package registration.candidate;
 
 import org.assertj.core.api.Assertions;
+import org.assertj.core.util.Lists;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,19 +18,20 @@ public class CandidateRegistrationManagerTest {
 
     @Before
     public void setUp() throws Exception {
-        emptyInMemoryCandidateRegistrationManager = new EmptyInMemoryCandidateRegistrationManager();
-        withBuilderFilledInMemoryCandidateRegistrationManager = new WithBuilderInMemoryCandidateRegistrationManager();
+        emptyInMemoryCandidateRegistrationManager = new InMemoryCandidateRegistrationManager();
+        withBuilderFilledInMemoryCandidateRegistrationManager = new InMemoryCandidateRegistrationManager(
+                Lists.newArrayList(EMAIL_REGIS_DUBOIS));
     }
 
     @Test
-    public void getEmails_should_return_no_email_when_no_email_exists() {
+    public void getEmails_should_return_no_email_when_no_email_exists() throws Exception {
         Collection<String> emails = emptyInMemoryCandidateRegistrationManager.getEmails();
         Assertions.assertThat(emails)
                   .hasSize(0);
     }
 
     @Test
-    public void getEmails_should_return_one_email_when_one_email_exists() {
+    public void getEmails_should_return_one_email_when_one_email_exists() throws Exception {
         Collection<String> emails = withBuilderFilledInMemoryCandidateRegistrationManager.getEmails();
         Assertions.assertThat(emails)
                   .containsExactlyInAnyOrder(EMAIL_REGIS_DUBOIS);
@@ -37,7 +39,7 @@ public class CandidateRegistrationManagerTest {
 
     @Test
     public void getEmails_should_return_one_candidate_when_addCandidate_to_empty() throws Exception {
-        emptyInMemoryCandidateRegistrationManager.addCandidate(Email.of("jules.fournier@xp.com"));
+        emptyInMemoryCandidateRegistrationManager.addCandidate(Email.of(EMAIL_JULES_FOURNIER));
         Assertions.assertThat(emptyInMemoryCandidateRegistrationManager.getEmails())
                   .containsExactlyInAnyOrder(EMAIL_JULES_FOURNIER);
     }
@@ -47,11 +49,5 @@ public class CandidateRegistrationManagerTest {
         emptyInMemoryCandidateRegistrationManager.addCandidates(EMAIL_JULES_FOURNIER, EMAIL_JULIE_MARECHAL);
         Assertions.assertThat(emptyInMemoryCandidateRegistrationManager.getEmails())
                   .containsExactlyInAnyOrder(EMAIL_JULIE_MARECHAL, EMAIL_JULES_FOURNIER);
-
     }
 }
-
-/* todo
-    SetUp email de base constant
-    Ajouter un builder
- */

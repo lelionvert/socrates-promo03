@@ -75,5 +75,13 @@ public class CandidateRegistrationManagerTest {
             .containsAll(candidatesEmail);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void emptyEmailThrowException() throws Exception {
+        new Email("");
+    }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void nullEmailThrowException() throws Exception {
+        new Email(null);
+    }
 }

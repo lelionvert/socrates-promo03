@@ -4,7 +4,14 @@ public class Email {
     private String email;
 
     public Email(String email) {
+        verifyEmail(email);
         this.email = email;
+    }
+
+    private void verifyEmail(String email) {
+        if(email == null || email.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override

@@ -12,7 +12,7 @@ namespace Socrates.Test
     public class CandidateRegistrationManagerTest
     {
         [Test]
-        public void GetEmails_Should_Return_No_Email_From_Candidate_When_No_Candidate_Exists()
+        public void GetEmails_Should_Return_No_Email_From_Candidate_When_No_Candidate_Email_Exists()
         {
             var candidateRegistrationManager = new CandidateRegistrationManager();
 
@@ -22,7 +22,7 @@ namespace Socrates.Test
         }
 
         [Test]
-        public void GetEmails_Should_Return_One_Candidate_When_Already_One_Exists()
+        public void GetEmails_Should_Return_One_Candidate_Email_When_Already_One_Exists()
         {
             var candidateRegistrationManager = new CandidateRegistrationManager("regis.dubois@socrates.com");
 
@@ -32,10 +32,24 @@ namespace Socrates.Test
             Check.That(listCandidatesEmails[0]).IsEqualTo("regis.dubois@socrates.com");
         }
 
-        
+        [Test]
+        public void AddEmail_Should_Return_The_Email_Previously_Added()
+        {
+            var candidateRegistrationManager = new CandidateRegistrationManager();
+
+            var candidateEmail = "regis.dubois@socrates.com";
+
+            candidateRegistrationManager.AddEmail(candidateEmail);
+
+            var listCandidatesEmails = candidateRegistrationManager.GetEmails();
+
+            Check.That(listCandidatesEmails[0]).IsEqualTo("regis.dubois@socrates.com");
+
+        }
+
         internal class CandidateRegistrationManager
         {
-            private IList<string> emailList = new List<string>();
+            private IList<string> candidateEmailList = new List<string>();
 
             public CandidateRegistrationManager()
             {
@@ -46,13 +60,18 @@ namespace Socrates.Test
             {
                 foreach (var email in emails)
                 {
-                    this.emailList.Add(email);
+                    this.candidateEmailList.Add(email);
                 }
+            }
+
+            internal void AddEmail(string candidateEmail)
+            {
+                this.candidateEmailList.Add(candidateEmail);
             }
 
             internal IList<string> GetEmails()
             {
-                return this.emailList;
+                return this.candidateEmailList;
             }
         }
     }

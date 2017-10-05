@@ -50,4 +50,18 @@ public class CandidateRegistrationManagerTest {
         Assertions.assertThat(emptyInMemoryCandidateRegistrationManager.getEmails())
                   .containsExactlyInAnyOrder(EMAIL_JULIE_MARECHAL, EMAIL_JULES_FOURNIER);
     }
+
+    @Test
+    public void getEmails_should_return_several_candidates_when_addCandidate_to_several_existing() throws Exception {
+        withBuilderFilledInMemoryCandidateRegistrationManager.addCandidate(Email.of(EMAIL_JULES_FOURNIER));
+        Assertions.assertThat(withBuilderFilledInMemoryCandidateRegistrationManager.getEmails())
+                  .containsExactlyInAnyOrder(EMAIL_JULES_FOURNIER, EMAIL_REGIS_DUBOIS);
+    }
+
+    @Test
+    public void getEmails_should_return_several_candidates_when_addCandidates_to_several_existing() throws Exception {
+        withBuilderFilledInMemoryCandidateRegistrationManager.addCandidates(EMAIL_JULES_FOURNIER, EMAIL_JULIE_MARECHAL);
+        Assertions.assertThat(withBuilderFilledInMemoryCandidateRegistrationManager.getEmails())
+                .containsExactlyInAnyOrder(EMAIL_JULES_FOURNIER, EMAIL_REGIS_DUBOIS, EMAIL_JULIE_MARECHAL);
+    }
 }

@@ -1,19 +1,19 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class CandidateRegistrationManager {
 
-    List<Email> candidates;
+    Set<Email> candidates;
 
     public CandidateRegistrationManager(List<Email> existingCandidates) {
-        this.candidates = existingCandidates;
+        this();
+        candidates.addAll(existingCandidates);
     }
 
     public CandidateRegistrationManager() {
-        this.candidates = new ArrayList<Email>();
+        this.candidates = new HashSet<Email>();
     }
 
-    public List<Email> findAllEmail() {
+    public Collection<Email> findAllEmail() {
         return candidates;
     }
 

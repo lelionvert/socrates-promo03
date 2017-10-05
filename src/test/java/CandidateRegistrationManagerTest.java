@@ -50,4 +50,30 @@ public class CandidateRegistrationManagerTest {
             .containsAll(candidatesEmail)
             .contains(newCandidateEmail);
     }
+
+    @Test
+    public void twoExistingAndAddingTwoCandidates(){
+        candidateRegistrationManager = new CandidateRegistrationManager(candidatesEmail);
+        List<Email> newCandidatesEmail = new ArrayList<Email>();
+        newCandidatesEmail.add(new Email("test2@test.fr"));
+        newCandidatesEmail.add(new Email("test3@test.fr"));
+        candidateRegistrationManager.addAll(newCandidatesEmail);
+
+        Assertions.assertThat(candidateRegistrationManager.findAllEmail())
+            .hasSize(4)
+            .containsAll(candidatesEmail)
+            .containsAll(newCandidatesEmail);
+    }
+    @Test
+    public void twoExistingAndAddingOneCandidateAlreadyExisting(){
+        candidateRegistrationManager = new CandidateRegistrationManager(candidatesEmail);
+        Email existingCandidateEmail = new Email("test@test.fr");
+        candidateRegistrationManager.add(existingCandidateEmail);
+
+        Assertions.assertThat(candidateRegistrationManager.findAllEmail())
+            .hasSize(2)
+            .containsAll(candidatesEmail);
+    }
+
+
 }

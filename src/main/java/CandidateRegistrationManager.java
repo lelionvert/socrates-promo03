@@ -2,7 +2,7 @@ import java.util.*;
 
 public class CandidateRegistrationManager {
 
-    private Set<Email> candidates;
+    private Collection<Email> candidates;
 
     public CandidateRegistrationManager(List<Email> existingCandidates) {
         this();

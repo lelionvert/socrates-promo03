@@ -8,12 +8,17 @@ public class Email {
 
     private String email;
 
-    public Email(String email) {
-        verifyEmail(email);
+    private Email(String email) {
         this.email = email;
     }
 
-    private void verifyEmail(String email) {
+    public static Email of(String email) {
+        verifyEmail(email);
+        return new Email(email);
+    }
+
+
+    private static void verifyEmail(String email) {
         if(email == null
             || email.isEmpty()
             || !isValidFormat(email)) {
@@ -21,7 +26,7 @@ public class Email {
         }
     }
 
-    private boolean isValidFormat(String email) {
+    private static boolean isValidFormat(String email) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(email);
         return matcher.find();
     }

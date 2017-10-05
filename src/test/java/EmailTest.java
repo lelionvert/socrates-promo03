@@ -4,16 +4,16 @@ public class EmailTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void emptyEmailThrowException() throws Exception {
-        new Email("");
+        Email.of("");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void nullEmailThrowException() throws Exception {
-        new Email(null);
+        Email.of(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void notEmailValidThrowException() throws Exception {
-        new Email("emailNotValid.ok");
+        Email.of("emailNotValid.ok");
     }
 }

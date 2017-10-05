@@ -26,7 +26,7 @@ namespace Socrates.Test
             var candidateRegistrationManager = new CandidateRegistrationManager(RegisDubois);
 
             var listCandidatesEmails = candidateRegistrationManager.GetEmails();
-            Check.That(listCandidatesEmails).ContainsExactly(new[] { RegisDubois });
+            Check.That(listCandidatesEmails).ContainsExactly(RegisDubois);
         }
 
         [TestCase(RegisDubois)]
@@ -57,7 +57,21 @@ namespace Socrates.Test
             Check.That(listCandidatesEmails).Contains(RegisDubois, FannyDubois ).Only().Once();
         }
 
-        
+        [Test]
+        public void AddEmail_Should_Return_Unique_Candidate_Email_Even_If_You_Try_To_Add_Existing_Candidate_Email()
+        {
+            var candidateRegistrationManager = new CandidateRegistrationManager();
+
+            candidateRegistrationManager.AddEmail(RegisDubois);
+
+            candidateRegistrationManager.AddEmail(RegisDubois);
+
+            var listCandidatesEmails = candidateRegistrationManager.GetEmails();
+
+            Check.That(listCandidatesEmails).Contains(RegisDubois).Once();
+        }
+
+
     }
 
     internal class CandidateRegistrationManager
@@ -77,7 +91,12 @@ namespace Socrates.Test
 
         internal void AddEmail(string candidateEmail)
         {
+            if (candidateEmailList.Contains(candidateEmail))
+            {
+                return;
+            }
             this.candidateEmailList.Add(candidateEmail);
+
         }
 
         internal IList<string> GetEmails()

@@ -64,8 +64,9 @@ public class CandidateRegistrationManagerTest {
             .containsAll(candidatesEmail)
             .containsAll(newCandidatesEmail);
     }
+
     @Test
-    public void twoExistingAndAddingOneCandidateAlreadyExisting(){
+    public void twoExistingAndAddingOneCandidateAlreadyExisting() {
         candidateRegistrationManager = new CandidateRegistrationManager(candidatesEmail);
         Email existingCandidateEmail = new Email("sabine@lcdlv.fr");
         candidateRegistrationManager.add(existingCandidateEmail);
@@ -73,20 +74,5 @@ public class CandidateRegistrationManagerTest {
         Assertions.assertThat(candidateRegistrationManager.findAllEmail())
             .hasSize(2)
             .containsAll(candidatesEmail);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void emptyEmailThrowException() throws Exception {
-        new Email("");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void nullEmailThrowException() throws Exception {
-        new Email(null);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void notEmailValidThrowException() throws Exception {
-        new Email("emailNotValid.ok");
     }
 }

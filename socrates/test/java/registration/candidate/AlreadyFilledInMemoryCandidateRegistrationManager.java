@@ -1,4 +1,4 @@
-package registration;
+package registration.candidate;
 
 import registration.candidate.InMemoryCandidateRegistrationManager;
 

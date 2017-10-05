@@ -18,4 +18,8 @@ public class InMemoryCandidateRegistrationManager implements CandidateRegistrati
     public Collection getEmails() {
         return this.emails;
     }
+
+    public void addCandidate(Email email) {
+        emails.add(email.getEmail());
+    }
 }

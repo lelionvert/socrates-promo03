@@ -1,5 +1,6 @@
-package registration;
+package registration.candidate;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,8 +9,8 @@ import java.util.Collection;
 
 public class CandidateRegistrationManagerTest {
 
-    private AlreadyFilledInMemoryCandidateRegistrationManager alreadyFilledInMemoryCandidateRegistrationManager;
-    private EmptyInMemoryCandidateRegistrationManager emptyInMemoryCandidateRegistrationManager;
+    private CandidateRegistrationManager alreadyFilledInMemoryCandidateRegistrationManager;
+    private CandidateRegistrationManager emptyInMemoryCandidateRegistrationManager;
 
     @Before
     public void setUp() throws Exception {
@@ -29,6 +30,12 @@ public class CandidateRegistrationManagerTest {
 
         Assert.assertEquals(1, emails.size());
         Assert.assertTrue(emails.contains("regis.dubois@socrates.com"));
+    }
+
+    @Test
+    public void getEmails_should_return_one_cantidate_when_addCandidate_to_empty() throws Exception {
+        emptyInMemoryCandidateRegistrationManager.addCandidate(Email.of("jules.fournier@xp.com"));
+        Assertions.assertThat(emptyInMemoryCandidateRegistrationManager.getEmails()).containsExactly("jules.fournier@xp.com");
     }
 
     /*

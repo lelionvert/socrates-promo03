@@ -10,7 +10,7 @@ public class CandidateRegistrationManager {
     }
 
     public CandidateRegistrationManager() {
-        this.candidates = new HashSet<>();
+        this.candidates = new ArrayList<>();
     }
 
     public Collection<Email> findAllEmail() {
@@ -24,6 +24,9 @@ public class CandidateRegistrationManager {
     }
 
     public void add(Email email) {
+        if(candidates.contains(email)) {
+            throw new CandidateRegistrationException("L'email "+email+" est déjà utilisé pour une candidature.");
+        }
         candidates.add(email);
     }
 }

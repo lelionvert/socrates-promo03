@@ -1,10 +1,17 @@
 import org.assertj.core.api.Assertions;
+import org.hamcrest.CoreMatchers;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class CandidateRegistrationManagerTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     private CandidateRegistrationManager candidateRegistrationManager;
     private List<Email> candidatesEmail;
@@ -69,10 +76,9 @@ public class CandidateRegistrationManagerTest {
     public void twoExistingAndAddingOneCandidateAlreadyExisting() {
         candidateRegistrationManager = new CandidateRegistrationManager(candidatesEmail);
         Email existingCandidateEmail = Email.of("sabine@lcdlv.fr");
-        candidateRegistrationManager.add(existingCandidateEmail);
 
-        Assertions.assertThat(candidateRegistrationManager.findAllEmail())
-            .hasSize(2)
-            .containsAll(candidatesEmail);
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage(CoreMatchers.containsString("L'email sabine@lcdlv.fr est déjà utilisé pour une candidature."));
+        candidateRegistrationManager.add(existingCandidateEmail);
     }
 }

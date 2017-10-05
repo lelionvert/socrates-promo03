@@ -5,23 +5,21 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class CandidateRegistrationManagerTest {
+
+    public static final Email sabineEmail = Email.of("sabine@lcdlv.fr");
+    public static final Email melodyEmail = Email.of("melody@lcdlv.fr");
+    public static final Email cyrilEmail = Email.of("cyril@lcdlv.fr");
+    public static final Email ismaelEmail = Email.of("ismael@lcdlv.fr");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     private CandidateRegistrationManager candidateRegistrationManager;
-    private List<Email> candidatesEmail;
 
     @Before
     public void setUp() throws Exception {
         candidateRegistrationManager = new CandidateRegistrationManager();
-        candidatesEmail = new ArrayList<>();
-        candidatesEmail.add(Email.of("sabine@lcdlv.fr"));
-        candidatesEmail.add(Email.of("melody@lcdlv.fr"));
     }
 
     @Test
@@ -31,54 +29,42 @@ public class CandidateRegistrationManagerTest {
 
     @Test
     public void noExistingAndAddingOneCandidate() {
-        Email email = Email.of("sabine@lcdlv.fr");
-        candidateRegistrationManager.add(email);
+        candidateRegistrationManager.add(sabineEmail);
         Assertions.assertThat(candidateRegistrationManager.findAllEmail())
-                  .hasSize(1)
-                  .contains(email);
+                  .containsOnlyOnce(sabineEmail);
     }
 
     @Test
     public void noExistingAndAddingTwoCandidates() {
-        candidateRegistrationManager.addAll(candidatesEmail);
+        candidateRegistrationManager.addMany(cyrilEmail, ismaelEmail);
         Assertions.assertThat(candidateRegistrationManager.findAllEmail())
-                  .hasSize(2)
-                  .containsAll(candidatesEmail);
+                  .containsExactlyInAnyOrder(cyrilEmail, ismaelEmail);
     }
 
     @Test
     public void twoExistingAndAddingOneCandidate(){
-        candidateRegistrationManager = new CandidateRegistrationManager(candidatesEmail);
-        Email newCandidateEmail = Email.of("cyril@lcdlv.fr");
-        candidateRegistrationManager.add(newCandidateEmail);
+        candidateRegistrationManager = CandidateRegistrationManager.withExisting(sabineEmail, melodyEmail);
+        candidateRegistrationManager.add(cyrilEmail);
 
         Assertions.assertThat(candidateRegistrationManager.findAllEmail())
-            .hasSize(3)
-            .containsAll(candidatesEmail)
-            .contains(newCandidateEmail);
+            .containsExactlyInAnyOrder(sabineEmail, cyrilEmail, melodyEmail);
     }
 
     @Test
     public void twoExistingAndAddingTwoCandidates(){
-        candidateRegistrationManager = new CandidateRegistrationManager(candidatesEmail);
-        List<Email> newCandidatesEmail = new ArrayList<>();
-        newCandidatesEmail.add(Email.of("cyril@lcdlv.fr"));
-        newCandidatesEmail.add(Email.of("ismael@lcdlv.fr"));
-        candidateRegistrationManager.addAll(newCandidatesEmail);
+        candidateRegistrationManager = CandidateRegistrationManager.withExisting(sabineEmail, melodyEmail);
+        candidateRegistrationManager.addMany(cyrilEmail, ismaelEmail);
 
         Assertions.assertThat(candidateRegistrationManager.findAllEmail())
-            .hasSize(4)
-            .containsAll(candidatesEmail)
-            .containsAll(newCandidatesEmail);
+            .containsExactlyInAnyOrder(sabineEmail, melodyEmail, cyrilEmail, ismaelEmail);
     }
 
     @Test
     public void twoExistingAndAddingOneCandidateAlreadyExisting() {
-        candidateRegistrationManager = new CandidateRegistrationManager(candidatesEmail);
-        Email existingCandidateEmail = Email.of("sabine@lcdlv.fr");
+        candidateRegistrationManager = CandidateRegistrationManager.withExisting(sabineEmail, melodyEmail);
 
-        thrown.expect(IllegalArgumentException.class);
+        thrown.expect(CandidateRegistrationException.class);
         thrown.expectMessage(CoreMatchers.containsString("L'email sabine@lcdlv.fr est déjà utilisé pour une candidature."));
-        candidateRegistrationManager.add(existingCandidateEmail);
+        candidateRegistrationManager.add(sabineEmail);
     }
 }

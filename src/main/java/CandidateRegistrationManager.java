@@ -4,7 +4,7 @@ public class CandidateRegistrationManager {
 
     private Collection<Email> candidates;
 
-    public CandidateRegistrationManager(List<Email> existingCandidates) {
+    private CandidateRegistrationManager(List<Email> existingCandidates) {
         this();
         candidates.addAll(existingCandidates);
     }
@@ -13,14 +13,18 @@ public class CandidateRegistrationManager {
         this.candidates = new ArrayList<>();
     }
 
+    public static CandidateRegistrationManager withExisting(Email... existingCandidates) {
+        return new CandidateRegistrationManager(Arrays.asList(existingCandidates));
+    }
+
     public Collection<Email> findAllEmail() {
         return candidates;
     }
 
-    public void addAll(List<Email> emails) {
-        emails.forEach( email ->
-            add(email)
-        );
+    public void addMany(Email... emails) {
+        for (Email email : emails){
+            add(email);
+        }
     }
 
     public void add(Email email) {

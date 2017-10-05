@@ -9,7 +9,7 @@ namespace Socrates.Test
     {
         private const string RegisDubois = "regis.dubois@socrates.com";
         private const string FannyDubois = "fanny.dubois@crafts.com";
-
+        private const string JulieFournier = "jules.fournier@xp.com";
         [Test]
         public void GetEmails_Should_Return_No_Email_From_Candidate_When_No_Candidate_Email_Exists()
         {
@@ -40,7 +40,6 @@ namespace Socrates.Test
             var listCandidatesEmails = candidateRegistrationManager.GetEmails();
 
             Check.That(listCandidatesEmails[0]).IsEqualTo(candidateEmail);
-
         }
 
         [Test]
@@ -57,20 +56,30 @@ namespace Socrates.Test
             Check.That(listCandidatesEmails).Contains(RegisDubois, FannyDubois ).Only().Once();
         }
 
-        [Test]
-        public void AddEmail_Should_Return_Unique_Candidate_Email_Even_If_You_Try_To_Add_Existing_Candidate_Email()
+        [TestCase(RegisDubois)]
+        [TestCase(FannyDubois)]
+        public void AddEmail_Should_Return_Unique_Candidate_Email_Even_If_You_Try_To_Add_Existing_Candidate_Email(string candidateEmail)
         {
             var candidateRegistrationManager = new CandidateRegistrationManager();
 
-            candidateRegistrationManager.AddEmail(RegisDubois);
-
-            candidateRegistrationManager.AddEmail(RegisDubois);
+            candidateRegistrationManager.AddEmail(candidateEmail);
+            candidateRegistrationManager.AddEmail(candidateEmail);
 
             var listCandidatesEmails = candidateRegistrationManager.GetEmails();
 
-            Check.That(listCandidatesEmails).Contains(RegisDubois).Once();
+            Check.That(listCandidatesEmails).Contains(candidateEmail).Only().Once();
         }
 
+        [Test]
+        public void AddEmail_Should_Add_One_Candidate_Email_When_Multiples_Candidate_Email_Exists()
+        {
+            var candidateRegistrationManager = new CandidateRegistrationManager(RegisDubois,FannyDubois);
+            candidateRegistrationManager.AddEmail(JulieFournier);
+
+            var listCandidatesEmails = candidateRegistrationManager.GetEmails();
+            Check.That(listCandidatesEmails).Contains(RegisDubois,FannyDubois,JulieFournier).Only().Once();
+
+        }
 
     }
 
@@ -78,14 +87,11 @@ namespace Socrates.Test
     {
         private IList<string> candidateEmailList = new List<string>();
 
-
-
-
         public CandidateRegistrationManager(params string[] emails)
         {
             foreach (var email in emails)
             {
-                this.candidateEmailList.Add(email);
+                candidateEmailList.Add(email);
             }
         }
 
@@ -95,13 +101,13 @@ namespace Socrates.Test
             {
                 return;
             }
-            this.candidateEmailList.Add(candidateEmail);
 
+            candidateEmailList.Add(candidateEmail);
         }
 
         internal IList<string> GetEmails()
         {
-            return this.candidateEmailList;
+            return candidateEmailList;
         }
     }
 }

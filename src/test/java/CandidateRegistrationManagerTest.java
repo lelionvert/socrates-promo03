@@ -13,8 +13,8 @@ public class CandidateRegistrationManagerTest {
     public void setUp() throws Exception {
         candidateRegistrationManager = new CandidateRegistrationManager();
         candidatesEmail = new ArrayList<>();
-        candidatesEmail.add(new Email("test@test.fr"));
-        candidatesEmail.add(new Email("test1@test.fr"));
+        candidatesEmail.add(new Email("sabine@lcdlv.fr"));
+        candidatesEmail.add(new Email("melody@lcdlv.fr"));
     }
 
     @Test
@@ -24,7 +24,7 @@ public class CandidateRegistrationManagerTest {
 
     @Test
     public void noExistingAndAddingOneCandidate() {
-        Email email = new Email("test@test.fr");
+        Email email = new Email("sabine@lcdlv.fr");
         candidateRegistrationManager.add(email);
         Assertions.assertThat(candidateRegistrationManager.findAllEmail())
                   .hasSize(1)
@@ -42,7 +42,7 @@ public class CandidateRegistrationManagerTest {
     @Test
     public void twoExistingAndAddingOneCandidate(){
         candidateRegistrationManager = new CandidateRegistrationManager(candidatesEmail);
-        Email newCandidateEmail = new Email("test2@test.fr");
+        Email newCandidateEmail = new Email("cyril@lcdlv.fr");
         candidateRegistrationManager.add(newCandidateEmail);
 
         Assertions.assertThat(candidateRegistrationManager.findAllEmail())
@@ -55,8 +55,8 @@ public class CandidateRegistrationManagerTest {
     public void twoExistingAndAddingTwoCandidates(){
         candidateRegistrationManager = new CandidateRegistrationManager(candidatesEmail);
         List<Email> newCandidatesEmail = new ArrayList<>();
-        newCandidatesEmail.add(new Email("test2@test.fr"));
-        newCandidatesEmail.add(new Email("test3@test.fr"));
+        newCandidatesEmail.add(new Email("cyril@lcdlv.fr"));
+        newCandidatesEmail.add(new Email("ismael@lcdlv.fr"));
         candidateRegistrationManager.addAll(newCandidatesEmail);
 
         Assertions.assertThat(candidateRegistrationManager.findAllEmail())
@@ -67,7 +67,7 @@ public class CandidateRegistrationManagerTest {
     @Test
     public void twoExistingAndAddingOneCandidateAlreadyExisting(){
         candidateRegistrationManager = new CandidateRegistrationManager(candidatesEmail);
-        Email existingCandidateEmail = new Email("test@test.fr");
+        Email existingCandidateEmail = new Email("sabine@lcdlv.fr");
         candidateRegistrationManager.add(existingCandidateEmail);
 
         Assertions.assertThat(candidateRegistrationManager.findAllEmail())

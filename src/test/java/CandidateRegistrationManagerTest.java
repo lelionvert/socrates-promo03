@@ -84,4 +84,9 @@ public class CandidateRegistrationManagerTest {
     public void nullEmailThrowException() throws Exception {
         new Email(null);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void notEmailValidThrowException() throws Exception {
+        new Email("emailNotValid.ok");
+    }
 }

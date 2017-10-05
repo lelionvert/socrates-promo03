@@ -1,6 +1,7 @@
 package registration.candidate;
 
 import java.util.Collection;
+import java.util.Collections;
 
 public class InMemoryCandidateRegistrationManager implements CandidateRegistrationManager {
 
@@ -16,5 +17,9 @@ public class InMemoryCandidateRegistrationManager implements CandidateRegistrati
 
     public void addCandidate(Email email) {
         emails.add(email.getEmail());
+    }
+
+    public void addCandidates(String... emails) {
+        Collections.addAll(this.emails, emails);
     }
 }

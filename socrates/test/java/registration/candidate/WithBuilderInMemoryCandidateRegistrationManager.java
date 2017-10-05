@@ -3,7 +3,7 @@ package registration.candidate;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class AlreadyFilledInMemoryCandidateRegistrationManager extends InMemoryCandidateRegistrationManager {
+public class WithBuilderInMemoryCandidateRegistrationManager extends InMemoryCandidateRegistrationManager {
 
     public static Collection<String> existingCandidates;
 
@@ -12,7 +12,7 @@ public class AlreadyFilledInMemoryCandidateRegistrationManager extends InMemoryC
         existingCandidates.add("regis.dubois@socrates.com");
     }
 
-    public AlreadyFilledInMemoryCandidateRegistrationManager() {
+    public WithBuilderInMemoryCandidateRegistrationManager() {
         super(existingCandidates);
 
     }

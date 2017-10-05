@@ -7,4 +7,6 @@ public interface CandidateRegistrationManager {
     Collection<String> getEmails();
 
     void addCandidate(Email email);
+
+    void addCandidates(String... emails);
 }

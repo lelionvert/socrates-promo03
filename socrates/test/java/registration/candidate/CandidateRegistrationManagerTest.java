@@ -32,29 +32,26 @@ public class CandidateRegistrationManagerTest {
     public void getEmails_should_return_one_email_when_one_email_exists() {
         Collection<String> emails = withBuilderFilledInMemoryCandidateRegistrationManager.getEmails();
         Assertions.assertThat(emails)
-                  .containsExactly(EMAIL_REGIS_DUBOIS)
-                  .hasSize(1);
+                  .containsExactlyInAnyOrder(EMAIL_REGIS_DUBOIS);
     }
 
     @Test
     public void getEmails_should_return_one_candidate_when_addCandidate_to_empty() throws Exception {
         emptyInMemoryCandidateRegistrationManager.addCandidate(Email.of("jules.fournier@xp.com"));
         Assertions.assertThat(emptyInMemoryCandidateRegistrationManager.getEmails())
-                  .containsExactly(EMAIL_JULES_FOURNIER)
-                  .hasSize(1);
+                  .containsExactlyInAnyOrder(EMAIL_JULES_FOURNIER);
     }
 
     @Test
     public void getEmails_should_return_several_candidates_when_addCandidates_to_empty() throws Exception {
         emptyInMemoryCandidateRegistrationManager.addCandidates(EMAIL_JULES_FOURNIER, EMAIL_JULIE_MARECHAL);
         Assertions.assertThat(emptyInMemoryCandidateRegistrationManager.getEmails())
-                  .containsExactly(EMAIL_JULES_FOURNIER, EMAIL_JULIE_MARECHAL);
+                  .containsExactlyInAnyOrder(EMAIL_JULIE_MARECHAL, EMAIL_JULES_FOURNIER);
 
     }
 }
 
 /* todo
-    regarder containsOnly / Exactly
     SetUp email de base constant
     Ajouter un builder
  */

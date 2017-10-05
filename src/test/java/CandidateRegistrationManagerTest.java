@@ -12,7 +12,7 @@ public class CandidateRegistrationManagerTest {
     @Before
     public void setUp() throws Exception {
         candidateRegistrationManager = new CandidateRegistrationManager();
-        candidatesEmail = new ArrayList<Email>();
+        candidatesEmail = new ArrayList<>();
         candidatesEmail.add(new Email("test@test.fr"));
         candidatesEmail.add(new Email("test1@test.fr"));
     }
@@ -54,7 +54,7 @@ public class CandidateRegistrationManagerTest {
     @Test
     public void twoExistingAndAddingTwoCandidates(){
         candidateRegistrationManager = new CandidateRegistrationManager(candidatesEmail);
-        List<Email> newCandidatesEmail = new ArrayList<Email>();
+        List<Email> newCandidatesEmail = new ArrayList<>();
         newCandidatesEmail.add(new Email("test2@test.fr"));
         newCandidatesEmail.add(new Email("test3@test.fr"));
         candidateRegistrationManager.addAll(newCandidatesEmail);

@@ -10,7 +10,7 @@ public class CandidateRegistrationManager {
     }
 
     public CandidateRegistrationManager() {
-        this.candidates = new HashSet<Email>();
+        this.candidates = new HashSet<>();
     }
 
     public Collection<Email> findAllEmail() {
@@ -18,7 +18,9 @@ public class CandidateRegistrationManager {
     }
 
     public void addAll(List<Email> emails) {
-        candidates.addAll(emails);
+        emails.forEach( email ->
+            add(email)
+        );
     }
 
     public void add(Email email) {

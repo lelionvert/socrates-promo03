@@ -14,14 +14,15 @@ public class CandidateRegistrationManagerTest {
 
     @Before
     public void setUp() throws Exception {
-        alreadyFilledInMemoryCandidateRegistrationManager = new AlreadyFilledInMemoryCandidateRegistrationManager();
         emptyInMemoryCandidateRegistrationManager = new EmptyInMemoryCandidateRegistrationManager();
+        alreadyFilledInMemoryCandidateRegistrationManager = new AlreadyFilledInMemoryCandidateRegistrationManager();
     }
 
     @Test
-    public void getNoEmailWhenNoEmailExists() {
-        Collection emails = emptyInMemoryCandidateRegistrationManager.getEmails();
-        Assert.assertEquals(0, emails.size());
+    public void getEmails_should_return_no_email_when_no_email_exists() {
+        Collection<String> emails = emptyInMemoryCandidateRegistrationManager.getEmails();
+        Assertions.assertThat(emails)
+                  .hasSize(0);
     }
 
     @Test

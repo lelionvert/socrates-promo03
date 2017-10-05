@@ -4,18 +4,13 @@ import java.util.Collection;
 
 public class InMemoryCandidateRegistrationManager implements CandidateRegistrationManager {
 
-    private String emailsString;
-    private Collection emails;
+    private Collection<String> emails;
 
     protected InMemoryCandidateRegistrationManager(Collection existingCandidates) {
         this.emails = existingCandidates;
     }
 
-    public String getEmailsString() {
-        return this.emailsString;
-    }
-
-    public Collection getEmails() {
+    public Collection<String> getEmails() {
         return this.emails;
     }
 

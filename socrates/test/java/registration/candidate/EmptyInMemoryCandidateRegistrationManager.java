@@ -1,13 +1,11 @@
 package registration.candidate;
 
-import registration.candidate.InMemoryCandidateRegistrationManager;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class EmptyInMemoryCandidateRegistrationManager extends InMemoryCandidateRegistrationManager {
 
-    public static Collection existingCandidates;
+    public static Collection<String> existingCandidates;
 
     static {
         existingCandidates = new ArrayList<String>();

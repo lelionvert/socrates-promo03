@@ -12,45 +12,47 @@ namespace Socrates.Test
     public class CandidateRegistrationManagerTest
     {
         [Test]
-        public void ShouldReturnNoCandidate()
+        public void GetEmails_Should_Return_No_Email_From_Candidate_When_No_Candidate_Exists()
         {
             var candidateRegistrationManager = new CandidateRegistrationManager();
 
-            var listCandidates = candidateRegistrationManager.getEmails();
+            var listCandidatesEmail = candidateRegistrationManager.GetEmails();
 
-            Check.That(listCandidates).HasSize(0);
+            Check.That(listCandidatesEmail).HasSize(0);
         }
 
         [Test]
-        public void ShouldReturnOneCandidateWhenInitializedCandidateList()
+        public void GetEmails_Should_Return_One_Candidate_When_Already_One_Exists()
         {
             var candidateRegistrationManager = new CandidateRegistrationManager("regis.dubois@socrates.com");
 
-            var listCandidates = candidateRegistrationManager.getEmails();
+            var listCandidatesEmails = candidateRegistrationManager.GetEmails();
 
-            Check.That(listCandidates).HasSize(1);
-            Check.That(listCandidates[0]).IsEqualTo("regis.dubois@socrates.com");
+            Check.That(listCandidatesEmails).HasSize(1);
+            Check.That(listCandidatesEmails[0]).IsEqualTo("regis.dubois@socrates.com");
         }
 
         
         internal class CandidateRegistrationManager
         {
-            private IList<string> array = new List<string>();
+            private IList<string> emailList = new List<string>();
 
             public CandidateRegistrationManager()
             {
                
             }
 
-            public CandidateRegistrationManager(string v)
+            public CandidateRegistrationManager(params string[] emails)
             {
-
-                this.array.Add(v);
+                foreach (var email in emails)
+                {
+                    this.emailList.Add(email);
+                }
             }
 
-            internal IList<string> getEmails()
+            internal IList<string> GetEmails()
             {
-                return this.array;
+                return this.emailList;
             }
         }
     }

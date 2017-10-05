@@ -25,17 +25,19 @@ public class CandidateRegistrationManagerTest {
     }
 
     @Test
-    public void getOneEmailWhenOneEmailExists() {
-        Collection emails = alreadyFilledInMemoryCandidateRegistrationManager.getEmails();
-
-        Assert.assertEquals(1, emails.size());
-        Assert.assertTrue(emails.contains("regis.dubois@socrates.com"));
+    public void getEmails_should_return_one_email_when_one_email_exists() {
+        Collection<String> emails = alreadyFilledInMemoryCandidateRegistrationManager.getEmails();
+        Assertions.assertThat(emails)
+                  .containsExactly("regis.dubois@socrates.com")
+                  .hasSize(1);
     }
 
     @Test
-    public void getEmails_should_return_one_cantidate_when_addCandidate_to_empty() throws Exception {
+    public void getEmails_should_return_one_candidate_when_addCandidate_to_empty() throws Exception {
         emptyInMemoryCandidateRegistrationManager.addCandidate(Email.of("jules.fournier@xp.com"));
-        Assertions.assertThat(emptyInMemoryCandidateRegistrationManager.getEmails()).containsExactly("jules.fournier@xp.com");
+        Assertions.assertThat(emptyInMemoryCandidateRegistrationManager.getEmails())
+                  .containsExactly("jules.fournier@xp.com")
+                  .hasSize(1);
     }
 
     /*

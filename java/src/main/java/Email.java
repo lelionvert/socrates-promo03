@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 
 public class Email {
 
-    private static Predicate<String> isEmptyAndNotNull = s -> s == null || s.isEmpty();
+    private static Predicate<String> isEmptyOrNull = s -> s == null || s.isEmpty();
 
     private static final Pattern VALID_EMAIL_ADDRESS_REGEX =
         Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -21,7 +21,7 @@ public class Email {
     }
 
     private static void verifyEmail(String email) {
-        if(isEmptyAndNotNull.test(email)
+        if(isEmptyOrNull.test(email)
             || !isValidFormat(email)) {
             throw new IllegalArgumentException();
         }

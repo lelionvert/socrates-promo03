@@ -1,5 +1,6 @@
 ﻿using NFluent;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 
 namespace Socrates.Test
@@ -56,7 +57,7 @@ namespace Socrates.Test
             
             var listCandidatesEmails = candidateRegistrationManager.GetEmails();
 
-            Check.That(listCandidatesEmails).Contains(Email.Of(RegisDubois), Email.Of(FannyDubois) ).Only().Once();
+            Check.That(listCandidatesEmails).Contains(Email.Of(RegisDubois), Email.Of(FannyDubois)).Only().Once();
         }
 
         [TestCase(RegisDubois)]
@@ -96,12 +97,25 @@ namespace Socrates.Test
         }
 
         [Test]
-        public void ShouldTestTheNextIssue()
+        public void AddEmail_Should_Throw_An_Exception_When_The_Candidate_Email_Adress_Is_Invalid()
+        {
+            Check.ThatCode(() =>
+            {
+                var candidateRegistrationManager = new CandidateRegistrationManager();
+                candidateRegistrationManager.AddEmail(Email.Of(String.Empty));
+            }).Throws<InvalidEmailException>();
+        }
+    }
+
+    public class InvalidEmailException : Exception
+    {
+
+        public InvalidEmailException(string message) : base(message)
         {
 
         }
     }
-    
+
     public class Email
     {
         private string mailAdress;
@@ -113,9 +127,15 @@ namespace Socrates.Test
 
         public static Email Of(string _mailAdress)
         {
+            if (String.IsNullOrEmpty(_mailAdress))
+            {
+                throw new InvalidEmailException($"The Candidate email address can't be empty");
+            }
             return new Email(_mailAdress);
         }
 
+
+        public void Test() { }
         public override bool Equals(object obj)
         {
             var email = obj as Email;

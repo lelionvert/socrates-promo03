@@ -21,13 +21,9 @@ public class CandidateRegistrationManager {
         return new ArrayList<>(candidates);
     }
 
-    public void addMany(Email... emails) {
+    public void add(Email... emails) {
         for (Email email : emails){
-            add(email);
+            candidates.add(email);
         }
-    }
-
-    public void add(Email email) {
-        candidates.add(email);
     }
 }

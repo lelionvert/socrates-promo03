@@ -1,36 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Socrates
 {
     public class Email
     {
-        private string mailAdress;
+        private string _emailAddress;
 
-        public Email(string _mailAdress)
+        public Email(string emailAddress)
         {
-            mailAdress = _mailAdress;
-        }
-
-        public static Email Of(string _mailAdress)
-        {
-            if (String.IsNullOrEmpty(_mailAdress))
+            if (IsValid(emailAddress)==false)
             {
-                throw new InvalidEmailException($"The Candidate email address can't be empty");
+                throw new InvalidEmailException("Email format is invalid");
             }
-            return new Email(_mailAdress);
+            _emailAddress = emailAddress;
         }
+
+        private bool IsValid(string emailAddress)
+        {
+            if (String.IsNullOrEmpty(emailAddress))
+            {
+                return false;
+            }
+
+            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            Match match = regex.Match(emailAddress);
+
+            return match.Success;
+        }
+
+        public static Email Of(string emailAddress)
+        {
+            
+            return new Email(emailAddress);
+        }
+
+
 
         public override bool Equals(object obj)
         {
             var email = obj as Email;
             return email != null &&
-                   mailAdress == email.mailAdress;
+                   _emailAddress == email._emailAddress;
         }
 
         public override int GetHashCode()
         {
-            return -358254024 + EqualityComparer<string>.Default.GetHashCode(mailAdress);
+            return -358254024 + EqualityComparer<string>.Default.GetHashCode(_emailAddress);
         }
     }
 }

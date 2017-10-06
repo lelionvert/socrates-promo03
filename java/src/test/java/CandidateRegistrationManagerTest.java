@@ -1,5 +1,4 @@
 import org.assertj.core.api.Assertions;
-import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -7,10 +6,10 @@ import org.junit.rules.ExpectedException;
 
 public class CandidateRegistrationManagerTest {
 
-    public static final Email sabineEmail = Email.of("sabine@lcdlv.fr");
-    public static final Email melodyEmail = Email.of("melody@lcdlv.fr");
-    public static final Email cyrilEmail = Email.of("cyril@lcdlv.fr");
-    public static final Email ismaelEmail = Email.of("ismael@lcdlv.fr");
+    public static final Email SABINE_EMAIL = Email.of("sabine@lcdlv.fr");
+    public static final Email MELODY_EMAIL = Email.of("melody@lcdlv.fr");
+    public static final Email CYRIL_EMAIL = Email.of("cyril@lcdlv.fr");
+    public static final Email ISMAEL_EMAIL = Email.of("ismael@lcdlv.fr");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -29,42 +28,42 @@ public class CandidateRegistrationManagerTest {
 
     @Test
     public void noExistingAndAddingOneCandidate() {
-        candidateRegistrationManager.add(sabineEmail);
+        candidateRegistrationManager.add(SABINE_EMAIL);
         Assertions.assertThat(candidateRegistrationManager.findAllEmail())
-                  .containsOnlyOnce(sabineEmail);
+                  .containsOnlyOnce(SABINE_EMAIL);
     }
 
     @Test
     public void noExistingAndAddingTwoCandidates() {
-        candidateRegistrationManager.addMany(cyrilEmail, ismaelEmail);
+        candidateRegistrationManager.addMany(CYRIL_EMAIL, ISMAEL_EMAIL);
         Assertions.assertThat(candidateRegistrationManager.findAllEmail())
-                  .containsExactlyInAnyOrder(cyrilEmail, ismaelEmail);
+                  .containsExactlyInAnyOrder(CYRIL_EMAIL, ISMAEL_EMAIL);
     }
 
     @Test
     public void twoExistingAndAddingOneCandidate(){
-        candidateRegistrationManager = CandidateRegistrationManager.withExisting(sabineEmail, melodyEmail);
-        candidateRegistrationManager.add(cyrilEmail);
+        candidateRegistrationManager = CandidateRegistrationManager.withExisting(SABINE_EMAIL, MELODY_EMAIL);
+        candidateRegistrationManager.add(CYRIL_EMAIL);
 
         Assertions.assertThat(candidateRegistrationManager.findAllEmail())
-            .containsExactlyInAnyOrder(sabineEmail, cyrilEmail, melodyEmail);
+            .containsExactlyInAnyOrder(SABINE_EMAIL, CYRIL_EMAIL, MELODY_EMAIL);
     }
 
     @Test
     public void twoExistingAndAddingTwoCandidates(){
-        candidateRegistrationManager = CandidateRegistrationManager.withExisting(sabineEmail, melodyEmail);
-        candidateRegistrationManager.addMany(cyrilEmail, ismaelEmail);
+        candidateRegistrationManager = CandidateRegistrationManager.withExisting(SABINE_EMAIL, MELODY_EMAIL);
+        candidateRegistrationManager.addMany(CYRIL_EMAIL, ISMAEL_EMAIL);
 
         Assertions.assertThat(candidateRegistrationManager.findAllEmail())
-            .containsExactlyInAnyOrder(sabineEmail, melodyEmail, cyrilEmail, ismaelEmail);
+            .containsExactlyInAnyOrder(SABINE_EMAIL, MELODY_EMAIL, CYRIL_EMAIL, ISMAEL_EMAIL);
     }
 
     @Test
     public void twoExistingAndAddingOneCandidateAlreadyExisting() {
-        candidateRegistrationManager = CandidateRegistrationManager.withExisting(sabineEmail, melodyEmail);
-        candidateRegistrationManager.add(sabineEmail);
+        candidateRegistrationManager = CandidateRegistrationManager.withExisting(SABINE_EMAIL, MELODY_EMAIL);
+        candidateRegistrationManager.add(SABINE_EMAIL);
 
         Assertions.assertThat(candidateRegistrationManager.findAllEmail())
-            .containsExactlyInAnyOrder(sabineEmail, melodyEmail);
+            .containsExactlyInAnyOrder(SABINE_EMAIL, MELODY_EMAIL);
     }
 }

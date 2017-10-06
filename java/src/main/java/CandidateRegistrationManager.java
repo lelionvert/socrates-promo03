@@ -28,9 +28,8 @@ public class CandidateRegistrationManager {
     }
 
     public void add(Email email) {
-        if(candidates.contains(email)) {
-            throw new CandidateRegistrationException("L'email "+email+" est déjà utilisé pour une candidature.");
+        if(! candidates.contains(email)) {
+            candidates.add(email);
         }
-        candidates.add(email);
     }
 }

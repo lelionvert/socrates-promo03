@@ -62,9 +62,9 @@ public class CandidateRegistrationManagerTest {
     @Test
     public void twoExistingAndAddingOneCandidateAlreadyExisting() {
         candidateRegistrationManager = CandidateRegistrationManager.withExisting(sabineEmail, melodyEmail);
-
-        thrown.expect(CandidateRegistrationException.class);
-        thrown.expectMessage(CoreMatchers.containsString("L'email sabine@lcdlv.fr est déjà utilisé pour une candidature."));
         candidateRegistrationManager.add(sabineEmail);
+
+        Assertions.assertThat(candidateRegistrationManager.findAllEmail())
+            .containsExactlyInAnyOrder(sabineEmail, melodyEmail);
     }
 }

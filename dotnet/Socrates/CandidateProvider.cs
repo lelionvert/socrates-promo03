@@ -19,6 +19,11 @@ namespace Socrates
         {
             return emailList;
         }
+
+        internal void AddEmail(Email candidateEmail)
+        {
+            emailList.Add(candidateEmail);
+        }
     }
 }
     

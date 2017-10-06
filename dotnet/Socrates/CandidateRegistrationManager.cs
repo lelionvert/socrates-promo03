@@ -4,33 +4,34 @@ namespace Socrates
 {
     public class CandidateRegistrationManager
     {
-        private IList<Email> candidateEmailList = new List<Email>();
+
+        private CandidateProvider candidateProvider;
 
         public CandidateRegistrationManager()
         {
-
+            candidateProvider = new CandidateProvider();
         }
 
         
 
         public CandidateRegistrationManager(CandidateProvider candidateProvider)
         {
-            candidateEmailList = candidateProvider.GetEmails();
+            this.candidateProvider = candidateProvider;
         }
 
         public void AddEmail(Email candidateEmail)
         {
-            if (candidateEmailList.Contains(candidateEmail))
+            if (candidateProvider.GetEmails().Contains(candidateEmail))
             {
                 throw new EmailExistingException("This email already exists") ;
             }
 
-            candidateEmailList.Add(candidateEmail);
+            candidateProvider.AddEmail(candidateEmail);
         }
 
         public IList<Email> GetEmails()
         {
-            return candidateEmailList;
+            return candidateProvider.GetEmails();
         }
 
     }

@@ -2,7 +2,7 @@ import java.util.*;
 
 public class CandidateRegistrationManager {
 
-    private Set<Email> candidates;
+    private final Set<Email> candidates;
 
     private CandidateRegistrationManager(List<Email> existingCandidates) {
         this();
@@ -22,8 +22,6 @@ public class CandidateRegistrationManager {
     }
 
     public void add(Email... emails) {
-        for (Email email : emails){
-            candidates.add(email);
-        }
+        candidates.addAll(Arrays.asList(emails));
     }
 }

@@ -16,4 +16,10 @@ public class EmailTest {
     public void should_throw_exception_when_email_has_no_at() throws Exception {
         Email.of("emailNotValid.ok");
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void should_throw_exception_when_email_has_no_domain_name() throws Exception {
+        Email.of("emailNotValid");
+    }
+
 }

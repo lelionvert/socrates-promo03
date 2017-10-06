@@ -26,12 +26,12 @@ public class CandidateRegistrationManagerTest {
     }
 
     @Test
-    public void noExistingAndAddingZeroCandidate() {
+    public void should_not_have_any_email_at_initialization() {
         assertThat(candidateRegistrationManager.findEmails()).isEmpty();
     }
 
     @Test
-    public void noExistingAndAddingOneCandidate() {
+    public void should_find_one_when_adding_one_given_no_existing_emails() {
         candidateRegistrationManager.add(SABINE_EMAIL);
         assertThat(candidateRegistrationManager.findEmails())
                   .containsOnlyOnce(SABINE_EMAIL);
@@ -47,14 +47,14 @@ public class CandidateRegistrationManagerTest {
     }
 
     @Test
-    public void noExistingAndAddingTwoCandidates() {
+    public void should_find_several_when_adding_several_given_no_existing_emails() {
         candidateRegistrationManager.addMany(CYRIL_EMAIL, ISMAEL_EMAIL);
         assertThat(candidateRegistrationManager.findEmails())
                   .containsExactlyInAnyOrder(CYRIL_EMAIL, ISMAEL_EMAIL);
     }
 
     @Test
-    public void twoExistingAndAddingOneCandidate(){
+    public void should_find_several_plus_one_when_adding_one_given_several_existing_emails(){
         candidateRegistrationManager = CandidateRegistrationManager.withExisting(SABINE_EMAIL, MELODY_EMAIL);
         candidateRegistrationManager.add(CYRIL_EMAIL);
 
@@ -63,7 +63,7 @@ public class CandidateRegistrationManagerTest {
     }
 
     @Test
-    public void twoExistingAndAddingTwoCandidates(){
+    public void should_find_several_plus_n_emails_when_adding_n_emails_given_several_existing_emails(){
         candidateRegistrationManager = CandidateRegistrationManager.withExisting(SABINE_EMAIL, MELODY_EMAIL);
         candidateRegistrationManager.addMany(CYRIL_EMAIL, ISMAEL_EMAIL);
 
@@ -72,7 +72,7 @@ public class CandidateRegistrationManagerTest {
     }
 
     @Test
-    public void twoExistingAndAddingOneCandidateAlreadyExisting() {
+    public void should_not_add_an_existing_candidate_email() {
         candidateRegistrationManager = CandidateRegistrationManager.withExisting(SABINE_EMAIL, MELODY_EMAIL);
         candidateRegistrationManager.add(SABINE_EMAIL);
 

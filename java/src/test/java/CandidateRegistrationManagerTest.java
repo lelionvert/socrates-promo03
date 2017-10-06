@@ -37,13 +37,11 @@ public class CandidateRegistrationManagerTest {
                   .containsOnlyOnce(SABINE_EMAIL);
     }
 
-    @Test
+    @Test(expected = UnsupportedOperationException.class)
     public void should_have_no_side_effect() {
         candidateRegistrationManager.addMany(SABINE_EMAIL);
         final Collection<Email> emails = candidateRegistrationManager.findEmails();
         emails.clear();
-        assertThat(candidateRegistrationManager.findEmails())
-                  .containsOnlyOnce(SABINE_EMAIL);
     }
 
     @Test

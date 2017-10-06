@@ -18,9 +18,7 @@ public class CandidateRegistrationManager {
     }
 
     public Collection<Email> findEmails() {
-        Collection<Email> candidatesEmailsFound = new ArrayList<>();
-        candidatesEmailsFound.addAll(candidates);
-        return candidatesEmailsFound;
+        return Collections.unmodifiableCollection(candidates);
     }
 
     public void addMany(Email... emails) {

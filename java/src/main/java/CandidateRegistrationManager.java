@@ -29,7 +29,7 @@ public class CandidateRegistrationManager {
         }
     }
 
-    public void add(Email email) {
+    private void add(Email email) {
         if(!candidates.contains(email)) {
             candidates.add(email);
         }

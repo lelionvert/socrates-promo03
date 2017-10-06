@@ -5,6 +5,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import java.util.Collection;
+
+import static org.assertj.core.api.Assertions.*;
+
 public class CandidateRegistrationManagerTest {
 
     public static final Email sabineEmail = Email.of("sabine@lcdlv.fr");
@@ -24,20 +28,29 @@ public class CandidateRegistrationManagerTest {
 
     @Test
     public void noExistingAndAddingZeroCandidate() {
-        Assertions.assertThat(candidateRegistrationManager.findAllEmail()).isEmpty();
+        assertThat(candidateRegistrationManager.findAllEmail()).isEmpty();
     }
 
     @Test
     public void noExistingAndAddingOneCandidate() {
         candidateRegistrationManager.add(sabineEmail);
-        Assertions.assertThat(candidateRegistrationManager.findAllEmail())
+        assertThat(candidateRegistrationManager.findAllEmail())
                   .containsOnlyOnce(sabineEmail);
+    }
+
+    @Test
+    public void should_have_no_side_effect() {
+        candidateRegistrationManager.add(sabineEmail);
+        Collection<Email> allEmail = candidateRegistrationManager.findAllEmail();
+        allEmail.clear();
+        assertThat(candidateRegistrationManager.findAllEmail())
+                .containsOnlyOnce(sabineEmail);
     }
 
     @Test
     public void noExistingAndAddingTwoCandidates() {
         candidateRegistrationManager.addMany(cyrilEmail, ismaelEmail);
-        Assertions.assertThat(candidateRegistrationManager.findAllEmail())
+        assertThat(candidateRegistrationManager.findAllEmail())
                   .containsExactlyInAnyOrder(cyrilEmail, ismaelEmail);
     }
 
@@ -46,7 +59,7 @@ public class CandidateRegistrationManagerTest {
         candidateRegistrationManager = CandidateRegistrationManager.withExisting(sabineEmail, melodyEmail);
         candidateRegistrationManager.add(cyrilEmail);
 
-        Assertions.assertThat(candidateRegistrationManager.findAllEmail())
+        assertThat(candidateRegistrationManager.findAllEmail())
             .containsExactlyInAnyOrder(sabineEmail, cyrilEmail, melodyEmail);
     }
 
@@ -55,7 +68,7 @@ public class CandidateRegistrationManagerTest {
         candidateRegistrationManager = CandidateRegistrationManager.withExisting(sabineEmail, melodyEmail);
         candidateRegistrationManager.addMany(cyrilEmail, ismaelEmail);
 
-        Assertions.assertThat(candidateRegistrationManager.findAllEmail())
+        assertThat(candidateRegistrationManager.findAllEmail())
             .containsExactlyInAnyOrder(sabineEmail, melodyEmail, cyrilEmail, ismaelEmail);
     }
 

@@ -18,7 +18,7 @@ public class CandidateRegistrationManager {
     }
 
     public Collection<Email> findAllEmail() {
-        return candidates;
+        return new ArrayList<>(candidates);
     }
 
     public void addMany(Email... emails) {

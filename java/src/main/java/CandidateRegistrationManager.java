@@ -2,14 +2,17 @@ import java.util.*;
 
 public class CandidateRegistrationManager {
 
-    private Collection<Email> candidates;
+    private Collection<Email> candidatesEmails;
+    private Collection<Candidate> candidates;
+
 
     private CandidateRegistrationManager(List<Email> existingCandidates) {
         this();
-        candidates.addAll(existingCandidates);
+        candidatesEmails.addAll(existingCandidates);
     }
 
     public CandidateRegistrationManager() {
+        this.candidatesEmails = new ArrayList<>();
         this.candidates = new ArrayList<>();
     }
 
@@ -18,7 +21,7 @@ public class CandidateRegistrationManager {
     }
 
     public Collection<Email> findEmails() {
-        return Collections.unmodifiableCollection(candidates);
+        return Collections.unmodifiableCollection(candidatesEmails);
     }
 
     public void addMany(Email... emails) {
@@ -28,9 +31,23 @@ public class CandidateRegistrationManager {
     }
 
     private void add(Email email) {
-        if(!candidates.contains(email)) {
-            candidates.add(email);
+        if(!candidatesEmails.contains(email)) {
+            candidatesEmails.add(email);
         }
 
+    }
+
+    public Collection<Candidate> findCandidates() {
+        return Collections.unmodifiableCollection(candidates);
+    }
+
+    public void addCandidates(Candidate... candidates) {
+        for (Candidate candidate : candidates){
+            addCandidate(candidate);
+        }
+    }
+
+    private void addCandidate(Candidate candidate) {
+        candidates.add(candidate);
     }
 }

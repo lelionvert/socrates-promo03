@@ -15,9 +15,6 @@ public class CandidateRegistrationManagerTest {
     public static final Email CYRIL_EMAIL = Email.of("cyril@lcdlv.fr");
     public static final Email ISMAEL_EMAIL = Email.of("ismael@lcdlv.fr");
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
     private CandidateRegistrationManager candidateRegistrationManager;
 
     @Before

@@ -1,10 +1,8 @@
 ﻿using NFluent;
 using NUnit.Framework;
-using System;
 
 namespace Socrates.Test
 {
-    [TestFixture]
     public class CandidateRegistrationManagerTest
     {
         private const string RegisDubois = "regis.dubois@socrates.com";
@@ -25,7 +23,9 @@ namespace Socrates.Test
         [Test]
         public void GetEmails_Should_Return_One_Candidate_Email_When_Already_One_Exists()
         {
-            var candidateRegistrationManager = new CandidateRegistrationManager(Email.Of(RegisDubois));
+            var candidateProvider = new CandidateProvider(Email.Of(RegisDubois));
+
+            var candidateRegistrationManager = new CandidateRegistrationManager(candidateProvider);
 
             var listCandidatesEmails = candidateRegistrationManager.GetEmails();
 
@@ -76,7 +76,10 @@ namespace Socrates.Test
         [Test]
         public void AddEmail_Should_Add_One_Candidate_Email_When_Multiples_Candidate_Email_Exists()
         {
-            var candidateRegistrationManager = new CandidateRegistrationManager(Email.Of(RegisDubois), Email.Of(FannyDubois));
+            var candidateProvider = new CandidateProvider(Email.Of(RegisDubois), Email.Of(FannyDubois));
+
+            var candidateRegistrationManager = new CandidateRegistrationManager(candidateProvider);
+
             candidateRegistrationManager.AddEmail(Email.Of(JulieFournier));
 
             var listCandidatesEmails = candidateRegistrationManager.GetEmails();
@@ -86,7 +89,9 @@ namespace Socrates.Test
         [TestCase(JulieMarechal, JulieFournier)]
         public void AddEmail_Should_Add_Multiple_Candidate_Emails_When_Multiples_Candidate_Email_Exists(string firstCandidateEmail, string secondCandidateEmail)
         {
-            var candidateRegistrationManager = new CandidateRegistrationManager(Email.Of(RegisDubois), Email.Of(FannyDubois));
+            var candidateProvider = new CandidateProvider(Email.Of(RegisDubois), Email.Of(FannyDubois));
+
+            var candidateRegistrationManager = new CandidateRegistrationManager(candidateProvider);
 
             candidateRegistrationManager.AddEmail(Email.Of(firstCandidateEmail));
             candidateRegistrationManager.AddEmail(Email.Of(secondCandidateEmail));
@@ -95,18 +100,7 @@ namespace Socrates.Test
             Check.That(listCandidatesEmails).Contains(Email.Of(RegisDubois), Email.Of(FannyDubois), Email.Of(firstCandidateEmail), Email.Of(secondCandidateEmail)).Only().Once();
         }
 
-        [TestCase("")]
-        [TestCase(null)]
-        [TestCase("gabriel.zaafrani")]
-        public void AddEmail_Should_Throw_An_Exception_When_The_Candidate_Email_Is_Invalid(string invalidEmail)
-        {
-           
-            Check.ThatCode(() =>
-            {
-                Email.Of(invalidEmail);
-            })
-            .Throws<InvalidEmailException>();
-        }
+        
     }
 }
     

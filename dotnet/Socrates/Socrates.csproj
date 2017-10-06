@@ -42,6 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CandidateProvider.cs" />
+    <Compile Include="CandidateRegistrationManager.cs" />
+    <Compile Include="Email.cs" />
+    <Compile Include="InvalidEmailException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

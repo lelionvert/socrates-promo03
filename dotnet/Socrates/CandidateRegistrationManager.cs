@@ -6,12 +6,16 @@ namespace Socrates
     {
         private IList<Email> candidateEmailList = new List<Email>();
 
-        public CandidateRegistrationManager(params Email[] emails)
+        public CandidateRegistrationManager()
         {
-            foreach (var email in emails)
-            {
-                candidateEmailList.Add(email);
-            }
+
+        }
+
+        
+
+        public CandidateRegistrationManager(CandidateProvider candidateProvider)
+        {
+            candidateEmailList = candidateProvider.GetEmails();
         }
 
         public void AddEmail(Email candidateEmail)

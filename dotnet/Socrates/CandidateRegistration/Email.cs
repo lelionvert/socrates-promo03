@@ -1,9 +1,9 @@
-﻿using Socrates.US1_CandidateRegistration;
+﻿using Socrates.CandidateRegistration;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Socrates.US1_CandidateRegistration
+namespace Socrates.CandidateRegistration
 {
     public class Email
     {

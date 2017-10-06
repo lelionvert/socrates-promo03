@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Socrates.US1_CandidateRegistration
+namespace Socrates.CandidateRegistration
 {
     public class InvalidEmailException : Exception
     {

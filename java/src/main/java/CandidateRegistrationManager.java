@@ -2,7 +2,7 @@ import java.util.*;
 
 public class CandidateRegistrationManager {
 
-    private Collection<Email> candidates;
+    private Set<Email> candidates;
 
     private CandidateRegistrationManager(List<Email> existingCandidates) {
         this();
@@ -10,7 +10,7 @@ public class CandidateRegistrationManager {
     }
 
     public CandidateRegistrationManager() {
-        this.candidates = new ArrayList<>();
+        this.candidates = new HashSet<>();
     }
 
     public static CandidateRegistrationManager withExisting(Email... existingCandidates) {
@@ -28,8 +28,6 @@ public class CandidateRegistrationManager {
     }
 
     public void add(Email email) {
-        if(! candidates.contains(email)) {
-            candidates.add(email);
-        }
+        candidates.add(email);
     }
 }

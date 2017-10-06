@@ -1,7 +1,10 @@
 ﻿using NFluent;
 using NUnit.Framework;
+using Socrates.Exceptions;
+using Socrates.Models;
+using Socrates.Services;
 
-namespace Socrates.Test
+namespace Socrates.Test.Services
 {
     public class CandidateRegistrationManagerTest
     {
@@ -67,7 +70,7 @@ namespace Socrates.Test
 
             candidateRegistrationManager.AddEmail(Email.Of(candidateEmail));
 
-            Check.ThatCode(() => candidateRegistrationManager.AddEmail(Email.Of(candidateEmail))).Throws<EmailExistingException>();
+            Check.ThatCode(() => candidateRegistrationManager.AddEmail(Email.Of(candidateEmail))).Throws<ExistingEmailException>();
         }
 
         [Test]
@@ -84,7 +87,7 @@ namespace Socrates.Test
         }
 
         [TestCase(JulieMarechal, JulieFournier)]
-        public void AddEmail_Should_Add_Multiple_Candidate_Emails_When_Multiples_Candidate_Email_Exists(string firstCandidateEmail, string secondCandidateEmail)
+        public void AddEmail_Should_Add_Multiple_Candidate_Emails_When_Multiple_Candidate_Emails_Exist(string firstCandidateEmail, string secondCandidateEmail)
         {
             var candidateProvider = new CandidateProvider(Email.Of(RegisDubois), Email.Of(FannyDubois));
 

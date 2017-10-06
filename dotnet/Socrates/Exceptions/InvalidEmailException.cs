@@ -1,6 +1,7 @@
 ﻿using System;
 
-namespace Socrates
+
+namespace Socrates.Exceptions
 {
     public class InvalidEmailException : Exception
     {

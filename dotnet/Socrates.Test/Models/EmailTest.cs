@@ -1,7 +1,9 @@
 ﻿using NFluent;
 using NUnit.Framework;
+using Socrates.Exceptions;
+using Socrates.Models;
 
-namespace Socrates.Test
+namespace Socrates.Test.Models
 {
     public class EmailTest
     {

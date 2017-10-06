@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Socrates.Models;
+using System.Collections.Generic;
 
-namespace Socrates
+namespace Socrates.Services
 {
     public class CandidateRegistrationManager
     {
@@ -23,7 +24,7 @@ namespace Socrates
         {
             if (candidateProvider.GetEmails().Contains(candidateEmail))
             {
-                throw new EmailExistingException("This email already exists") ;
+                throw new ExistingEmailException("This email already exists") ;
             }
 
             candidateProvider.AddEmail(candidateEmail);

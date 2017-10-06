@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Socrates.Models;
+using System;
 using System.Collections.Generic;
 
-namespace Socrates
+namespace Socrates.Services
 {
     public class CandidateProvider
     {

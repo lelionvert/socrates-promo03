@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Socrates.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Socrates
+namespace Socrates.Models
 {
     public class Email
     {

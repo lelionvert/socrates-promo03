@@ -22,7 +22,7 @@ namespace Socrates
         {
             if (candidateEmailList.Contains(candidateEmail))
             {
-                return;
+                throw new EmailExistingException("This email already exists") ;
             }
 
             candidateEmailList.Add(candidateEmail);

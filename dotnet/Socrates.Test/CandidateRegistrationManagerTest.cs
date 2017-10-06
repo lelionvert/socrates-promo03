@@ -66,11 +66,8 @@ namespace Socrates.Test
             var candidateRegistrationManager = new CandidateRegistrationManager();
 
             candidateRegistrationManager.AddEmail(Email.Of(candidateEmail));
-            candidateRegistrationManager.AddEmail(Email.Of(candidateEmail));
 
-            var listCandidatesEmails = candidateRegistrationManager.GetEmails();
-
-            Check.That(listCandidatesEmails).Contains(Email.Of(candidateEmail)).Only().Once();
+            Check.ThatCode(() => candidateRegistrationManager.AddEmail(Email.Of(candidateEmail))).Throws<EmailExistingException>();
         }
 
         [Test]

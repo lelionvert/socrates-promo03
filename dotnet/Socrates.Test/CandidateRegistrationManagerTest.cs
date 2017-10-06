@@ -95,15 +95,17 @@ namespace Socrates.Test
             Check.That(listCandidatesEmails).Contains(Email.Of(RegisDubois), Email.Of(FannyDubois), Email.Of(firstCandidateEmail), Email.Of(secondCandidateEmail)).Only().Once();
         }
 
-        [Test]
-        public void AddEmail_Should_Throw_An_Exception_When_The_Candidate_Email_Adress_Is_Null_Or_Empty()
+        [TestCase("")]
+        [TestCase(null)]
+        public void AddEmail_Should_Throw_An_Exception_When_The_Candidate_Email_Adress_Is_Null_Or_Empty(string invalidEmail)
         {
             var candidateRegistrationManager = new CandidateRegistrationManager();
 
             Check.ThatCode(() =>
             {
-                candidateRegistrationManager.AddEmail(Email.Of(String.Empty));
-            }).Throws<InvalidEmailException>();
+                candidateRegistrationManager.AddEmail(Email.Of(invalidEmail));
+            })
+            .Throws<InvalidEmailException>();
         }
     }
 }

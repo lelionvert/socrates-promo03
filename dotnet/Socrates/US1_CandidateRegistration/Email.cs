@@ -1,9 +1,9 @@
-﻿using Socrates.Exceptions;
+﻿using Socrates.US1_CandidateRegistration;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Socrates.Models
+namespace Socrates.US1_CandidateRegistration
 {
     public class Email
     {

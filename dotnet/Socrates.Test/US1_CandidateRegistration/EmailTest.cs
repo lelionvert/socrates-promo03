@@ -1,7 +1,7 @@
 ﻿using NFluent;
 using NUnit.Framework;
-using Socrates.Exceptions;
-using Socrates.Models;
+using Socrates.US1_CandidateRegistration;
+using Socrates.US1_CandidateRegistration;
 
 namespace Socrates.Test.Models
 {

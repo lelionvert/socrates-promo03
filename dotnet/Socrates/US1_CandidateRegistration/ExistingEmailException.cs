@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Socrates.Exceptions
+namespace Socrates.US1_CandidateRegistration
 {
     [Serializable]
     public class ExistingEmailException : Exception

@@ -1,42 +1,44 @@
 ﻿using NFluent;
 using NUnit.Framework;
-using Socrates.Exceptions;
-using Socrates.Models;
-using Socrates.Services;
+using Socrates.US1_CandidateRegistration;
 
 namespace Socrates.Test.Services
 {
     public class CandidateRegistrationManagerTest
     {
-        private const string RegisDubois = "regis.dubois@socrates.com";
-        private const string FannyDubois = "fanny.dubois@crafts.com";
-        private const string JulieFournier = "jules.fournier@xp.com";
-        private const string JulieMarechal = "julie.marechal@microsoft.com";
+        private const string RegisDuboisEmail = "regis.dubois@socrates.com";
+        private const string FannyDuboisEmail = "fanny.dubois@crafts.com";
+        private const string JulieFournierEmail = "jules.fournier@xp.com";
+        private const string JulieMarechalEmail = "julie.marechal@microsoft.com";
 
         [Test]
-        public void GetEmails_Should_Return_No_Email_From_Candidate_When_No_Candidate_Email_Exists()
+        public void GetCandidates_Should_Return_No_Candidates_When_No_Candidate_Exists()
         {
             var candidateRegistrationManager = new CandidateRegistrationManager();
 
-            var listCandidatesEmail = candidateRegistrationManager.GetEmails();
+            var listCandidates = candidateRegistrationManager.Candidates;
 
-            Check.That(listCandidatesEmail).IsEmpty();
+            Check.That(listCandidates).IsEmpty();
         }
 
+           
+
+
         [Test]
-        public void GetEmails_Should_Return_One_Candidate_Email_When_Already_One_Exists()
+        public void GetCandidates_Should_Return_One_Candidate_When_Already_One_Exists()
         {
-            var candidateProvider = new CandidateProvider(Email.Of(RegisDubois));
+            var regisDuboisCandidate = new Candidate(Email.Of(RegisDuboisEmail));
+            var candidateProvider = new CandidateProvider(regisDuboisCandidate);
 
             var candidateRegistrationManager = new CandidateRegistrationManager(candidateProvider);
 
-            var listCandidatesEmails = candidateRegistrationManager.GetEmails();
+            var listCandidates = candidateRegistrationManager.Candidates;
 
-            Check.That(listCandidatesEmails).ContainsExactly(Email.Of(RegisDubois));
+            Check.That(listCandidates).ContainsExactly(regisDuboisCandidate);
         }
         
-        [TestCase(RegisDubois)]
-        [TestCase(FannyDubois)]
+        [TestCase(RegisDuboisEmail)]
+        [TestCase(FannyDuboisEmail)]
         public void AddEmail_Should_Return_The_Email_Previously_Added(string candidateEmail)
         {
             var candidateRegistrationManager = new CandidateRegistrationManager();
@@ -53,17 +55,17 @@ namespace Socrates.Test.Services
         {
             var candidateRegistrationManager = new CandidateRegistrationManager();
 
-            candidateRegistrationManager.AddEmail(Email.Of(FannyDubois));
+            candidateRegistrationManager.AddEmail(Email.Of(FannyDuboisEmail));
 
-            candidateRegistrationManager.AddEmail(Email.Of(RegisDubois));
+            candidateRegistrationManager.AddEmail(Email.Of(RegisDuboisEmail));
             
             var listCandidatesEmails = candidateRegistrationManager.GetEmails();
 
-            Check.That(listCandidatesEmails).Contains(Email.Of(RegisDubois), Email.Of(FannyDubois)).Only().Once();
+            Check.That(listCandidatesEmails).Contains(Email.Of(RegisDuboisEmail), Email.Of(FannyDuboisEmail)).Only().Once();
         }
 
-        [TestCase(RegisDubois)]
-        [TestCase(FannyDubois)]
+        [TestCase(RegisDuboisEmail)]
+        [TestCase(FannyDuboisEmail)]
         public void AddEmail_Should_Return_Unique_Candidate_Email_Even_If_You_Try_To_Add_Existing_Candidate_Email(string candidateEmail)
         {
             var candidateRegistrationManager = new CandidateRegistrationManager();
@@ -76,20 +78,20 @@ namespace Socrates.Test.Services
         [Test]
         public void AddEmail_Should_Add_One_Candidate_Email_When_Multiples_Candidate_Email_Exists()
         {
-            var candidateProvider = new CandidateProvider(Email.Of(RegisDubois), Email.Of(FannyDubois));
+            var candidateProvider = new CandidateProvider(Email.Of(RegisDuboisEmail), Email.Of(FannyDuboisEmail));
 
             var candidateRegistrationManager = new CandidateRegistrationManager(candidateProvider);
 
-            candidateRegistrationManager.AddEmail(Email.Of(JulieFournier));
+            candidateRegistrationManager.AddEmail(Email.Of(JulieFournierEmail));
 
             var listCandidatesEmails = candidateRegistrationManager.GetEmails();
-            Check.That(listCandidatesEmails).Contains(Email.Of(RegisDubois), Email.Of(FannyDubois), Email.Of(JulieFournier)).Only().Once();
+            Check.That(listCandidatesEmails).Contains(Email.Of(RegisDuboisEmail), Email.Of(FannyDuboisEmail), Email.Of(JulieFournierEmail)).Only().Once();
         }
 
-        [TestCase(JulieMarechal, JulieFournier)]
+        [TestCase(JulieMarechalEmail, JulieFournierEmail)]
         public void AddEmail_Should_Add_Multiple_Candidate_Emails_When_Multiple_Candidate_Emails_Exist(string firstCandidateEmail, string secondCandidateEmail)
         {
-            var candidateProvider = new CandidateProvider(Email.Of(RegisDubois), Email.Of(FannyDubois));
+            var candidateProvider = new CandidateProvider(Email.Of(RegisDuboisEmail), Email.Of(FannyDuboisEmail));
 
             var candidateRegistrationManager = new CandidateRegistrationManager(candidateProvider);
 
@@ -97,7 +99,7 @@ namespace Socrates.Test.Services
             candidateRegistrationManager.AddEmail(Email.Of(secondCandidateEmail));
 
             var listCandidatesEmails = candidateRegistrationManager.GetEmails();
-            Check.That(listCandidatesEmails).Contains(Email.Of(RegisDubois), Email.Of(FannyDubois), Email.Of(firstCandidateEmail), Email.Of(secondCandidateEmail)).Only().Once();
+            Check.That(listCandidatesEmails).Contains(Email.Of(RegisDuboisEmail), Email.Of(FannyDuboisEmail), Email.Of(firstCandidateEmail), Email.Of(secondCandidateEmail)).Only().Once();
         }
 
         

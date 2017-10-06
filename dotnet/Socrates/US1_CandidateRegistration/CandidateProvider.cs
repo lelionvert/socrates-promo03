@@ -1,12 +1,14 @@
-﻿using Socrates.Models;
+﻿using Socrates.US1_CandidateRegistration;
 using System;
 using System.Collections.Generic;
 
-namespace Socrates.Services
+namespace Socrates.US1_CandidateRegistration
 {
     public class CandidateProvider
     {
         private IList<Email> emailList = new List<Email>();
+        private IList<Candidate> candidatsList = new List<Candidate>();
+      
 
         public CandidateProvider(params Email[] emails)
         {
@@ -16,14 +18,24 @@ namespace Socrates.Services
             }
         }
 
+        public CandidateProvider(Candidate candidat)
+        {
+            candidatsList.Add(candidat);
+        }
+
         public IList<Email> GetEmails()
         {
             return emailList;
         }
 
-        internal void AddEmail(Email candidateEmail)
+        public void AddEmail(Email candidateEmail)
         {
             emailList.Add(candidateEmail);
+        }
+
+        public IList<Candidate> GetCandidats()
+        {
+            return candidatsList;
         }
     }
 }

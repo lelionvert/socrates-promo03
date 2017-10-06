@@ -1,7 +1,9 @@
-﻿using Socrates.Models;
+﻿using Socrates.US1_CandidateRegistration;
+using Socrates.US1_CandidateRegistration;
 using System.Collections.Generic;
+using System;
 
-namespace Socrates.Services
+namespace Socrates.US1_CandidateRegistration
 {
     public class CandidateRegistrationManager
     {
@@ -12,8 +14,6 @@ namespace Socrates.Services
         {
             candidateProvider = new CandidateProvider();
         }
-
-        
 
         public CandidateRegistrationManager(CandidateProvider candidateProvider)
         {
@@ -30,11 +30,14 @@ namespace Socrates.Services
             candidateProvider.AddEmail(candidateEmail);
         }
 
+        public IList<Candidate> Candidates => candidateProvider.GetCandidats();
+
         public IList<Email> GetEmails()
         {
             return candidateProvider.GetEmails();
         }
 
+       
     }
 }
     

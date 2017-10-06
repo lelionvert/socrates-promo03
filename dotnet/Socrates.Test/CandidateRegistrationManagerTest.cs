@@ -100,8 +100,7 @@ namespace Socrates.Test
         [TestCase("gabriel.zaafrani")]
         public void AddEmail_Should_Throw_An_Exception_When_The_Candidate_Email_Is_Invalid(string invalidEmail)
         {
-            var candidateRegistrationManager = new CandidateRegistrationManager();
-
+           
             Check.ThatCode(() =>
             {
                 Email.Of(invalidEmail);

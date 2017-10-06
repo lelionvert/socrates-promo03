@@ -2,9 +2,9 @@ import java.util.*;
 
 public class CandidateRegistrationManager {
 
-    private final Set<Email> candidates;
+    private final Collection<Email> candidates;
 
-    private CandidateRegistrationManager(List<Email> existingCandidates) {
+    private CandidateRegistrationManager(Collection<Email> existingCandidates) {
         this();
         candidates.addAll(existingCandidates);
     }

@@ -1,7 +1,6 @@
 ﻿using NFluent;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
 
 namespace Socrates.Test
 {
@@ -97,85 +96,15 @@ namespace Socrates.Test
         }
 
         [Test]
-        public void AddEmail_Should_Throw_An_Exception_When_The_Candidate_Email_Adress_Is_Invalid()
+        public void AddEmail_Should_Throw_An_Exception_When_The_Candidate_Email_Adress_Is_Null_Or_Empty()
         {
+            var candidateRegistrationManager = new CandidateRegistrationManager();
+
             Check.ThatCode(() =>
             {
-                var candidateRegistrationManager = new CandidateRegistrationManager();
                 candidateRegistrationManager.AddEmail(Email.Of(String.Empty));
             }).Throws<InvalidEmailException>();
         }
-    }
-
-    public class InvalidEmailException : Exception
-    {
-
-        public InvalidEmailException(string message) : base(message)
-        {
-
-        }
-    }
-
-    public class Email
-    {
-        private string mailAdress;
-
-        public Email(string _mailAdress)
-        {
-            mailAdress = _mailAdress;
-        }
-
-        public static Email Of(string _mailAdress)
-        {
-            if (String.IsNullOrEmpty(_mailAdress))
-            {
-                throw new InvalidEmailException($"The Candidate email address can't be empty");
-            }
-            return new Email(_mailAdress);
-        }
-
-
-        public void Test() { }
-        public override bool Equals(object obj)
-        {
-            var email = obj as Email;
-            return email != null &&
-                   mailAdress == email.mailAdress;
-        }
-
-        public override int GetHashCode()
-        {
-            return -358254024 + EqualityComparer<string>.Default.GetHashCode(mailAdress);
-        }
-    }
-
-    public class CandidateRegistrationManager
-    {
-        private IList<Email> candidateEmailList = new List<Email>();
-
-        public CandidateRegistrationManager(params Email[] emails)
-        {
-            foreach (var email in emails)
-            {
-                candidateEmailList.Add(email);
-            }
-        }
-
-        internal void AddEmail(Email candidateEmail)
-        {
-            if (candidateEmailList.Contains(candidateEmail))
-            {
-                return;
-            }
-
-            candidateEmailList.Add(candidateEmail);
-        }
-
-        internal IList<Email> GetEmails()
-        {
-            return candidateEmailList;
-        }
-
     }
 }
     

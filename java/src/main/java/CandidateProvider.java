@@ -6,15 +6,15 @@ class CandidateProvider {
 
     private final Collection<Candidate> candidates = new HashSet<>();
 
-    public boolean isEmpty() {
+    boolean isEmpty() {
         return candidates.isEmpty();
     }
 
-    public void add(Candidate... candidates) {
+    void add(Candidate... candidates) {
         Collections.addAll(this.candidates, candidates);
     }
 
-    public boolean exist(Candidate... candidates) {
+    boolean exist(Candidate... candidates) {
         for (Candidate candidateCandidate : candidates) {
             if(!this.candidates.contains(candidateCandidate))
                 return false;
@@ -22,11 +22,11 @@ class CandidateProvider {
         return true;
     }
 
-    public int size() {
+    int size() {
         return candidates.size();
     }
 
-    public Collection<Candidate> getCandidates() {
+    Collection<Candidate> getCandidates() {
         return Collections.unmodifiableCollection(candidates);
     }
 }

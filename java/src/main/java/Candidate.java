@@ -1,4 +1,4 @@
-public class Candidate {
+class Candidate {
 
     private final Email email;
 

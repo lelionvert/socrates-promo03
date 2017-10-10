@@ -21,17 +21,17 @@ public class CandidateRegistrationManagerTest {
     @Test
     public void should_have_all_emails_when_adding_emails_to_existing_emails(){
         candidateRegistrationManager = CandidateRegistrationManager.withExisting(Candidate.ofCandidate(SABINE_EMAIL), Candidate.ofCandidate(MELODY_EMAIL));
-        candidateRegistrationManager.add(Candidate.ofCandidate(CYRIL_EMAIL), Candidate.ofCandidate(ISMAEL_EMAIL));
+        candidateRegistrationManager.register(Candidate.ofCandidate(CYRIL_EMAIL), Candidate.ofCandidate(ISMAEL_EMAIL));
 
-        assertThat(candidateRegistrationManager.findAllEmail())
+        assertThat(candidateRegistrationManager.getAllEmails())
             .containsExactlyInAnyOrder(SABINE_EMAIL, MELODY_EMAIL, CYRIL_EMAIL, ISMAEL_EMAIL);
     }
 
     @Test
     public void should_have_to_add_distinct_emails() {
         candidateRegistrationManager = CandidateRegistrationManager.withExisting(Candidate.ofCandidate(SABINE_EMAIL), Candidate.ofCandidate(MELODY_EMAIL));
-        candidateRegistrationManager.add(Candidate.ofCandidate(SABINE_EMAIL));
-        Assertions.assertThat(candidateRegistrationManager.findAllEmail())
+        candidateRegistrationManager.register(Candidate.ofCandidate(SABINE_EMAIL));
+        Assertions.assertThat(candidateRegistrationManager.getAllEmails())
                 .containsExactlyInAnyOrder(SABINE_EMAIL, MELODY_EMAIL);
     }
 }

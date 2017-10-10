@@ -4,7 +4,7 @@ public class CandidateRegistrationManager {
 
     private final CandidateProvider candidateProvider;
 
-        private CandidateRegistrationManager(Candidate... existingCandidates) {
+    private CandidateRegistrationManager(Candidate... existingCandidates) {
         this();
         candidateProvider.add(existingCandidates);
     }
@@ -17,7 +17,7 @@ public class CandidateRegistrationManager {
         return new CandidateRegistrationManager(existingCandidates);
     }
 
-    public ArrayList<Email> findAllEmail() {
+    public ArrayList<Email> getAllEmails() {
         ArrayList<Email> emails = new ArrayList<>();
         for (Candidate candidate : candidateProvider.getCandidates()) {
             emails.add(candidate.getEmail());
@@ -25,7 +25,7 @@ public class CandidateRegistrationManager {
         return emails;
     }
 
-    public void add(Candidate... candidates) {
+    public void register(Candidate... candidates) {
         candidateProvider.add(candidates);
     }
 }

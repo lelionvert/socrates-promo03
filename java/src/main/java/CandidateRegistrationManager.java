@@ -2,21 +2,27 @@ import java.util.*;
 
 public class CandidateRegistrationManager {
 
-    private Collection<Email> candidatesEmails;
     private Collection<Candidate> candidates;
+
+    public CandidateRegistrationManager() {
+        this.candidates = new ArrayList<>();
+    }
 
     private CandidateRegistrationManager(List<Candidate> existingCandidates) {
         this();
         candidates.addAll(existingCandidates);
     }
 
-    public CandidateRegistrationManager() {
-        this.candidatesEmails = new ArrayList<>();
-        this.candidates = new ArrayList<>();
+    public static CandidateRegistrationManager withExisting(Candidate... candidates) {
+        return new CandidateRegistrationManager(Arrays.asList(candidates));
     }
 
     public Collection<Email> findEmails() {
-        return Collections.unmodifiableCollection(candidatesEmails);
+        List<Email> emails = new ArrayList<>();
+        for (Candidate candidate : candidates) {
+            emails.add(candidate.getEmail());
+        }
+        return emails;
     }
 
     public Collection<Candidate> findCandidates() {
@@ -33,9 +39,5 @@ public class CandidateRegistrationManager {
         if (!candidates.contains(candidate)) {
             candidates.add(candidate);
         }
-    }
-
-    public static CandidateRegistrationManager withExisting(Candidate... candidates) {
-        return new CandidateRegistrationManager(Arrays.asList(candidates));
     }
 }

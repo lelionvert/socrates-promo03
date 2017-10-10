@@ -1,9 +1,15 @@
 
 public class Candidate {
+
+
     private Email email;
 
     public Candidate(Email email) {
         this.email = email;
+    }
+
+    public Email getEmail() {
+        return email;
     }
 
     @Override

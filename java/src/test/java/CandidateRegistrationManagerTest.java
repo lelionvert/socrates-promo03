@@ -33,15 +33,10 @@ public class CandidateRegistrationManagerTest {
     }
 
     @Test
-    public void should_not_have_any_candidate_at_initialization() {
-        assertThat(candidateRegistrationManager.findCandidates()).isEmpty();
-    }
-
-    @Test
     public void should_find_one_when_adding_one_given_no_existing_candidates() {
         candidateRegistrationManager.addCandidates(SABINE_CANDIDATE);
-        assertThat(candidateRegistrationManager.findCandidates())
-            .containsOnlyOnce(new Candidate(SABINE_EMAIL));
+        assertThat(candidateRegistrationManager.findEmails())
+            .containsOnlyOnce(SABINE_EMAIL);
     }
 
     @Test(expected = UnsupportedOperationException.class)

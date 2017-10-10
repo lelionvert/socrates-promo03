@@ -53,7 +53,9 @@ public class CandidateRegistrationManager {
     }
 
     private void addCandidate(Candidate candidate) {
-        candidates.add(candidate);
+        if (!candidates.contains(candidate)) {
+            candidates.add(candidate);
+        }
     }
 
     public static CandidateRegistrationManager withExisting(Candidate... candidates) {

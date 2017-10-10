@@ -115,4 +115,13 @@ public class CandidateRegistrationManagerTest {
         assertThat(candidateRegistrationManager.findEmails())
             .containsExactlyInAnyOrder(SABINE_EMAIL, MELODY_EMAIL);
     }
+
+    @Test
+    public void should_not_add_an_existing_candidate() {
+        candidateRegistrationManager = CandidateRegistrationManager.withExisting(SABINE_CANDIDATE, MELODY_CANDIDATE);
+        candidateRegistrationManager.addCandidates(SABINE_CANDIDATE);
+
+        assertThat(candidateRegistrationManager.findCandidates())
+            .containsExactlyInAnyOrder(SABINE_CANDIDATE, MELODY_CANDIDATE);
+    }
 }

@@ -2,9 +2,9 @@ import java.util.*;
 
 public class CandidateRegistrationManager {
 
-    private Collection<Email> candidates;
+    private Collection<Candidate> candidates;
 
-    private CandidateRegistrationManager(List<Email> existingCandidates) {
+    private CandidateRegistrationManager(List<Candidate> existingCandidates) {
         this();
         candidates.addAll(existingCandidates);
     }
@@ -13,23 +13,23 @@ public class CandidateRegistrationManager {
         this.candidates = new ArrayList<>();
     }
 
-    public static CandidateRegistrationManager withExisting(Email... existingCandidates) {
+    public static CandidateRegistrationManager withExisting(Candidate... existingCandidates) {
         return new CandidateRegistrationManager(Arrays.asList(existingCandidates));
     }
 
-    public Collection<Email> findEmails() {
+    public Collection<Candidate> findEmails() {
         return Collections.unmodifiableCollection(candidates);
     }
 
-    public void addMany(Email... emails) {
-        for (Email email : emails){
-            add(email);
+    public void addMany(Candidate... candidates) {
+        for (Candidate candidate : candidates){
+            add(candidate);
         }
     }
 
-    private void add(Email email) {
-        if(!candidates.contains(email)) {
-            candidates.add(email);
+    private void add(Candidate candidate) {
+        if(!candidates.contains(candidate)) {
+            candidates.add(candidate);
         }
 
     }

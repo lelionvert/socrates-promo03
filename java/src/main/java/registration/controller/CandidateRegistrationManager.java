@@ -6,7 +6,7 @@ import shared.model.Email;
 
 import java.util.*;
 
-class CandidateRegistrationManager {
+public class CandidateRegistrationManager {
 
     private final CandidateRepository candidateRepository;
 

@@ -5,6 +5,7 @@ import org.junit.Test;
 import registration.controller.CandidateRegistrationManager;
 import registration.model.Candidate;
 import registration.repository.CandidateRepository;
+import registration.repository.InMemoryCandidateRepository;
 import shared.model.Email;
 
 import java.util.Collection;
@@ -29,9 +30,9 @@ public class CandidateRegistrationManagerTest {
 
     @Before
     public void setUp() throws Exception {
-        CandidateRepository candidateRepository = new CandidateRepository();
+        CandidateRepository candidateRepository = new InMemoryCandidateRepository();
         candidateRegistrationManager = new CandidateRegistrationManager(candidateRepository);
-        CandidateRepository candidateRepositoryWithExistingCandidates = CandidateRepository.withExisting(SABINE_CANDIDATE, MELODY_CANDIDATE);
+        CandidateRepository candidateRepositoryWithExistingCandidates = InMemoryCandidateRepository.withExisting(SABINE_CANDIDATE, MELODY_CANDIDATE);
         candidateRegistrationManagerWithExistingCandidates = new CandidateRegistrationManager(candidateRepositoryWithExistingCandidates);
     }
 

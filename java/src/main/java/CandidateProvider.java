@@ -11,12 +11,17 @@ public class CandidateProvider {
         return true;
     }
 
-    public boolean exist(Email email) {
-        return emails.contains(email);
+    public void add(Email... emails) {
+        for (Email candidateEmail : emails) {
+            this.emails.add(candidateEmail);
+        }
     }
 
-
-    public void add(Email email) {
-        emails.add(email);
+    public boolean exist(Email... emails) {
+        for (Email candidateEmail : emails) {
+            if(!this.emails.contains(candidateEmail))
+                return false;
+        }
+        return true;
     }
 }

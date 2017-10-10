@@ -12,13 +12,13 @@ namespace Socrates.Test.Services
         private const string JulieMarechalEmail = "julie.marechal@microsoft.com";
 
         [Test]
-        public void GetCandidates_Should_Return_No_Candidates_When_No_Candidate_Exists()
+        public void GetCandidates_Should_Return_No_Candidates_When_Initializing_Register()
         {
-            var candidateRegistrationManager = new CandidateRegistrationManager();
 
-            var candidates = candidateRegistrationManager.Candidates;
+            var candidateProvider = new CandidateProvider();
+            var candidateRegistrationManager = new CandidateRegister(candidateProvider);
 
-            Check.That(candidates).IsEmpty();
+            Check.That(candidateProvider.IsEmpty()).IsTrue();
         }
 
         [Test]
@@ -27,7 +27,7 @@ namespace Socrates.Test.Services
             var regisDuboisCandidate = new Candidate(Email.Of(RegisDuboisEmail));
             var candidateProvider = new CandidateProvider(regisDuboisCandidate);
 
-            var candidateRegistrationManager = new CandidateRegistrationManager(candidateProvider);
+            var candidateRegistrationManager = new CandidateRegister(candidateProvider);
 
             var candidates = candidateRegistrationManager.Candidates;
 
@@ -40,9 +40,9 @@ namespace Socrates.Test.Services
         {
             var candidate = new Candidate(Email.Of(candidateEmail));
 
-            var candidateRegistrationManager = new CandidateRegistrationManager();
+            var candidateRegistrationManager = new CandidateRegister();
 
-            candidateRegistrationManager.Register(candidate);
+            candidateRegistrationManager.Add(candidate);
 
             var candidates = candidateRegistrationManager.Candidates;
 
@@ -52,10 +52,10 @@ namespace Socrates.Test.Services
         [Test]
         public void Add_Should_Insert_Multiples_Candidate_And_Return_Candidate_List_From_The_Candidate()
         {
-            var candidateRegistrationManager = new CandidateRegistrationManager();
+            var candidateRegistrationManager = new CandidateRegister();
 
-            candidateRegistrationManager.Register(new Candidate(Email.Of(FannyDuboisEmail)));
-            candidateRegistrationManager.Register(new Candidate(Email.Of(RegisDuboisEmail)));
+            candidateRegistrationManager.Add(new Candidate(Email.Of(FannyDuboisEmail)));
+            candidateRegistrationManager.Add(new Candidate(Email.Of(RegisDuboisEmail)));
 
             var candidates = candidateRegistrationManager.Candidates;
 
@@ -66,11 +66,11 @@ namespace Socrates.Test.Services
         [TestCase(FannyDuboisEmail)]
         public void Add_Should_Return_Unique_Candidate_Even_If_You_Try_To_Add_Existing_Candidate(string candidateEmail)
         {
-            var candidateRegistrationManager = new CandidateRegistrationManager();
+            var candidateRegistrationManager = new CandidateRegister();
 
-            candidateRegistrationManager.Register(new Candidate(Email.Of(candidateEmail)));
+            candidateRegistrationManager.Add(new Candidate(Email.Of(candidateEmail)));
 
-            Check.ThatCode(() => candidateRegistrationManager.Register(new Candidate(Email.Of(candidateEmail)))).Throws<ExistingCandidateException>();
+            Check.ThatCode(() => candidateRegistrationManager.Add(new Candidate(Email.Of(candidateEmail)))).Throws<ExistingCandidateException>();
         }
 
         [Test]
@@ -78,9 +78,9 @@ namespace Socrates.Test.Services
         {
             var candidateProvider = new CandidateProvider(new Candidate(Email.Of(RegisDuboisEmail)), new Candidate(Email.Of(FannyDuboisEmail)));
 
-            var candidateRegistrationManager = new CandidateRegistrationManager(candidateProvider);
+            var candidateRegistrationManager = new CandidateRegister(candidateProvider);
 
-            candidateRegistrationManager.Register(new Candidate(Email.Of(JulieFournierEmail)));
+            candidateRegistrationManager.Add(new Candidate(Email.Of(JulieFournierEmail)));
 
             var candidates = candidateRegistrationManager.Candidates;
 
@@ -92,10 +92,10 @@ namespace Socrates.Test.Services
         {
             var candidateProvider = new CandidateProvider(new Candidate(Email.Of(RegisDuboisEmail)), new Candidate(Email.Of(FannyDuboisEmail)));
 
-            var candidateRegistrationManager = new CandidateRegistrationManager(candidateProvider);
+            var candidateRegistrationManager = new CandidateRegister(candidateProvider);
 
-            candidateRegistrationManager.Register(new Candidate(Email.Of(firstCandidateEmail)));
-            candidateRegistrationManager.Register(new Candidate(Email.Of(secondCandidateEmail)));
+            candidateRegistrationManager.Add(new Candidate(Email.Of(firstCandidateEmail)));
+            candidateRegistrationManager.Add(new Candidate(Email.Of(secondCandidateEmail)));
 
             var candidates = candidateRegistrationManager.Candidates;
             Check.That(candidates).Contains(new Candidate(Email.Of(RegisDuboisEmail)), new Candidate(Email.Of(FannyDuboisEmail)), new Candidate(Email.Of(firstCandidateEmail)), new Candidate(Email.Of(secondCandidateEmail))).Only().Once();

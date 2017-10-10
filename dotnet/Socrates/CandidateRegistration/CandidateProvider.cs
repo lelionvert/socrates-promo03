@@ -29,7 +29,12 @@ namespace Socrates.CandidateRegistration
             candidates.Add(candidate);
         }
 
-        internal bool Exists(Candidate candidate)
+        public bool IsEmpty()
+        {
+            return candidates.Count == 0;
+        }
+
+        public bool ContainsCandidates(Candidate candidate)
         {
             return candidates.Contains(candidate); 
         }

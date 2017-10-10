@@ -35,14 +35,9 @@ namespace Socrates.CandidateRegistration
             return candidates.Count == 0;
         }
 
-        public bool ContainsCandidates(Candidate candidate)
-        {
-            return candidates.Contains(candidate); 
-        }
-
         public bool ContainsCandidates(params Candidate[] candidates)
         {
-            return this.candidates.Any(candidates.Contains);
+            return candidates.All(this.candidates.Contains) && this.candidates.All(candidates.Contains);
         }
     }
 }

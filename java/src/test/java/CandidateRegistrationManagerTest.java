@@ -1,21 +1,14 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Collection;
-
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CandidateRegistrationManagerTest {
 
-    public static final Email SABINE_MAIL = Email.of("sabine@lcdlv.fr");
-
-
-    public static final Email MELODY_MAIL = Email.of("melody@lcdlv.fr");
-
-
-    public static final Email CYRIL_MAIL = Email.of("cyril@lcdlv.fr");
-
-    public static final Email ISMAEL_MAIL = Email.of("ismael@lcdlv.fr");
+    private static final Email SABINE_MAIL = Email.of("sabine@lcdlv.fr");
+    private static final Email MELODY_MAIL = Email.of("melody@lcdlv.fr");
+    private static final Email CYRIL_MAIL = Email.of("cyril@lcdlv.fr");
+    private static final Email ISMAEL_MAIL = Email.of("ismael@lcdlv.fr");
 
     private CandidateRegistrationManager candidateRegistrationManager;
 

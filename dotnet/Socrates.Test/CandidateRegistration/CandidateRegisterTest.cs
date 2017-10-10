@@ -29,24 +29,22 @@ namespace Socrates.Test.Services
 
             var candidateRegister = new CandidateRegister(candidateProvider);
 
-            var candidates = candidateRegister.Candidates;
+            var expectedCandidate = new Candidate(Email.Of(RegisDuboisEmail));
 
-            Check.That(candidates).ContainsExactly(regisDuboisCandidate);
+            Check.That(candidateProvider.ContainsCandidates(expectedCandidate)).IsTrue();
         }
-        
+
         [TestCase(RegisDuboisEmail)]
         [TestCase(FannyDuboisEmail)]
         public void Add_Should_Return_The_CandidateEmail_Previously_Added(string candidateEmail)
         {
             var candidate = new Candidate(Email.Of(candidateEmail));
-
-            var candidateRegistrer = new CandidateRegister();
+            var candidateProvider = new CandidateProvider();
+            var candidateRegistrer = new CandidateRegister(candidateProvider);
 
             candidateRegistrer.Add(candidate);
 
-            var candidates = candidateRegistrer.Candidates;
-
-            Check.That(candidates[0]).IsEqualTo(new Candidate(Email.Of(candidateEmail)));
+            Check.That(candidateProvider.ContainsCandidates(new Candidate(Email.Of(candidateEmail)))).IsTrue();
         }
 
         [Test]
@@ -101,7 +99,7 @@ namespace Socrates.Test.Services
             Check.That(candidates).Contains(new Candidate(Email.Of(RegisDuboisEmail)), new Candidate(Email.Of(FannyDuboisEmail)), new Candidate(Email.Of(firstCandidateEmail)), new Candidate(Email.Of(secondCandidateEmail))).Only().Once();
         }
 
-        
+
     }
 }
-    
+

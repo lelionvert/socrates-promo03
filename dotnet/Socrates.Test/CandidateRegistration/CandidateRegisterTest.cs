@@ -18,13 +18,21 @@ namespace Socrates.Test.Services
             var candidateRegister = new CandidateRegister(candidateProvider);
             
             candidateRegister.Register(new Candidate(Email.Of(RegisDuboisEmail)));
+
             Check.That(candidateProvider.hasAlreadyWasCalled).IsTrue();
         }
 
+        [Test]
+        public void Register_Should_Call_AddCandidate_When_HasAlready_Return_False()
+        {
+            var candidateProvider = new MockCandidateProvider();
+            var candidateRegister = new CandidateRegister(candidateProvider);
 
+            candidateRegister.Register(new Candidate(Email.Of(RegisDuboisEmail)));
+
+            Check.That(candidateProvider.addCandidateWasCalled).IsTrue();
+        }
         
-
-
     }
 }
 

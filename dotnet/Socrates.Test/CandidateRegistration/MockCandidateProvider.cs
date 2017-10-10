@@ -5,11 +5,12 @@ namespace Socrates.Test.Services
 {
     internal class MockCandidateProvider : ICandidateProvider
     {
-        public bool hasAlreadyWasCalled { get; private set; };
+        public bool hasAlreadyWasCalled { get; private set; }
+        public bool addCandidateWasCalled { get; private set; }
 
         public void AddCandidate(Candidate candidate)
         {
-            throw new System.NotImplementedException();
+            addCandidateWasCalled = true;
         }
 
         public IList<Email> GetCandidateEmails()
@@ -21,7 +22,7 @@ namespace Socrates.Test.Services
         {
             hasAlreadyWasCalled = true;
 
-            return true;
+            return false;
         }
     }
 }

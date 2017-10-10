@@ -25,10 +25,6 @@ public class CandidateRegistrationManager {
         return Collections.unmodifiableCollection(emails);
     }
 
-    public Collection<Candidate> findCandidates() {
-        return Collections.unmodifiableCollection(candidates);
-    }
-
     public void addCandidates(Candidate... candidates) {
         for (Candidate candidate : candidates){
             addCandidate(candidate);

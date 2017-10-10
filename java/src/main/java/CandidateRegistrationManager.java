@@ -11,6 +11,11 @@ public class CandidateRegistrationManager {
         candidatesEmails.addAll(existingCandidates);
     }
 
+    private CandidateRegistrationManager(List<Candidate> existingCandidates, String temporaryVariable) {
+        this();
+        candidates.addAll(existingCandidates);
+    }
+
     public CandidateRegistrationManager() {
         this.candidatesEmails = new ArrayList<>();
         this.candidates = new ArrayList<>();
@@ -49,5 +54,9 @@ public class CandidateRegistrationManager {
 
     private void addCandidate(Candidate candidate) {
         candidates.add(candidate);
+    }
+
+    public static CandidateRegistrationManager withExisting(Candidate... candidates) {
+        return new CandidateRegistrationManager(Arrays.asList(candidates), null);
     }
 }

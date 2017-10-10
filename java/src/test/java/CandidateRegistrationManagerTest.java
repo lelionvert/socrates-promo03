@@ -18,6 +18,7 @@ public class CandidateRegistrationManagerTest {
     public static final Candidate SABINE_CANDIDATE = new Candidate(SABINE_EMAIL);
     private static final Candidate CYRIL_CANDIDATE = new Candidate(CYRIL_EMAIL);
     private static final Candidate ISMAEL_CANDIDATE = new Candidate(ISMAEL_EMAIL);
+    private static final Candidate MELODY_CANDIDATE = new Candidate(MELODY_EMAIL);
 
     private CandidateRegistrationManager candidateRegistrationManager;
 
@@ -86,6 +87,15 @@ public class CandidateRegistrationManagerTest {
 
         assertThat(candidateRegistrationManager.findEmails())
             .containsExactlyInAnyOrder(SABINE_EMAIL, CYRIL_EMAIL, MELODY_EMAIL);
+    }
+
+    @Test
+    public void should_find_several_plus_one_when_adding_one_given_several_existing_candidates(){
+        candidateRegistrationManager = CandidateRegistrationManager.withExisting(SABINE_CANDIDATE, MELODY_CANDIDATE);
+        candidateRegistrationManager.addCandidates(CYRIL_CANDIDATE);
+
+        assertThat(candidateRegistrationManager.findCandidates())
+            .containsExactlyInAnyOrder(new Candidate(SABINE_EMAIL), new Candidate(MELODY_EMAIL), new Candidate(CYRIL_EMAIL));
     }
 
     @Test

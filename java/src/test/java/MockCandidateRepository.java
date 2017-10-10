@@ -1,23 +1,39 @@
-import java.util.ArrayList;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.util.Collection;
-import java.util.Collections;
 
 public class MockCandidateRepository implements CandidateRepository{
 
-    private Collection<Email> emails = new ArrayList<>();
+    private boolean isGetEmailCalled;
+    private boolean isAddCalled;
+    private boolean isMethodHasAlreadyCalled;
 
     @Override
     public void add(Candidate candidate) {
-
+        isAddCalled = true;
     }
 
     @Override
     public boolean hasAlready(Candidate candidate) {
-        return false;
+        isMethodHasAlreadyCalled = true;
+        return true;
     }
 
     @Override
     public Collection<Email> getEmails() {
-        return emails;
+        isGetEmailCalled = true;
+        return null;
+    }
+
+    public boolean isGetEmailCalled() {
+        return isGetEmailCalled;
+    }
+
+    public boolean isAddCalled() {
+        return isAddCalled;
+    }
+
+    public boolean isMethodHasAlreadyCalled() {
+        return isMethodHasAlreadyCalled;
     }
 }

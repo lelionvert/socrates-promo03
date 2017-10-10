@@ -3,9 +3,9 @@ import org.junit.Test;
 
 import java.util.Collection;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class CandidateRegistrationManagerTest {
+public class CandidateRegistrationManagerIntegrationTest {
 
     private static final Email SABINE_EMAIL = Email.of("sabine@lcdlv.fr");
     private static final Email MELODY_EMAIL = Email.of("melody@lcdlv.fr");
@@ -30,28 +30,43 @@ public class CandidateRegistrationManagerTest {
     }
 
     @Test
-    public void should_call_method_getEmail_when_manager_find_emails() {
-        MockCandidateRepository mockCandidateRepository = new MockCandidateRepository();
-        candidateRegistrationManager = new CandidateRegistrationManager(mockCandidateRepository);
-        candidateRegistrationManager.findEmails();
-        assertThat(mockCandidateRepository.isGetEmailCalled()).isTrue();
+    public void should_not_have_any_email_at_initialization() {
+        assertThat(candidateRegistrationManager.findEmails()).isEmpty();
     }
 
     @Test
-    public void should_call_method_has_already_and_add_when_manager_register_a_candidate() {
-        MockCandidateRepository mockCandidateRepository = new MockCandidateRepository();
-        candidateRegistrationManager = new CandidateRegistrationManager(mockCandidateRepository);
+    public void should_find_one_when_adding_one_given_no_existing_candidates() {
         candidateRegistrationManager.register(SABINE_CANDIDATE);
-        assertThat(mockCandidateRepository.isMethodHasAlreadyCalled()).isTrue();
-        assertThat(mockCandidateRepository.isAddCalled()).isTrue();
+        assertThat(candidateRegistrationManager.findEmails())
+            .containsOnlyOnce(SABINE_EMAIL);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void should_have_no_side_effect_for_candidates() {
+        candidateRegistrationManager.register(SABINE_CANDIDATE);
+        final Collection<Email> emails = candidateRegistrationManager.findEmails();
+        emails.clear();
+    }
+
+    @Test
+    public void should_find_several_candidates_when_adding_several_candidates_given_no_existing_candidates() {
+        candidateRegistrationManager.register(CYRIL_CANDIDATE, ISMAEL_CANDIDATE);
+        assertThat(candidateRegistrationManager.findEmails())
+            .containsExactlyInAnyOrder(CYRIL_EMAIL, ISMAEL_EMAIL);
+    }
+
+    @Test
+    public void should_find_several_plus_one_when_adding_one_given_several_existing_candidates() {
+        candidateRegistrationManagerWithExistingCandidates.register(CYRIL_CANDIDATE);
+        assertThat(candidateRegistrationManagerWithExistingCandidates.findEmails())
+            .containsExactlyInAnyOrder(SABINE_EMAIL, MELODY_EMAIL, CYRIL_EMAIL);
     }
 
     @Test
     public void should_not_add_an_existing_candidate() {
-        MockCandidateRepository mockCandidateRepository = new MockCandidateRepository();
-        candidateRegistrationManagerWithExistingCandidates = new CandidateRegistrationManager(mockCandidateRepository);
         candidateRegistrationManagerWithExistingCandidates.register(SABINE_CANDIDATE);
-        assertThat(mockCandidateRepository.isMethodHasAlreadyCalled()).isTrue();
-        assertThat(mockCandidateRepository.isAddCalled()).isFalse();
+        assertThat(candidateRegistrationManagerWithExistingCandidates.findEmails())
+            .containsExactlyInAnyOrder(SABINE_EMAIL, MELODY_EMAIL);
     }
 }
+

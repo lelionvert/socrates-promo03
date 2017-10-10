@@ -9,6 +9,7 @@ import registration.repository.InMemoryCandidateRepository;
 import shared.model.Email;
 
 import java.util.Collection;
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -38,7 +39,31 @@ public class CandidateRegistrationManagerTest {
 
     @Test
     public void should_not_have_any_email_at_initialization() {
+        MockGetEmailsEmptyInMemoryCandidateRepository mockGetEmailsEmptyInMemoryCandidateRepository = new MockGetEmailsEmptyInMemoryCandidateRepository();
+        CandidateRegistrationManager candidateRegistrationManager = new CandidateRegistrationManager(mockGetEmailsEmptyInMemoryCandidateRepository);
         assertThat(candidateRegistrationManager.findEmails()).isEmpty();
+        assertThat(mockGetEmailsEmptyInMemoryCandidateRepository.getEmailsWasCalled).isTrue();
+    }
+
+    class MockGetEmailsEmptyInMemoryCandidateRepository implements CandidateRepository {
+
+        public boolean getEmailsWasCalled = false;
+
+        @Override
+        public void add(Candidate candidate) {
+
+        }
+
+        @Override
+        public boolean hasAlready(Candidate candidate) {
+            return false;
+        }
+
+        @Override
+        public Collection<Email> getEmails() {
+            getEmailsWasCalled = true;
+            return Collections.emptyList();
+        }
     }
 
     @Test

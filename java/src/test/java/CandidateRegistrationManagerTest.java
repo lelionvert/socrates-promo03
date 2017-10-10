@@ -19,11 +19,16 @@ public class CandidateRegistrationManagerTest {
 
     private CandidateRegistrationManager candidateRegistrationManager;
     private CandidateRepository candidateRepository;
+    private CandidateRepository candidateRepositoryWithExistingCandidates;
+    private CandidateRegistrationManager candidateRegistrationManagerWithExistingCandidates;
+
 
     @Before
     public void setUp() throws Exception {
         candidateRepository = new CandidateRepository();
         candidateRegistrationManager = new CandidateRegistrationManager(candidateRepository);
+        candidateRepositoryWithExistingCandidates = CandidateRepository.withExisting(SABINE_CANDIDATE, MELODY_CANDIDATE);
+        candidateRegistrationManagerWithExistingCandidates = new CandidateRegistrationManager(candidateRepositoryWithExistingCandidates);
     }
 
     @Test
@@ -54,21 +59,15 @@ public class CandidateRegistrationManagerTest {
 
     @Test
     public void should_find_several_plus_one_when_adding_one_given_several_existing_candidates() {
-        CandidateRepository anotherCandidateRepository = CandidateRepository.withExisting(SABINE_CANDIDATE, MELODY_CANDIDATE);
-        CandidateRegistrationManager anotherCandidateRegistrationManager = new CandidateRegistrationManager(anotherCandidateRepository);
-        anotherCandidateRegistrationManager.register(CYRIL_CANDIDATE);
-
-        assertThat(anotherCandidateRegistrationManager.findEmails())
+        candidateRegistrationManagerWithExistingCandidates.register(CYRIL_CANDIDATE);
+        assertThat(candidateRegistrationManagerWithExistingCandidates.findEmails())
             .containsExactlyInAnyOrder(SABINE_EMAIL, MELODY_EMAIL, CYRIL_EMAIL);
     }
 
     @Test
     public void should_not_add_an_existing_candidate() {
-        CandidateRepository candidateRepository = CandidateRepository.withExisting(SABINE_CANDIDATE, MELODY_CANDIDATE);
-        CandidateRegistrationManager candidateRegistrationManager = new CandidateRegistrationManager(candidateRepository);
-        candidateRegistrationManager.register(SABINE_CANDIDATE);
-
-        assertThat(candidateRegistrationManager.findEmails())
+        candidateRegistrationManagerWithExistingCandidates.register(SABINE_CANDIDATE);
+        assertThat(candidateRegistrationManagerWithExistingCandidates.findEmails())
             .containsExactlyInAnyOrder(SABINE_EMAIL, MELODY_EMAIL);
     }
 }

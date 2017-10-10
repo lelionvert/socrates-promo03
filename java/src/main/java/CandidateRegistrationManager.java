@@ -22,7 +22,7 @@ public class CandidateRegistrationManager {
         for (Candidate candidate : candidates) {
             emails.add(candidate.getEmail());
         }
-        return emails;
+        return Collections.unmodifiableCollection(emails);
     }
 
     public Collection<Candidate> findCandidates() {

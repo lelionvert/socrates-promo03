@@ -42,8 +42,8 @@ public class CandidateRegistrationManagerTest {
     @Test(expected = UnsupportedOperationException.class)
     public void should_have_no_side_effect_for_candidates() {
         candidateRegistrationManager.addCandidates(SABINE_CANDIDATE);
-        final Collection<Candidate> candidates = candidateRegistrationManager.findCandidates();
-        candidates.clear();
+        final Collection<Email> emails = candidateRegistrationManager.findEmails();
+        emails.clear();
     }
 
     @Test

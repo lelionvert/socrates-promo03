@@ -42,12 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CandidateProvider.cs" />
-    <Compile Include="CandidateRegistrationManager.cs" />
-    <Compile Include="Email.cs" />
-    <Compile Include="InvalidEmailException.cs" />
+    <Compile Include="CandidateRegistration\Email.cs" />
+    <Compile Include="CandidateRegistration\ExistingEmailException.cs" />
+    <Compile Include="CandidateRegistration\InvalidEmailException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CandidateRegistration\Candidat.cs" />
+    <Compile Include="CandidateRegistration\CandidateProvider.cs" />
+    <Compile Include="CandidateRegistration\CandidateRegistrationManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

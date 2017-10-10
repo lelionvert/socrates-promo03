@@ -15,21 +15,26 @@ namespace Socrates.CandidateRegistration
         }
 
         public CandidateRegistrationManager(CandidateProvider candidateProvider)
+            : this()
         {
-            this.candidateProvider = candidateProvider;
+            if (candidateProvider != null)
+            {
+                this.candidateProvider = candidateProvider;
+            }
+            
         }
 
        
 
-        public IList<Candidate> Candidates => candidateProvider.GetCandidates();
+        public   IList<Candidate> Candidates => candidateProvider.GetCandidates();
 
        
 
-        public void Add(Candidate candidate)
+        public void Register(Candidate candidate)
         {
-            if (candidateProvider.GetCandidates().Contains(candidate))
+            if (candidateProvider.Exists(candidate))
             {
-                throw new ExistingEmailException("This candidate already exists");
+                throw new ExistingCandidateException("This candidate already exists");
             }
             candidateProvider.AddCandidate(candidate);
         }

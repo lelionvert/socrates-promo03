@@ -42,7 +42,7 @@ namespace Socrates.Test.Services
 
             var candidateRegistrationManager = new CandidateRegistrationManager();
 
-            candidateRegistrationManager.Add(candidate);
+            candidateRegistrationManager.Register(candidate);
 
             var candidates = candidateRegistrationManager.Candidates;
 
@@ -54,8 +54,8 @@ namespace Socrates.Test.Services
         {
             var candidateRegistrationManager = new CandidateRegistrationManager();
 
-            candidateRegistrationManager.Add(new Candidate(Email.Of(FannyDuboisEmail)));
-            candidateRegistrationManager.Add(new Candidate(Email.Of(RegisDuboisEmail)));
+            candidateRegistrationManager.Register(new Candidate(Email.Of(FannyDuboisEmail)));
+            candidateRegistrationManager.Register(new Candidate(Email.Of(RegisDuboisEmail)));
 
             var candidates = candidateRegistrationManager.Candidates;
 
@@ -68,9 +68,9 @@ namespace Socrates.Test.Services
         {
             var candidateRegistrationManager = new CandidateRegistrationManager();
 
-            candidateRegistrationManager.Add(new Candidate(Email.Of(candidateEmail)));
+            candidateRegistrationManager.Register(new Candidate(Email.Of(candidateEmail)));
 
-            Check.ThatCode(() => candidateRegistrationManager.Add(new Candidate(Email.Of(candidateEmail)))).Throws<ExistingEmailException>();
+            Check.ThatCode(() => candidateRegistrationManager.Register(new Candidate(Email.Of(candidateEmail)))).Throws<ExistingCandidateException>();
         }
 
         [Test]
@@ -80,7 +80,7 @@ namespace Socrates.Test.Services
 
             var candidateRegistrationManager = new CandidateRegistrationManager(candidateProvider);
 
-            candidateRegistrationManager.Add(new Candidate(Email.Of(JulieFournierEmail)));
+            candidateRegistrationManager.Register(new Candidate(Email.Of(JulieFournierEmail)));
 
             var candidates = candidateRegistrationManager.Candidates;
 
@@ -94,8 +94,8 @@ namespace Socrates.Test.Services
 
             var candidateRegistrationManager = new CandidateRegistrationManager(candidateProvider);
 
-            candidateRegistrationManager.Add(new Candidate(Email.Of(firstCandidateEmail)));
-            candidateRegistrationManager.Add(new Candidate(Email.Of(secondCandidateEmail)));
+            candidateRegistrationManager.Register(new Candidate(Email.Of(firstCandidateEmail)));
+            candidateRegistrationManager.Register(new Candidate(Email.Of(secondCandidateEmail)));
 
             var candidates = candidateRegistrationManager.Candidates;
             Check.That(candidates).Contains(new Candidate(Email.Of(RegisDuboisEmail)), new Candidate(Email.Of(FannyDuboisEmail)), new Candidate(Email.Of(firstCandidateEmail)), new Candidate(Email.Of(secondCandidateEmail))).Only().Once();

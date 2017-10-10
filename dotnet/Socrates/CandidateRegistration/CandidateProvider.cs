@@ -10,9 +10,6 @@ namespace Socrates.CandidateRegistration
         private IList<Candidate> candidates = new List<Candidate>();
       
 
-
-      
-
         public CandidateProvider(params Candidate[] candidates)
         {
             foreach (var candidat in candidates)
@@ -21,9 +18,6 @@ namespace Socrates.CandidateRegistration
             }
         }
 
-       
-
-       
 
         public IList<Candidate> GetCandidates()
         {
@@ -33,6 +27,11 @@ namespace Socrates.CandidateRegistration
         public void AddCandidate(Candidate candidate)
         {
             candidates.Add(candidate);
+        }
+
+        internal bool Exists(Candidate candidate)
+        {
+            return candidates.Contains(candidate); 
         }
     }
 }

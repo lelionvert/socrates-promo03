@@ -1,16 +1,12 @@
-﻿using Socrates.CandidateRegistration;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Socrates.CandidateRegistration
 {
-    public class CandidateProvider
+    public class CandidateProvider : ICandidateProvider
     {
-      
         private IList<Candidate> candidates = new List<Candidate>();
         
-
         public CandidateProvider(params Candidate[] candidates)
         {
             foreach (var candidat in candidates)
@@ -18,7 +14,6 @@ namespace Socrates.CandidateRegistration
                 this.candidates.Add(candidat);
             }
         }
-
 
         public IList<Candidate> GetCandidates()
         {
@@ -38,6 +33,11 @@ namespace Socrates.CandidateRegistration
         public bool HasAlready(params Candidate[] candidates)
         {
             return candidates.All(this.candidates.Contains) && this.candidates.All(candidates.Contains);
+        }
+
+        public IList<Email> GetCandidateEmails()
+        {
+            return candidates.Select(candidate => candidate.Email).ToList();
         }
     }
 }

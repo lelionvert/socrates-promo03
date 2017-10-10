@@ -56,5 +56,15 @@ namespace Socrates.Test.CandidateRegistration
             Check.That(candidates).IsTrue();
         }
 
+        [Test]
+        public void GetCandidateEmails_Should_Return_Candidates_Email_List()
+        {
+            var candidateProvider = new CandidateProvider();
+
+            candidateProvider.AddCandidate(new Candidate(Email.Of(FannyDuboisEmail)));
+            candidateProvider.AddCandidate(new Candidate(Email.Of(RegisDuboisEmail)));
+
+            Check.That(candidateProvider.GetCandidateEmails()).ContainsExactly(Email.Of(FannyDuboisEmail), Email.Of(RegisDuboisEmail));
+        }
     }
 }

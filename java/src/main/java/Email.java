@@ -4,37 +4,32 @@ import java.util.regex.Pattern;
 
 public class Email {
 
-    Predicate<String> isEmpty = s -> s == null || s.isEmpty();
+    private static final Predicate<String> isEmptyOrNull = s -> s == null || s.isEmpty();
 
     private static final Pattern VALID_EMAIL_ADDRESS_REGEX =
         Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
-    private String email;
+    private final String email;
 
     public static Email of(String email) {
+        verifyEmail(email);
         return new Email(email);
     }
 
-    private Email(String email) {
-        verifyEmail(email);
+    private Email(String email){
         this.email = email;
     }
 
-    private void verifyEmail(String email) {
-        if(isEmpty.test(email)
+    private static void verifyEmail(String email) {
+        if(isEmptyOrNull.test(email)
             || !isValidFormat(email)) {
             throw new IllegalArgumentException();
         }
     }
 
-    private boolean isValidFormat(String email) {
+    private static boolean isValidFormat(String email) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(email);
         return matcher.find();
-    }
-
-    @Override
-    public String toString() {
-        return this.email;
     }
 
     @Override
@@ -44,11 +39,11 @@ public class Email {
 
         Email email1 = (Email) o;
 
-        return email.equals(email1.email);
+        return email != null ? email.equals(email1.email) : email1.email == null;
     }
 
     @Override
     public int hashCode() {
-        return email.hashCode();
+        return email != null ? email.hashCode() : 0;
     }
 }

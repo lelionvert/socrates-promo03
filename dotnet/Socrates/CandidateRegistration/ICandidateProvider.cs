@@ -4,7 +4,7 @@ namespace Socrates.CandidateRegistration
 {
     public interface ICandidateProvider
     {
-        bool HasAlready(Candidate[] candidates);
+        bool HasAlready(params Candidate[] candidates);
 
         void AddCandidate(Candidate candidate);
 

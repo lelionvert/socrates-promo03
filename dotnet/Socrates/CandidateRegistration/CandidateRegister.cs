@@ -2,14 +2,9 @@
 {
     public class CandidateRegister
     {
-        private CandidateProvider candidateProvider;
+        private ICandidateProvider candidateProvider;
 
-        public CandidateRegister()
-        {
-            candidateProvider = new CandidateProvider();
-        }
-
-        public CandidateRegister(CandidateProvider candidateProvider)
+        public CandidateRegister(ICandidateProvider candidateProvider)
         {
             this.candidateProvider = candidateProvider;
         }

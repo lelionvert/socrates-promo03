@@ -20,6 +20,12 @@ public class CandidateProviderTest {
     }
 
     @Test
+    public void should_have_no_empty_list_when_add_candidate() {
+        candidateProvider.add(MARJORY_CANDIDATE);
+        Assertions.assertThat(candidateProvider.isEmpty()).isFalse();
+    }
+
+    @Test
     public void should_adding_a_candidate() throws Exception {
         candidateProvider.add(MARJORY_CANDIDATE);
         Assertions.assertThat(candidateProvider.exist(MARJORY_CANDIDATE)).isTrue();

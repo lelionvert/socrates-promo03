@@ -7,7 +7,7 @@ class CandidateProvider {
     private final Collection<Candidate> candidates = new HashSet<>();
 
     public boolean isEmpty() {
-        return true;
+        return candidates.isEmpty();
     }
 
     public void add(Candidate... candidates) {

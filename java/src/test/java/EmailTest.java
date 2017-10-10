@@ -1,5 +1,6 @@
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
+import shared.model.Email;
 
 public class EmailTest {
 

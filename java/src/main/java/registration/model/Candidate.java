@@ -1,5 +1,8 @@
+package registration.model;
 
-class Candidate {
+import shared.model.Email;
+
+public class Candidate {
 
     private final Email email;
 

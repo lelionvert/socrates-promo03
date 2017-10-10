@@ -1,3 +1,8 @@
+package registration.repository;
+
+import registration.model.Candidate;
+import shared.model.Email;
+
 import java.util.*;
 
 public class CandidateRepository {

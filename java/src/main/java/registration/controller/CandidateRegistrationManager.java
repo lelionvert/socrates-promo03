@@ -1,3 +1,9 @@
+package registration.controller;
+
+import registration.model.Candidate;
+import registration.repository.CandidateRepository;
+import shared.model.Email;
+
 import java.util.*;
 
 class CandidateRegistrationManager {

@@ -1,35 +1,10 @@
-import java.util.*;
+import java.util.Collection;
 
-public class CandidateRepository {
+public interface CandidateRepository {
 
-    private final Collection<Candidate> candidates;
+    void add(Candidate candidate);
 
-    private CandidateRepository(Collection<Candidate> candidates) {
-        this();
-        this.candidates.addAll(candidates);
-    }
+    boolean hasAlready(Candidate candidate);
 
-    public static CandidateRepository withExisting(Candidate... candidates) {
-        return new CandidateRepository(Arrays.asList(candidates));
-    }
-
-    public CandidateRepository() {
-        this.candidates = new ArrayList<>();
-    }
-
-    public void add(Candidate candidate) {
-            candidates.add(candidate);
-    }
-
-    public boolean hasAlready(Candidate candidate) {
-        return candidates.contains(candidate);
-    }
-
-    public Collection<Email> getEmails() {
-        List<Email> emails = new ArrayList<>();
-        for (Candidate candidate : candidates) {
-            emails.add(candidate.getEmail());
-        }
-        return Collections.unmodifiableCollection(emails);
-    }
+    Collection<Email> getEmails();
 }

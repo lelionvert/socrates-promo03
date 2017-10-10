@@ -23,4 +23,6 @@ public class EmailTest {
         Email valentinEmail = Email.of("valentin@lcdlv.fr");
         Assertions.assertThat(valentinEmail).isNotNull();
     }
+
+
 }

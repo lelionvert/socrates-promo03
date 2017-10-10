@@ -23,14 +23,16 @@ public class CandidateRegistrationManagerTest {
 
     @Before
     public void setUp() throws Exception {
-        CandidateRepository candidateRepository = new CandidateRepository();
-        candidateRegistrationManager = new CandidateRegistrationManager(candidateRepository);
-        CandidateRepository candidateRepositoryWithExistingCandidates = CandidateRepository.withExisting(SABINE_CANDIDATE, MELODY_CANDIDATE);
-        candidateRegistrationManagerWithExistingCandidates = new CandidateRegistrationManager(candidateRepositoryWithExistingCandidates);
+        DefaultCandidateRepository defaultCandidateRepository = new DefaultCandidateRepository();
+        candidateRegistrationManager = new CandidateRegistrationManager(defaultCandidateRepository);
+        DefaultCandidateRepository defaultCandidateRepositoryWithExistingCandidates = DefaultCandidateRepository.withExisting(SABINE_CANDIDATE, MELODY_CANDIDATE);
+        candidateRegistrationManagerWithExistingCandidates = new CandidateRegistrationManager(defaultCandidateRepositoryWithExistingCandidates);
     }
 
     @Test
     public void should_not_have_any_email_at_initialization() {
+        CandidateRepository mockCandidateRepository = new MockCandidateRepository();
+        candidateRegistrationManager = new CandidateRegistrationManager(mockCandidateRepository);
         assertThat(candidateRegistrationManager.findEmails()).isEmpty();
     }
 

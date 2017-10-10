@@ -3,16 +3,13 @@ import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by valmey on 10/10/2017.
- */
 public class Email {
     private static final Pattern VALID_EMAIL_ADDRESS_REGEX =
         Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     private static Predicate<String> isEmptyOrNull = s -> s == null || s.isEmpty(); //isBlank String.Utils Apache
     private String email;
 
-    public Email(String email) {
+    private Email(String email) {
         this.email = email;
     }
 
@@ -21,7 +18,7 @@ public class Email {
         return new Email(email);
     }
 
-    public static void verifyEmail(String email) {
+    private static void verifyEmail(String email) {
         if(isEmptyOrNull.test(email)
             || !isValidFormat(email)) {
             throw new IllegalArgumentException();

@@ -16,6 +16,8 @@ public class CandidateRegistrationManagerTest {
     public static final Email ISMAEL_EMAIL = Email.of("ismael@lcdlv.fr");
 
     public static final Candidate SABINE_CANDIDATE = new Candidate(SABINE_EMAIL);
+    private static final Candidate CYRIL_CANDIDATE = new Candidate(CYRIL_EMAIL);
+    private static final Candidate ISMAEL_CANDIDATE = new Candidate(ISMAEL_EMAIL);
 
     private CandidateRegistrationManager candidateRegistrationManager;
 
@@ -68,6 +70,13 @@ public class CandidateRegistrationManagerTest {
         candidateRegistrationManager.addMany(CYRIL_EMAIL, ISMAEL_EMAIL);
         assertThat(candidateRegistrationManager.findEmails())
                   .containsExactlyInAnyOrder(CYRIL_EMAIL, ISMAEL_EMAIL);
+    }
+
+    @Test
+    public void should_find_several_candidates_when_adding_several_candidates_given_no_existing_candidates() {
+        candidateRegistrationManager.addCandidates(CYRIL_CANDIDATE, ISMAEL_CANDIDATE);
+        assertThat(candidateRegistrationManager.findCandidates())
+            .containsExactlyInAnyOrder(new Candidate(CYRIL_EMAIL), new Candidate(ISMAEL_EMAIL));
     }
 
     @Test

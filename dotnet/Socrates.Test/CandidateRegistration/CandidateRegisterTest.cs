@@ -4,7 +4,7 @@ using Socrates.CandidateRegistration;
 
 namespace Socrates.Test.Services
 {
-    public class CandidateRegistrationManagerTest
+    public class CandidateRegisterTest
     {
         private const string RegisDuboisEmail = "regis.dubois@socrates.com";
         private const string FannyDuboisEmail = "fanny.dubois@crafts.com";

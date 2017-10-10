@@ -45,7 +45,7 @@ public class CandidateRegistrationManagerTest {
     public void should_find_one_when_adding_one_given_no_existing_candidates() {
         candidateRegistrationManager.addCandidates(SABINE_CANDIDATE);
         assertThat(candidateRegistrationManager.findCandidates())
-            .containsOnlyOnce(SABINE_CANDIDATE);
+            .containsOnlyOnce(new Candidate(SABINE_EMAIL));
     }
 
 

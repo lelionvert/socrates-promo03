@@ -28,7 +28,7 @@ namespace Socrates.Test.CandidateRegistration
             candidateProvider.AddCandidate(candidate);
             var expectedCandidate = new Candidate(Email.Of(candidateEmail));
 
-            Check.That(candidateProvider.ContainsCandidates(expectedCandidate)).IsTrue();
+            Check.That(candidateProvider.HasAlready(expectedCandidate)).IsTrue();
         }
 
         [TestCase(RegisDuboisEmail)]
@@ -40,7 +40,7 @@ namespace Socrates.Test.CandidateRegistration
 
             var expectedCandidate = new Candidate(Email.Of(candidateEmail));
 
-            Check.That(candidateProvider.ContainsCandidates(expectedCandidate)).IsTrue();
+            Check.That(candidateProvider.HasAlready(expectedCandidate)).IsTrue();
         }
 
         [Test]
@@ -51,7 +51,7 @@ namespace Socrates.Test.CandidateRegistration
             candidateProvider.AddCandidate(new Candidate(Email.Of(FannyDuboisEmail)));
             candidateProvider.AddCandidate(new Candidate(Email.Of(RegisDuboisEmail)));
 
-            var candidates = candidateProvider.ContainsCandidates(new Candidate(Email.Of(FannyDuboisEmail)), new Candidate(Email.Of(RegisDuboisEmail)));
+            var candidates = candidateProvider.HasAlready(new Candidate(Email.Of(FannyDuboisEmail)), new Candidate(Email.Of(RegisDuboisEmail)));
 
             Check.That(candidates).IsTrue();
         }

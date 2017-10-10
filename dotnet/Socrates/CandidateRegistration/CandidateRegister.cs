@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Socrates.CandidateRegistration
+﻿namespace Socrates.CandidateRegistration
 {
     public class CandidateRegister
     {
@@ -16,11 +14,9 @@ namespace Socrates.CandidateRegistration
             this.candidateProvider = candidateProvider;
         }
 
-        public IList<Candidate> Candidates => candidateProvider.GetCandidates();
-
         public void Register(Candidate candidate)
         {
-            if (candidateProvider.ContainsCandidates(candidate))
+            if (candidateProvider.HasAlready(candidate))
             {
                 return;
             }

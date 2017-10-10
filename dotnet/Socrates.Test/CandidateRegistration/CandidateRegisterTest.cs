@@ -31,7 +31,7 @@ namespace Socrates.Test.Services
 
             var expectedCandidate = new Candidate(Email.Of(RegisDuboisEmail));
 
-            Check.That(candidateProvider.ContainsCandidates(expectedCandidate)).IsTrue();
+            Check.That(candidateProvider.HasAlready(expectedCandidate)).IsTrue();
         }
 
         [TestCase(RegisDuboisEmail)]
@@ -44,7 +44,7 @@ namespace Socrates.Test.Services
 
             candidateRegistrer.Register(candidate);
 
-            Check.That(candidateProvider.ContainsCandidates(new Candidate(Email.Of(candidateEmail)))).IsTrue();
+            Check.That(candidateProvider.HasAlready(new Candidate(Email.Of(candidateEmail)))).IsTrue();
         }
 
         [Test]
@@ -56,7 +56,7 @@ namespace Socrates.Test.Services
            candidateRegister.Register(new Candidate(Email.Of(FannyDuboisEmail)));
            candidateRegister.Register(new Candidate(Email.Of(RegisDuboisEmail)));
 
-            Check.That(candidateProvider.ContainsCandidates(new Candidate(Email.Of(RegisDuboisEmail)), new Candidate(Email.Of(FannyDuboisEmail)))).IsTrue();
+            Check.That(candidateProvider.HasAlready(new Candidate(Email.Of(RegisDuboisEmail)), new Candidate(Email.Of(FannyDuboisEmail)))).IsTrue();
         }
 
         [TestCase(RegisDuboisEmail)]
@@ -83,7 +83,7 @@ namespace Socrates.Test.Services
 
             candidateRegister.Register(new Candidate(Email.Of(JulieFournierEmail)));
 
-            var candidates = candidateRegister.Candidates;
+            var candidates = candidateProvider.GetCandidates();
 
             Check.That(candidates).Contains(new Candidate(Email.Of(RegisDuboisEmail)), new Candidate(Email.Of(FannyDuboisEmail)), new Candidate(Email.Of(JulieFournierEmail))).Only().Once();
         }
@@ -98,7 +98,7 @@ namespace Socrates.Test.Services
             candidateRegister.Register(new Candidate(Email.Of(firstCandidateEmail)));
             candidateRegister.Register(new Candidate(Email.Of(secondCandidateEmail)));
 
-            var candidates = candidateRegister.Candidates;
+            var candidates = candidateProvider.GetCandidates();
             Check.That(candidates).Contains(new Candidate(Email.Of(RegisDuboisEmail)), new Candidate(Email.Of(FannyDuboisEmail)), new Candidate(Email.Of(firstCandidateEmail)), new Candidate(Email.Of(secondCandidateEmail))).Only().Once();
         }
 

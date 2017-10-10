@@ -7,12 +7,12 @@ import static org.assertj.core.api.Assertions.*;
 
 public class CandidateRegistrationManagerTest {
 
-    public static final Email SABINE_EMAIL = Email.of("sabine@lcdlv.fr");
-    public static final Email MELODY_EMAIL = Email.of("melody@lcdlv.fr");
-    public static final Email CYRIL_EMAIL = Email.of("cyril@lcdlv.fr");
-    public static final Email ISMAEL_EMAIL = Email.of("ismael@lcdlv.fr");
+    private static final Email SABINE_EMAIL = Email.of("sabine@lcdlv.fr");
+    private static final Email MELODY_EMAIL = Email.of("melody@lcdlv.fr");
+    private static final Email CYRIL_EMAIL = Email.of("cyril@lcdlv.fr");
+    private static final Email ISMAEL_EMAIL = Email.of("ismael@lcdlv.fr");
 
-    public static final Candidate SABINE_CANDIDATE = new Candidate(SABINE_EMAIL);
+    private static final Candidate SABINE_CANDIDATE = new Candidate(SABINE_EMAIL);
     private static final Candidate CYRIL_CANDIDATE = new Candidate(CYRIL_EMAIL);
     private static final Candidate ISMAEL_CANDIDATE = new Candidate(ISMAEL_EMAIL);
     private static final Candidate MELODY_CANDIDATE = new Candidate(MELODY_EMAIL);

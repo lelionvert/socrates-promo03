@@ -18,16 +18,14 @@ public class CandidateRegistrationManagerTest {
     private static final Candidate MELODY_CANDIDATE = new Candidate(MELODY_EMAIL);
 
     private CandidateRegistrationManager candidateRegistrationManager;
-    private CandidateRepository candidateRepository;
-    private CandidateRepository candidateRepositoryWithExistingCandidates;
     private CandidateRegistrationManager candidateRegistrationManagerWithExistingCandidates;
 
 
     @Before
     public void setUp() throws Exception {
-        candidateRepository = new CandidateRepository();
+        CandidateRepository candidateRepository = new CandidateRepository();
         candidateRegistrationManager = new CandidateRegistrationManager(candidateRepository);
-        candidateRepositoryWithExistingCandidates = CandidateRepository.withExisting(SABINE_CANDIDATE, MELODY_CANDIDATE);
+        CandidateRepository candidateRepositoryWithExistingCandidates = CandidateRepository.withExisting(SABINE_CANDIDATE, MELODY_CANDIDATE);
         candidateRegistrationManagerWithExistingCandidates = new CandidateRegistrationManager(candidateRepositoryWithExistingCandidates);
     }
 

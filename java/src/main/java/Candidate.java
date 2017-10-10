@@ -1,7 +1,7 @@
 
-public class Candidate {
+class Candidate {
 
-    private Email email;
+    private final Email email;
 
     public Candidate(Email email) {
         this.email = email;

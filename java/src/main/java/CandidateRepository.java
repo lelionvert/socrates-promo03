@@ -2,7 +2,7 @@ import java.util.*;
 
 public class CandidateRepository {
 
-    private Collection<Candidate> candidates;
+    private final Collection<Candidate> candidates;
 
     private CandidateRepository(Collection<Candidate> candidates) {
         this();

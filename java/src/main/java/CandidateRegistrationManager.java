@@ -1,8 +1,8 @@
 import java.util.*;
 
-public class CandidateRegistrationManager {
+class CandidateRegistrationManager {
 
-    private CandidateRepository candidateRepository;
+    private final CandidateRepository candidateRepository;
 
     public CandidateRegistrationManager(CandidateRepository candidateRepository) {
         this.candidateRepository = candidateRepository;

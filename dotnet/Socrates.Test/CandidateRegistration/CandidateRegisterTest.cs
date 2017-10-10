@@ -63,11 +63,15 @@ namespace Socrates.Test.Services
         [TestCase(FannyDuboisEmail)]
         public void Add_Should_Return_Unique_Candidate_Even_If_You_Try_To_Add_Existing_Candidate(string candidateEmail)
         {
-            var candidateRegister = new CandidateRegister();
+            var candidateProvider = new CandidateProvider();
+
+            var candidateRegister = new CandidateRegister(candidateProvider);
 
             candidateRegister.Register(new Candidate(Email.Of(candidateEmail)));
 
-            Check.ThatCode(() => candidateRegister.Register(new Candidate(Email.Of(candidateEmail)))).Throws<ExistingCandidateException>();
+            candidateRegister.Register(new Candidate(Email.Of(candidateEmail)));
+
+            Check.That(candidateProvider.GetCandidates()).Contains(new Candidate(Email.Of(candidateEmail))).Only().Once();
         }
 
         [Test]

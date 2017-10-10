@@ -20,9 +20,9 @@ namespace Socrates.CandidateRegistration
 
         public void Register(Candidate candidate)
         {
-            if (candidateProvider.GetCandidates().Contains(candidate))
+            if (candidateProvider.ContainsCandidates(candidate))
             {
-                throw new ExistingCandidateException("This candidate already exists");
+                return;
             }
             candidateProvider.AddCandidate(candidate);
         }

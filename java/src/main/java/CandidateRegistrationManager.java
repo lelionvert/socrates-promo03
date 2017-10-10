@@ -2,26 +2,26 @@ import java.util.*;
 
 public class CandidateRegistrationManager {
 
-    private final Collection<Email> candidates;
+    private final CandidateProvider candidateProvider;
 
-    private CandidateRegistrationManager(Collection<Email> existingCandidates) {
+        private CandidateRegistrationManager(Email... existingCandidates) {
         this();
-        candidates.addAll(existingCandidates);
+        candidateProvider.add(existingCandidates);
     }
 
     public CandidateRegistrationManager() {
-        this.candidates = new HashSet<>();
+        candidateProvider = new CandidateProvider();
     }
 
     public static CandidateRegistrationManager withExisting(Email... existingCandidates) {
-        return new CandidateRegistrationManager(Arrays.asList(existingCandidates));
+        return new CandidateRegistrationManager(existingCandidates);
     }
 
     public Collection<Email> findAllEmail() {
-        return new ArrayList<>(candidates);
+        return candidateProvider.getEmails();
     }
 
     public void add(Email... emails) {
-        candidates.addAll(Arrays.asList(emails));
+        candidateProvider.add(emails);
     }
 }

@@ -21,22 +21,6 @@ public class CandidateRegistrationManagerTest {
     }
 
     @Test
-    public void should_have_all_emails_added_after_initialization() {
-        candidateRegistrationManager.add(CYRIL_EMAIL, ISMAEL_EMAIL);
-        assertThat(candidateRegistrationManager.findAllEmail())
-                .containsExactlyInAnyOrder(CYRIL_EMAIL, ISMAEL_EMAIL);
-    }
-
-    @Test
-    public void should_have_no_side_effect() {
-        candidateRegistrationManager.add(SABINE_EMAIL);
-        Collection<Email> allEmail = candidateRegistrationManager.findAllEmail();
-        allEmail.clear();
-        assertThat(candidateRegistrationManager.findAllEmail())
-                .containsOnlyOnce(SABINE_EMAIL);
-    }
-
-    @Test
     public void should_have_all_emails_when_adding_emails_to_existing_emails(){
         candidateRegistrationManager = CandidateRegistrationManager.withExisting(SABINE_EMAIL, MELODY_EMAIL);
         candidateRegistrationManager.add(CYRIL_EMAIL, ISMAEL_EMAIL);

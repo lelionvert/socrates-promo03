@@ -1,6 +1,5 @@
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 
 public class CandidateProvider {
@@ -27,5 +26,9 @@ public class CandidateProvider {
 
     public int size() {
         return emails.size();
+    }
+
+    public Collection<Email> getEmails() {
+        return Collections.unmodifiableCollection(emails);
     }
 }

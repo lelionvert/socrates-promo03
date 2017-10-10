@@ -7,7 +7,7 @@ public class Email {
     private final static Predicate<String> isBlank = s -> s == null || s.isEmpty();
     private final static Pattern VALID_EMAIL_ADDRESS_REGEX =
         Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-    private String email;
+    private final String email;
 
     private Email(String email) {
         this.email = email;

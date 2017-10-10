@@ -1,6 +1,6 @@
 public class Candidate {
 
-    private Email email;
+    private final Email email;
 
     static Candidate ofCandidate(Email of) {
         return new Candidate(of);

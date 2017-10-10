@@ -2,18 +2,16 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 
-public class CandidateProvider {
+class CandidateProvider {
 
-    private Collection<Candidate> candidates = new HashSet<>();
+    private final Collection<Candidate> candidates = new HashSet<>();
 
     public boolean isEmpty() {
         return true;
     }
 
     public void add(Candidate... candidates) {
-        for (Candidate candidateCandidate : candidates) {
-            this.candidates.add(candidateCandidate);
-        }
+        Collections.addAll(this.candidates, candidates);
     }
 
     public boolean exist(Candidate... candidates) {

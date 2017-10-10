@@ -6,8 +6,8 @@ public class CandidateProviderTest {
 
     private CandidateProvider candidateProvider;
 
-    public static final Candidate MARJORY_CANDIDATE = Candidate.ofCandidate(Email.of("marjoryTahLesOuf@lcdlv.fr"));
-    public static final Candidate JORDAN_CANDIDATE = Candidate.ofCandidate(Email.of("jordan@lcdlv.fr"));
+    private static final Candidate MARJORY_CANDIDATE = Candidate.ofCandidate(Email.of("marjoryTahLesOuf@lcdlv.fr"));
+    private static final Candidate JORDAN_CANDIDATE = Candidate.ofCandidate(Email.of("jordan@lcdlv.fr"));
 
     @Before
     public void setUp() throws Exception {

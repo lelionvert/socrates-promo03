@@ -6,8 +6,8 @@ public class CandidateProviderTest {
 
     private CandidateProvider candidateProvider;
 
-    public static final Email MARJORY_EMAIL = Email.of("marjoryTahLesOuf@lcdlv.fr");
-    public static final Email JORDAN_EMAIL = Email.of("jordan@lcdlv.fr");
+    public static final Candidate MARJORY_CANDIDATE = Candidate.ofCandidate(Email.of("marjoryTahLesOuf@lcdlv.fr"));
+    public static final Candidate JORDAN_CANDIDATE = Candidate.ofCandidate(Email.of("jordan@lcdlv.fr"));
 
     @Before
     public void setUp() throws Exception {
@@ -21,26 +21,26 @@ public class CandidateProviderTest {
 
     @Test
     public void should_adding_a_candidate() throws Exception {
-        candidateProvider.add(MARJORY_EMAIL);
-        Assertions.assertThat(candidateProvider.exist(MARJORY_EMAIL)).isTrue();
+        candidateProvider.add(MARJORY_CANDIDATE);
+        Assertions.assertThat(candidateProvider.exist(MARJORY_CANDIDATE)).isTrue();
     }
 
     @Test
     public void should_adding_many_candidate() throws Exception {
-        candidateProvider.add(MARJORY_EMAIL, JORDAN_EMAIL);
-        Assertions.assertThat(candidateProvider.exist(MARJORY_EMAIL, JORDAN_EMAIL))
+        candidateProvider.add(MARJORY_CANDIDATE, JORDAN_CANDIDATE);
+        Assertions.assertThat(candidateProvider.exist(MARJORY_CANDIDATE, JORDAN_CANDIDATE))
                 .isTrue();
     }
 
     @Test
     public void should_not_add_an_existing_email() throws Exception {
-        candidateProvider.add(MARJORY_EMAIL, JORDAN_EMAIL);
-        candidateProvider.add(MARJORY_EMAIL);
+        candidateProvider.add(MARJORY_CANDIDATE, JORDAN_CANDIDATE);
+        candidateProvider.add(MARJORY_CANDIDATE);
         Assertions.assertThat(candidateProvider.size()).isEqualTo(2);
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void should_not_have_side_effect() throws Exception {
-        candidateProvider.getEmails().clear();
+        candidateProvider.getCandidates().clear();
     }
 }

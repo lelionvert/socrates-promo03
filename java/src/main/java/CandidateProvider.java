@@ -4,31 +4,31 @@ import java.util.HashSet;
 
 public class CandidateProvider {
 
-    private Collection<Email> emails = new HashSet<>();
+    private Collection<Candidate> candidates = new HashSet<>();
 
     public boolean isEmpty() {
         return true;
     }
 
-    public void add(Email... emails) {
-        for (Email candidateEmail : emails) {
-            this.emails.add(candidateEmail);
+    public void add(Candidate... candidates) {
+        for (Candidate candidateCandidate : candidates) {
+            this.candidates.add(candidateCandidate);
         }
     }
 
-    public boolean exist(Email... emails) {
-        for (Email candidateEmail : emails) {
-            if(!this.emails.contains(candidateEmail))
+    public boolean exist(Candidate... candidates) {
+        for (Candidate candidateCandidate : candidates) {
+            if(!this.candidates.contains(candidateCandidate))
                 return false;
         }
         return true;
     }
 
     public int size() {
-        return emails.size();
+        return candidates.size();
     }
 
-    public Collection<Email> getEmails() {
-        return Collections.unmodifiableCollection(emails);
+    public Collection<Candidate> getCandidates() {
+        return Collections.unmodifiableCollection(candidates);
     }
 }

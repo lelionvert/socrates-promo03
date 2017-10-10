@@ -18,10 +18,12 @@ public class CandidateRegistrationManagerTest {
     private static final Candidate MELODY_CANDIDATE = new Candidate(MELODY_EMAIL);
 
     private CandidateRegistrationManager candidateRegistrationManager;
+    private CandidateRepository candidateRepository;
 
     @Before
     public void setUp() throws Exception {
-        candidateRegistrationManager = new CandidateRegistrationManager();
+        candidateRepository = new CandidateRepository();
+        candidateRegistrationManager = new CandidateRegistrationManager(candidateRepository);
     }
 
     @Test
@@ -52,16 +54,18 @@ public class CandidateRegistrationManagerTest {
 
     @Test
     public void should_find_several_plus_one_when_adding_one_given_several_existing_candidates() {
-        candidateRegistrationManager = CandidateRegistrationManager.withExisting(SABINE_CANDIDATE, MELODY_CANDIDATE);
-        candidateRegistrationManager.register(CYRIL_CANDIDATE);
+        CandidateRepository anotherCandidateRepository = CandidateRepository.withExisting(SABINE_CANDIDATE, MELODY_CANDIDATE);
+        CandidateRegistrationManager anotherCandidateRegistrationManager = new CandidateRegistrationManager(anotherCandidateRepository);
+        anotherCandidateRegistrationManager.register(CYRIL_CANDIDATE);
 
-        assertThat(candidateRegistrationManager.findEmails())
+        assertThat(anotherCandidateRegistrationManager.findEmails())
             .containsExactlyInAnyOrder(SABINE_EMAIL, MELODY_EMAIL, CYRIL_EMAIL);
     }
 
     @Test
     public void should_not_add_an_existing_candidate() {
-        candidateRegistrationManager = CandidateRegistrationManager.withExisting(SABINE_CANDIDATE, MELODY_CANDIDATE);
+        CandidateRepository candidateRepository = CandidateRepository.withExisting(SABINE_CANDIDATE, MELODY_CANDIDATE);
+        CandidateRegistrationManager candidateRegistrationManager = new CandidateRegistrationManager(candidateRepository);
         candidateRegistrationManager.register(SABINE_CANDIDATE);
 
         assertThat(candidateRegistrationManager.findEmails())

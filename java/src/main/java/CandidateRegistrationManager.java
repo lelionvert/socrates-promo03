@@ -2,27 +2,14 @@ import java.util.*;
 
 public class CandidateRegistrationManager {
 
-    private Collection<Candidate> candidates;
+    private CandidateRepository candidateRepository;
 
-    public CandidateRegistrationManager() {
-        this.candidates = new ArrayList<>();
-    }
-
-    private CandidateRegistrationManager(List<Candidate> existingCandidates) {
-        this();
-        candidates.addAll(existingCandidates);
-    }
-
-    public static CandidateRegistrationManager withExisting(Candidate... candidates) {
-        return new CandidateRegistrationManager(Arrays.asList(candidates));
+    public CandidateRegistrationManager(CandidateRepository candidateRepository) {
+        this.candidateRepository = candidateRepository;
     }
 
     public Collection<Email> findEmails() {
-        List<Email> emails = new ArrayList<>();
-        for (Candidate candidate : candidates) {
-            emails.add(candidate.getEmail());
-        }
-        return Collections.unmodifiableCollection(emails);
+        return candidateRepository.getEmails();
     }
 
     public void register(Candidate... candidates) {
@@ -32,8 +19,8 @@ public class CandidateRegistrationManager {
     }
 
     private void registerOne(Candidate candidate) {
-        if (!candidates.contains(candidate)) {
-            candidates.add(candidate);
+        if (!candidateRepository.hasAlready(candidate)) {
+            candidateRepository.add(candidate);
         }
     }
 }

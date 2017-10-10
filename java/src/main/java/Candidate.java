@@ -1,7 +1,6 @@
 
 public class Candidate {
 
-
     private Email email;
 
     public Candidate(Email email) {

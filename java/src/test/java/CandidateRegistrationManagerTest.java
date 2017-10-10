@@ -1,8 +1,5 @@
-import org.assertj.core.api.Assertions;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.util.Collection;
 
@@ -34,21 +31,21 @@ public class CandidateRegistrationManagerTest {
 
     @Test
     public void should_find_one_when_adding_one_given_no_existing_candidates() {
-        candidateRegistrationManager.addCandidates(SABINE_CANDIDATE);
+        candidateRegistrationManager.register(SABINE_CANDIDATE);
         assertThat(candidateRegistrationManager.findEmails())
             .containsOnlyOnce(SABINE_EMAIL);
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void should_have_no_side_effect_for_candidates() {
-        candidateRegistrationManager.addCandidates(SABINE_CANDIDATE);
+        candidateRegistrationManager.register(SABINE_CANDIDATE);
         final Collection<Email> emails = candidateRegistrationManager.findEmails();
         emails.clear();
     }
 
     @Test
     public void should_find_several_candidates_when_adding_several_candidates_given_no_existing_candidates() {
-        candidateRegistrationManager.addCandidates(CYRIL_CANDIDATE, ISMAEL_CANDIDATE);
+        candidateRegistrationManager.register(CYRIL_CANDIDATE, ISMAEL_CANDIDATE);
         assertThat(candidateRegistrationManager.findEmails())
             .containsExactlyInAnyOrder(CYRIL_EMAIL, ISMAEL_EMAIL);
     }
@@ -56,7 +53,7 @@ public class CandidateRegistrationManagerTest {
     @Test
     public void should_find_several_plus_one_when_adding_one_given_several_existing_candidates() {
         candidateRegistrationManager = CandidateRegistrationManager.withExisting(SABINE_CANDIDATE, MELODY_CANDIDATE);
-        candidateRegistrationManager.addCandidates(CYRIL_CANDIDATE);
+        candidateRegistrationManager.register(CYRIL_CANDIDATE);
 
         assertThat(candidateRegistrationManager.findEmails())
             .containsExactlyInAnyOrder(SABINE_EMAIL, MELODY_EMAIL, CYRIL_EMAIL);
@@ -65,7 +62,7 @@ public class CandidateRegistrationManagerTest {
     @Test
     public void should_not_add_an_existing_candidate() {
         candidateRegistrationManager = CandidateRegistrationManager.withExisting(SABINE_CANDIDATE, MELODY_CANDIDATE);
-        candidateRegistrationManager.addCandidates(SABINE_CANDIDATE);
+        candidateRegistrationManager.register(SABINE_CANDIDATE);
 
         assertThat(candidateRegistrationManager.findEmails())
             .containsExactlyInAnyOrder(SABINE_EMAIL, MELODY_EMAIL);

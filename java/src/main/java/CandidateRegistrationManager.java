@@ -25,13 +25,13 @@ public class CandidateRegistrationManager {
         return Collections.unmodifiableCollection(emails);
     }
 
-    public void addCandidates(Candidate... candidates) {
+    public void register(Candidate... candidates) {
         for (Candidate candidate : candidates){
-            addCandidate(candidate);
+            registerOne(candidate);
         }
     }
 
-    private void addCandidate(Candidate candidate) {
+    private void registerOne(Candidate candidate) {
         if (!candidates.contains(candidate)) {
             candidates.add(candidate);
         }

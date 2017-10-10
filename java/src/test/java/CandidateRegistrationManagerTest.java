@@ -21,11 +21,6 @@ public class CandidateRegistrationManagerTest {
     }
 
     @Test
-    public void should_have_no_email_at_initialization() {
-        assertThat(candidateRegistrationManager.findAllEmail()).isEmpty();
-    }
-
-    @Test
     public void should_have_all_emails_added_after_initialization() {
         candidateRegistrationManager.add(CYRIL_EMAIL, ISMAEL_EMAIL);
         assertThat(candidateRegistrationManager.findAllEmail())

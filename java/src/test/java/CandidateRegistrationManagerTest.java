@@ -56,6 +56,13 @@ public class CandidateRegistrationManagerTest {
         emails.clear();
     }
 
+    @Test(expected = UnsupportedOperationException.class)
+    public void should_have_no_side_effect_for_candidates() {
+        candidateRegistrationManager.addCandidates(SABINE_CANDIDATE);
+        final Collection<Candidate> candidates = candidateRegistrationManager.findCandidates();
+        candidates.clear();
+    }
+
     @Test
     public void should_find_several_when_adding_several_given_no_existing_emails() {
         candidateRegistrationManager.addMany(CYRIL_EMAIL, ISMAEL_EMAIL);

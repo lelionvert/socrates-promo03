@@ -3,9 +3,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CandidateProviderTest {
-    public static final String TOTO_EMAIL = "totoTahLesOuf@lcdlv.fr";
-    public static final String TATA_EMAIL = "tata@lcdlv.fr";
+
     private CandidateProvider candidateProvider;
+
+    public static final Email TOTO_EMAIL = Email.of("totoTahLesOuf@lcdlv.fr");
+    public static final Email TATA_EMAIL = Email.of("tata@lcdlv.fr");
 
     @Before
     public void setUp() throws Exception {
@@ -19,17 +21,21 @@ public class CandidateProviderTest {
 
     @Test
     public void should_adding_a_candidate() throws Exception {
-        Email email = Email.of(TOTO_EMAIL);
-        candidateProvider.add(email);
-        Assertions.assertThat(candidateProvider.exist(email)).isTrue();
+        candidateProvider.add(TOTO_EMAIL);
+        Assertions.assertThat(candidateProvider.exist(TOTO_EMAIL)).isTrue();
     }
 
     @Test
     public void should_adding_many_candidate() throws Exception {
-        Email totoEmail = Email.of(TOTO_EMAIL);
-        Email tataEmail = Email.of(TATA_EMAIL);
-        candidateProvider.add(totoEmail, tataEmail);
-        Assertions.assertThat(candidateProvider.exist(totoEmail, tataEmail))
+        candidateProvider.add(TOTO_EMAIL, TATA_EMAIL);
+        Assertions.assertThat(candidateProvider.exist(TOTO_EMAIL, TATA_EMAIL))
                 .isTrue();
+    }
+
+    @Test
+    public void should_not_add_an_existing_email() throws Exception {
+        candidateProvider.add(TOTO_EMAIL, TATA_EMAIL);
+        candidateProvider.add(TOTO_EMAIL);
+        Assertions.assertThat(candidateProvider.size()).isEqualTo(2);
     }
 }

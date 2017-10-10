@@ -24,4 +24,8 @@ public class CandidateProvider {
         }
         return true;
     }
+
+    public int size() {
+        return emails.size();
+    }
 }

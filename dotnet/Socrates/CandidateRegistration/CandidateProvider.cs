@@ -1,6 +1,7 @@
 ﻿using Socrates.CandidateRegistration;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Socrates.CandidateRegistration
 {
@@ -8,7 +9,7 @@ namespace Socrates.CandidateRegistration
     {
       
         private IList<Candidate> candidates = new List<Candidate>();
-      
+        
 
         public CandidateProvider(params Candidate[] candidates)
         {
@@ -37,6 +38,11 @@ namespace Socrates.CandidateRegistration
         public bool ContainsCandidates(Candidate candidate)
         {
             return candidates.Contains(candidate); 
+        }
+
+        public bool ContainsCandidates(params Candidate[] candidates)
+        {
+            return this.candidates.Any(candidates.Contains);
         }
     }
 }

@@ -43,13 +43,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CandidateRegistration\Email.cs" />
-    <Compile Include="CandidateRegistration\ExistingEmailException.cs" />
+    <Compile Include="CandidateRegistration\ExistingCandidateException.cs" />
     <Compile Include="CandidateRegistration\InvalidEmailException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CandidateRegistration\Candidat.cs" />
     <Compile Include="CandidateRegistration\CandidateProvider.cs" />
-    <Compile Include="CandidateRegistration\CandidateRegistrationManager.cs" />
+    <Compile Include="CandidateRegistration\CandidateRegister.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -52,7 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CandidateRegistration\CandidateRegistrationManagerTest.cs" />
+    <Compile Include="CandidateRegistration\CandidateProviderTest.cs" />
+    <Compile Include="CandidateRegistration\CandidateRegisterTest.cs" />
     <Compile Include="CandidateRegistration\EmailTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

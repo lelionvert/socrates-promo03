@@ -16,7 +16,7 @@ namespace Socrates.Test.Services
         {
 
             var candidateProvider = new CandidateProvider();
-            var candidateRegistrationManager = new CandidateRegister(candidateProvider);
+            var candidateRegister = new CandidateRegister(candidateProvider);
 
             Check.That(candidateProvider.IsEmpty()).IsTrue();
         }
@@ -27,9 +27,9 @@ namespace Socrates.Test.Services
             var regisDuboisCandidate = new Candidate(Email.Of(RegisDuboisEmail));
             var candidateProvider = new CandidateProvider(regisDuboisCandidate);
 
-            var candidateRegistrationManager = new CandidateRegister(candidateProvider);
+            var candidateRegister = new CandidateRegister(candidateProvider);
 
-            var candidates = candidateRegistrationManager.Candidates;
+            var candidates = candidateRegister.Candidates;
 
             Check.That(candidates).ContainsExactly(regisDuboisCandidate);
         }
@@ -40,11 +40,11 @@ namespace Socrates.Test.Services
         {
             var candidate = new Candidate(Email.Of(candidateEmail));
 
-            var candidateRegistrationManager = new CandidateRegister();
+            var candidateRegistrer = new CandidateRegister();
 
-            candidateRegistrationManager.Add(candidate);
+            candidateRegistrer.Add(candidate);
 
-            var candidates = candidateRegistrationManager.Candidates;
+            var candidates = candidateRegistrer.Candidates;
 
             Check.That(candidates[0]).IsEqualTo(new Candidate(Email.Of(candidateEmail)));
         }
@@ -52,12 +52,12 @@ namespace Socrates.Test.Services
         [Test]
         public void Add_Should_Insert_Multiples_Candidate_And_Return_Candidate_List_From_The_Candidate()
         {
-            var candidateRegistrationManager = new CandidateRegister();
+            var candidateRegister = new CandidateRegister();
 
-            candidateRegistrationManager.Add(new Candidate(Email.Of(FannyDuboisEmail)));
-            candidateRegistrationManager.Add(new Candidate(Email.Of(RegisDuboisEmail)));
+            candidateRegister.Add(new Candidate(Email.Of(FannyDuboisEmail)));
+            candidateRegister.Add(new Candidate(Email.Of(RegisDuboisEmail)));
 
-            var candidates = candidateRegistrationManager.Candidates;
+            var candidates = candidateRegister.Candidates;
 
             Check.That(candidates).Contains(new Candidate(Email.Of(RegisDuboisEmail)), new Candidate(Email.Of(FannyDuboisEmail))).Only().Once();
         }
@@ -66,11 +66,11 @@ namespace Socrates.Test.Services
         [TestCase(FannyDuboisEmail)]
         public void Add_Should_Return_Unique_Candidate_Even_If_You_Try_To_Add_Existing_Candidate(string candidateEmail)
         {
-            var candidateRegistrationManager = new CandidateRegister();
+            var candidateRegister = new CandidateRegister();
 
-            candidateRegistrationManager.Add(new Candidate(Email.Of(candidateEmail)));
+            candidateRegister.Add(new Candidate(Email.Of(candidateEmail)));
 
-            Check.ThatCode(() => candidateRegistrationManager.Add(new Candidate(Email.Of(candidateEmail)))).Throws<ExistingCandidateException>();
+            Check.ThatCode(() => candidateRegister.Add(new Candidate(Email.Of(candidateEmail)))).Throws<ExistingCandidateException>();
         }
 
         [Test]
@@ -78,11 +78,11 @@ namespace Socrates.Test.Services
         {
             var candidateProvider = new CandidateProvider(new Candidate(Email.Of(RegisDuboisEmail)), new Candidate(Email.Of(FannyDuboisEmail)));
 
-            var candidateRegistrationManager = new CandidateRegister(candidateProvider);
+            var candidateRegister = new CandidateRegister(candidateProvider);
 
-            candidateRegistrationManager.Add(new Candidate(Email.Of(JulieFournierEmail)));
+            candidateRegister.Add(new Candidate(Email.Of(JulieFournierEmail)));
 
-            var candidates = candidateRegistrationManager.Candidates;
+            var candidates = candidateRegister.Candidates;
 
             Check.That(candidates).Contains(new Candidate(Email.Of(RegisDuboisEmail)), new Candidate(Email.Of(FannyDuboisEmail)), new Candidate(Email.Of(JulieFournierEmail))).Only().Once();
         }
@@ -92,12 +92,12 @@ namespace Socrates.Test.Services
         {
             var candidateProvider = new CandidateProvider(new Candidate(Email.Of(RegisDuboisEmail)), new Candidate(Email.Of(FannyDuboisEmail)));
 
-            var candidateRegistrationManager = new CandidateRegister(candidateProvider);
+            var candidateRegister = new CandidateRegister(candidateProvider);
 
-            candidateRegistrationManager.Add(new Candidate(Email.Of(firstCandidateEmail)));
-            candidateRegistrationManager.Add(new Candidate(Email.Of(secondCandidateEmail)));
+            candidateRegister.Add(new Candidate(Email.Of(firstCandidateEmail)));
+            candidateRegister.Add(new Candidate(Email.Of(secondCandidateEmail)));
 
-            var candidates = candidateRegistrationManager.Candidates;
+            var candidates = candidateRegister.Candidates;
             Check.That(candidates).Contains(new Candidate(Email.Of(RegisDuboisEmail)), new Candidate(Email.Of(FannyDuboisEmail)), new Candidate(Email.Of(firstCandidateEmail)), new Candidate(Email.Of(secondCandidateEmail))).Only().Once();
         }
 

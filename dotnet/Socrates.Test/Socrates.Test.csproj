@@ -55,6 +55,11 @@
     <Compile Include="CandidateRegistration\CandidateProviderTest.cs" />
     <Compile Include="CandidateRegistration\CandidateRegisterTest.cs" />
     <Compile Include="CandidateRegistration\EmailTest.cs" />
+    <Compile Include="CandidateRegistration\MockCandidateProvider.cs" />
+    <Compile Include="CandidateRegistration\SpyCandidateProvider.cs" />
+    <Compile Include="Meals\ColdMealsCounter.cs" />
+    <Compile Include="Meals\ColdMealsCounterAcceptanceTest.cs" />
+    <Compile Include="Meals\Participant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,3 +1,6 @@
+package com.lacombe.promo3.registration.model;
+
+import com.lacombe.promo3.registration.model.Email;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
@@ -23,4 +26,6 @@ public class EmailTest {
         Email valentinEmail = Email.of("valentin@lcdlv.fr");
         Assertions.assertThat(valentinEmail).isNotNull();
     }
+
+
 }

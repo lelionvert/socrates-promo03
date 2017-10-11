@@ -1,30 +1,38 @@
+package com.lacombe.promo3.registration.repository;
+
+import com.lacombe.promo3.registration.model.Candidate;
+import com.lacombe.promo3.registration.model.Email;
+
 import java.util.*;
 
-public class CandidateRepository {
+public class DefaultCandidateRepository implements CandidateRepository {
 
     private final Collection<Candidate> candidates;
 
-    private CandidateRepository(Collection<Candidate> candidates) {
+    private DefaultCandidateRepository(Collection<Candidate> candidates) {
         this();
         this.candidates.addAll(candidates);
     }
 
-    public static CandidateRepository withExisting(Candidate... candidates) {
-        return new CandidateRepository(Arrays.asList(candidates));
+    public static DefaultCandidateRepository withExisting(Candidate... candidates) {
+        return new DefaultCandidateRepository(Arrays.asList(candidates));
     }
 
-    public CandidateRepository() {
+    public DefaultCandidateRepository() {
         this.candidates = new ArrayList<>();
     }
 
+    @Override
     public void add(Candidate candidate) {
             candidates.add(candidate);
     }
 
+    @Override
     public boolean hasAlready(Candidate candidate) {
         return candidates.contains(candidate);
     }
 
+    @Override
     public Collection<Email> getEmails() {
         List<Email> emails = new ArrayList<>();
         for (Candidate candidate : candidates) {

@@ -1,3 +1,9 @@
+package com.lacombe.promo3.registration;
+
+import com.lacombe.promo3.registration.model.Candidate;
+import com.lacombe.promo3.registration.model.Email;
+import com.lacombe.promo3.registration.repository.CandidateRepository;
+
 import java.util.*;
 
 class CandidateRegistrationManager {

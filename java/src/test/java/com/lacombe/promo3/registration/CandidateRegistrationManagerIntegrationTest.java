@@ -1,11 +1,16 @@
+package com.lacombe.promo3.registration;
+
+import com.lacombe.promo3.registration.model.Candidate;
+import com.lacombe.promo3.registration.model.Email;
+import com.lacombe.promo3.registration.repository.DefaultCandidateRepository;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Collection;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class CandidateRegistrationManagerTest {
+public class CandidateRegistrationManagerIntegrationTest {
 
     private static final Email SABINE_EMAIL = Email.of("sabine@lcdlv.fr");
     private static final Email MELODY_EMAIL = Email.of("melody@lcdlv.fr");
@@ -23,10 +28,10 @@ public class CandidateRegistrationManagerTest {
 
     @Before
     public void setUp() throws Exception {
-        CandidateRepository candidateRepository = new CandidateRepository();
-        candidateRegistrationManager = new CandidateRegistrationManager(candidateRepository);
-        CandidateRepository candidateRepositoryWithExistingCandidates = CandidateRepository.withExisting(SABINE_CANDIDATE, MELODY_CANDIDATE);
-        candidateRegistrationManagerWithExistingCandidates = new CandidateRegistrationManager(candidateRepositoryWithExistingCandidates);
+        DefaultCandidateRepository defaultCandidateRepository = new DefaultCandidateRepository();
+        candidateRegistrationManager = new CandidateRegistrationManager(defaultCandidateRepository);
+        DefaultCandidateRepository defaultCandidateRepositoryWithExistingCandidates = DefaultCandidateRepository.withExisting(SABINE_CANDIDATE, MELODY_CANDIDATE);
+        candidateRegistrationManagerWithExistingCandidates = new CandidateRegistrationManager(defaultCandidateRepositoryWithExistingCandidates);
     }
 
     @Test
@@ -69,3 +74,4 @@ public class CandidateRegistrationManagerTest {
             .containsExactlyInAnyOrder(SABINE_EMAIL, MELODY_EMAIL);
     }
 }
+

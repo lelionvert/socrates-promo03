@@ -1,5 +1,6 @@
+package com.lacombe.promo3.registration.model;
 
-class Candidate {
+public class Candidate {
 
     private final Email email;
 

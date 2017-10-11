@@ -39,13 +39,20 @@ public class CandidateRegistrationManagerTest {
 
     @Test
     public void should_not_have_any_email_at_initialization() {
-        MockGetEmailsEmptyInMemoryCandidateRepository mockGetEmailsEmptyInMemoryCandidateRepository = new MockGetEmailsEmptyInMemoryCandidateRepository();
-        CandidateRegistrationManager candidateRegistrationManager = new CandidateRegistrationManager(mockGetEmailsEmptyInMemoryCandidateRepository);
+        MockInMemoryCandidateRepository mockInMemoryCandidateRepository = new MockInMemoryCandidateRepository();
+        CandidateRegistrationManager candidateRegistrationManager = new CandidateRegistrationManager(mockInMemoryCandidateRepository);
         assertThat(candidateRegistrationManager.findEmails()).isEmpty();
-        assertThat(mockGetEmailsEmptyInMemoryCandidateRepository.getEmailsWasCalled).isTrue();
+        assertThat(mockInMemoryCandidateRepository.getEmailsWasCalled).isTrue();
     }
 
-    class MockGetEmailsEmptyInMemoryCandidateRepository implements CandidateRepository {
+    @Test
+    public void should_find_one_when_adding_one_given_no_existing_candidates() {
+        candidateRegistrationManager.register(SABINE_CANDIDATE);
+        assertThat(candidateRegistrationManager.findEmails())
+            .containsOnlyOnce(SABINE_EMAIL);
+    }
+
+    class MockInMemoryCandidateRepository implements CandidateRepository {
 
         public boolean getEmailsWasCalled = false;
 
@@ -64,13 +71,6 @@ public class CandidateRegistrationManagerTest {
             getEmailsWasCalled = true;
             return Collections.emptyList();
         }
-    }
-
-    @Test
-    public void should_find_one_when_adding_one_given_no_existing_candidates() {
-        candidateRegistrationManager.register(SABINE_CANDIDATE);
-        assertThat(candidateRegistrationManager.findEmails())
-            .containsOnlyOnce(SABINE_EMAIL);
     }
 
     @Test(expected = UnsupportedOperationException.class)

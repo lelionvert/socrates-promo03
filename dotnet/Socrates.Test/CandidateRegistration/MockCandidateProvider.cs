@@ -9,9 +9,11 @@ namespace Socrates.Test.Services
         public bool HasAlreadyWasCalled { get; private set; }
         public bool AddCandidateWasCalled { get; private set; }
         public bool HasAlreadyReturn { get; internal set; }
+        public int AddCandidateCallCount { get; internal set; }
 
         public void AddCandidate(Candidate candidate)
         {
+            AddCandidateCallCount++;
             AddCandidateWasCalled = true;
         }
 

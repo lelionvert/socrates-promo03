@@ -65,13 +65,14 @@ namespace Socrates.Test.Services
         [Test]
         public void Register_Should_Test_How_Many_Time_AddCandidate_From_Provider_Is_Called()
         {
-            var candidateProvider = new MockCandidateProvider();
+            var candidateProvider = new SpyCandidateProvider();
 
             var candidateRegister = new CandidateRegister(candidateProvider);
 
             candidateRegister.Register(new Candidate(Email.Of(RegisDuboisEmail)));
+            candidateRegister.Register(new Candidate(Email.Of(RegisDuboisEmail)));
 
-            Check.That(candidateProvider.AddCandidateCallCount).IsEqualTo(1) ;
+            Check.That(candidateProvider.AddCandidateCallCount).IsEqualTo(2) ;
         }
 
     }

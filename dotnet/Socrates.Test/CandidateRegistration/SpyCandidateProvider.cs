@@ -5,9 +5,8 @@ namespace Socrates.Test.Services
 {
     internal class SpyCandidateProvider : ICandidateProvider
     {
+        internal int HasAlreadyCallCount { get; private set; }
         internal int AddCandidateCallCount {  get; private set; }
-
-       
 
         public void AddCandidate(Candidate candidate)
         {
@@ -21,6 +20,7 @@ namespace Socrates.Test.Services
 
         public bool HasAlready(params Candidate[] candidates)
         {
+            HasAlreadyCallCount++;
             return false;
         }
     }

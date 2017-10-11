@@ -1,6 +1,12 @@
+package com.lacombe.promo3.registration;
+
+import com.lacombe.promo3.registration.model.Candidate;
+import com.lacombe.promo3.registration.model.Email;
+import com.lacombe.promo3.registration.repository.CandidateRepository;
+
 import java.util.Collection;
 
-public class MockCandidateRepository implements CandidateRepository{
+public class MockCandidateRepository implements CandidateRepository {
 
     private Candidate existingCandidate;
     private boolean isGetEmailCalled;
@@ -9,7 +15,7 @@ public class MockCandidateRepository implements CandidateRepository{
 
     public MockCandidateRepository(Candidate candidate) {
         existingCandidate = candidate;
-    }
+}
 
     @Override
     public void add(Candidate candidate) {

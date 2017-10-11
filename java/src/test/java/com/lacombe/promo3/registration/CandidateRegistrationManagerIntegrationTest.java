@@ -1,3 +1,8 @@
+package com.lacombe.promo3.registration;
+
+import com.lacombe.promo3.registration.model.Candidate;
+import com.lacombe.promo3.registration.model.Email;
+import com.lacombe.promo3.registration.repository.DefaultCandidateRepository;
 import org.junit.Before;
 import org.junit.Test;
 

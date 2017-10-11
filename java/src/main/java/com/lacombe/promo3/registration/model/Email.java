@@ -1,3 +1,5 @@
+package com.lacombe.promo3.registration.model;
+
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

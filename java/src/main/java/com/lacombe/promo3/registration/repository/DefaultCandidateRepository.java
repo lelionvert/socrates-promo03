@@ -1,3 +1,8 @@
+package com.lacombe.promo3.registration.repository;
+
+import com.lacombe.promo3.registration.model.Candidate;
+import com.lacombe.promo3.registration.model.Email;
+
 import java.util.*;
 
 public class DefaultCandidateRepository implements CandidateRepository {

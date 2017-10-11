@@ -11,9 +11,6 @@ public class MockCandidateRepository implements CandidateRepository{
         existingCandidate = candidate;
     }
 
-    public MockCandidateRepository() {
-    }
-
     @Override
     public void add(Candidate candidate) {
         isAddCalled = true;

@@ -6,12 +6,10 @@ import static org.assertj.core.api.Assertions.*;
 public class CandidateRegistrationManagerTest {
 
     private static final Email SABINE_EMAIL = Email.of("sabine@lcdlv.fr");
-    private static final Email MELODY_EMAIL = Email.of("melody@lcdlv.fr");
     private static final Email CYRIL_EMAIL = Email.of("cyril@lcdlv.fr");
 
     static final Candidate SABINE_CANDIDATE = new Candidate(SABINE_EMAIL);
     private static final Candidate CYRIL_CANDIDATE = new Candidate(CYRIL_EMAIL);
-    private static final Candidate MELODY_CANDIDATE = new Candidate(MELODY_EMAIL);
 
     private CandidateRegistrationManager candidateRegistrationManager;
     private MockCandidateRepository mockCandidateRepository;

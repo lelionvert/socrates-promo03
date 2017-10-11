@@ -8,8 +8,9 @@ import registration.repository.CandidateRepository;
 import registration.repository.InMemoryCandidateRepository;
 import shared.model.Email;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -47,17 +48,34 @@ public class CandidateRegistrationManagerTest {
 
     @Test
     public void should_find_one_when_adding_one_given_no_existing_candidates() {
+        MockInMemoryCandidateRepository mockInMemoryCandidateRepository = new MockInMemoryCandidateRepository(SABINE_EMAIL);
+        CandidateRegistrationManager candidateRegistrationManager = new CandidateRegistrationManager(mockInMemoryCandidateRepository);
         candidateRegistrationManager.register(SABINE_CANDIDATE);
+        assertThat(mockInMemoryCandidateRepository.addWasCalled).isTrue();
         assertThat(candidateRegistrationManager.findEmails())
             .containsOnlyOnce(SABINE_EMAIL);
+        assertThat(mockInMemoryCandidateRepository.getEmailsWasCalled).isTrue();
+
     }
 
     class MockInMemoryCandidateRepository implements CandidateRepository {
 
-        public boolean getEmailsWasCalled = false;
+        boolean getEmailsWasCalled = false;
+        boolean addWasCalled = false;
+        private List<Email> emails;
+
+        public MockInMemoryCandidateRepository() {
+            emails = new ArrayList<>();
+        }
+
+        public MockInMemoryCandidateRepository(Email email) {
+            this();
+            emails.add(email);
+        }
 
         @Override
         public void add(Candidate candidate) {
+            addWasCalled = true;
 
         }
 
@@ -69,7 +87,7 @@ public class CandidateRegistrationManagerTest {
         @Override
         public Collection<Email> getEmails() {
             getEmailsWasCalled = true;
-            return Collections.emptyList();
+            return emails;
         }
     }
 

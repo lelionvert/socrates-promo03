@@ -1,12 +1,18 @@
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.util.Collection;
 
 public class MockCandidateRepository implements CandidateRepository{
 
+    private Candidate existingCandidate;
     private boolean isGetEmailCalled;
     private boolean isAddCalled;
     private boolean isMethodHasAlreadyCalled;
+
+    public MockCandidateRepository(Candidate candidate) {
+        existingCandidate = candidate;
+    }
+
+    public MockCandidateRepository() {
+    }
 
     @Override
     public void add(Candidate candidate) {
@@ -16,7 +22,10 @@ public class MockCandidateRepository implements CandidateRepository{
     @Override
     public boolean hasAlready(Candidate candidate) {
         isMethodHasAlreadyCalled = true;
-        return true;
+        if(existingCandidate.equals(candidate)) {
+            return true;
+        }
+        return false;
     }
 
     @Override

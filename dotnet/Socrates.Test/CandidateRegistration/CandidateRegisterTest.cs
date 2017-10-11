@@ -86,6 +86,18 @@ namespace Socrates.Test.Services
 
             Check.That(candidateProvider.HasAlreadyCallCount).IsEqualTo(1);
         }
+
+        [Test]
+        public void Register_Should_Test_How_Many_Time_GetCandidateEmail_From_Provider_Is_Called()
+        {
+            var candidateProvider = new SpyCandidateProvider();
+            var candidateRegister = new CandidateRegister(candidateProvider);
+
+            var emailsReceiveFromTheFirstCalled = candidateRegister.GetCandidateEmails();
+            var emailsReceiveFromTheSecondCalled = candidateRegister.GetCandidateEmails();
+
+            Check.That(candidateProvider.GetCandidateCallCount).IsEqualTo(2);         
+        }
     }
 }
 

@@ -5,6 +5,7 @@ namespace Socrates.Test.Services
 {
     internal class SpyCandidateProvider : ICandidateProvider
     {
+        internal int GetCandidateCallCount { get; set; }
         internal int HasAlreadyCallCount { get; private set; }
         internal int AddCandidateCallCount {  get; private set; }
 
@@ -15,7 +16,8 @@ namespace Socrates.Test.Services
 
         public IList<Email> GetCandidateEmails()
         {
-            throw new System.NotImplementedException();
+            GetCandidateCallCount++;
+            return null;
         }
 
         public bool HasAlready(params Candidate[] candidates)

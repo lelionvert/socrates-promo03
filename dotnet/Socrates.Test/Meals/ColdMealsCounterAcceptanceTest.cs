@@ -28,7 +28,7 @@ namespace Socrates.Test.Meals
 
             Check.That(coldMealsNumber).IsZero();
         }
-
+        /*
         [Test]
         public void CountColdMeals_Should_Return_One_Cold_Meal_When_Participants_Checkin_After_21h()
         {
@@ -40,6 +40,7 @@ namespace Socrates.Test.Meals
 
             Check.That(coldMealsNumber).IsEqualTo(1);
         }
+        */
     }
 
    

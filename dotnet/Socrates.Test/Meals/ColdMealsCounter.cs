@@ -17,7 +17,7 @@ namespace Socrates.Test.Meals
 
         internal int CountColdMeals()
         {
-            throw new NotImplementedException();
+            return 0;
         }
     }
 }

@@ -9,6 +9,11 @@ import java.util.Scanner;
 
 public class Application {
 
+    private static final String CANDIDATE_ADDED_MESSAGE = "Le candidat a été ajouté.";
+    private static final String NOT_VALID_EMAIL_MESSAGE = "L'email n'est pas valide.";
+    private static final String CANDIDATE_EMAIL_MESSAGE = "Email du candidat :";
+    private static final String NO_FOUND_CANDIDATE_MESSAGE = "Aucun candidat trouvé.";
+
     private static CandidateRegistrationManager candidateRegistrationManager;
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -48,25 +53,23 @@ public class Application {
     }
 
     private static void addCandidate() throws IOException {
-        System.out.println("Email du candidat :");
+        System.out.println(CANDIDATE_EMAIL_MESSAGE);
         String emailValue = scanner.nextLine();
         Email email;
         try {
             email = Email.of(emailValue);
-            Candidate candidate = new Candidate(
-                    email
-            );
+            Candidate candidate = new Candidate(email);
             candidateRegistrationManager.register(candidate);
-            System.out.println("Le candidat a été ajouté.");
+            System.out.println(CANDIDATE_ADDED_MESSAGE);
         } catch (Exception e) {
-            System.out.println("L'email n'est pas valide.");
+            System.out.println(NOT_VALID_EMAIL_MESSAGE);
         }
     }
 
     private static void showCandidatesEmail() {
         Collection<Email> emails = candidateRegistrationManager.findEmails();
         if(emails.isEmpty()) {
-            System.out.println("Aucun candidat trouvé.");
+            System.out.println(NO_FOUND_CANDIDATE_MESSAGE);
         } else {
             emails.forEach(System.out::println);
         }

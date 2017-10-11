@@ -1,4 +1,4 @@
-package com.lacombe.promo3.registration;
+package com.lacombe.promo3.registration.unit;
 
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;

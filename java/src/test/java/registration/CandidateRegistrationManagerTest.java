@@ -2,7 +2,6 @@ package registration;
 
 import org.junit.Before;
 import org.junit.Test;
-import registration.controller.CandidateRegistrationManager;
 import registration.model.Candidate;
 import registration.repository.CandidateRepository;
 import registration.repository.InMemoryCandidateRepository;
@@ -46,17 +45,51 @@ public class CandidateRegistrationManagerTest {
         assertThat(mockInMemoryCandidateRepository.getEmailsWasCalled).isTrue();
     }
 
+    //should_find_one_candidate_when_adding_one_given_none
+    //test du repository
+
     @Test
-    public void should_find_one_when_adding_one_given_no_existing_candidates() {
-        MockInMemoryCandidateRepository mockInMemoryCandidateRepository = new MockInMemoryCandidateRepository(SABINE_EMAIL);
+    public void should_call_repository_add_method_when_repository_not_already_has_candidate() {
+        // Arrange
+        // Act
+        // Assert
+
+        //should_call_add_repository_when_repository_not_already_has_it
+
+        //ARRANGE
+        MockInMemoryCandidateRepository mockInMemoryCandidateRepository = new MockInMemoryCandidateRepository();
         CandidateRegistrationManager candidateRegistrationManager = new CandidateRegistrationManager(mockInMemoryCandidateRepository);
+
+        //ACT
         candidateRegistrationManager.register(SABINE_CANDIDATE);
+
+        //ASSERT
         assertThat(mockInMemoryCandidateRepository.addWasCalled).isTrue();
-        assertThat(candidateRegistrationManager.findEmails())
-            .containsOnlyOnce(SABINE_EMAIL);
-        assertThat(mockInMemoryCandidateRepository.getEmailsWasCalled).isTrue();
+        //assertThat(candidateRegistrationManager.findEmails()).containsOnlyOnce(SABINE_EMAIL);
 
     }
+
+    @Test
+    public void should_not_call_repository_add_method_when_repository_has_already_candidate() {
+        // Arrange
+        // Act
+        // Assert
+
+        //should_not_call_repository_when_repository_already_has_it
+
+        //ARRANGE
+        MockInMemoryCandidateRepository mockInMemoryCandidateRepository = new MockInMemoryCandidateRepository(SABINE_EMAIL);
+        CandidateRegistrationManager candidateRegistrationManager = new CandidateRegistrationManager(mockInMemoryCandidateRepository);
+
+        //ACT
+        candidateRegistrationManager.register(SABINE_CANDIDATE);
+
+        //ASSERT
+        assertThat(mockInMemoryCandidateRepository.addWasCalled).isFalse();
+        //assertThat(candidateRegistrationManager.findEmails()).containsOnlyOnce(SABINE_EMAIL);
+
+    }
+
 
     class MockInMemoryCandidateRepository implements CandidateRepository {
 
@@ -64,11 +97,11 @@ public class CandidateRegistrationManagerTest {
         boolean addWasCalled = false;
         private List<Email> emails;
 
-        public MockInMemoryCandidateRepository() {
+        MockInMemoryCandidateRepository() {
             emails = new ArrayList<>();
         }
 
-        public MockInMemoryCandidateRepository(Email email) {
+        MockInMemoryCandidateRepository(Email email) {
             this();
             emails.add(email);
         }
@@ -81,13 +114,13 @@ public class CandidateRegistrationManagerTest {
 
         @Override
         public boolean hasAlready(Candidate candidate) {
-            return false;
+            return emails.contains(candidate.getEmail());
         }
 
         @Override
         public Collection<Email> getEmails() {
             getEmailsWasCalled = true;
-            return emails;
+            return null;
         }
     }
 

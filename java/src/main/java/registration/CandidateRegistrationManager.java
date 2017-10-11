@@ -1,4 +1,4 @@
-package registration.controller;
+package registration;
 
 import registration.model.Candidate;
 import registration.repository.CandidateRepository;

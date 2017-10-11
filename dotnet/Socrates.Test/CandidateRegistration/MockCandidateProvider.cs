@@ -5,24 +5,27 @@ namespace Socrates.Test.Services
 {
     internal class MockCandidateProvider : ICandidateProvider
     {
-        public bool hasAlreadyWasCalled { get; private set; }
-        public bool addCandidateWasCalled { get; private set; }
+        public bool GetCandidateEmailsReturn { get; set; }
+        public bool HasAlreadyWasCalled { get; private set; }
+        public bool AddCandidateWasCalled { get; private set; }
+        public bool HasAlreadyReturn { get; internal set; }
 
         public void AddCandidate(Candidate candidate)
         {
-            addCandidateWasCalled = true;
+            AddCandidateWasCalled = true;
         }
 
         public IList<Email> GetCandidateEmails()
         {
-            throw new System.NotImplementedException();
+            GetCandidateEmailsReturn = true;
+            return null;
         }
 
         public bool HasAlready(params Candidate[] candidates)
         {
-            hasAlreadyWasCalled = true;
+            HasAlreadyWasCalled = true;
 
-            return false;
+            return HasAlreadyReturn;
         }
     }
 }

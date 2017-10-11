@@ -1,4 +1,7 @@
-﻿namespace Socrates.CandidateRegistration
+﻿using System;
+using System.Collections.Generic;
+
+namespace Socrates.CandidateRegistration
 {
     public class CandidateRegister
     {
@@ -16,6 +19,11 @@
                 return;
             }
             candidateProvider.AddCandidate(candidate);
+        }
+
+        public IList<Email> GetCandidateEmails()
+        {
+            return candidateProvider.GetCandidateEmails();
         }
     }
 }

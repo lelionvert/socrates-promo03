@@ -1,4 +1,4 @@
-package com.lacombe.promo3.registration.model;
+package com.lacombe.promo3.registration.unit;
 
 import com.lacombe.promo3.registration.model.Email;
 import org.assertj.core.api.Assertions;

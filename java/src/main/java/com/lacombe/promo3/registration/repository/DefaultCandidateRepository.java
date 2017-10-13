@@ -2,9 +2,11 @@ package com.lacombe.promo3.registration.repository;
 
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+@Repository
 public class DefaultCandidateRepository implements CandidateRepository {
 
     private final Collection<Candidate> candidates;
@@ -39,5 +41,10 @@ public class DefaultCandidateRepository implements CandidateRepository {
             emails.add(candidate.getEmail());
         }
         return Collections.unmodifiableCollection(emails);
+    }
+
+    @Override
+    public Collection<Candidate> getCandidates() {
+        return candidates;
     }
 }

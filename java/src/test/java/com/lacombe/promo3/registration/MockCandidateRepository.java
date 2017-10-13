@@ -37,6 +37,11 @@ public class MockCandidateRepository implements CandidateRepository {
         return null;
     }
 
+    @Override
+    public Collection<Candidate> getCandidates() {
+        return null;
+    }
+
     public boolean isGetEmailCalled() {
         return isGetEmailCalled;
     }

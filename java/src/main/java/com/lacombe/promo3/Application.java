@@ -1,3 +1,5 @@
+package com.lacombe.promo3;
+
 import com.lacombe.promo3.registration.CandidateRegistrationManager;
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
@@ -6,6 +8,7 @@ import com.lacombe.promo3.registration.repository.DefaultCandidateRepository;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Scanner;
+
 
 public class Application {
 

@@ -11,21 +11,25 @@ public class Email {
     private static final Pattern VALID_EMAIL_ADDRESS_REGEX =
         Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
-    private final String email;
+    private final String emailString;
 
     public static Email of(String email) {
         verifyEmail(email);
         return new Email(email);
     }
 
+    public String getEmailString() {
+        return emailString;
+    }
+
     private Email(String email){
-        this.email = email;
+        this.emailString = email;
     }
 
     private static void verifyEmail(String email) {
         if(isEmptyOrNull.test(email)
             || !isValidFormat(email)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(email);
         }
     }
 
@@ -41,16 +45,16 @@ public class Email {
 
         Email email1 = (Email) o;
 
-        return email != null ? email.equals(email1.email) : email1.email == null;
+        return emailString != null ? emailString.equals(email1.emailString) : email1.emailString == null;
     }
 
     @Override
     public int hashCode() {
-        return email != null ? email.hashCode() : 0;
+        return emailString != null ? emailString.hashCode() : 0;
     }
 
     @Override
     public String toString() {
-        return email;
+        return emailString;
     }
 }

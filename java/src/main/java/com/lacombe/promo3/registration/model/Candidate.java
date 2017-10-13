@@ -13,7 +13,7 @@ public class Candidate {
     }
 
     public boolean hasEmail(String email){
-        return this.email.equals(email);
+        return this.email.isEqualsToString(email);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.lacombe.promo3.registration.acceptance;
 
-import com.lacombe.promo3.registration.EmailLogger;
-import com.lacombe.promo3.registration.EmailService;
+import com.lacombe.promo3.logger.EmailLogger;
+import com.lacombe.promo3.logger.EmailService;
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
 import com.lacombe.promo3.registration.repository.DefaultCandidateRepository;

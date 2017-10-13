@@ -1,4 +1,4 @@
-package com.lacombe.promo3.registration;
+package com.lacombe.promo3.logger;
 
 import com.lacombe.promo3.registration.repository.DefaultCandidateRepository;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;

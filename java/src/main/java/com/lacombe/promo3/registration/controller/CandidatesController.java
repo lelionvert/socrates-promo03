@@ -4,11 +4,10 @@ import com.lacombe.promo3.registration.controller.dto.EmailDTO;
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
 import com.lacombe.promo3.registration.service.CandidateService;
+import com.lacombe.promo3.registration.service.LunchService;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -20,11 +19,16 @@ import java.util.Collection;
 @RequestMapping("/api")
 public class CandidatesController {
 
-    CandidateService candidateService;
+    private static final ModelMapper modelMapper = new ModelMapper();
 
-    public CandidatesController() {
-        this.candidateService = new CandidateService();
+    private CandidateService candidateService;
+    private LunchService lunchService;
+
+    public CandidatesController(CandidateService candidateService, LunchService lunchService) {
+        this.candidateService = candidateService;
+        this.lunchService = lunchService;
     }
+
 
     @GetMapping("/emails")
     @ApiOperation(value = "Candidates emails list", response = Iterable.class)
@@ -44,11 +48,20 @@ public class CandidatesController {
 
     @PostMapping("/candidate")
     @ApiOperation(value = "Add a candidate with email", response = Candidate.class)
-    public ResponseEntity<Candidate> addCandidate(@Valid @RequestBody  EmailDTO email) {
+    public ResponseEntity<Candidate> addCandidate(@Valid @RequestBody  EmailDTO emailDTO) {
+        System.out.println("dto " + emailDTO.getEmail());
+        Email email = modelMapper.map(emailDTO, Email.class);
+        System.out.println("entity " + email.getEmail());
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}")
-                .buildAndExpand(candidateService.add(email.getEmail())
+                .buildAndExpand(candidateService.add(email)
                         .getEmail()).toUri();
         return ResponseEntity.created(location).build();
+    }
+
+    @GetMapping("/lunch")
+    @ApiOperation(value = "Candidates lunch")
+    public ResponseEntity<?> getCandidatesLunch(@Valid @RequestParam String email){
+        return ResponseEntity.ok(lunchService.getLunch(email));
     }
 }

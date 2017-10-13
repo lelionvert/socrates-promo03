@@ -1,4 +1,4 @@
-package com.lacombe.promo3.registration;
+package com.lacombe.promo3.logger;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 

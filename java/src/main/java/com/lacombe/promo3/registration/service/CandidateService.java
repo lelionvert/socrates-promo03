@@ -30,12 +30,14 @@ public class CandidateService {
     }
 
     public Candidate getCandidateByEmail(String email){
-        return candidateRegistrationManager.findByEmail(email);
+
+        Candidate byEmail = candidateRegistrationManager.findByEmail(email);
+        return byEmail;
     }
 
-    public Candidate add(String email){
+    public Candidate add(Email email){
         return new ArrayList<>(
-                candidateRegistrationManager.register(new Candidate(Email.of(email))))
+                candidateRegistrationManager.register(new Candidate(email)))
                 .get(0);
     }
 }

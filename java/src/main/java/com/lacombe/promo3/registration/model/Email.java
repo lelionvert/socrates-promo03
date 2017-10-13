@@ -22,7 +22,7 @@ public class Email {
         return email;
     }
 
-    private Email(String email){
+    public Email(String email){
         this.email = email;
     }
 
@@ -36,6 +36,10 @@ public class Email {
     private static boolean isValidFormat(String email) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(email);
         return matcher.find();
+    }
+
+    public boolean isEqualsToString(String email){
+        return this.email.equals(email);
     }
 
     @Override

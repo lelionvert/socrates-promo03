@@ -1,0 +1,7 @@
+spring:
+ application:
+   name: my-app
+ cloud:
+   consul:
+     host: localhost
+     port: 8500

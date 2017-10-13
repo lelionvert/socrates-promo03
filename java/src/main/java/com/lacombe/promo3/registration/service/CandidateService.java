@@ -36,7 +36,8 @@ public class CandidateService {
     }
 
 
-    public String addCandidate(Candidate candidate) {
+    public String addCandidate(String email) {
+        Candidate candidate = new Candidate(Email.of(email));
         candidateRegistrationManager.register(candidate);
         return candidate.getEmail().getEmailString();
     }

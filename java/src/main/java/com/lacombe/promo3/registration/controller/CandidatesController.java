@@ -1,12 +1,14 @@
 package com.lacombe.promo3.registration.controller;
 
 import com.lacombe.promo3.registration.model.Candidate;
+import com.lacombe.promo3.registration.model.Email;
 import com.lacombe.promo3.registration.service.CandidateService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.Collection;
 import java.util.Optional;
@@ -40,11 +42,11 @@ public class CandidatesController {
     }
 
     @PostMapping("/candidates")
-    public ResponseEntity<?> addCandidate(@RequestBody Candidate candidate) {
-        String email = candidateService.addCandidate(candidate);
+    public ResponseEntity<?> addCandidate(@RequestBody @Valid CandidateForm candidateForm) {
+        String email = candidateService.addCandidate(candidateForm.getEmail());
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{email}")
-                .buildAndExpand(candidate.getEmail().getEmailString()).toUri();
+                .buildAndExpand(email).toUri();
         return ResponseEntity.created(location).build();
     }
 

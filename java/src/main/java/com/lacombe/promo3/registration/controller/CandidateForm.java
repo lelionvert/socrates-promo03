@@ -1,15 +1,20 @@
 package com.lacombe.promo3.registration.controller;
 
-import com.lacombe.promo3.registration.model.Email;
-
 import javax.validation.constraints.NotNull;
 
 public class CandidateForm {
 
-    @NotNull
-    private Email email;
+    public CandidateForm() {
+    }
 
-    public Email getEmail() {
+    @NotNull
+    private String email;
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
         return email;
     }
 }

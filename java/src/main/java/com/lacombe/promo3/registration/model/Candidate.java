@@ -1,5 +1,7 @@
 package com.lacombe.promo3.registration.model;
 
+import com.lacombe.promo3.registration.controller.CandidateForm;
+
 public class Candidate {
 
     private Email email;
@@ -28,5 +30,9 @@ public class Candidate {
     @Override
     public int hashCode() {
         return email != null ? email.hashCode() : 0;
+    }
+
+    public static Candidate of(CandidateForm candidateForm) {
+        return null;
     }
 }

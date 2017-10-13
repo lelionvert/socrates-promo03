@@ -5,6 +5,7 @@ import com.lacombe.promo3.registration.model.Email;
 import com.lacombe.promo3.registration.repository.CandidateRepository;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public class SpyCandidateRepository implements CandidateRepository {
 
@@ -24,6 +25,16 @@ public class SpyCandidateRepository implements CandidateRepository {
 
     @Override
     public Collection<Email> getEmails() {
+        return null;
+    }
+
+    @Override
+    public Collection<Candidate> getCandidates() {
+        return null;
+    }
+
+    @Override
+    public Optional<Candidate> getCandidate(String email) {
         return null;
     }
 

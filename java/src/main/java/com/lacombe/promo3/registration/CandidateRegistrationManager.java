@@ -29,4 +29,8 @@ public class CandidateRegistrationManager {
             candidateRepository.add(candidate);
         }
     }
+
+    public Optional<Candidate> findCandidate(String email) {
+            return candidateRepository.getCandidate(email);
+    }
 }

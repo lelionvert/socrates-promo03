@@ -4,6 +4,7 @@ import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public interface CandidateRepository {
 
@@ -12,4 +13,8 @@ public interface CandidateRepository {
     boolean hasAlready(Candidate candidate);
 
     Collection<Email> getEmails();
+
+    Collection<Candidate> getCandidates();
+
+    Optional<Candidate> getCandidate(String email);
 }

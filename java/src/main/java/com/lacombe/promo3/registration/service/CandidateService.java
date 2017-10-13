@@ -29,6 +29,10 @@ public class CandidateService {
         return candidateRegistrationManager.findEmails();
     }
 
+    public Candidate getCandidateByEmail(String email){
+        return candidateRegistrationManager.findByEmail(email);
+    }
+
     public Candidate add(String email){
         return new ArrayList<>(
                 candidateRegistrationManager.register(new Candidate(Email.of(email))))

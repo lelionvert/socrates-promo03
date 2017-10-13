@@ -12,6 +12,7 @@ public class MockCandidateRepository implements CandidateRepository {
     private boolean isGetEmailCalled;
     private boolean isAddCalled;
     private boolean isMethodHasAlreadyCalled;
+    private boolean isGetByEmailCalled;
 
     public MockCandidateRepository(Candidate candidate) {
         existingCandidate = candidate;
@@ -37,6 +38,12 @@ public class MockCandidateRepository implements CandidateRepository {
         return null;
     }
 
+    @Override
+    public Candidate getByEmail(String email) {
+        isGetByEmailCalled = true;
+        return null;
+    }
+
     public boolean isGetEmailCalled() {
         return isGetEmailCalled;
     }
@@ -48,4 +55,6 @@ public class MockCandidateRepository implements CandidateRepository {
     public boolean isMethodHasAlreadyCalled() {
         return isMethodHasAlreadyCalled;
     }
+
+    public boolean isGetByEmailCalled(){ return isGetByEmailCalled;}
 }

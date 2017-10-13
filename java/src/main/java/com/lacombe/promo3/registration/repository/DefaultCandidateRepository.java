@@ -40,4 +40,10 @@ public class DefaultCandidateRepository implements CandidateRepository {
         }
         return Collections.unmodifiableCollection(emails);
     }
+
+    @Override
+    public Candidate getByEmail(String email) {
+        return candidates.stream().filter(candidate -> candidate.hasEmail(email))
+                .findFirst().orElse(null);
+    }
 }

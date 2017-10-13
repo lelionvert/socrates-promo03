@@ -19,6 +19,10 @@ public class CandidateRegistrationManager {
         return candidateRepository.getEmails();
     }
 
+    public Candidate findByEmail(String email){
+        return candidateRepository.getByEmail(email);
+    }
+
     public Collection<Candidate> register(Candidate... candidates) {
         for (Candidate candidate : candidates){
             registerOne(candidate);

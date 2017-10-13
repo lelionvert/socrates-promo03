@@ -12,6 +12,10 @@ public class Candidate {
         return email;
     }
 
+    public boolean hasEmail(String email){
+        return this.email.equals(email);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -1,4 +1,4 @@
-package com.lacombe.promo3.registration;
+package com.lacombe.promo3.registration.controller;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

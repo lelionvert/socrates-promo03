@@ -4,6 +4,7 @@ import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
 import com.lacombe.promo3.registration.service.CandidateService;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -12,7 +13,6 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.Collection;
 import java.util.Optional;
-
 
 @RestController
 @RequestMapping("/api")

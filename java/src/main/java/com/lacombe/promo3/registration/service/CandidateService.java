@@ -4,11 +4,13 @@ import com.lacombe.promo3.registration.CandidateRegistrationManager;
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
 import com.lacombe.promo3.registration.repository.DefaultCandidateRepository;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Random;
 
 
 @Service
@@ -22,9 +24,19 @@ public class CandidateService {
     private final DefaultCandidateRepository defaultCandidateRepository = DefaultCandidateRepository.withExisting(SABINE_CANDIDATE, CYRIL_CANDIDATE);
     private final CandidateRegistrationManager candidateRegistrationManager = new CandidateRegistrationManager(defaultCandidateRepository);
 
-
+    @HystrixCommand(fallbackMethod = "reliableGetItem")
     public Optional<Candidate> getItem(String email) {
-        return candidateRegistrationManager.findCandidate(email);
+        boolean isServiceOk = new Random().nextBoolean();
+        if(isServiceOk) {
+            return candidateRegistrationManager.findCandidate(email);
+        } else {
+            throw new Error("It is a Random exception to test Hystrix");
+        }
+        //return candidateRegistrationManager.findCandidate(email);
+    }
+
+    public Optional<Candidate> reliableGetItem(String email) {
+        return Optional.empty();
     }
 
     public Collection<Candidate> getCandidates() {

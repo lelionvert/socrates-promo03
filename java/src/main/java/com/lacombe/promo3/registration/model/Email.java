@@ -18,6 +18,10 @@ public class Email {
         return new Email(email);
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     private Email(String email){
         this.email = email;
     }

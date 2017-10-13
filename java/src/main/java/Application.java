@@ -2,6 +2,7 @@ import com.lacombe.promo3.registration.CandidateRegistrationManager;
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
 import com.lacombe.promo3.registration.repository.DefaultCandidateRepository;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.IOException;
 import java.util.Collection;

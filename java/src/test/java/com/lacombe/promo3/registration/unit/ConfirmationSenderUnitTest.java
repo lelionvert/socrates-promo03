@@ -1,9 +1,6 @@
 package com.lacombe.promo3.registration.unit;
 
-import com.lacombe.promo3.EmailSender;
-import com.lacombe.promo3.registration.acceptance.ConfirmationSender;
-import com.lacombe.promo3.registration.model.Candidate;
-import com.lacombe.promo3.registration.model.Email;
+import com.lacombe.promo3.registration.ConfirmationSender;
 import com.lacombe.promo3.registration.repository.ConfirmationRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,10 +14,7 @@ import static org.mockito.Mockito.verify;
 public class ConfirmationSenderUnitTest {
 
     @Mock
-    EmailSender emailSender;
-
-    @Mock
-    ConfirmationRepository confirmationRepository;
+    private ConfirmationRepository confirmationRepository;
 
     @Test
     public void should_get_confirmations_email_list() throws Exception {

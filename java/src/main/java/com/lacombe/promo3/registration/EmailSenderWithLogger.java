@@ -9,9 +9,4 @@ public class EmailSenderWithLogger implements EmailSender{
         throw new NotImplementedException();
     }
 
-    @Override
-    public boolean send() {
-        return false;
-    }
-
 }

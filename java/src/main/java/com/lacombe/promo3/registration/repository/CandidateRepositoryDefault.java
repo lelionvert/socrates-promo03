@@ -5,20 +5,20 @@ import com.lacombe.promo3.registration.model.Email;
 
 import java.util.*;
 
-public class DefaultCandidateRepository implements CandidateRepository {
+public class CandidateRepositoryDefault implements CandidateRepository {
 
     private final Collection<Candidate> candidates;
 
-    private DefaultCandidateRepository(Collection<Candidate> candidates) {
+    private CandidateRepositoryDefault(Collection<Candidate> candidates) {
         this();
         this.candidates.addAll(candidates);
     }
 
-    public static DefaultCandidateRepository withExisting(Candidate... candidates) {
-        return new DefaultCandidateRepository(Arrays.asList(candidates));
+    public static CandidateRepositoryDefault withExisting(Candidate... candidates) {
+        return new CandidateRepositoryDefault(Arrays.asList(candidates));
     }
 
-    public DefaultCandidateRepository() {
+    public CandidateRepositoryDefault() {
         this.candidates = new ArrayList<>();
     }
 

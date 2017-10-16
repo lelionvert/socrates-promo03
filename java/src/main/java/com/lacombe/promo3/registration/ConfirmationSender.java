@@ -1,15 +1,14 @@
-package com.lacombe.promo3.registration.acceptance;
+package com.lacombe.promo3.registration;
 
 import com.lacombe.promo3.EmailSender;
-import com.lacombe.promo3.registration.CandidateConfirmationChecker;
 import com.lacombe.promo3.registration.repository.ConfirmationRepository;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class ConfirmationSender {
 
     private ConfirmationRepository confirmationRepository;
 
-    public ConfirmationSender(ConfirmationRepository confirmationRepository, CandidateConfirmationChecker candidateCofirmationChecker, EmailSender emailSender) {
+    public ConfirmationSender(ConfirmationRepository confirmationRepository,
+                              CandidateConfirmationChecker candidateCofirmationChecker, EmailSender emailSender) {
     }
 
     public ConfirmationSender(ConfirmationRepository confirmationRepository) {

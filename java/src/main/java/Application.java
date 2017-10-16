@@ -1,20 +1,20 @@
-import com.lacombe.promo3.registration.CandidateRegistrationManager;
+import com.lacombe.promo3.registration.CandidateRegister;
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
-import com.lacombe.promo3.registration.repository.DefaultCandidateRepository;
+import com.lacombe.promo3.registration.repository.CandidateRepositoryDefault;
 
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Scanner;
 
-public class Application {
+class Application {
 
     private static final String CANDIDATE_ADDED_MESSAGE = "Le candidat a été ajouté.";
     private static final String NOT_VALID_EMAIL_MESSAGE = "L'email n'est pas valide.";
     private static final String CANDIDATE_EMAIL_MESSAGE = "Email du candidat :";
     private static final String NO_FOUND_CANDIDATE_MESSAGE = "Aucun candidat trouvé.";
 
-    private static CandidateRegistrationManager candidateRegistrationManager;
+    private static CandidateRegister candidateRegister;
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
@@ -48,18 +48,18 @@ public class Application {
     }
 
     private static void initManager() {
-        DefaultCandidateRepository defaultCandidateRepository = new DefaultCandidateRepository();
-        candidateRegistrationManager = new CandidateRegistrationManager(defaultCandidateRepository);
+        CandidateRepositoryDefault defaultCandidateRepository = new CandidateRepositoryDefault();
+        candidateRegister = new CandidateRegister(defaultCandidateRepository);
     }
 
-    private static void addCandidate() throws IOException {
+    private static void addCandidate() {
         System.out.println(CANDIDATE_EMAIL_MESSAGE);
         String emailValue = scanner.nextLine();
         Email email;
         try {
             email = Email.of(emailValue);
             Candidate candidate = new Candidate(email);
-            candidateRegistrationManager.register(candidate);
+            candidateRegister.register(candidate);
             System.out.println(CANDIDATE_ADDED_MESSAGE);
         } catch (Exception e) {
             System.out.println(NOT_VALID_EMAIL_MESSAGE);
@@ -67,7 +67,7 @@ public class Application {
     }
 
     private static void showCandidatesEmail() {
-        Collection<Email> emails = candidateRegistrationManager.findEmails();
+        Collection<Email> emails = candidateRegister.findEmails();
         if(emails.isEmpty()) {
             System.out.println(NO_FOUND_CANDIDATE_MESSAGE);
         } else {

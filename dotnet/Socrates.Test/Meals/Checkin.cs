@@ -1,15 +1,16 @@
 ﻿using System;
+using Socrates.CandidateRegistration;
 
 namespace Socrates.Test.Meals
 {
-    internal class Participant
+    public class Checkin
     {
-        private string v;
+        private Email email;
         private DateTime participantCheckinDate;
 
-        public Participant(string v, DateTime participantCheckinDate)
+        public Checkin(Email email, DateTime participantCheckinDate)
         {
-            this.v = v;
+            this.email = email;
             this.participantCheckinDate = participantCheckinDate;
         }
     }

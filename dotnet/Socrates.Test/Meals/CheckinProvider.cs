@@ -17,7 +17,7 @@ namespace Socrates.Test.Meals
 
         public int CountLateCheckin()
         {
-            throw new NotImplementedException();
+            return 0;
         }
     }
 }

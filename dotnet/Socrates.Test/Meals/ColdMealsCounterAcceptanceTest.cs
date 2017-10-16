@@ -1,5 +1,4 @@
-﻿
-using NFluent;
+﻿using NFluent;
 using NUnit.Framework;
 using Socrates.CandidateRegistration;
 using System;

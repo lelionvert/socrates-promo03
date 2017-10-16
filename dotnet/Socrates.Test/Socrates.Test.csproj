@@ -124,6 +124,7 @@
     <Compile Include="CandidateRegistration\SpyCandidateProvider.cs" />
     <Compile Include="Meals\Checkin.cs" />
     <Compile Include="Meals\CheckinProvider.cs" />
+    <Compile Include="Meals\CheckinProviderTest.cs" />
     <Compile Include="Meals\ColdMealsCounter.cs" />
     <Compile Include="Meals\ColdMealsCounterAcceptanceTest.cs" />
     <Compile Include="Meals\ColdMealsCounterTest.cs" />

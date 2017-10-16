@@ -7,18 +7,18 @@ import static org.mockito.Mockito.*;
 
 public class ColdMealsCounterTest {
     @Test
-    public void should_call_method_countLateCheckins_when_count_cold_meals() throws Exception {
+    public void should_call_method_countLateCheckIns_when_count_cold_meals() throws Exception {
         //Arrange
         CheckInProvider checkInProvider = mock(CheckInProvider.class);
         ColdMealsCounter counter = new ColdMealsCounter(checkInProvider);
-        when(checkInProvider.countLateCheckins()).thenReturn(0);
+        when(checkInProvider.countLateCheckIns()).thenReturn(0);
 
         //Act
         int nbColdMeals = counter.count();
 
         //Assert
         Assertions.assertThat(nbColdMeals).isEqualTo(0);
-        verify(checkInProvider).countLateCheckins();
+        verify(checkInProvider).countLateCheckIns();
     }
 
     @Test
@@ -26,7 +26,7 @@ public class ColdMealsCounterTest {
         //Arrange
         CheckInProvider checkInProvider = mock(CheckInProvider.class);
         ColdMealsCounter counter = new ColdMealsCounter(checkInProvider);
-        when(checkInProvider.countLateCheckins()).thenReturn(1);
+        when(checkInProvider.countLateCheckIns()).thenReturn(1);
 
         //Act
         int nbColdMeals = counter.count();

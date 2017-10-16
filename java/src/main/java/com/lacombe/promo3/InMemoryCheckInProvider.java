@@ -13,7 +13,7 @@ public class InMemoryCheckInProvider implements CheckInProvider {
         this.checkIns = checkIns;
     }
 
-    public static InMemoryCheckInProvider of(CheckIn... checkIns) {
+    static InMemoryCheckInProvider of(CheckIn... checkIns) {
         return new InMemoryCheckInProvider(Arrays.asList(checkIns));
     }
 
@@ -24,13 +24,13 @@ public class InMemoryCheckInProvider implements CheckInProvider {
     }
 
     @Override
-    public int countLateCheckins() {
-        int nbLateCheckins = 0;
+    public int countLateCheckIns() {
+        int nbLateCheckIns = 0;
         for (CheckIn checkIn : checkIns) {
             if (checkIn.isLate()) {
-                nbLateCheckins += 1;
+                nbLateCheckIns += 1;
             }
         }
-        return nbLateCheckins;
+        return nbLateCheckIns;
     }
 }

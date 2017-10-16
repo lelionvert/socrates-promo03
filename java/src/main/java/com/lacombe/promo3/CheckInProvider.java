@@ -5,5 +5,5 @@ import java.util.Collection;
 public interface CheckInProvider {
     Collection<CheckIn> getCheckIns();
 
-    int countLateCheckins();
+    int countLateCheckIns();
 }

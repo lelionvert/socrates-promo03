@@ -1,7 +1,5 @@
 package com.lacombe.promo3;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public class ColdMealsCounter {
     private CheckInProvider checkInProvider;
 
@@ -10,6 +8,6 @@ public class ColdMealsCounter {
     }
 
     public Integer count() {
-        return checkInProvider.countLateCheckins();
+        return checkInProvider.countLateCheckIns();
     }
 }

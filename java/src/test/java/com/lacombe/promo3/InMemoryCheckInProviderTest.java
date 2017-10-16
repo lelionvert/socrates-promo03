@@ -22,7 +22,7 @@ public class InMemoryCheckInProviderTest {
         CheckInProvider checkInProvider = InMemoryCheckInProvider.of(regisCheckIn);
 
         //Act
-        int nbCheckins = checkInProvider.countLateCheckins();
+        int nbCheckins = checkInProvider.countLateCheckIns();
 
         //Assert
         verify(regisCheckIn).isLate();

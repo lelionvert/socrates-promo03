@@ -30,9 +30,9 @@ public class InMemoryCheckInProviderTest {
     }
 
     @Test
-    public void should_have_zero_check_in_late_when_check_in_date_is_not_given() throws Exception {
+    public void should_have_zero_check_in_late_when_check_in_date_is_on_time() throws Exception {
         //Arrange
-        when(regisCheckIn.getCheckInDate()).thenReturn(null);
+        when(regisCheckIn.isLate()).thenReturn(false);
         CheckInProvider checkInProvider = InMemoryCheckInProvider.of(regisCheckIn);
 
         //Act

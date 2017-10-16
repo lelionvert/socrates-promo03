@@ -22,10 +22,25 @@ public class InMemoryCheckInProviderTest {
         CheckInProvider checkInProvider = InMemoryCheckInProvider.of(regisCheckIn);
 
         //Act
-        int nbCheckins = checkInProvider.countLateCheckIns();
+        int nbCheckIns = checkInProvider.countLateCheckIns();
 
         //Assert
         verify(regisCheckIn).isLate();
-        Assertions.assertThat(nbCheckins).isEqualTo(1);
+        Assertions.assertThat(nbCheckIns).isEqualTo(1);
     }
+
+    @Test
+    public void should_have_zero_check_in_late_when_check_in_date_is_not_given() throws Exception {
+        //Arrange
+        when(regisCheckIn.getCheckInDate()).thenReturn(null);
+        CheckInProvider checkInProvider = InMemoryCheckInProvider.of(regisCheckIn);
+
+        //Act
+        int nbCheckIns = checkInProvider.countLateCheckIns();
+
+        //Assert
+        Assertions.assertThat(nbCheckIns).isEqualTo(0);
+    }
+
+
 }

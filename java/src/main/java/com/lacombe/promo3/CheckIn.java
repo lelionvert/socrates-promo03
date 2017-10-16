@@ -20,4 +20,8 @@ class CheckIn {
     boolean isLate() {
         return checkingDate.isAfter(LocalDateTime.of(2017, Month.OCTOBER, 27, 21, 0, 0,0));
     }
+
+    public LocalDateTime getCheckInDate() {
+        return checkingDate;
+    }
 }

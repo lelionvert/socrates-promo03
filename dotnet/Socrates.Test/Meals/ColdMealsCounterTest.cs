@@ -9,23 +9,29 @@ namespace Socrates.Test.Meals
         [Test]
         public void CountColdMeals_Should_Return_Zero_Cold_Meal_When_Zero_Participant()
         {
+            // SETUP
             var checkinProvider = Substitute.For<ICheckinProvider>();
             checkinProvider.CountLateCheckin().Returns(0);
 
+            // RUN
             var coldMealsCounter = new ColdMealsCounter(checkinProvider);
             var coldMealsNumber = coldMealsCounter.CountColdMeals();
 
+            // ASSERT
             Check.That(coldMealsNumber).IsZero();
         }
 
         [Test]
         public void CountColdMeals_Should_Return_Zero_Cold_Meals_When_Participants_Checkin_Before_21h()
         {
+            // SETUP
             var checkinProvider = Substitute.For<ICheckinProvider>();
             checkinProvider.CountLateCheckin().Returns(0);
 
+            // RUN
             var coldMealsCounter = new ColdMealsCounter(checkinProvider);
 
+            // ASSERT
             Check.That(coldMealsCounter.CountColdMeals()).IsZero();
         }
 

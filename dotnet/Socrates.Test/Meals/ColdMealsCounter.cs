@@ -1,12 +1,8 @@
-﻿using System;
-
-namespace Socrates.Test.Meals
+﻿namespace Socrates.Test.Meals
 {
     internal class ColdMealsCounter
     {
         private ICheckinProvider checkinProvider;
-
-     
 
         public ColdMealsCounter(ICheckinProvider checkinProvider)
         {

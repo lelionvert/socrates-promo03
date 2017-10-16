@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Socrates.Test.Meals
 {
@@ -17,7 +16,17 @@ namespace Socrates.Test.Meals
 
         public int CountLateCheckin()
         {
-            return 0;
+            int lateCheckinNumber = 0;
+
+            foreach(var checkin in participantCheckin)
+            {
+                if (checkin.IsLate())
+                {
+                    lateCheckinNumber++;
+                }
+            }
+
+            return lateCheckinNumber;
         }
     }
 }

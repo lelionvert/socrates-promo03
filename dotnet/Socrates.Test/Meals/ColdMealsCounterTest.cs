@@ -35,19 +35,20 @@ namespace Socrates.Test.Meals
             Check.That(coldMealsCounter.CountColdMeals()).IsZero();
         }
 
-        [Test]
-        public void CountColdMeals_Should_Return_One_Cold_Meal_When_Participants_Checkin_After_21h()
+        [TestCase(1)]
+        [TestCase(2)]
+        public void CountColdMeals_Should_Return_One_Cold_Meal_When_Participants_Checkin_After_21h(int numberLateCheckin)
         {
             // SETUP
             var checkinProvider = Substitute.For<ICheckinProvider>();
-            checkinProvider.CountLateCheckin().Returns(1);
+            checkinProvider.CountLateCheckin().Returns(numberLateCheckin);
             var coldMealCounter = new ColdMealsCounter(checkinProvider);
 
             // RUN
             var coldMealsNumber = coldMealCounter.CountColdMeals();
 
             // ASSERT
-            Check.That(coldMealsNumber).IsEqualTo(1);
+            Check.That(coldMealsNumber).IsEqualTo(numberLateCheckin);
         }
     }
 }

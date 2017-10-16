@@ -25,8 +25,15 @@ public class CheckInTest {
 
     @Test
     public void should_not_be_late_when_check_in_date_is_after_thursday_night() throws Exception {
-        regisCheckIn.setCheckingDate(LocalDateTime.of(2017, Month.OCTOBER, 28, 0, 0, 0, 0));
+        regisCheckIn.setCheckingDate(LocalDateTime.of(2017, Month.OCTOBER,28,0,0,0,0));
         Boolean isLate = regisCheckIn.isLate();
         Assertions.assertThat(isLate).isFalse();
+    }
+
+    @Test
+    public void should_be_late_when_check_in_date_is_thursday_night() throws Exception {
+        regisCheckIn.setCheckingDate(LocalDateTime.of(2017, Month.OCTOBER,27,21,1,0,1));
+        Boolean isLate = regisCheckIn.isLate();
+        Assertions.assertThat(isLate).isTrue();
     }
 }

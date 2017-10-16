@@ -24,8 +24,8 @@ public class CheckInTest {
     }
 
     @Test
-    public void should_not_be_late_when_check_in_date_is_after_thursday() throws Exception {
-        regisCheckIn.setCheckingDate(LocalDateTime.of(2017, Month.OCTOBER,28,0,0,0,0));
+    public void should_not_be_late_when_check_in_date_is_after_thursday_night() throws Exception {
+        regisCheckIn.setCheckingDate(LocalDateTime.of(2017, Month.OCTOBER, 28, 0, 0, 0, 0));
         Boolean isLate = regisCheckIn.isLate();
         Assertions.assertThat(isLate).isFalse();
     }

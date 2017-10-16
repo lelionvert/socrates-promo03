@@ -25,6 +25,12 @@ public class InMemoryCheckInProvider implements CheckInProvider {
 
     @Override
     public int countLateCheckins() {
-        return 0;
+        int nbLateCheckins = 0;
+        for (CheckIn checkIn : checkIns) {
+            if (checkIn.isLate()) {
+                nbLateCheckins += 1;
+            }
+        }
+        return nbLateCheckins;
     }
 }

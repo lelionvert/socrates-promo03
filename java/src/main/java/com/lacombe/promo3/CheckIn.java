@@ -1,6 +1,7 @@
 package com.lacombe.promo3;
 
 import com.lacombe.promo3.registration.model.Email;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.time.LocalDateTime;
 
@@ -19,5 +20,9 @@ public class CheckIn {
 
     public void setCheckingDate(LocalDateTime checkingDate) {
         this.checkingDate = checkingDate;
+    }
+
+    public boolean isLate() {
+        throw new NotImplementedException();
     }
 }

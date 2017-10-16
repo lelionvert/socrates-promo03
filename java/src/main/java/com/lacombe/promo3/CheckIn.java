@@ -1,9 +1,9 @@
 package com.lacombe.promo3;
 
 import com.lacombe.promo3.registration.model.Email;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.time.LocalDateTime;
+import java.time.Month;
 
 public class CheckIn {
     private Email email;
@@ -23,6 +23,6 @@ public class CheckIn {
     }
 
     public boolean isLate() {
-        throw new NotImplementedException();
+        return checkingDate.isAfter(LocalDateTime.of(2017, Month.OCTOBER, 27, 21, 0, 0,0));
     }
 }

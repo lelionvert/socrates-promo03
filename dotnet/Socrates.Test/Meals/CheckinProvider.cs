@@ -3,18 +3,21 @@ using System.Collections.Generic;
 
 namespace Socrates.Test.Meals
 {
-    internal class CheckinProvider
+    internal class CheckinProvider : ICheckinProvider
     {
         private IList<Checkin> participantCheckin = new List<Checkin>();
-
-        public CheckinProvider(Checkin checkin)
+            
+        public CheckinProvider(params Checkin[] checkins)
         {
-            participantCheckin.Add(checkin);
+            foreach (var checkin in checkins)
+            {
+                participantCheckin.Add(checkin);
+            }
         }
 
-        internal int CountLateCheckin()
+        public int CountLateCheckin()
         {
-            return 0;
+            throw new NotImplementedException();
         }
     }
 }

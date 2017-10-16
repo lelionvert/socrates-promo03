@@ -4,13 +4,18 @@ namespace Socrates.Test.Meals
 {
     internal class ColdMealsCounter
     {
-        public ColdMealsCounter()
+        private ICheckinProvider checkinProvider;
+
+     
+
+        public ColdMealsCounter(ICheckinProvider checkinProvider)
         {
+            this.checkinProvider = checkinProvider;
         }
 
         internal int CountColdMeals()
         {
-            return 0;
+            return checkinProvider.CountLateCheckin();
         }
     }
 }

@@ -1,10 +1,12 @@
 package com.lacombe.promo3.registration.acceptance;
 
-import com.lacombe.promo3.registration.EmailLogger;
-import com.lacombe.promo3.registration.EmailService;
+import com.lacombe.promo3.EmailSender;
+import com.lacombe.promo3.registration.CandidateConfirmationChecker;
+import com.lacombe.promo3.registration.EmailSenderWithLogger;
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
 import com.lacombe.promo3.registration.repository.DefaultCandidateRepository;
+import com.lacombe.promo3.registration.repository.DefaultConfirmationRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
@@ -16,19 +18,26 @@ public class US4_SendEmailAcceptanceTest {
     public static final Candidate JULIE_CANDIDATE = new Candidate(JULIE_EMAIL);
 
     @Test
-    public void should_send_a_confirmation_or_payment_email_to_all_candidates() throws Exception {
+    public void should_send_a_confirmation_or_payment_email_to_all_new_candidates() throws Exception {
         // GIVEN
         DefaultCandidateRepository defaultCandidateRepository =
                 DefaultCandidateRepository.withExisting(LUCAS_CANDIDATE, JULIE_CANDIDATE);
-        EmailLogger emailLogger = new EmailLogger();
-        EmailService emailService = new EmailService(defaultCandidateRepository, emailLogger);
+        DefaultConfirmationRepository defaultConfirmationRepository = new DefaultConfirmationRepository();
+
+        EmailSender emailSender = new EmailSenderWithLogger();
+
+        CandidateConfirmationChecker candidateConfirmationChecker = new CandidateConfirmationChecker(defaultCandidateRepository);
+
+        ConfirmationSender confirmationSender = new ConfirmationSender(defaultConfirmationRepository,
+                                                                        candidateConfirmationChecker,
+                                                                        emailSender);
 
         // WHEN
-        emailService.sendConfirmationOrPaymentEmail();
+        confirmationSender.execute();
 
         // THEN
-        Assertions.assertThat(emailLogger.print())
-                .isEqualTo("Email sent to :" + LUCAS_CANDIDATE
-                                             + ", " + JULIE_CANDIDATE);
+        Assertions.assertThat(((EmailSenderWithLogger)emailSender).printLog())
+                .isEqualTo("Email sent to : " + LUCAS_CANDIDATE + "\n"
+                + "Email sent to : " + JULIE_CANDIDATE);
     }
 }

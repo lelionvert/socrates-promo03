@@ -4,7 +4,10 @@ import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.service.CandidateService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -28,8 +31,12 @@ public class CandidatesController {
     }
 
     @PostMapping("/candidate")
-    public void addCandidate(String email) {
-        candidateService.addCandidate(email);
+    public ResponseEntity<Candidate> addCandidate(@RequestBody @Valid CandidatDto candidatDto) {
+        Candidate candidate = candidateService.addCandidate(candidatDto.getEmail().getEmail());
+        URI location = ServletUriComponentsBuilder
+            .fromCurrentRequest().path("/{email}")
+            .buildAndExpand(candidate.getEmail()).toUri();
+        return ResponseEntity.created(location).build();
     }
 
     @GetMapping("/candidate/{id}")
@@ -40,5 +47,11 @@ public class CandidatesController {
             return ResponseEntity.ok(candidates.get(index));
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/emails")
+    public ResponseEntity<String> getEmail() {
+        String email = candidateService.getEmail();
+        return ResponseEntity.ok(email);
     }
 }

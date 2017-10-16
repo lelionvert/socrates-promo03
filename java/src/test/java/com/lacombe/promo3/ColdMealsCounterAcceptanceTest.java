@@ -52,4 +52,15 @@ public class ColdMealsCounterAcceptanceTest {
         Integer countColdMeals = coldMealsCounter.count();
         Assertions.assertThat(countColdMeals).isEqualTo(2);
     }
+
+    @Test
+    public void should_have_no_cold_meals_when_one_or_several_participants_do_not_give_check_in_date() throws Exception {
+        julesCheckIn.setCheckingDate(LocalDateTime.of(2017, 10, 27, 20, 15, 0, 0));
+
+        CheckInProvider checkInProvider = InMemoryCheckInProvider.of(regisCheckIn, fannyCheckIn, emilieCheckIn, julesCheckIn);
+        ColdMealsCounter coldMealsCounter = new ColdMealsCounter(checkInProvider);
+
+        Integer countColdMeals = coldMealsCounter.count();
+        Assertions.assertThat(countColdMeals).isEqualTo(0);
+    }
 }

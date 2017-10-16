@@ -2,7 +2,6 @@ package com.lacombe.promo3;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import static org.mockito.Mockito.*;
 
@@ -20,5 +19,19 @@ public class ColdMealsCounterTest {
         //Assert
         Assertions.assertThat(nbColdMeals).isEqualTo(0);
         verify(checkInProvider).countLateCheckins();
+    }
+
+    @Test
+    public void should_have_one_cold_meals_when_there_is_one_late_check_in() throws Exception {
+        //Arrange
+        CheckInProvider checkInProvider = mock(CheckInProvider.class);
+        ColdMealsCounter counter = new ColdMealsCounter(checkInProvider);
+        when(checkInProvider.countLateCheckins()).thenReturn(1);
+
+        //Act
+        int nbColdMeals = counter.count();
+
+        //Assert
+        Assertions.assertThat(nbColdMeals).isEqualTo(1);
     }
 }

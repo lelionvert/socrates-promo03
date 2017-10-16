@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.mockito.Mockito.*;
 
-public class InMemoryCheckinProviderTest {
+public class InMemoryCheckInProviderTest {
 
     private CheckIn regisCheckIn;
 

@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 
 public class ColdMealsCounterAcceptanceTest {
 
@@ -28,10 +27,10 @@ public class ColdMealsCounterAcceptanceTest {
 
     @Test
     public void should_have_zero_cold_meals_when_all_participants_are_not_late() throws Exception {
-        regisCheckIn.setCheckingDate(LocalDateTime.of(2017, 10, 27, 16, 30, 00, 0));
-        fannyCheckIn.setCheckingDate(LocalDateTime.of(2017, 10, 27, 18, 30, 00, 0));
-        emilieCheckIn.setCheckingDate(LocalDateTime.of(2017, 10, 27, 19, 00, 00, 0));
-        julesCheckIn.setCheckingDate(LocalDateTime.of(2017, 10, 27, 20, 45, 00, 0));
+        regisCheckIn.setCheckingDate(LocalDateTime.of(2017, 10, 27, 16, 30, 0, 0));
+        fannyCheckIn.setCheckingDate(LocalDateTime.of(2017, 10, 27, 18, 30, 0, 0));
+        emilieCheckIn.setCheckingDate(LocalDateTime.of(2017, 10, 27, 19, 0, 0, 0));
+        julesCheckIn.setCheckingDate(LocalDateTime.of(2017, 10, 27, 20, 45, 0, 0));
 
         CheckInProvider checkInProvider = InMemoryCheckInProvider.of(regisCheckIn, fannyCheckIn, emilieCheckIn, julesCheckIn);
         ColdMealsCounter coldMealsCounter = new ColdMealsCounter(checkInProvider);

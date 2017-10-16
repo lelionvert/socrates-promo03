@@ -18,7 +18,9 @@ class CheckIn {
     }
 
     boolean isLate() {
-        return  checkingDate != null && checkingDate.isAfter(LocalDateTime.of(2017, Month.OCTOBER, 27, 21, 0, 0,0));
+        return checkingDate != null
+                && checkingDate.isAfter(LocalDateTime.of(2017, Month.OCTOBER, 27, 21, 0, 0,0))
+                && checkingDate.isBefore(LocalDateTime.of(2017, Month.OCTOBER, 28, 0, 0, 0, 0));
     }
 
 }

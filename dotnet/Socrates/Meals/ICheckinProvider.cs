@@ -1,4 +1,4 @@
-﻿namespace Socrates.Test.Meals
+﻿namespace Socrates.Meals
 {
     public interface ICheckinProvider
     {

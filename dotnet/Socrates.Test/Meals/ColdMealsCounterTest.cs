@@ -1,6 +1,7 @@
 ﻿using NFluent;
 using NSubstitute;
 using NUnit.Framework;
+using Socrates.Meals;
 
 namespace Socrates.Test.Meals
 {

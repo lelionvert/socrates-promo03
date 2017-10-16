@@ -45,6 +45,10 @@
     <Compile Include="CandidateRegistration\Email.cs" />
     <Compile Include="CandidateRegistration\ICandidateProvider.cs" />
     <Compile Include="CandidateRegistration\InvalidEmailException.cs" />
+    <Compile Include="Meals\Checkin.cs" />
+    <Compile Include="Meals\CheckinProvider.cs" />
+    <Compile Include="Meals\ColdMealsCounter.cs" />
+    <Compile Include="Meals\ICheckinProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CandidateRegistration\Candidat.cs" />
@@ -54,8 +58,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ColdMealsCounter\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

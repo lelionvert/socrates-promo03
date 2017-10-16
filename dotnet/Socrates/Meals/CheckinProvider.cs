@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Socrates.Test.Meals
+namespace Socrates.Meals
 {
-    internal class CheckinProvider : ICheckinProvider
+    public class CheckinProvider : ICheckinProvider
     {
         private IList<Checkin> participantCheckin = new List<Checkin>();
             

@@ -1,7 +1,7 @@
 ﻿using System;
 using Socrates.CandidateRegistration;
 
-namespace Socrates.Test.Meals
+namespace Socrates.Meals
 {
     public class Checkin
     {
@@ -15,7 +15,7 @@ namespace Socrates.Test.Meals
             this.participantCheckinDate = participantCheckinDate;
         }
 
-        internal bool IsLate()
+        public bool IsLate()
         {
             return participantCheckinDate > maximumCheckinDate;
         }

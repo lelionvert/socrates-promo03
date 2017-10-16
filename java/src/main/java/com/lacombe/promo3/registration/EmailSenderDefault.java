@@ -1,15 +1,15 @@
 package com.lacombe.promo3.registration;
 
+import com.lacombe.promo3.EmailSender;
+import com.lacombe.promo3.registration.model.Candidate;
+import com.lacombe.promo3.registration.model.Email;
 import com.lacombe.promo3.registration.repository.DefaultCandidateRepository;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public class EmailSenderDefault {
+public class EmailSenderDefault implements EmailSender {
 
-    public EmailSenderDefault(DefaultCandidateRepository defaultCandidateRepository) {
-        throw new NotImplementedException();
-    }
-
-    public void sendConfirmationEmail() {
-        throw new NotImplementedException();
+    @Override
+    public boolean send() {
+        return false;
     }
 }

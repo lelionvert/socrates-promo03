@@ -5,9 +5,11 @@ import com.lacombe.promo3.registration.CandidateConfirmationChecker;
 import com.lacombe.promo3.registration.EmailSenderWithLogger;
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
+import com.lacombe.promo3.registration.repository.ConfirmationRepository;
 import com.lacombe.promo3.registration.repository.DefaultCandidateRepository;
 import com.lacombe.promo3.registration.repository.DefaultConfirmationRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class US4_SendEmailAcceptanceTest {
@@ -17,18 +19,19 @@ public class US4_SendEmailAcceptanceTest {
     public static final Email JULIE_EMAIL = Email.of("julie@lcdlv.fr");
     public static final Candidate JULIE_CANDIDATE = new Candidate(JULIE_EMAIL);
 
+    @Ignore
     @Test
     public void should_send_a_confirmation_or_payment_email_to_all_new_candidates() throws Exception {
         // GIVEN
         DefaultCandidateRepository defaultCandidateRepository =
                 DefaultCandidateRepository.withExisting(LUCAS_CANDIDATE, JULIE_CANDIDATE);
-        DefaultConfirmationRepository defaultConfirmationRepository = new DefaultConfirmationRepository();
+        ConfirmationRepository confirmationRepository = new DefaultConfirmationRepository();
 
         EmailSender emailSender = new EmailSenderWithLogger();
 
         CandidateConfirmationChecker candidateConfirmationChecker = new CandidateConfirmationChecker(defaultCandidateRepository);
 
-        ConfirmationSender confirmationSender = new ConfirmationSender(defaultConfirmationRepository,
+        ConfirmationSender confirmationSender = new ConfirmationSender(confirmationRepository,
                                                                         candidateConfirmationChecker,
                                                                         emailSender);
 

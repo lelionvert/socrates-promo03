@@ -13,4 +13,5 @@ public class EmailSenderWithLogger implements EmailSender{
     public boolean send() {
         return false;
     }
+
 }

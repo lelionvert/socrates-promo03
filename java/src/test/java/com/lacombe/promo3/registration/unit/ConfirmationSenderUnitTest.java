@@ -37,9 +37,14 @@ public class ConfirmationSenderUnitTest {
 
     @Mock
     private ConfirmationRepositoryWriter confirmationRepositoryWriter;
+    private ConfirmationSender confirmationSender;
 
     @Before
     public void setUp() throws Exception {
+        confirmationSender = new ConfirmationSender(confirmationRepositoryWriter
+                , candidateConfirmationChecker
+                , emailSender);
+
         when(candidateConfirmationChecker.getCandidates()).thenReturn(Collections.emptyList());
         when(emailSender.sendTo(Matchers.any())).thenReturn(
                 new EmailsStatus(
@@ -51,17 +56,14 @@ public class ConfirmationSenderUnitTest {
 
     @Test
     public void should_send_one_confirmation_email_when_no_confirmation_email_are_sent() throws Exception {
-        // ARRANGE
-        ConfirmationSender confirmationSender = new ConfirmationSender(confirmationRepositoryWriter
-                , candidateConfirmationChecker
-                , emailSender);
-        // ACT
         confirmationSender.execute();
-        // ASSERT
+
         verify(candidateConfirmationChecker, times(1)).getCandidates();
         verify(emailSender, times(1)).sendTo(any(Collection.class));
         verify(confirmationRepositoryWriter, times(1)).add(any(Email.class));
     }
+
+
 
     /* TODO Dans le checker */
     /*

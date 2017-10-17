@@ -53,6 +53,7 @@ namespace Socrates.Test.Meals
             // ASSERT
             Check.That(coldMealsNumber).IsEqualTo(1);
         }
+
         [Test]
         public void CountColdMeals_Should_Return_Two_Cold_Meal_When_Participants_Checkin_After_21h_And_Before_Midnight()
         {

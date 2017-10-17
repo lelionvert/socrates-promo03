@@ -1,5 +1,4 @@
-﻿using Socrates.CandidateRegistration;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -33,11 +32,8 @@ namespace Socrates.CandidateRegistration
 
         public static Email Of(string emailAddress)
         {
-            
             return new Email(emailAddress);
         }
-
-
 
         public override bool Equals(object obj)
         {

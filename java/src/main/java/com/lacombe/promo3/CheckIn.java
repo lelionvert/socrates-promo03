@@ -7,20 +7,36 @@ import java.time.Month;
 
 class CheckIn {
     private final Email email;
-    private LocalDateTime checkingDate;
+    private LocalDateTime checkInDate;
 
-    CheckIn(Email email) {
-        this.email = email;
+    private CheckIn(Email email) {
+        this(email, null);
     }
 
-    void setCheckingDate(LocalDateTime checkingDate) {
-        this.checkingDate = checkingDate;
+    private CheckIn(Email email, LocalDateTime checkInDate) {
+        this.email = email;
+        this.checkInDate = checkInDate;
+    }
+
+
+
+    static CheckIn of(Email email, LocalDateTime checkInDate) {
+        return new CheckIn(email, checkInDate);
+    }
+
+    static CheckIn of(Email email) {
+        return new CheckIn(email);
+    }
+
+
+    void setCheckInDate(LocalDateTime checkInDate) {
+        this.checkInDate = checkInDate;
     }
 
     boolean isLate() {
-        return checkingDate != null
-                && checkingDate.isAfter(LocalDateTime.of(2017, Month.OCTOBER, 27, 21, 0, 0,0))
-                && checkingDate.isBefore(LocalDateTime.of(2017, Month.OCTOBER, 28, 0, 0, 0, 0));
+        return checkInDate != null
+                && checkInDate.isAfter(LocalDateTime.of(2017, Month.OCTOBER, 27, 21, 0, 0,0))
+                && checkInDate.isBefore(LocalDateTime.of(2017, Month.OCTOBER, 28, 0, 0, 0, 0));
     }
 
 }

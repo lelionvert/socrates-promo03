@@ -1,7 +1,12 @@
+
 package com.lacombe.promo3;
 
+import com.lacombe.promo3.registration.model.Email;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
+
+import java.time.LocalDateTime;
+import java.util.Collections;
 
 import static org.mockito.Mockito.*;
 
@@ -11,14 +16,14 @@ public class ColdMealsCounterTest {
         //Arrange
         CheckInProvider checkInProvider = mock(CheckInProvider.class);
         ColdMealsCounter counter = new ColdMealsCounter(checkInProvider);
-        when(checkInProvider.countLateCheckIns()).thenReturn(0);
+        when(checkInProvider.getCheckIns()).thenReturn(Collections.emptyList());
 
         //Act
         int nbColdMeals = counter.count();
 
         //Assert
         Assertions.assertThat(nbColdMeals).isEqualTo(0);
-        verify(checkInProvider).countLateCheckIns();
+        verify(checkInProvider).getCheckIns();
     }
 
     @Test
@@ -26,7 +31,9 @@ public class ColdMealsCounterTest {
         //Arrange
         CheckInProvider checkInProvider = mock(CheckInProvider.class);
         ColdMealsCounter counter = new ColdMealsCounter(checkInProvider);
-        when(checkInProvider.countLateCheckIns()).thenReturn(1);
+        CheckIn regisCheckIn = CheckIn.of(Email.of("regis.dubois@socrates.com"),
+                LocalDateTime.of(2017, 10, 27, 22, 0, 0, 0));
+        when(checkInProvider.getCheckIns()).thenReturn(Collections.singletonList(regisCheckIn));
 
         //Act
         int nbColdMeals = counter.count();

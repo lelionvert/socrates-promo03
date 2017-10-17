@@ -1,8 +1,8 @@
-package com.lacombe.promo3.registration.repository;
+package com.lacombe.promo3.communication.repository;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public class ConfirmationRepositoryDefault implements ConfirmationRepository {
+public class ConfirmationRepositoryInMemory implements ConfirmationRepository {
 
     @Override
     public void getEmails() {

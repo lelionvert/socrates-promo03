@@ -1,7 +1,7 @@
-package com.lacombe.promo3.registration.repository;
+package com.lacombe.promo3.shared.repository;
 
-import com.lacombe.promo3.registration.model.Candidate;
-import com.lacombe.promo3.registration.model.Email;
+import com.lacombe.promo3.shared.model.Candidate;
+import com.lacombe.promo3.shared.model.Email;
 
 import java.util.Collection;
 

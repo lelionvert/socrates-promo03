@@ -1,9 +1,9 @@
 package com.lacombe.promo3.registration.integration;
 
 import com.lacombe.promo3.registration.CandidateRegister;
-import com.lacombe.promo3.registration.model.Candidate;
-import com.lacombe.promo3.registration.model.Email;
-import com.lacombe.promo3.registration.repository.CandidateRepositoryDefault;
+import com.lacombe.promo3.shared.model.Candidate;
+import com.lacombe.promo3.shared.model.Email;
+import com.lacombe.promo3.shared.repository.CandidateRepositoryInMemory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,9 +29,9 @@ public class CandidateRegistrationManagerIntegrationTest {
 
     @Before
     public void setUp() throws Exception {
-        CandidateRepositoryDefault defaultCandidateRepository = new CandidateRepositoryDefault();
+        CandidateRepositoryInMemory defaultCandidateRepository = new CandidateRepositoryInMemory();
         candidateRegister = new CandidateRegister(defaultCandidateRepository);
-        CandidateRepositoryDefault defaultCandidateRepositoryWithExistingCandidates = CandidateRepositoryDefault.withExisting(SABINE_CANDIDATE, MELODY_CANDIDATE);
+        CandidateRepositoryInMemory defaultCandidateRepositoryWithExistingCandidates = CandidateRepositoryInMemory.withExisting(SABINE_CANDIDATE, MELODY_CANDIDATE);
         candidateRegisterWithExistingCandidates = new CandidateRegister(defaultCandidateRepositoryWithExistingCandidates);
     }
 

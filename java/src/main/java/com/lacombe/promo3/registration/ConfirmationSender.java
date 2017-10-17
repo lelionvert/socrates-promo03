@@ -1,7 +1,7 @@
 package com.lacombe.promo3.registration;
 
-import com.lacombe.promo3.EmailSender;
-import com.lacombe.promo3.registration.repository.ConfirmationRepository;
+import com.lacombe.promo3.communication.EmailSender;
+import com.lacombe.promo3.communication.repository.ConfirmationRepository;
 
 public class ConfirmationSender {
 

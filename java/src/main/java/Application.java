@@ -1,7 +1,7 @@
 import com.lacombe.promo3.registration.CandidateRegister;
-import com.lacombe.promo3.registration.model.Candidate;
-import com.lacombe.promo3.registration.model.Email;
-import com.lacombe.promo3.registration.repository.CandidateRepositoryDefault;
+import com.lacombe.promo3.shared.model.Candidate;
+import com.lacombe.promo3.shared.model.Email;
+import com.lacombe.promo3.shared.repository.CandidateRepositoryInMemory;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -48,7 +48,7 @@ class Application {
     }
 
     private static void initManager() {
-        CandidateRepositoryDefault defaultCandidateRepository = new CandidateRepositoryDefault();
+        CandidateRepositoryInMemory defaultCandidateRepository = new CandidateRepositoryInMemory();
         candidateRegister = new CandidateRegister(defaultCandidateRepository);
     }
 

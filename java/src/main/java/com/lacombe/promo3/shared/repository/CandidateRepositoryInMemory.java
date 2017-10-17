@@ -1,24 +1,24 @@
-package com.lacombe.promo3.registration.repository;
+package com.lacombe.promo3.shared.repository;
 
-import com.lacombe.promo3.registration.model.Candidate;
-import com.lacombe.promo3.registration.model.Email;
+import com.lacombe.promo3.shared.model.Candidate;
+import com.lacombe.promo3.shared.model.Email;
 
 import java.util.*;
 
-public class CandidateRepositoryDefault implements CandidateRepository {
+public class CandidateRepositoryInMemory implements CandidateRepository {
 
     private final Collection<Candidate> candidates;
 
-    private CandidateRepositoryDefault(Collection<Candidate> candidates) {
+    private CandidateRepositoryInMemory(Collection<Candidate> candidates) {
         this();
         this.candidates.addAll(candidates);
     }
 
-    public static CandidateRepositoryDefault withExisting(Candidate... candidates) {
-        return new CandidateRepositoryDefault(Arrays.asList(candidates));
+    public static CandidateRepositoryInMemory withExisting(Candidate... candidates) {
+        return new CandidateRepositoryInMemory(Arrays.asList(candidates));
     }
 
-    public CandidateRepositoryDefault() {
+    public CandidateRepositoryInMemory() {
         this.candidates = new ArrayList<>();
     }
 

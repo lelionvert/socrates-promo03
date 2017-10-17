@@ -1,6 +1,6 @@
 package com.lacombe.promo3.registration.unit;
 
-import com.lacombe.promo3.registration.model.Email;
+import com.lacombe.promo3.shared.model.Email;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 

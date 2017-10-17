@@ -1,7 +1,7 @@
 package com.lacombe.promo3.registration.unit;
 
 import com.lacombe.promo3.registration.ConfirmationSender;
-import com.lacombe.promo3.registration.repository.ConfirmationRepository;
+import com.lacombe.promo3.communication.repository.ConfirmationRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;

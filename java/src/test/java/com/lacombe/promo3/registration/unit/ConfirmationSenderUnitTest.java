@@ -25,21 +25,20 @@ public class ConfirmationSenderUnitTest {
     private ConfirmationRepository confirmationRepository;
 
     @Test
-    public void should_call_get_candidate_list() throws Exception {
+    public void should_get_candidate_list_from_checker() throws Exception {
         //ARRANGE
-        ConfirmationSender confirmationSender = new ConfirmationSender(candidateConfirmationChecker);
+        ConfirmationSender confirmationSender = new ConfirmationSender(emailSender, candidateConfirmationChecker);
         //ACT
         confirmationSender.execute();
         //ASSERT
         verify(candidateConfirmationChecker, times(1)).getCandidates();
     }
 
-    /*
-    @Ignore
     @Test
-    public void should_send_an_email() throws Exception {
+    public void should_send_an_email_from_email_sender() throws Exception {
         // ARRANGE
-        ConfirmationSender confirmationSender = new ConfirmationSender(confirmationRepository, candidateConfirmationChecker);
+        ConfirmationSender confirmationSender = new ConfirmationSender(emailSender
+                                                                        , candidateConfirmationChecker);
         // ACT
         confirmationSender.execute();
         // ASSERT

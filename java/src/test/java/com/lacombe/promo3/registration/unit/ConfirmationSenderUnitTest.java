@@ -1,7 +1,9 @@
 package com.lacombe.promo3.registration.unit;
 
-import com.lacombe.promo3.registration.ConfirmationSender;
+import com.lacombe.promo3.communication.EmailSender;
 import com.lacombe.promo3.communication.repository.ConfirmationRepository;
+import com.lacombe.promo3.registration.CandidateConfirmationChecker;
+import com.lacombe.promo3.registration.ConfirmationSender;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -14,15 +16,47 @@ import static org.mockito.Mockito.verify;
 public class ConfirmationSenderUnitTest {
 
     @Mock
+    private EmailSender emailSender;
+
+    @Mock
+    private CandidateConfirmationChecker candidateConfirmationChecker;
+
+    @Mock
     private ConfirmationRepository confirmationRepository;
 
     @Test
-    public void should_get_confirmations_email_list() throws Exception {
+    public void should_call_get_candidate_list() throws Exception {
         //ARRANGE
-        ConfirmationSender confirmationSender = new ConfirmationSender(confirmationRepository);
+        ConfirmationSender confirmationSender = new ConfirmationSender(candidateConfirmationChecker);
+        //ACT
+        confirmationSender.execute();
+        //ASSERT
+        verify(candidateConfirmationChecker, times(1)).getCandidates();
+    }
+
+    /*
+    @Ignore
+    @Test
+    public void should_send_an_email() throws Exception {
+        // ARRANGE
+        ConfirmationSender confirmationSender = new ConfirmationSender(confirmationRepository, candidateConfirmationChecker);
+        // ACT
+        confirmationSender.execute();
+        // ASSERT
+        verify(emailSender, times(1)).send();
+    }
+
+    /* TODO Dans le checker */
+    /*
+    @Ignore
+    @Test
+    public void should_call_get_confirmations_email_list() throws Exception {
+        //ARRANGE
+        ConfirmationSender confirmationSender = new ConfirmationSender(confirmationRepository, candidateConfirmationChecker);
         //ACT
         confirmationSender.execute();
         //ASSERT
         verify(confirmationRepository, times(1)).getEmails();
     }
+    */
 }

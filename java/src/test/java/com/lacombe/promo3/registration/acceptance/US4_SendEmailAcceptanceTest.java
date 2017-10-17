@@ -32,13 +32,13 @@ public class US4_SendEmailAcceptanceTest {
                 CandidateRepositoryInMemory.withExisting(LUCAS_CANDIDATE, JULIE_CANDIDATE);
         ConfirmationRepository confirmationRepository = new ConfirmationRepositoryInMemory();
 
-        EmailSender emailSender = new EmailSenderLoggedInConsole();
+        EmailSenderLogged emailSenderLogged = new EmailSenderLoggedInConsole();
 
         CandidateConfirmationChecker candidateConfirmationChecker = new CandidateConfirmationChecker(defaultCandidateRepository);
 
         ConfirmationSender confirmationSender = new ConfirmationSender(confirmationRepository,
                                                                         candidateConfirmationChecker,
-                                                                        emailSender);
+                                                                        emailSenderLogged);
 
         // WHEN
         confirmationSender.execute();
@@ -49,9 +49,9 @@ public class US4_SendEmailAcceptanceTest {
                                     .withObject("Confirmation")
                                     .withCore("Hello, please confirm or pay.")
                                     .build();
-        Assertions.assertThat(((EmailSenderLogged)emailSender).getMessage())
+        Assertions.assertThat(emailSenderLogged.getMessage())
                 .isEqualTo(messageLucas);
-        Assertions.assertThat(((EmailSenderLogged)emailSender).printLog())
+        Assertions.assertThat(emailSenderLogged.printLog())
                 .isEqualTo("Email sent to : " + LUCAS_CANDIDATE);
     }
 }

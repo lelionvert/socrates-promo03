@@ -6,16 +6,19 @@ import com.lacombe.promo3.communication.repository.ConfirmationRepository;
 public class ConfirmationSender {
 
     private ConfirmationRepository confirmationRepository;
+    private CandidateConfirmationChecker candidateConfirmationChecker;
 
     public ConfirmationSender(ConfirmationRepository confirmationRepository,
-                              CandidateConfirmationChecker candidateCofirmationChecker, EmailSender emailSender) {
+                              CandidateConfirmationChecker candidateConfirmationChecker, EmailSender emailSender) {
+        this.confirmationRepository = confirmationRepository;
+        this.candidateConfirmationChecker = candidateConfirmationChecker;
     }
 
-    public ConfirmationSender(ConfirmationRepository confirmationRepository) {
-        this.confirmationRepository = confirmationRepository;
+    public ConfirmationSender(CandidateConfirmationChecker candidateConfirmationChecker) {
+        this.candidateConfirmationChecker = candidateConfirmationChecker;
     }
 
     public void execute() {
-        confirmationRepository.getEmails();
+        candidateConfirmationChecker.getCandidates();
     }
 }

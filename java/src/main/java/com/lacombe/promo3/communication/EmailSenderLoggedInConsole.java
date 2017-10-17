@@ -11,4 +11,9 @@ public class EmailSenderLoggedInConsole implements EmailSenderLogged {
     public EmailMessage getMessage() {
         return null;
     }
+
+    @Override
+    public void send() {
+
+    }
 }

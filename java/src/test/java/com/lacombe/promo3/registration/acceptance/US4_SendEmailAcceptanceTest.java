@@ -1,14 +1,13 @@
 package com.lacombe.promo3.registration.acceptance;
 
 import com.lacombe.promo3.communication.EmailMessage;
-import com.lacombe.promo3.communication.EmailSender;
 import com.lacombe.promo3.communication.EmailSenderLoggedInConsole;
 import com.lacombe.promo3.registration.CandidateConfirmationChecker;
 import com.lacombe.promo3.registration.ConfirmationSender;
 import com.lacombe.promo3.communication.EmailSenderLogged;
 import com.lacombe.promo3.shared.model.Candidate;
 import com.lacombe.promo3.shared.model.Email;
-import com.lacombe.promo3.communication.repository.ConfirmationRepository;
+import com.lacombe.promo3.communication.repository.ConfirmationRepositoryWriter;
 import com.lacombe.promo3.shared.repository.CandidateRepositoryInMemory;
 import com.lacombe.promo3.communication.repository.ConfirmationRepositoryInMemory;
 import org.assertj.core.api.Assertions;
@@ -30,7 +29,7 @@ public class US4_SendEmailAcceptanceTest {
         // GIVEN
         CandidateRepositoryInMemory defaultCandidateRepository =
                 CandidateRepositoryInMemory.withExisting(LUCAS_CANDIDATE, JULIE_CANDIDATE);
-        ConfirmationRepository confirmationRepository = new ConfirmationRepositoryInMemory();
+        ConfirmationRepositoryWriter confirmationRepository = new ConfirmationRepositoryInMemory();
 
         EmailSenderLogged emailSenderLogged = new EmailSenderLoggedInConsole();
 

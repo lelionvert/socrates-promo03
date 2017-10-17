@@ -1,11 +1,11 @@
 package com.lacombe.promo3.communication.repository;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import com.lacombe.promo3.shared.model.Email;
 
-public class ConfirmationRepositoryInMemory implements ConfirmationRepository {
+public class ConfirmationRepositoryInMemory implements ConfirmationRepositoryWriter {
 
     @Override
-    public void getEmails() {
-        throw new NotImplementedException();
+    public void add(Email email) {
+
     }
 }

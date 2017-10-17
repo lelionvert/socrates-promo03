@@ -39,4 +39,9 @@ class CheckIn {
                 && checkInDate.isBefore(LocalDateTime.of(2017, Month.OCTOBER, 28, 0, 0, 0, 0));
     }
 
+    public boolean isBetween(LocalDateTime begin, LocalDateTime end) {
+       return checkInDate != null
+                && checkInDate.isAfter(begin)
+                && checkInDate.isBefore(end);
+    }
 }

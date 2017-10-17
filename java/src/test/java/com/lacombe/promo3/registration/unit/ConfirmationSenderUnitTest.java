@@ -46,16 +46,17 @@ public class ConfirmationSenderUnitTest {
                 , emailSender);
 
         when(candidateConfirmationChecker.getCandidates()).thenReturn(Collections.emptyList());
-        when(emailSender.sendTo(Matchers.any())).thenReturn(
-                new EmailsStatus(
-                    new ArrayList<Email>() {{
-                        add(SABINE_EMAIL);
-                    }})
-        );
     }
 
     @Test
-    public void should_send_one_confirmation_email_when_no_confirmation_email_are_sent() throws Exception {
+    public void should_send_one_confirmation_email_when_no_confirmations_emails_are_sent() throws Exception {
+        when(emailSender.sendTo(Matchers.any())).thenReturn(
+                new EmailsStatus(
+                        new ArrayList<Email>() {{
+                            add(SABINE_EMAIL);
+                        }})
+        );
+
         confirmationSender.execute();
 
         verify(candidateConfirmationChecker, times(1)).getCandidates();
@@ -63,7 +64,22 @@ public class ConfirmationSenderUnitTest {
         verify(confirmationRepositoryWriter, times(1)).add(any(Email.class));
     }
 
+    @Test
+    public void should_send_many_confirmations_emails_when_no_confirmations_emails_are_sent() throws Exception {
+        when(emailSender.sendTo(Matchers.any())).thenReturn(
+                new EmailsStatus(
+                        new ArrayList<Email>() {{
+                            add(SABINE_EMAIL);
+                            add(CYRIL_EMAIL);
+                        }})
+        );
 
+        confirmationSender.execute();
+
+        verify(candidateConfirmationChecker, times(1)).getCandidates();
+        verify(emailSender, times(1)).sendTo(any(Collection.class));
+        verify(confirmationRepositoryWriter, times(2)).add(any(Email.class));
+    }
 
     /* TODO Dans le checker */
     /*

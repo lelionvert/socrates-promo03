@@ -3,7 +3,6 @@ package com.lacombe.promo3;
 import com.lacombe.promo3.registration.model.Email;
 
 import java.time.LocalDateTime;
-import java.time.Month;
 
 class CheckIn {
     private final Email email;
@@ -20,10 +19,6 @@ class CheckIn {
 
     static CheckIn of(Email email) {
         return new CheckIn(email);
-    }
-
-    static CheckIn of(Email email, LocalDateTime checkInDate) {
-        return new CheckIn(email, checkInDate);
     }
 
     void setCheckInDate(LocalDateTime checkInDate) {

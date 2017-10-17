@@ -4,9 +4,6 @@ import com.lacombe.promo3.registration.model.Email;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.time.LocalDateTime;
-import java.time.Month;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CheckInTest {

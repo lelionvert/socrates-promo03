@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class InMemoryCheckInProvider implements CheckInProvider {
-    private Collection<CheckIn> checkIns;
+    private final Collection<CheckIn> checkIns;
 
     private InMemoryCheckInProvider(Collection<CheckIn> checkIns) {
         this.checkIns = checkIns;

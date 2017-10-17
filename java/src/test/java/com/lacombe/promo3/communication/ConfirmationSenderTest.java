@@ -2,11 +2,8 @@ package com.lacombe.promo3.communication;
 
 import com.lacombe.promo3.registration.model.Email;
 import com.lacombe.promo3.registration.repository.CandidateRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -20,8 +17,10 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class ConfirmationSenderTest {
 
-    public static final Email SABINE_EMAIL_ADDRESS = Email.of("sabine@lcdlv.fr");
-    public static final Email MELODY_EMAIL_ADDRESS = Email.of("melody@lcdlv.fr");
+    private static final Email SABINE_EMAIL_ADDRESS = Email.of("sabine@lcdlv.fr");
+    private static final Email MELODY_EMAIL_ADDRESS = Email.of("melody@lcdlv.fr");
+    private static final String HOUSSAM_EMAIL_ADDRESS = "houssam@lcdlv.fr";
+
     @Mock
     CandidateRepository candidateRepository;
 
@@ -41,10 +40,10 @@ public class ConfirmationSenderTest {
         confirmationSender.send();
 
         final Message expectedMessage = Message.MessageBuilder.aMessage()
-            .withSender("houssam@lcdlv.fr")
+            .withSender(HOUSSAM_EMAIL_ADDRESS)
             .withRecipient(SABINE_EMAIL_ADDRESS)
             .withObject("Confirmation")
-            .withBody("Hello Sabine,\n Can you confirm me that you are coming at Socrates?\n Regards,\n Houssam Fakih")
+            .withBody("Hello,\n Can you confirm me that you are coming at Socrates?\n Regards,\n Houssam Fakih")
             .build();
 
         //THEN
@@ -63,23 +62,25 @@ public class ConfirmationSenderTest {
         confirmationSender.send();
 
         final Message expectedMessageForSabineCandidate = Message.MessageBuilder.aMessage()
-            .withSender("houssam@lcdlv.fr")
+            .withSender(HOUSSAM_EMAIL_ADDRESS)
             .withRecipient(SABINE_EMAIL_ADDRESS)
             .withObject("Confirmation")
-            .withBody("Hello Sabine,\n Can you confirm me that you are coming at Socrates?\n Regards,\n Houssam Fakih")
+            .withBody("Hello,\n Can you confirm me that you are coming at Socrates?\n Regards,\n Houssam Fakih")
             .build();
 
         final Message expectedMessageForMelodyCandidate = Message.MessageBuilder.aMessage()
-            .withSender("houssam@lcdlv.fr")
+            .withSender(HOUSSAM_EMAIL_ADDRESS)
             .withRecipient(MELODY_EMAIL_ADDRESS)
             .withObject("Confirmation")
-            .withBody("Hello Melody,\n Can you confirm me that you are coming at Socrates?\n Regards,\n Houssam Fakih")
+            .withBody("Hello,\n Can you confirm me that you are coming at Socrates?\n Regards,\n Houssam Fakih")
             .build();
 
         //THEN
         Mockito.verify(candidateRepository, times(1)).getEmails();
-        Mockito.verify(emailSender, times(1)).send(expectedMessageForSabineCandidate);
-        Mockito.verify(logger, times(1)).log(SABINE_EMAIL_ADDRESS);
+        Mockito.verify(emailSender, Mockito.atLeastOnce()).send(expectedMessageForSabineCandidate);
+        Mockito.verify(emailSender, Mockito.atLeastOnce()).send(expectedMessageForMelodyCandidate);
+        Mockito.verify(logger, Mockito.atLeastOnce()).log(SABINE_EMAIL_ADDRESS);
+        Mockito.verify(logger, Mockito.atLeastOnce()).log(MELODY_EMAIL_ADDRESS);
     }
 
 }

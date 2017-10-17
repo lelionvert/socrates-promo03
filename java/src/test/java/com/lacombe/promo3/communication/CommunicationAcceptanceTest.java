@@ -23,13 +23,13 @@ public class CommunicationAcceptanceTest {
         confirmationSender.send();
 
         //then
-        Assertions.assertThat(defaultLogger.print()).isEqualTo("Un email a bien été envoyé à sabine@lcdlv.fr");
-        Assertions.assertThat(defaultEmailSender.getEmailsSent()).hasSize(1)
+        Assertions.assertThat(defaultLogger.print()).isEqualTo("An email was sent to Email{email='sabine@lcdlv.fr'}");
+        Assertions.assertThat(defaultEmailSender.getMessagesSent()).hasSize(1)
             .contains(Message.MessageBuilder.aMessage()
                 .withSender("houssam@lcdlv.fr")
                 .withRecipient(Email.of("sabine@lcdlv.fr"))
                 .withObject("Confirmation")
-                .withBody("Hello Sabine,\n Can you confirm me that you are coming at Socrates?\n Regards,\n Houssam Fakih")
+                .withBody("Hello,\n Can you confirm me that you are coming at Socrates?\n Regards,\n Houssam Fakih")
                 .build());
     }
 }

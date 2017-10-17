@@ -21,13 +21,18 @@ public class ConfirmationSender {
 
     public void send() {
         final Collection<Email> emails = candidateRepository.getEmails();
+
         for (Email email : emails) {
+
             final Message message = MessageBuilder.aMessage()
                 .withSender("houssam@lcdlv.fr")
                 .withRecipient(email)
-                .withBody("Hello Sabine,\n Can you confirm me that you are coming at Socrates?\n Regards,\n Houssam Fakih")
-                .withObject("Confirmation").build();
+                .withBody("Hello,\n Can you confirm me that you are coming at Socrates?\n Regards,\n Houssam Fakih")
+                .withObject("Confirmation")
+                .build();
+
             emailSender.send(message);
+
             logger.log(email);
         }
     }

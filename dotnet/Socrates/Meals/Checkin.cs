@@ -7,7 +7,7 @@ namespace Socrates.Meals
     {
         private Email email;
         private DateTime participantCheckinDate;
-        private DateTime maximumCheckinDate = new DateTime(2017, 10, 27, 21, 00, 00);
+    
 
         public Checkin(Email email, DateTime participantCheckinDate)
         {
@@ -15,9 +15,15 @@ namespace Socrates.Meals
             this.participantCheckinDate = participantCheckinDate;
         }
 
-        public bool IsLate()
+        public bool IsAfter(DateTime startingDate)
         {
-            return participantCheckinDate > maximumCheckinDate;
+            return participantCheckinDate > startingDate;
+        }
+
+        public bool IsBefore(DateTime endingDate)
+        {
+           return participantCheckinDate < endingDate;
+           
         }
     }
 }

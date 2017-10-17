@@ -4,8 +4,8 @@ namespace Socrates.Meals
 {
     public class CheckinProvider : ICheckinProvider
     {
-        private IList<Checkin> participantCheckin = new List<Checkin>();
-            
+        private readonly IList<Checkin> participantCheckin = new List<Checkin>();
+
         public CheckinProvider(params Checkin[] checkins)
         {
             foreach (var checkin in checkins)
@@ -14,19 +14,9 @@ namespace Socrates.Meals
             }
         }
 
-        public int CountLateCheckin()
+        public IList<Checkin> GetCheckins()
         {
-            int lateCheckinNumber = 0;
-
-            foreach(var checkin in participantCheckin)
-            {
-                if (checkin.IsLate())
-                {
-                    lateCheckinNumber++;
-                }
-            }
-
-            return lateCheckinNumber;
+            return new List<Checkin>(participantCheckin);
         }
     }
 }

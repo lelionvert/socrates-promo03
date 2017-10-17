@@ -23,7 +23,7 @@ namespace Socrates.Test.Meals
         }
 
         [Test]
-        public void CountColdMeals_Should_Return_Zero_Cold_Meals_When_Participants_Checkin_Before_21h()
+        public void CountColdMeals_Should_Return_Zero_Cold_Meals_When_Participants_Checkin_Before_21h_And_Before_Midnight()
         {
             // SETUP
             var participantCheckinDate = new DateTime(2017, 10, 27, 16, 30, 00);
@@ -39,7 +39,7 @@ namespace Socrates.Test.Meals
         }
 
         [Test]
-        public void CountColdMeals_Should_Return_One_Cold_Meal_When_Participants_Checkin_After_21h()
+        public void CountColdMeals_Should_Return_One_Cold_Meal_When_Participants_Checkin_After_21h_And_Before_Midnight()
         {
             // SETUP
             var participantCheckinDate = new DateTime(2017, 10, 27, 21, 30, 00);
@@ -54,7 +54,7 @@ namespace Socrates.Test.Meals
             Check.That(coldMealsNumber).IsEqualTo(1);
         }
         [Test]
-        public void CountColdMeals_Should_Return_Three_Cold_Meal_When_Participants_Checkin_After_21h()
+        public void CountColdMeals_Should_Return_Two_Cold_Meal_When_Participants_Checkin_After_21h_And_Before_Midnight()
         {
             // SETUP
             var firstParticipantCheckinDate = new DateTime(2017, 10, 27, 21, 30, 00);
@@ -72,7 +72,7 @@ namespace Socrates.Test.Meals
             var coldMealsNumber = coldMealsCounter.CountColdMeals();
 
             // ASSERT
-            Check.That(coldMealsNumber).IsEqualTo(3);
+            Check.That(coldMealsNumber).IsEqualTo(2);
         }
     }
 }

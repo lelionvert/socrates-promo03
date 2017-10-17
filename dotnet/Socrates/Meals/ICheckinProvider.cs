@@ -1,7 +1,9 @@
-﻿namespace Socrates.Meals
+﻿using System.Collections.Generic;
+
+namespace Socrates.Meals
 {
     public interface ICheckinProvider
     {
-        int CountLateCheckin();
+        IList<Checkin> GetCheckins();
     }
 }

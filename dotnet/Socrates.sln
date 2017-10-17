@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socrates", "Socrates\Socrat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socrates.Test", "Socrates.Test\Socrates.Test.csproj", "{064019A4-9710-47F4-9943-1AAABF8D5ED5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socrates.Console.ColdMeals", "Socrates.Console.ColdMeals\Socrates.Console.ColdMeals.csproj", "{F9EAFD07-6C7B-4BDF-B0FA-9F133705465C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{064019A4-9710-47F4-9943-1AAABF8D5ED5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{064019A4-9710-47F4-9943-1AAABF8D5ED5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{064019A4-9710-47F4-9943-1AAABF8D5ED5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9EAFD07-6C7B-4BDF-B0FA-9F133705465C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9EAFD07-6C7B-4BDF-B0FA-9F133705465C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9EAFD07-6C7B-4BDF-B0FA-9F133705465C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9EAFD07-6C7B-4BDF-B0FA-9F133705465C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

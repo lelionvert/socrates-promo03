@@ -18,32 +18,21 @@ class CheckIn {
         this.checkInDate = checkInDate;
     }
 
-
+    static CheckIn of(Email email) {
+        return new CheckIn(email);
+    }
 
     static CheckIn of(Email email, LocalDateTime checkInDate) {
         return new CheckIn(email, checkInDate);
     }
 
-    static CheckIn of(Email email) {
-        return new CheckIn(email);
-    }
-
-
     void setCheckInDate(LocalDateTime checkInDate) {
         this.checkInDate = checkInDate;
     }
 
-    boolean isLate() {
-        return checkInDate != null
-                && checkInDate.isAfter(LocalDateTime.of(2017, Month.OCTOBER, 27, 21, 0, 0,0))
-                && checkInDate.isBefore(LocalDateTime.of(2017, Month.OCTOBER, 28, 0, 0, 0, 0));
-    }
-
-    public boolean isBetween(LocalDateTime begin, LocalDateTime end) {
+    boolean isBetween(LocalDateTime begin, LocalDateTime end) {
        return checkInDate != null
                 && checkInDate.isAfter(begin)
                 && checkInDate.isBefore(end);
     }
-
-
 }

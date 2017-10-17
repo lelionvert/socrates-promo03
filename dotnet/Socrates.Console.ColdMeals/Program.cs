@@ -15,9 +15,15 @@ namespace Socrates.Consoles.ColdMeals
 
             do
             {
-                Console.WriteLine(" 1  - Ajouter les données lié aux participants");
-                Console.WriteLine(" 2  - Afficher le nombre de repas froid");
-                Console.WriteLine(" 0  - Quitter le programme \n");
+                Console.WriteLine("************************************************");
+                Console.WriteLine("**              SOCRATES FR                   **");
+                Console.WriteLine("************************************************");
+                Console.WriteLine("**                                            **");
+                Console.WriteLine("** 1 - Ajouter des participants               **");
+                Console.WriteLine("** 2 - Afficher le nombre de repas froid      **");
+                Console.WriteLine("** 0 - Quitter                                **");
+                Console.WriteLine("**                                            **");
+                Console.WriteLine("************************************************");
 
                 string saisie = Console.ReadLine();
 
@@ -36,14 +42,18 @@ namespace Socrates.Consoles.ColdMeals
 
         private static void ShowColdMealsNumber()
         {
+            Console.WriteLine("\n");
             Console.WriteLine($"{coldMealsCounter.CountColdMeals()} repas froid");
+            Console.WriteLine("\n\n\n");
         }
 
         private static void AddCheckin()
         {
+            Console.WriteLine("\n");
+
             var checkins = new List<Checkin>();
 
-            var participantNumber = 0;
+            var participantNumber = 1;
             var addNewParticipantCheckin = false;
             do
             {
@@ -107,6 +117,8 @@ namespace Socrates.Consoles.ColdMeals
             var checkinProvider = new CheckinProvider(checkins.ToArray());
 
             coldMealsCounter = new ColdMealsCounter(checkinProvider);
+
+            Console.WriteLine("\n\n\n");
         }
     }
 }

@@ -1,37 +1,50 @@
 
 package com.lacombe.promo3;
 
-import org.assertj.core.api.Assertions;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Collections;
 
-import static org.mockito.Mockito.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ColdMealsCounterTest {
 
 
+    @Mock
+    private CheckInProvider checkInProvider;
+    @Mock
+    private CheckIn checkIn;
+
+    private ColdMealsCounter counter;
+
+    @Before
+    public void setUp() throws Exception {
+        counter = new ColdMealsCounter(checkInProvider);
+    }
+
     @Test
-    public void should_call_method_countLateCheckIns_when_count_cold_meals() throws Exception {
+    public void should_have_zero_cold_meal_when_there_is_no_check_in() throws Exception {
         //Arrange
-        CheckInProvider checkInProvider = mock(CheckInProvider.class);
-        ColdMealsCounter counter = new ColdMealsCounter(checkInProvider);
         when(checkInProvider.getCheckIns()).thenReturn(Collections.emptyList());
 
         //Act
         int nbColdMeals = counter.count();
 
         //Assert
-        Assertions.assertThat(nbColdMeals).isEqualTo(0);
         verify(checkInProvider).getCheckIns();
+        assertThat(nbColdMeals).isEqualTo(0);
     }
 
     @Test
-    public void should_have_one_cold_meals_when_there_is_one_late_check_in() throws Exception {
+    public void should_have_one_cold_meal_when_there_is_one_late_check_in() throws Exception {
         //Arrange
-        CheckInProvider checkInProvider = mock(CheckInProvider.class);
-        CheckIn checkIn = mock(CheckIn.class);
-        ColdMealsCounter counter = new ColdMealsCounter(checkInProvider);
         when(checkIn.isBetween(ColdMealsCounter.BEGIN_COLD_MEALS_DATE,
                 ColdMealsCounter.END_COLD_MEALS_DATE)).thenReturn(true);
         when(checkInProvider.getCheckIns()).thenReturn(Collections.singletonList(checkIn));
@@ -41,6 +54,6 @@ public class ColdMealsCounterTest {
 
         //Assert
         verify(checkIn).isBetween(ColdMealsCounter.BEGIN_COLD_MEALS_DATE, ColdMealsCounter.END_COLD_MEALS_DATE);
-        Assertions.assertThat(nbColdMeals).isEqualTo(1);
+        assertThat(nbColdMeals).isEqualTo(1);
     }
 }

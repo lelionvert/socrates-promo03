@@ -44,4 +44,6 @@ class CheckIn {
                 && checkInDate.isAfter(begin)
                 && checkInDate.isBefore(end);
     }
+
+
 }

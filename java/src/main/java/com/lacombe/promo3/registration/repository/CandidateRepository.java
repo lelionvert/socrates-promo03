@@ -12,4 +12,6 @@ public interface CandidateRepository {
     boolean hasAlready(Candidate candidate);
 
     Collection<Email> getEmails();
+
+    Collection<Candidate> getCandidates();
 }

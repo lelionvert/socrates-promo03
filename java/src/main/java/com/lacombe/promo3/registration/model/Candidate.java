@@ -4,12 +4,19 @@ public class Candidate {
 
     private final Email email;
 
-    public Candidate(Email email) {
+    private final String firstName;
+
+    public Candidate(Email email, String firstName) {
         this.email = email;
+        this.firstName = firstName;
     }
 
     public Email getEmail() {
         return email;
+    }
+
+    public String getFirstName() {
+        return firstName;
     }
 
     @Override

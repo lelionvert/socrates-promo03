@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class InMemoryCheckInProvider implements CheckInProvider {
-
-
     private Collection<CheckIn> checkIns;
 
     private InMemoryCheckInProvider(Collection<CheckIn> checkIns) {
@@ -17,20 +15,8 @@ public class InMemoryCheckInProvider implements CheckInProvider {
         return new InMemoryCheckInProvider(Arrays.asList(checkIns));
     }
 
-
     @Override
     public Collection<CheckIn> getCheckIns() {
         return Collections.unmodifiableCollection(checkIns);
-    }
-
-    @Override
-    public int countLateCheckIns() {
-        int nbLateCheckIns = 0;
-        for (CheckIn checkIn : checkIns) {
-            if (checkIn.isLate()) {
-                nbLateCheckIns += 1;
-            }
-        }
-        return nbLateCheckIns;
     }
 }

@@ -27,6 +27,11 @@ public class SpyCandidateRepository implements CandidateRepository {
         return null;
     }
 
+    @Override
+    public Collection<Candidate> getCandidates() {
+        return null;
+    }
+
     public int countHowManyTimesMethodHasAlreadyBeenCalled() {
         return numberOfTimesMethodHasAlreadyCalled;
     }

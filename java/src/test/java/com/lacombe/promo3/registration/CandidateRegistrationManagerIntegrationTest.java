@@ -17,10 +17,10 @@ public class CandidateRegistrationManagerIntegrationTest {
     private static final Email CYRIL_EMAIL = Email.of("cyril@lcdlv.fr");
     private static final Email ISMAEL_EMAIL = Email.of("ismael@lcdlv.fr");
 
-    private static final Candidate SABINE_CANDIDATE = new Candidate(SABINE_EMAIL);
-    private static final Candidate CYRIL_CANDIDATE = new Candidate(CYRIL_EMAIL);
-    private static final Candidate ISMAEL_CANDIDATE = new Candidate(ISMAEL_EMAIL);
-    private static final Candidate MELODY_CANDIDATE = new Candidate(MELODY_EMAIL);
+    private static final Candidate SABINE_CANDIDATE = new Candidate(SABINE_EMAIL, "Sabine");
+    private static final Candidate CYRIL_CANDIDATE = new Candidate(CYRIL_EMAIL, "Cyril");
+    private static final Candidate ISMAEL_CANDIDATE = new Candidate(ISMAEL_EMAIL, "Ismael");
+    private static final Candidate MELODY_CANDIDATE = new Candidate(MELODY_EMAIL, "Melody");
 
     private CandidateRegistrationManager candidateRegistrationManager;
     private CandidateRegistrationManager candidateRegistrationManagerWithExistingCandidates;

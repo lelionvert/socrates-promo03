@@ -1,11 +1,7 @@
 package com.lacombe.promo3.communication;
 
-import com.lacombe.promo3.registration.model.Email;
+import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.repository.CandidateRepository;
-
-import java.util.Collection;
-
-import static com.lacombe.promo3.communication.Message.*;
 
 public class ConfirmationSender {
 
@@ -20,20 +16,13 @@ public class ConfirmationSender {
     }
 
     public void send() {
-        final Collection<Email> emails = candidateRepository.getEmails();
 
-        for (Email email : emails) {
+        for (Candidate candidate : candidateRepository.getCandidates()) {
 
-            final Message message = MessageBuilder.aMessage()
-                .withSender("houssam@lcdlv.fr")
-                .withRecipient(email)
-                .withBody("Hello,\n Can you confirm me that you are coming at Socrates?\n Regards,\n Houssam Fakih")
-                .withObject("Confirmation")
-                .build();
+            emailSender.send(MessageTemplate.createMessage(candidate));
 
-            emailSender.send(message);
-
-            logger.log(email);
+            logger.log(candidate.getEmail());
         }
     }
+
 }

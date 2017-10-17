@@ -9,27 +9,25 @@ import org.junit.Test;
 public class CommunicationAcceptanceTest {
 
 
+    private static final Email SABINE_EMAIL = Email.of("sabine@lcdlv.fr");
+    private static final String SABINE = "Sabine";
+    private static final String MESSAGE_LOGGED_WHEN_SENT = "An email was sent to Email{email='sabine@lcdlv.fr'}";
 
     @Test
     public void should_send_email_to_one_candidate() throws Exception {
-        //given
-        final Candidate sabineCandidate = new Candidate(Email.of("sabine@lcdlv.fr"));
+        //GIVEN
+        final Candidate sabineCandidate = new Candidate(SABINE_EMAIL, SABINE);
         final DefaultCandidateRepository defaultCandidateRepository = DefaultCandidateRepository.withExisting(sabineCandidate);
         final DefaultEmailSender defaultEmailSender = new DefaultEmailSender();
         final DefaultLogger defaultLogger = new DefaultLogger();
         ConfirmationSender confirmationSender = new ConfirmationSender(defaultCandidateRepository, defaultEmailSender, defaultLogger);
 
-        //when
+        //WHEN
         confirmationSender.send();
 
-        //then
-        Assertions.assertThat(defaultLogger.print()).isEqualTo("An email was sent to Email{email='sabine@lcdlv.fr'}");
+        //THEN
+        Assertions.assertThat(defaultLogger.print()).isEqualTo(MESSAGE_LOGGED_WHEN_SENT);
         Assertions.assertThat(defaultEmailSender.getMessagesSent()).hasSize(1)
-            .contains(Message.MessageBuilder.aMessage()
-                .withSender("houssam@lcdlv.fr")
-                .withRecipient(Email.of("sabine@lcdlv.fr"))
-                .withObject("Confirmation")
-                .withBody("Hello,\n Can you confirm me that you are coming at Socrates?\n Regards,\n Houssam Fakih")
-                .build());
+            .contains(MessageTemplate.createMessage(sabineCandidate));
     }
 }

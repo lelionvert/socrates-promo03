@@ -1,5 +1,6 @@
 package com.lacombe.promo3.communication;
 
+import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
 import com.lacombe.promo3.registration.repository.CandidateRepository;
 import org.junit.Test;
@@ -18,8 +19,9 @@ import static org.mockito.Mockito.when;
 public class ConfirmationSenderTest {
 
     private static final Email SABINE_EMAIL_ADDRESS = Email.of("sabine@lcdlv.fr");
+    private static final Candidate SABINE_CANDIDATE = new Candidate(SABINE_EMAIL_ADDRESS, "Sabine");
     private static final Email MELODY_EMAIL_ADDRESS = Email.of("melody@lcdlv.fr");
-    private static final String HOUSSAM_EMAIL_ADDRESS = "houssam@lcdlv.fr";
+    private static final Candidate MELODY_CANDIDATE = new Candidate(MELODY_EMAIL_ADDRESS, "Melody");
 
     @Mock
     CandidateRepository candidateRepository;
@@ -34,21 +36,14 @@ public class ConfirmationSenderTest {
     public void should_send_email_to_one_candidate() {
         //GIVEN
         ConfirmationSender confirmationSender = new ConfirmationSender(candidateRepository, emailSender, logger);
-        when(candidateRepository.getEmails()).thenReturn(Arrays.asList(SABINE_EMAIL_ADDRESS));
+        when(candidateRepository.getCandidates()).thenReturn(Arrays.asList(SABINE_CANDIDATE));
 
         //WHEN
         confirmationSender.send();
 
-        final Message expectedMessage = Message.MessageBuilder.aMessage()
-            .withSender(HOUSSAM_EMAIL_ADDRESS)
-            .withRecipient(SABINE_EMAIL_ADDRESS)
-            .withObject("Confirmation")
-            .withBody("Hello,\n Can you confirm me that you are coming at Socrates?\n Regards,\n Houssam Fakih")
-            .build();
-
         //THEN
-        Mockito.verify(candidateRepository, times(1)).getEmails();
-        Mockito.verify(emailSender, times(1)).send(expectedMessage);
+        Mockito.verify(candidateRepository, times(1)).getCandidates();
+        Mockito.verify(emailSender, times(1)).send(MessageTemplate.createMessage(SABINE_CANDIDATE));
         Mockito.verify(logger, times(1)).log(SABINE_EMAIL_ADDRESS);
     }
 
@@ -56,29 +51,15 @@ public class ConfirmationSenderTest {
     public void should_send_email_to_two_candidates() {
         //GIVEN
         ConfirmationSender confirmationSender = new ConfirmationSender(candidateRepository, emailSender, logger);
-        when(candidateRepository.getEmails()).thenReturn(Arrays.asList(SABINE_EMAIL_ADDRESS, MELODY_EMAIL_ADDRESS));
+        when(candidateRepository.getCandidates()).thenReturn(Arrays.asList(SABINE_CANDIDATE, MELODY_CANDIDATE));
 
         //WHEN
         confirmationSender.send();
 
-        final Message expectedMessageForSabineCandidate = Message.MessageBuilder.aMessage()
-            .withSender(HOUSSAM_EMAIL_ADDRESS)
-            .withRecipient(SABINE_EMAIL_ADDRESS)
-            .withObject("Confirmation")
-            .withBody("Hello,\n Can you confirm me that you are coming at Socrates?\n Regards,\n Houssam Fakih")
-            .build();
-
-        final Message expectedMessageForMelodyCandidate = Message.MessageBuilder.aMessage()
-            .withSender(HOUSSAM_EMAIL_ADDRESS)
-            .withRecipient(MELODY_EMAIL_ADDRESS)
-            .withObject("Confirmation")
-            .withBody("Hello,\n Can you confirm me that you are coming at Socrates?\n Regards,\n Houssam Fakih")
-            .build();
-
         //THEN
-        Mockito.verify(candidateRepository, times(1)).getEmails();
-        Mockito.verify(emailSender, Mockito.atLeastOnce()).send(expectedMessageForSabineCandidate);
-        Mockito.verify(emailSender, Mockito.atLeastOnce()).send(expectedMessageForMelodyCandidate);
+        Mockito.verify(candidateRepository, times(1)).getCandidates();
+        Mockito.verify(emailSender, Mockito.atLeastOnce()).send(MessageTemplate.createMessage(SABINE_CANDIDATE));
+        Mockito.verify(emailSender, Mockito.atLeastOnce()).send(MessageTemplate.createMessage(MELODY_CANDIDATE));
         Mockito.verify(logger, Mockito.atLeastOnce()).log(SABINE_EMAIL_ADDRESS);
         Mockito.verify(logger, Mockito.atLeastOnce()).log(MELODY_EMAIL_ADDRESS);
     }

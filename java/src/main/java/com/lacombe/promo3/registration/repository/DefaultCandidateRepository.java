@@ -40,4 +40,9 @@ public class DefaultCandidateRepository implements CandidateRepository {
         }
         return Collections.unmodifiableCollection(emails);
     }
+
+    @Override
+    public Collection<Candidate> getCandidates() {
+        return Collections.unmodifiableCollection(candidates);
+    }
 }

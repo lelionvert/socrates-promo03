@@ -4,12 +4,12 @@ import com.lacombe.promo3.registration.model.Email;
 
 public class Message {
 
-    private String sender;
+    private Email sender;
     private Email recipient;
     private String object;
     private String body;
 
-    private Message(String sender, Email recipient, String object, String body) {
+    private Message(Email sender, Email recipient, String object, String body) {
         this.sender = sender;
         this.recipient = recipient;
         this.object = object;
@@ -17,7 +17,7 @@ public class Message {
     }
 
     public static final class MessageBuilder {
-        private String sender;
+        private Email sender;
         private Email recipient;
         private String object;
         private String body;
@@ -29,7 +29,7 @@ public class Message {
             return new MessageBuilder();
         }
 
-        public MessageBuilder withSender(String sender) {
+        public MessageBuilder withSender(Email sender) {
             this.sender = sender;
             return this;
         }

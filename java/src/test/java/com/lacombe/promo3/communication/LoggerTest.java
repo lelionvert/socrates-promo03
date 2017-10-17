@@ -6,8 +6,8 @@ import org.junit.Test;
 
 public class LoggerTest {
 
-    public static final Email CYRIL_EMAIL_ADDRESS = Email.of("cyril@lcdlv.fr");
-    public static final Email ISMAEL_EMAIL_ADDRESS = Email.of("ismael@lcdlv.fr");
+    private static final Email CYRIL_EMAIL_ADDRESS = Email.of("cyril@lcdlv.fr");
+    private static final Email ISMAEL_EMAIL_ADDRESS = Email.of("ismael@lcdlv.fr");
 
     @Test
     public void should_find_one_message_sent_in_the_log() {

@@ -1,4 +1,4 @@
-package com.lacombe.promo3;
+package com.lacombe.promo3.meals;
 
 import java.util.Collection;
 

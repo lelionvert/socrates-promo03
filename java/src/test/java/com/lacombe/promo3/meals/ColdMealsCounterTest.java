@@ -1,5 +1,5 @@
 
-package com.lacombe.promo3;
+package com.lacombe.promo3.meals;
 
 import org.junit.Before;
 import org.junit.Test;

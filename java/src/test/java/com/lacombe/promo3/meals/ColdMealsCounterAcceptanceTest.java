@@ -1,4 +1,4 @@
-package com.lacombe.promo3;
+package com.lacombe.promo3.meals;
 
 import com.lacombe.promo3.registration.model.Email;
 import org.assertj.core.api.Assertions;

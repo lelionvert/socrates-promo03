@@ -19,7 +19,7 @@ namespace Socrates.Meals
             var checkins = checkinProvider.GetCheckins();
             foreach (var checkin in checkins)
             {
-                if (checkin.IsAfter(startingDate) && checkin.IsBefore(endingDate))
+                if (checkin.IsBetween(startingDate,endingDate))
                     numberColdMeals++;
             }
             return numberColdMeals;

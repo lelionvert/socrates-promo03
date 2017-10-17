@@ -17,13 +17,14 @@ namespace Socrates.Meals
 
         public bool IsAfter(DateTime startingDate)
         {
-            return participantCheckinDate > startingDate;
+            return participantCheckinDate >= startingDate;
         }
 
-        public bool IsBefore(DateTime endingDate)
+       
+
+        public bool IsBetween(DateTime startingDate, DateTime endingDate)
         {
-           return participantCheckinDate < endingDate;
-           
+            return IsAfter(startingDate) && !IsAfter(endingDate);
         }
     }
 }

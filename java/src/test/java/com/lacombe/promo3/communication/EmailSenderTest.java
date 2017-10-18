@@ -4,6 +4,8 @@ import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
 import org.junit.Test;
 
+import java.util.Collection;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class EmailSenderTest {
@@ -30,7 +32,6 @@ public class EmailSenderTest {
     @Test
     public void should_add_valentin_message_to_a_list_of_emails_sent_with_already_one_message() {
         //GIVEN
-
         DefaultEmailSender defaultEmailSender = DefaultEmailSender.with(MessageTemplate.createMessage(CYRIL_CANDIDATE));
 
         //WHEN
@@ -40,5 +41,19 @@ public class EmailSenderTest {
         assertThat(defaultEmailSender.getMessagesSent())
             .hasSize(2)
             .containsExactlyInAnyOrder(MessageTemplate.createMessage(CYRIL_CANDIDATE), MessageTemplate.createMessage(VALENTIN_CANDIDATE));
+    }
+
+    @Test
+    public void should_retrieve_list_of_email_that_already_received_the_confirmation_message() {
+        //GIVEN
+        DefaultEmailSender defaultEmailSender = DefaultEmailSender.with(MessageTemplate.createMessage(CYRIL_CANDIDATE));
+
+        //WHEN
+        Collection<Email> emails = defaultEmailSender.getEmailsAlreadyUsedForConfirmationEmail();
+
+        //THEN
+        assertThat(emails)
+            .hasSize(1)
+            .containsExactlyInAnyOrder(CYRIL_EMAIL_ADDRESS);
     }
 }

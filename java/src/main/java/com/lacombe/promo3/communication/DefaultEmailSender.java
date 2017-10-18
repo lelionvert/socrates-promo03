@@ -1,9 +1,8 @@
 package com.lacombe.promo3.communication;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
+import com.lacombe.promo3.registration.model.Email;
+
+import java.util.*;
 
 public class DefaultEmailSender implements EmailSender {
 
@@ -30,5 +29,14 @@ public class DefaultEmailSender implements EmailSender {
     @Override
     public void send(Message message) {
         messagesSent.add(message);
+    }
+
+    @Override
+    public Collection<Email> getEmailsAlreadyUsedForConfirmationEmail() {
+        Collection<Email> emails = new ArrayList<>();
+        for(Message message : messagesSent) {
+            emails.add(message.getRecipient());
+        }
+        return emails;
     }
 }

@@ -54,6 +54,10 @@ public class Message {
         }
     }
 
+    public Email getRecipient() {
+        return recipient;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -1,7 +1,8 @@
-package com.lacombe.promo3.registration.repository;
+package com.lacombe.promo3.registration.repository.inmemory;
 
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
+import com.lacombe.promo3.registration.repository.CandidateRepository;
 
 import java.util.*;
 

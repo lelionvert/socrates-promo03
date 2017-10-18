@@ -4,8 +4,7 @@ import com.lacombe.promo3.registration.CandidateRegistrationManager;
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
 import com.lacombe.promo3.registration.repository.CandidateRepository;
-import com.lacombe.promo3.registration.repository.DBCandidateRepository;
-import com.lacombe.promo3.registration.repository.DefaultCandidateRepository;
+import com.lacombe.promo3.registration.repository.spring.DbCandidateRepository;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -54,7 +53,7 @@ public class Application {
 
     private static void initManager() {
         //CandidateRepository candidateRepository = new DefaultCandidateRepository();
-        CandidateRepository candidateRepository = new DBCandidateRepository();
+        CandidateRepository candidateRepository = new DbCandidateRepository();
         candidateRegistrationManager = new CandidateRegistrationManager(candidateRepository);
     }
 

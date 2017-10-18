@@ -2,6 +2,7 @@ package com.lacombe.promo3.registration.repository;
 
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.util.Collection;
 import java.util.Optional;

@@ -1,10 +1,10 @@
-package com.lacombe.promo3.registration.repository;
+package com.lacombe.promo3.registration.repository.spring;
 
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
+import com.lacombe.promo3.registration.repository.CandidateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.Collection;
@@ -12,8 +12,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public class DBCandidateRepository implements CandidateRepository {
+
+public class DbCandidateRepository implements CandidateRepository {
 
     private JdbcTemplate jdbcTemplate;
 

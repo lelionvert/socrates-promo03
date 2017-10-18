@@ -3,7 +3,6 @@ package com.lacombe.promo3.registration;
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
 import com.lacombe.promo3.registration.repository.CandidateRepository;
-import com.lacombe.promo3.registration.repository.DBCandidateRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;

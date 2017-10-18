@@ -28,6 +28,8 @@ public class ConfirmationSender {
 
     public void execute() {
         Collection<Candidate> candidates = candidateConfirmationChecker.getCandidates();
+        if(candidates.isEmpty())
+            return;
         EmailsStatus emailsStatus = emailSender.sendTo(candidates);
         saveConfirmationSent(emailsStatus);
     }

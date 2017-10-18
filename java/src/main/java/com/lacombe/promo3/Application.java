@@ -3,6 +3,8 @@ package com.lacombe.promo3;
 import com.lacombe.promo3.registration.CandidateRegistrationManager;
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
+import com.lacombe.promo3.registration.repository.CandidateRepository;
+import com.lacombe.promo3.registration.repository.DBCandidateRepository;
 import com.lacombe.promo3.registration.repository.DefaultCandidateRepository;
 
 import java.io.IOException;
@@ -51,21 +53,23 @@ public class Application {
     }
 
     private static void initManager() {
-        DefaultCandidateRepository defaultCandidateRepository = new DefaultCandidateRepository();
-        candidateRegistrationManager = new CandidateRegistrationManager(defaultCandidateRepository);
+        //CandidateRepository candidateRepository = new DefaultCandidateRepository();
+        CandidateRepository candidateRepository = new DBCandidateRepository();
+        candidateRegistrationManager = new CandidateRegistrationManager(candidateRepository);
     }
 
     private static void addCandidate() throws IOException {
         System.out.println(CANDIDATE_EMAIL_MESSAGE);
         String emailValue = scanner.nextLine();
         Email email;
-        try {
+
             email = Email.of(emailValue);
             Candidate candidate = new Candidate(email);
             candidateRegistrationManager.register(candidate);
             System.out.println(CANDIDATE_ADDED_MESSAGE);
+        try {
         } catch (Exception e) {
-            System.out.println(NOT_VALID_EMAIL_MESSAGE);
+            System.out.println(e+ "\n" + NOT_VALID_EMAIL_MESSAGE);
         }
     }
 

@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    username: learner
+    password: learn
+    driverClassName: org.postgresql.Driver
+    url:  jdbc:postgresql://postgres-lacombe.westeurope.cloudapp.azure.com:5432/playground-3?currentSchema=valmey

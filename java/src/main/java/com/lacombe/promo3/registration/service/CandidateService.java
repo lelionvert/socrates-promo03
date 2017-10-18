@@ -3,7 +3,10 @@ package com.lacombe.promo3.registration.service;
 import com.lacombe.promo3.registration.CandidateRegistrationManager;
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
+import com.lacombe.promo3.registration.repository.CandidateRepository;
+import com.lacombe.promo3.registration.repository.CandidateRepositoryDB;
 import com.lacombe.promo3.registration.repository.DefaultCandidateRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,10 +22,17 @@ public class CandidateService {
 
     private final CandidateRegistrationManager candidateRegistrationManager;
 
-    public CandidateService(){
-        DefaultCandidateRepository defaultCandidateRepository =
-                DefaultCandidateRepository.withExisting(LUCAS_CANDIDATE, JULIE_CANDIDATE);
-        candidateRegistrationManager = new CandidateRegistrationManager(defaultCandidateRepository);
+    // private CandidateRepository candidateRepository;
+
+    // public CandidateService(){
+        // DefaultCandidateRepository defaultCandidateRepository =
+        //         DefaultCandidateRepository.withExisting(LUCAS_CANDIDATE, JULIE_CANDIDATE);
+        // candidateRegistrationManager = new CandidateRegistrationManager(candidateRepository);
+     //   candidateRegistrationManager = new CandidateRegistrationManager();
+    // }
+
+    public CandidateService(CandidateRegistrationManager candidateRegistrationManager){
+        this.candidateRegistrationManager = candidateRegistrationManager;
     }
 
     public Collection<Email> getEmails(){
@@ -35,9 +45,9 @@ public class CandidateService {
         return byEmail;
     }
 
-    public Candidate add(Email email){
+    public Candidate add(String email){
         return new ArrayList<>(
-                candidateRegistrationManager.register(new Candidate(email)))
+                candidateRegistrationManager.register(new Candidate(Email.of(email))))
                 .get(0);
     }
 }

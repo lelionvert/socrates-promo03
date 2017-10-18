@@ -4,13 +4,18 @@ import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toSet;
 
 @Repository
 public class CandidateRepositoryDB implements CandidateRepository {
@@ -40,7 +45,8 @@ public class CandidateRepositoryDB implements CandidateRepository {
 
     @Override
     public void add(Candidate candidate) {
-
+        jdbcTemplate.update("INSERT INTO candidate(email) VALUES (?)"
+                , new Object[] {candidate.getEmail()});
     }
 
     @Override
@@ -50,11 +56,18 @@ public class CandidateRepositoryDB implements CandidateRepository {
 
     @Override
     public Collection<Email> getEmails() {
-        return null;
+        Collection<Candidate> candidates = findAll();
+        return candidates.stream().map(Candidate::getEmail).collect(toSet());
     }
 
     @Override
     public Candidate getByEmail(String email) {
-        return null;
+        String query = "SELECT * FROM candidate WHERE email = ?";
+        return jdbcTemplate.queryForObject(query, new Object[]{email},
+                new RowMapper<Candidate>() {
+                    public Candidate mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        return new Candidate(Email.of(rs.getString("email")));
+                    }
+                });
     }
 }

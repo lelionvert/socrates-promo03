@@ -3,16 +3,22 @@ package com.lacombe.promo3.registration;
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
 import com.lacombe.promo3.registration.repository.CandidateRepository;
+import net.bytebuddy.asm.Advice;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-
+@Service
 public class CandidateRegistrationManager {
 
-    private final CandidateRepository candidateRepository;
+    @Autowired
+    private CandidateRepository candidateRepository;
 
     public CandidateRegistrationManager(CandidateRepository candidateRepository) {
         this.candidateRepository = candidateRepository;
+    }
+
+    public CandidateRegistrationManager() {
     }
 
     public Collection<Email> findEmails() {

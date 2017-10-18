@@ -2,10 +2,13 @@ package com.lacombe.promo3.registration.model;
 
 public class Candidate {
 
-    private final Email email;
+    private Email email;
 
     public Candidate(Email email) {
         this.email = email;
+    }
+
+    public Candidate() {
     }
 
     public Email getEmail() {

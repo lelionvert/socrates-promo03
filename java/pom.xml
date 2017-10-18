@@ -102,6 +102,11 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>spring-boot-starter-jpa</artifactId>
+            <version>5.17.0</version>
+        </dependency>
     </dependencies>
 
     <repositories>

@@ -48,13 +48,10 @@ public class CandidatesController {
 
     @PostMapping("/candidate")
     @ApiOperation(value = "Add a candidate with email", response = Candidate.class)
-    public ResponseEntity<Candidate> addCandidate(@Valid @RequestBody  EmailDTO emailDTO) {
-        System.out.println("dto " + emailDTO.getEmail());
-        Email email = modelMapper.map(emailDTO, Email.class);
-        System.out.println("entity " + email.getEmail());
+    public ResponseEntity<Candidate> addCandidate(@RequestBody @Valid EmailDTO emailDTO) {
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}")
-                .buildAndExpand(candidateService.add(email)
+                .buildAndExpand(candidateService.add(emailDTO.getEmail())
                         .getEmail()).toUri();
         return ResponseEntity.created(location).build();
     }

@@ -4,29 +4,27 @@ import com.lacombe.promo3.registration.model.Email;
 
 import java.util.*;
 
-public class DefaultArchiveEmail implements ArchiveEmail {
+public class Emails {
 
     private List<Email> emails;
 
-    DefaultArchiveEmail() {
-        this.emails = new ArrayList<>();
+    public Emails() {
+        this.emails = new ArrayList<Email>();
     }
 
-    public DefaultArchiveEmail(List<Email> emails) {
+    private Emails(List<Email> emails) {
         this();
         this.emails.addAll(emails);
     }
 
-    public static DefaultArchiveEmail with(Email... emails) {
-        return new DefaultArchiveEmail(Arrays.asList(emails));
+    public static Emails with(Email... emails) {
+        return new Emails(Arrays.asList(emails));
     }
 
-    @Override
     public void add(Email email) {
         emails.add(email);
     }
 
-    @Override
     public Collection<Email> retrieveEmails() {
         return Collections.unmodifiableCollection(emails);
     }

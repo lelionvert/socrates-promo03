@@ -38,25 +38,25 @@ public class ConfirmationSenderTest {
     Logger logger;
 
     @Mock
-    ArchiveEmail archiveEmail;
+    EmailArchiver emailArchiver;
 
     @Test
     public void should_not_send_any_email() throws Exception {
         //GIVEN
-        confirmationSender = new ConfirmationSender(candidateRepository, emailSender, logger, archiveEmail);
+        confirmationSender = new ConfirmationSender(candidateRepository, emailSender, logger, emailArchiver);
         when(candidateRepository.getCandidates()).thenReturn(Collections.EMPTY_LIST);
 
         //WHEN
         confirmationSender.send();
 
         //THEN
-        Assertions.assertThat(confirmationSender.getEmailsAlreadyUsedForConfirmationEmail()).isEmpty();
+        Assertions.assertThat(emailArchiver.retrieveEmails()).isEmpty();
     }
 
     @Test
     public void should_send_email_to_one_candidate() {
         //GIVEN
-        confirmationSender = new ConfirmationSender(candidateRepository, emailSender, logger, archiveEmail);
+        confirmationSender = new ConfirmationSender(candidateRepository, emailSender, logger, emailArchiver);
         when(candidateRepository.getCandidates()).thenReturn(Arrays.asList(SABINE_CANDIDATE));
 
         //WHEN
@@ -71,7 +71,7 @@ public class ConfirmationSenderTest {
     @Test
     public void should_send_email_to_two_candidates() {
         //GIVEN
-        confirmationSender = new ConfirmationSender(candidateRepository, emailSender, logger, archiveEmail);
+        confirmationSender = new ConfirmationSender(candidateRepository, emailSender, logger, emailArchiver);
         when(candidateRepository.getCandidates()).thenReturn(Arrays.asList(SABINE_CANDIDATE, MELODY_CANDIDATE));
 
         //WHEN
@@ -88,13 +88,13 @@ public class ConfirmationSenderTest {
     @Test
     public void should_send_email_to_only_one_candidate_form_a_list_of_two_candidates() {
         //GIVEN
-        confirmationSender = new ConfirmationSender(candidateRepository, emailSender, logger, archiveEmail);
+        confirmationSender = new ConfirmationSender(candidateRepository, emailSender, logger, emailArchiver);
         when(candidateRepository.getCandidates()).thenReturn(Arrays.asList(SABINE_CANDIDATE,MELODY_CANDIDATE));
-        when(archiveEmail.retrieveEmails()).thenReturn(Arrays.asList(SABINE_EMAIL_ADDRESS));
+        when(emailArchiver.retrieveEmails()).thenReturn(Arrays.asList(SABINE_EMAIL_ADDRESS));
 
         //WHEN
         confirmationSender.send();
-        when(archiveEmail.retrieveEmails()).thenReturn(Arrays.asList(SABINE_EMAIL_ADDRESS, MELODY_EMAIL_ADDRESS));
+        when(emailArchiver.retrieveEmails()).thenReturn(Arrays.asList(SABINE_EMAIL_ADDRESS, MELODY_EMAIL_ADDRESS));
 
         //THEN
         Mockito.verify(candidateRepository, times(1)).getCandidates();
@@ -103,7 +103,7 @@ public class ConfirmationSenderTest {
         Mockito.verify(emailSender, never()).send(MessageTemplate.createMessage(SABINE_CANDIDATE));
         Mockito.verify(logger, never()).log(SABINE_EMAIL_ADDRESS);
 
-        Assertions.assertThat(confirmationSender.getEmailsAlreadyUsedForConfirmationEmail())
+        Assertions.assertThat(emailArchiver.retrieveEmails())
             .containsExactlyInAnyOrder(SABINE_EMAIL_ADDRESS, MELODY_EMAIL_ADDRESS);
     }
 

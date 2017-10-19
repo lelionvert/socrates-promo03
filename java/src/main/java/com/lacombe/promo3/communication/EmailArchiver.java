@@ -4,7 +4,7 @@ import com.lacombe.promo3.registration.model.Email;
 
 import java.util.Collection;
 
-public interface ArchiveEmail {
+public interface EmailArchiver {
 
     void add(Email email);
 

@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ArchiveEmailTest {
+public class EmailArchiverTest {
 
     private static final Email CYRIL_EMAIL_ADDRESS = Email.of("cyril@lcdlv.fr");
     private static final Email VALENTIN_EMAIL_ADDRESS = Email.of("valentin@lcdlv.fr");
@@ -13,7 +13,7 @@ public class ArchiveEmailTest {
     @Test
     public void should_add_cyril_email_to_an_empty_list_of_emails_sent() {
         //GIVEN
-        DefaultArchiveEmail defaultArchiveEmail = new DefaultArchiveEmail();
+        DefaultEmailArchiver defaultArchiveEmail = new DefaultEmailArchiver();
 
         //WHEN
         defaultArchiveEmail.add(CYRIL_EMAIL_ADDRESS);
@@ -27,7 +27,7 @@ public class ArchiveEmailTest {
     @Test
     public void should_add_valentin_message_to_a_list_of_emails_sent_with_already_one_message() {
         //GIVEN
-        DefaultArchiveEmail defaultArchiveEmail = DefaultArchiveEmail.with(CYRIL_EMAIL_ADDRESS);
+        DefaultEmailArchiver defaultArchiveEmail = new DefaultEmailArchiver(Emails.with(CYRIL_EMAIL_ADDRESS));
 
         //WHEN
         defaultArchiveEmail.add(VALENTIN_EMAIL_ADDRESS);

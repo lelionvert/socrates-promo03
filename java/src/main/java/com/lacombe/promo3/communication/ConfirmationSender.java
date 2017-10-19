@@ -7,19 +7,21 @@ import com.lacombe.promo3.registration.repository.CandidateRepository;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class ConfirmationSender {
 
     private CandidateRepository candidateRepository;
     private EmailSender emailSender;
     private Logger logger;
-    private ArchiveEmail archiveEmail;
+    private EmailArchiver emailArchiver;
 
-    public ConfirmationSender(CandidateRepository candidateRepository, EmailSender emailSender, Logger logger, ArchiveEmail archiveEmail) {
+    public ConfirmationSender(CandidateRepository candidateRepository, EmailSender emailSender, Logger logger, EmailArchiver EmailArchiver) {
         this.candidateRepository = candidateRepository;
         this.emailSender = emailSender;
         this.logger = logger;
-        this.archiveEmail = archiveEmail;
+        this.emailArchiver = EmailArchiver;
     }
 
     public void send() {
@@ -30,24 +32,17 @@ public class ConfirmationSender {
 
             logger.log(candidate.getEmail());
 
-            archiveEmail.add(candidate.getEmail());
+            emailArchiver.add(candidate.getEmail());
         }
     }
 
     private List<Candidate> getCandidatesThatDidNotReceiveTheConfirmationMessage() {
-        Collection<Email> emailsAlreadyUsed = getEmailsAlreadyUsedForConfirmationEmail();
+        Collection<Email> emailsAlreadyUsed = emailArchiver.retrieveEmails();
         List<Candidate> candidates = new ArrayList<>(candidateRepository.getCandidates());
 
-        for(Candidate candidate : candidates) {
-            if(emailsAlreadyUsed.contains(candidate.getEmail())) {
-                candidates.remove(candidate);
-            }
-        }
-        return candidates;
-    }
+        final Predicate<Candidate> confirmationNotSentPredicate = candidate -> !emailsAlreadyUsed.contains(candidate.getEmail());
+        return candidates.stream().filter(confirmationNotSentPredicate).collect(Collectors.toList());
 
-    public Collection<Email> getEmailsAlreadyUsedForConfirmationEmail() {
-        return archiveEmail.retrieveEmails();
     }
 
 }

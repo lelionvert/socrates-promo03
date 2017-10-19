@@ -6,7 +6,7 @@ import com.lacombe.promo3.registration.repository.CandidateRepository;
 
 import java.util.*;
 
-class CandidateRegistrationManager {
+public class CandidateRegistrationManager {
 
     private final CandidateRepository candidateRepository;
 

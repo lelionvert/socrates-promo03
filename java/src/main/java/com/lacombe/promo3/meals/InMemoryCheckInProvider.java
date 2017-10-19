@@ -1,22 +1,18 @@
 package com.lacombe.promo3.meals;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-
 public class InMemoryCheckInProvider implements CheckInProvider {
-    private final Collection<CheckIn> checkIns;
+    private final CheckIns checkIns;
 
-    private InMemoryCheckInProvider(Collection<CheckIn> checkIns) {
+    private InMemoryCheckInProvider(CheckIns checkIns) {
         this.checkIns = checkIns;
     }
 
-    static InMemoryCheckInProvider of(CheckIn... checkIns) {
-        return new InMemoryCheckInProvider(Arrays.asList(checkIns));
+    static InMemoryCheckInProvider of(CheckIns checkIns) {
+        return new InMemoryCheckInProvider(checkIns);
     }
 
     @Override
-    public Collection<CheckIn> getCheckIns() {
-        return Collections.unmodifiableCollection(checkIns);
+    public CheckIns getCheckIns() {
+        return checkIns;
     }
 }

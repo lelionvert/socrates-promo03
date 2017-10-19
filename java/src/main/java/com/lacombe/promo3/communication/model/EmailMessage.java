@@ -2,18 +2,30 @@ package com.lacombe.promo3.communication.model;
 
 import com.lacombe.promo3.registration.model.Email;
 
-public class Message {
+public class EmailMessage {
 
     private Email sender;
     private Email recipient;
     private String object;
     private String body;
 
-    private Message(Email sender, Email recipient, String object, String body) {
+    private EmailMessage(Email sender, Email recipient, String object, String body) {
         this.sender = sender;
         this.recipient = recipient;
         this.object = object;
         this.body = body;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public Email getSender() {
+        return sender;
+    }
+
+    public String getObject() {
+        return object;
     }
 
     public static final class MessageBuilder {
@@ -49,8 +61,8 @@ public class Message {
             return this;
         }
 
-        public Message build() {
-            return new Message(sender, recipient, object, body);
+        public EmailMessage build() {
+            return new EmailMessage(sender, recipient, object, body);
         }
     }
 
@@ -63,12 +75,12 @@ public class Message {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Message message = (Message) o;
+        EmailMessage emailMessage = (EmailMessage) o;
 
-        if (sender != null ? !sender.equals(message.sender) : message.sender != null) return false;
-        if (recipient != null ? !recipient.equals(message.recipient) : message.recipient != null) return false;
-        if (object != null ? !object.equals(message.object) : message.object != null) return false;
-        return body != null ? body.equals(message.body) : message.body == null;
+        if (sender != null ? !sender.equals(emailMessage.sender) : emailMessage.sender != null) return false;
+        if (recipient != null ? !recipient.equals(emailMessage.recipient) : emailMessage.recipient != null) return false;
+        if (object != null ? !object.equals(emailMessage.object) : emailMessage.object != null) return false;
+        return body != null ? body.equals(emailMessage.body) : emailMessage.body == null;
     }
 
     @Override

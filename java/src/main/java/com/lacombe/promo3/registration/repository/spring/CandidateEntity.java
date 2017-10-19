@@ -1,7 +1,5 @@
 package com.lacombe.promo3.registration.repository.spring;
 
-import com.lacombe.promo3.registration.model.Email;
-
 import javax.persistence.*;
 
 @Entity

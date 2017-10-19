@@ -1,4 +1,4 @@
-package com.lacombe.promo3.registration.acceptance;
+package com.lacombe.promo3.communication.acceptance;
 
 import com.lacombe.promo3.communication.EmailMessage;
 import com.lacombe.promo3.communication.EmailSenderLoggedInConsole;
@@ -28,7 +28,7 @@ public class US4_SendEmailAcceptanceTest {
     public void should_send_a_confirmation_email_to_one_new_candidates() throws Exception {
         // GIVEN
         CandidateRepositoryInMemory defaultCandidateRepository =
-                CandidateRepositoryInMemory.withExisting(LUCAS_CANDIDATE, JULIE_CANDIDATE);
+                CandidateRepositoryInMemory.withExisting(LUCAS_CANDIDATE);
         ConfirmationRepositoryWriter confirmationRepository = new ConfirmationRepositoryInMemory();
 
         EmailSenderLogged emailSenderLogged = new EmailSenderLoggedInConsole();

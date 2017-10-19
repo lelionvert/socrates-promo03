@@ -48,6 +48,7 @@
     <Compile Include="Meals\Checkin.cs" />
     <Compile Include="Meals\CheckinProvider.cs" />
     <Compile Include="Meals\ColdMealsCounter.cs" />
+    <Compile Include="Meals\ColdMealsNumber.cs" />
     <Compile Include="Meals\ICheckinProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

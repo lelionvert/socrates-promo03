@@ -22,7 +22,7 @@ namespace Socrates.Test.Meals
             var coldMealsNumber = coldMealsCounter.CountColdMeals();
 
             // ASSERT
-            Check.That(coldMealsNumber).IsZero();
+            Check.That(coldMealsNumber).IsEqualTo(ColdMealsNumber.ValueOf(0));
         }
 
         [Test]
@@ -40,9 +40,9 @@ namespace Socrates.Test.Meals
 
             // RUN
             var coldMealsCounter = new ColdMealsCounter(checkinProvider);
-
+            var coldMealsNumber = coldMealsCounter.CountColdMeals();
             // ASSERT
-            Check.That(coldMealsCounter.CountColdMeals()).IsZero();
+            Check.That(coldMealsNumber).IsEqualTo(ColdMealsNumber.ValueOf(0));
         }
 
         [Test]
@@ -63,9 +63,9 @@ namespace Socrates.Test.Meals
 
             // RUN
             var coldMealsCounter = new ColdMealsCounter(checkinProvider);
-
+            var coldMealsNumber = coldMealsCounter.CountColdMeals();
             // ASSERT
-            Check.That(coldMealsCounter.CountColdMeals()).IsEqualTo(2);
+            Check.That(coldMealsNumber).IsEqualTo(ColdMealsNumber.ValueOf(2));
         }
 
         [Test]
@@ -86,9 +86,9 @@ namespace Socrates.Test.Meals
 
             // RUN
             var coldMealsCounter = new ColdMealsCounter(checkinProvider);
-
+            var coldMealsNumber = coldMealsCounter.CountColdMeals();
             // ASSERT
-            Check.That(coldMealsCounter.CountColdMeals()).IsEqualTo(0);
+            Check.That(coldMealsNumber).IsEqualTo(ColdMealsNumber.ValueOf(0));
         }
     }
 }

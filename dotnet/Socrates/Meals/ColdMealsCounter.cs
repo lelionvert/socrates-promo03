@@ -13,7 +13,7 @@ namespace Socrates.Meals
             this.checkinProvider = checkinProvider;
         }
 
-        public int CountColdMeals()
+        public ColdMealsNumber CountColdMeals()
         {
             int numberColdMeals = 0;
             var checkins = checkinProvider.GetCheckins();
@@ -22,7 +22,7 @@ namespace Socrates.Meals
                 if (checkin.IsBetween(startingDate,endingDate))
                     numberColdMeals++;
             }
-            return numberColdMeals;
+            return ColdMealsNumber.ValueOf(numberColdMeals);
         }
     }
 }

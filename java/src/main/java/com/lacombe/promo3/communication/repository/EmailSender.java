@@ -1,8 +1,8 @@
 package com.lacombe.promo3.communication.repository;
 
-import com.lacombe.promo3.communication.model.Message;
+import com.lacombe.promo3.communication.model.EmailMessage;
 
 public interface EmailSender {
 
-    void send(Message message);
+    void send(EmailMessage emailMessage);
 }

@@ -55,4 +55,8 @@ public class Email {
             "email='" + email + '\'' +
             '}';
     }
+
+    public String getEmailAddress() {
+        return email;
+    }
 }

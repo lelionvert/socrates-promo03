@@ -45,15 +45,15 @@ public class ColdMealsCounterTest {
     public void should_have_one_cold_meal_when_there_is_one_late_check_in() throws Exception {
         //Arrange
         checkIns = CheckIns.of(checkIn);
-        when(checkIn.isBetween(ColdMealsCounter.BEGIN_COLD_MEALS_DATE,
-                ColdMealsCounter.END_COLD_MEALS_DATE)).thenReturn(true);
+        when(checkIn.isBetween(ColdMealsCounter.BEGIN_DATE,
+                ColdMealsCounter.END_DATE)).thenReturn(true);
         when(checkInProvider.getCheckIns()).thenReturn(checkIns);
 
         //Act
         int nbColdMeals = counter.count();
 
         //Assert
-        verify(checkIn).isBetween(ColdMealsCounter.BEGIN_COLD_MEALS_DATE, ColdMealsCounter.END_COLD_MEALS_DATE);
+        verify(checkIn).isBetween(ColdMealsCounter.BEGIN_DATE, ColdMealsCounter.END_DATE);
         assertThat(nbColdMeals).isEqualTo(1);
     }
 
@@ -61,8 +61,8 @@ public class ColdMealsCounterTest {
     public void should_have_zero_cold_meal_when_check_in_date_is_before_begin_cold_meals_date() throws Exception {
         //Arrange
         checkIns = CheckIns.of(checkIn);
-        when(checkIn.isBetween(ColdMealsCounter.BEGIN_COLD_MEALS_DATE,
-                ColdMealsCounter.END_COLD_MEALS_DATE)).thenReturn(false);
+        when(checkIn.isBetween(ColdMealsCounter.BEGIN_DATE,
+                ColdMealsCounter.END_DATE)).thenReturn(false);
         when(checkInProvider.getCheckIns()).thenReturn(checkIns);
 
         //Act

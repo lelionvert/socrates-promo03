@@ -15,4 +15,14 @@ public class InMemoryCheckInProvider implements CheckInProvider {
     public CheckIns getCheckIns() {
         return checkIns;
     }
+
+    @Override
+    public void add(CheckIn checkIn) {
+        checkIns.add(checkIn);
+    }
+
+    @Override
+    public int size() {
+        return checkIns.size();
+    }
 }

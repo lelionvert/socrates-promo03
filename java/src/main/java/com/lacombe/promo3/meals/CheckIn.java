@@ -22,4 +22,8 @@ class CheckIn {
                 && checkInDate.isAfter(begin)
                 && checkInDate.isBefore(end);
     }
+
+    boolean hasSameEmail(CheckIn checkIn) {
+        return this.email.equals(checkIn.email);
+    }
 }

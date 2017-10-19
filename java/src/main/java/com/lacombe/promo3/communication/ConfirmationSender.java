@@ -13,11 +13,13 @@ public class ConfirmationSender {
     private CandidateRepository candidateRepository;
     private EmailSender emailSender;
     private Logger logger;
+    private ArchiveEmail archiveEmail;
 
-    public ConfirmationSender(CandidateRepository candidateRepository, EmailSender emailSender, Logger logger) {
+    public ConfirmationSender(CandidateRepository candidateRepository, EmailSender emailSender, Logger logger, ArchiveEmail archiveEmail) {
         this.candidateRepository = candidateRepository;
         this.emailSender = emailSender;
         this.logger = logger;
+        this.archiveEmail = archiveEmail;
     }
 
     public void send() {
@@ -27,11 +29,13 @@ public class ConfirmationSender {
             emailSender.send(MessageTemplate.createMessage(candidate));
 
             logger.log(candidate.getEmail());
+
+            archiveEmail.add(candidate.getEmail());
         }
     }
 
     private List<Candidate> getCandidatesThatDidNotReceiveTheConfirmationMessage() {
-        Collection<Email> emailsAlreadyUsed = emailSender.getEmailsAlreadyUsedForConfirmationEmail();
+        Collection<Email> emailsAlreadyUsed = getEmailsAlreadyUsedForConfirmationEmail();
         List<Candidate> candidates = new ArrayList<>(candidateRepository.getCandidates());
 
         for(Candidate candidate : candidates) {
@@ -40,6 +44,10 @@ public class ConfirmationSender {
             }
         }
         return candidates;
+    }
+
+    public Collection<Email> getEmailsAlreadyUsedForConfirmationEmail() {
+        return archiveEmail.retrieveEmails();
     }
 
 }

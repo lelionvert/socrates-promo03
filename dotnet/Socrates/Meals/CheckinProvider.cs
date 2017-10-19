@@ -1,22 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 
 namespace Socrates.Meals
 {
     public class CheckinProvider : ICheckinProvider
     {
-        private readonly IList<Checkin> participantCheckin = new List<Checkin>();
+        private readonly Checkins participantCheckins;
 
         public CheckinProvider(params Checkin[] checkins)
         {
-            foreach (var checkin in checkins)
-            {
-                participantCheckin.Add(checkin);
-            }
+            participantCheckins = Checkins.FromList(checkins.ToList());
         }
 
-        public IList<Checkin> GetCheckins()
+        public Checkins GetCheckins()
         {
-            return new List<Checkin>(participantCheckin);
+            return participantCheckins;
         }
     }
 }

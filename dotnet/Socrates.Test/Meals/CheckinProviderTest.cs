@@ -19,7 +19,7 @@ namespace Socrates.Test.Meals
             var checkins = checkinProvider.GetCheckins();
 
             // ASSERT
-            Check.That(checkins).IsEmpty();
+            Check.That(checkins.CountCheckins()).IsZero();
         }
 
         [Test]
@@ -31,10 +31,10 @@ namespace Socrates.Test.Meals
             var checkinProvider = new CheckinProvider(participantCheckin);
 
             // RUN
-            var countLateCheckin = checkinProvider.GetCheckins();
-
+            Checkins countLateCheckin = checkinProvider.GetCheckins();
+            
             // ASSERT
-            Check.That(countLateCheckin.Count).IsEqualTo(1);
+            Check.That(countLateCheckin.CountCheckins()).IsEqualTo(1);
         }
     }
 }

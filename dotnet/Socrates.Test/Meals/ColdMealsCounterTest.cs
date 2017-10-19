@@ -15,14 +15,14 @@ namespace Socrates.Test.Meals
         {
             // SETUP
             var checkinProvider = Substitute.For<ICheckinProvider>();
-            checkinProvider.GetCheckins().Returns(new List<Checkin>());
+            checkinProvider.GetCheckins().Returns(Checkins.FromList(new List<Checkin>()));
 
             // RUN
             var coldMealsCounter = new ColdMealsCounter(checkinProvider);
             var coldMealsNumber = coldMealsCounter.CountColdMeals();
 
             // ASSERT
-            Check.That(coldMealsNumber).IsEqualTo(ColdMealsNumber.ValueOf(0));
+            Check.That(coldMealsNumber).IsEqualTo(0);
         }
 
         [Test]
@@ -36,13 +36,13 @@ namespace Socrates.Test.Meals
             checkins.Add(secondParticipantCheckin);
 
             var checkinProvider = Substitute.For<ICheckinProvider>();
-            checkinProvider.GetCheckins().Returns(checkins);
+            checkinProvider.GetCheckins().Returns(Checkins.FromList(checkins));
 
             // RUN
             var coldMealsCounter = new ColdMealsCounter(checkinProvider);
             var coldMealsNumber = coldMealsCounter.CountColdMeals();
             // ASSERT
-            Check.That(coldMealsNumber).IsEqualTo(ColdMealsNumber.ValueOf(0));
+            Check.That(coldMealsNumber).IsEqualTo(0);
         }
 
         [Test]
@@ -59,13 +59,13 @@ namespace Socrates.Test.Meals
             checkins.Add(thirdParticipantCheckin);
 
             var checkinProvider = Substitute.For<ICheckinProvider>();
-            checkinProvider.GetCheckins().Returns(checkins);
+            checkinProvider.GetCheckins().Returns(Checkins.FromList(checkins));
 
             // RUN
             var coldMealsCounter = new ColdMealsCounter(checkinProvider);
             var coldMealsNumber = coldMealsCounter.CountColdMeals();
             // ASSERT
-            Check.That(coldMealsNumber).IsEqualTo(ColdMealsNumber.ValueOf(2));
+            Check.That(coldMealsNumber).IsEqualTo(2);
         }
 
         [Test]
@@ -82,13 +82,13 @@ namespace Socrates.Test.Meals
             checkins.Add(thirdParticipantCheckin);
 
             var checkinProvider = Substitute.For<ICheckinProvider>();
-            checkinProvider.GetCheckins().Returns(checkins);
+            checkinProvider.GetCheckins().Returns(Checkins.FromList(checkins));
 
             // RUN
             var coldMealsCounter = new ColdMealsCounter(checkinProvider);
             var coldMealsNumber = coldMealsCounter.CountColdMeals();
             // ASSERT
-            Check.That(coldMealsNumber).IsEqualTo(ColdMealsNumber.ValueOf(0));
+            Check.That(coldMealsNumber).IsEqualTo(0);
         }
     }
 }

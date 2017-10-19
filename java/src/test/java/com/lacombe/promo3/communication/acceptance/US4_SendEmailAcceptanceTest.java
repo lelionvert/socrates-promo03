@@ -46,7 +46,7 @@ public class US4_SendEmailAcceptanceTest {
         EmailMessage messageLucas = EmailMessage.of().withRecipient("houssam@lcdlv.fr")
                                     .withSender(LUCAS_EMAIL_STRING)
                                     .withObject("Confirmation")
-                                    .withCore("Hello, please confirm or pay.")
+                                    .withCore("Hello lucas, please confirm or pay.")
                                     .build();
         Assertions.assertThat(emailSenderLogged.getMessage())
                 .isEqualTo(messageLucas);

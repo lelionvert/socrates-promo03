@@ -8,4 +8,6 @@ import java.util.Collection;
 public interface EmailSender {
 
     EmailsStatus sendTo(Collection<Candidate> candidates);
+
+    EmailsStatus sendTo(Candidate candidate);
 }

@@ -81,7 +81,6 @@ public class ConfirmationSenderUnitTest {
         verify(confirmationRepositoryWriter, times(1)).add(any(Email.class));
     }
 
-    @Ignore
     @Test
     public void should_send_many_confirmations_emails_when_no_confirmations_emails_are_sent() throws Exception {
         List<Candidate> candidates = asList(SABINE_CANDIDATE, CYRIL_CANDIDATE);

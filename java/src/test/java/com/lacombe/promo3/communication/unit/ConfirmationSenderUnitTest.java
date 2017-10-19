@@ -8,7 +8,6 @@ import com.lacombe.promo3.registration.EmailsStatus;
 import com.lacombe.promo3.shared.model.Candidate;
 import com.lacombe.promo3.shared.model.Email;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -27,10 +26,10 @@ import static org.mockito.Mockito.*;
 public class ConfirmationSenderUnitTest {
 
     private static final Email SABINE_EMAIL = Email.of("sabine@lcdlv.fr");
-    private static final Candidate SABINE_CANDIDATE = new Candidate(SABINE_EMAIL);
+    private static final Candidate SABINE_CANDIDATE = new Candidate(SABINE_EMAIL, "cyril");
 
     private static final Email CYRIL_EMAIL = Email.of("cyril@lcdlv.fr");
-    private static final Candidate CYRIL_CANDIDATE = new Candidate(CYRIL_EMAIL);
+    private static final Candidate CYRIL_CANDIDATE = new Candidate(CYRIL_EMAIL, "cyril");
 
     @Mock
     private EmailSender emailSender;
@@ -54,14 +53,14 @@ public class ConfirmationSenderUnitTest {
     public void should_send_none_confirmation_email_when_no_candidates_registered() throws Exception {
         List<Candidate> candidates = Collections.emptyList();
         when(candidateConfirmationChecker.getCandidates()).thenReturn(candidates);
-        when(emailSender.sendTo(eq(candidates))).thenReturn(
+        when(emailSender.sendToMany(eq(candidates))).thenReturn(
                 new EmailsStatus(Collections.emptyList())
         );
 
         confirmationSender.execute();
 
         verify(candidateConfirmationChecker, times(1)).getCandidates();
-        verify(emailSender, times(0)).sendTo(any(Collection.class));
+        verify(emailSender, times(0)).sendToMany(any(Collection.class));
         verify(confirmationRepositoryWriter, times(0)).add(any(Email.class));
 
     }
@@ -70,14 +69,14 @@ public class ConfirmationSenderUnitTest {
     public void should_send_one_confirmation_email_when_no_confirmations_emails_are_sent() throws Exception {
         List<Candidate> candidates = asList(SABINE_CANDIDATE);
         when(candidateConfirmationChecker.getCandidates()).thenReturn(candidates);
-        when(emailSender.sendTo(eq(candidates))).thenReturn(
+        when(emailSender.sendToMany(eq(candidates))).thenReturn(
                 new EmailsStatus(asList(SABINE_EMAIL))
         );
 
         confirmationSender.execute();
 
         verify(candidateConfirmationChecker, times(1)).getCandidates();
-        verify(emailSender, times(1)).sendTo(any(Collection.class));
+        verify(emailSender, times(1)).sendToMany(any(Collection.class));
         verify(confirmationRepositoryWriter, times(1)).add(any(Email.class));
     }
 
@@ -85,14 +84,14 @@ public class ConfirmationSenderUnitTest {
     public void should_send_many_confirmations_emails_when_no_confirmations_emails_are_sent() throws Exception {
         List<Candidate> candidates = asList(SABINE_CANDIDATE, CYRIL_CANDIDATE);
         when(candidateConfirmationChecker.getCandidates()).thenReturn(candidates);
-        when(emailSender.sendTo(eq(candidates))).thenReturn(
+        when(emailSender.sendToMany(eq(candidates))).thenReturn(
                 new EmailsStatus(asList(SABINE_EMAIL, CYRIL_EMAIL))
         );
 
         confirmationSender.execute();
 
         verify(candidateConfirmationChecker, times(1)).getCandidates();
-        verify(emailSender, times(1)).sendTo(any(Collection.class));
+        verify(emailSender, times(1)).sendToMany(any(Collection.class));
         verify(confirmationRepositoryWriter, times(2)).add(any(Email.class));
     }
 

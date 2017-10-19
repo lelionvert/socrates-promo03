@@ -13,8 +13,8 @@ public class CandidateRegistrationManagerTest {
     private static final Email SABINE_EMAIL = Email.of("sabine@lcdlv.fr");
     private static final Email CYRIL_EMAIL = Email.of("cyril@lcdlv.fr");
 
-    private static final Candidate SABINE_CANDIDATE = new Candidate(SABINE_EMAIL);
-    private static final Candidate CYRIL_CANDIDATE = new Candidate(CYRIL_EMAIL);
+    private static final Candidate SABINE_CANDIDATE = new Candidate(SABINE_EMAIL, "cyril");
+    private static final Candidate CYRIL_CANDIDATE = new Candidate(CYRIL_EMAIL, "cyril");
     private static final int NUMBER_OF_TIMES_METHOD_SHOULD_BEEN_CALLED = 2;
 
     private CandidateRegister candidateRegister;

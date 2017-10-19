@@ -58,7 +58,7 @@ class Application {
         Email email;
         try {
             email = Email.of(emailValue);
-            Candidate candidate = new Candidate(email);
+            Candidate candidate = new Candidate(email, "cyril");
             candidateRegister.register(candidate);
             System.out.println(CANDIDATE_ADDED_MESSAGE);
         } catch (Exception e) {

@@ -7,7 +7,9 @@ import java.util.Collection;
 
 public interface EmailSender {
 
-    EmailsStatus sendTo(Collection<Candidate> candidates);
+    EmailsStatus sendToMany(Collection<Candidate> candidates);
 
-    EmailsStatus sendTo(Candidate candidate);
+    EmailsStatus sendToOne(Candidate candidate);
+
+    Collection<EmailMessage> getMessages();
 }

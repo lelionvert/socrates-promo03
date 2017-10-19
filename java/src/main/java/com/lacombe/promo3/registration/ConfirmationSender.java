@@ -30,7 +30,7 @@ public class ConfirmationSender {
         Collection<Candidate> candidates = candidateConfirmationChecker.getCandidates();
         if(candidates.isEmpty())
             return;
-        EmailsStatus emailsStatus = emailSender.sendTo(candidates);
+        EmailsStatus emailsStatus = emailSender.sendToMany(candidates);
         saveConfirmationSent(emailsStatus);
     }
 

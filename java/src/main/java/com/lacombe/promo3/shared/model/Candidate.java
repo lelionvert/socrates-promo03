@@ -5,8 +5,9 @@ public class Candidate {
     private final Email email;
     private String firstName;
 
-    public Candidate(Email email) {
+    public Candidate(Email email, String firstName) {
         this.email = email;
+        this.firstName = firstName;
     }
 
     public Email getEmail() {

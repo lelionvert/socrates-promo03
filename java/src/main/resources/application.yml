@@ -1,0 +1,11 @@
+spring:
+  datasource:
+      username: learner
+      password: learn
+      driverClassName: org.postgresql.Driver
+      url:  jdbc:postgresql://postgres-lacombe.westeurope.cloudapp.azure.com:5432/playground-3?currentSchema=sabine
+
+logging:
+ level:
+   org.hibernate.SQL: DEBUG
+   org.hibernate.type.descriptor.sql.BasicBinder: TRACE

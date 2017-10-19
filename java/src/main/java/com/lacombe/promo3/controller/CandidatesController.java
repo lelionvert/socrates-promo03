@@ -1,6 +1,7 @@
 package com.lacombe.promo3.controller;
 
 import com.lacombe.promo3.registration.model.Candidate;
+import com.lacombe.promo3.registration.model.Email;
 import com.lacombe.promo3.service.CandidateService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,8 +51,8 @@ public class CandidatesController {
     }
 
     @GetMapping("/emails")
-    public ResponseEntity<String> getEmail() {
-        String email = candidateService.getEmail();
-        return ResponseEntity.ok(email);
+    public ResponseEntity<Collection<Email>> getEmail() {
+        Collection<Email> emails = candidateService.getEmails();
+        return ResponseEntity.ok(emails);
     }
 }

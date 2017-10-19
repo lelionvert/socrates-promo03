@@ -11,14 +11,14 @@ public class Email {
     private static final Pattern VALID_EMAIL_ADDRESS_REGEX =
         Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
-    private final String email;
+    private String email;
 
-    public static Email of(String email) {
+    public static Email valueOf(String email) {
         verifyEmail(email);
         return new Email(email);
     }
 
-    private Email(String email){
+    public Email(String email){
         this.email = email;
     }
 

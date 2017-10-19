@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-@Repository
 public class DefaultCandidateRepository implements CandidateRepository {
 
     private final Collection<Candidate> candidates;

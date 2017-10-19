@@ -12,10 +12,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CandidateRegistrationManagerIntegrationTest {
 
-    private static final Email SABINE_EMAIL = Email.of("sabine@lcdlv.fr");
-    private static final Email MELODY_EMAIL = Email.of("melody@lcdlv.fr");
-    private static final Email CYRIL_EMAIL = Email.of("cyril@lcdlv.fr");
-    private static final Email ISMAEL_EMAIL = Email.of("ismael@lcdlv.fr");
+    private static final Email SABINE_EMAIL = Email.valueOf("sabine@lcdlv.fr");
+    private static final Email MELODY_EMAIL = Email.valueOf("melody@lcdlv.fr");
+    private static final Email CYRIL_EMAIL = Email.valueOf("cyril@lcdlv.fr");
+    private static final Email ISMAEL_EMAIL = Email.valueOf("ismael@lcdlv.fr");
 
     private static final Candidate SABINE_CANDIDATE = new Candidate(SABINE_EMAIL);
     private static final Candidate CYRIL_CANDIDATE = new Candidate(CYRIL_EMAIL);

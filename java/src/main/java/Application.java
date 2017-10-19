@@ -57,7 +57,7 @@ public class Application {
         String emailValue = scanner.nextLine();
         Email email;
         try {
-            email = Email.of(emailValue);
+            email = Email.valueOf(emailValue);
             Candidate candidate = new Candidate(email);
             candidateRegistrationManager.register(candidate);
             System.out.println(CANDIDATE_ADDED_MESSAGE);

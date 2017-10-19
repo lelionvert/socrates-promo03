@@ -1,4 +1,4 @@
-package com.lacombe.promo3.communication;
+package com.lacombe.promo3.communication.model;
 
 import com.lacombe.promo3.registration.model.Email;
 

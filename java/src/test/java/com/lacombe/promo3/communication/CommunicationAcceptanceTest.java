@@ -1,8 +1,15 @@
 package com.lacombe.promo3.communication;
 
+import com.lacombe.promo3.communication.model.Emails;
+import com.lacombe.promo3.communication.model.MessageTemplate;
+import com.lacombe.promo3.communication.repository.DefaultEmailArchiver;
+import com.lacombe.promo3.communication.repository.DefaultLogger;
+import com.lacombe.promo3.communication.repository.EmailArchiver;
+import com.lacombe.promo3.communication.repository.EmailSender;
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
 import com.lacombe.promo3.registration.repository.DefaultCandidateRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -45,9 +52,7 @@ public class CommunicationAcceptanceTest {
 
         //THEN
         assertThat(defaultLogger.print()).isEqualTo(LOG_SABINE_MESSAGE_WAS_SENT);
-        assertThat(defaultArchiveEmail.retrieveEmails())
-            .hasSize(1)
-            .contains(SABINE_EMAIL_ADDRESS);
+        assertThat(defaultArchiveEmail.retrieveEmails()).isEqualTo(Emails.with(SABINE_EMAIL_ADDRESS));
         Mockito.verify(emailSender, times(1)).send(MessageTemplate.createMessage(SABINE_CANDIDATE));
     }
 
@@ -60,17 +65,16 @@ public class CommunicationAcceptanceTest {
         confirmationSender = new ConfirmationSender(defaultCandidateRepository, emailSender, defaultLogger, defaultArchiveEmail);
 
         //WHEN
-        confirmationSender.send();
+        EmailStatus emailStatus = confirmationSender.send();
 
         //THEN
         assertThat(defaultLogger.print())
             .containsOnlyOnce(LOG_SABINE_MESSAGE_WAS_SENT)
             .containsOnlyOnce(LOG_GABRIEL_MESSAGE_WAS_SENT);
-        assertThat(defaultArchiveEmail.retrieveEmails())
-            .hasSize(2)
-            .containsExactlyInAnyOrder(SABINE_EMAIL_ADDRESS, GABRIEL_EMAIL_ADDRESS);
+        assertThat(defaultArchiveEmail.retrieveEmails()).isEqualTo(Emails.with(SABINE_EMAIL_ADDRESS, GABRIEL_EMAIL_ADDRESS));
         Mockito.verify(emailSender, times(1)).send(MessageTemplate.createMessage(GABRIEL_CANDIDATE));
         Mockito.verify(emailSender, never()).send(MessageTemplate.createMessage(SABINE_CANDIDATE));
+        Assertions.assertThat(emailStatus).isEqualTo(EmailStatus.ALL_EMAIL_SENT);
 
     }
 
@@ -83,9 +87,10 @@ public class CommunicationAcceptanceTest {
         confirmationSender = new ConfirmationSender(defaultCandidateRepository, emailSender, defaultLogger, defaultArchiveEmail);
 
         //WHEN
-        confirmationSender.send();
+        EmailStatus message = confirmationSender.send();
 
         //THEN
+        Assertions.assertThat(message).isEqualTo(EmailStatus.NO_EMAIL_SENT);
     }
 
 }

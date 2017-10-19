@@ -8,10 +8,18 @@ import java.util.Collections;
 
 public class EmailsStatus {
 
-    private Collection<Email> emailsSent = new ArrayList<>();
+    private Collection<Email> emailsSent;
 
     public EmailsStatus(Collection<Email> emailsSent) {
         this.emailsSent = emailsSent;
+    }
+
+    public EmailsStatus() {
+        emailsSent = new ArrayList<>();
+    }
+
+    public boolean isEmpty() {
+        return emailsSent.isEmpty();
     }
 
     public Collection<Email> getEmailsSent() {

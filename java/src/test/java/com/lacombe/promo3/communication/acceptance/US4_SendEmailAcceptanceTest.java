@@ -4,7 +4,7 @@ import com.lacombe.promo3.communication.EmailMessage;
 import com.lacombe.promo3.communication.EmailSender;
 import com.lacombe.promo3.communication.EmailSenderDefault;
 import com.lacombe.promo3.registration.CandidateConfirmationChecker;
-import com.lacombe.promo3.registration.ConfirmationSender;
+import com.lacombe.promo3.communication.ConfirmationSender;
 import com.lacombe.promo3.shared.model.Candidate;
 import com.lacombe.promo3.shared.model.Email;
 import com.lacombe.promo3.communication.repository.ConfirmationRepositoryWriter;
@@ -40,7 +40,7 @@ public class US4_SendEmailAcceptanceTest {
                                                                         emailSenderLogged);
 
         // WHEN
-        confirmationSender.execute();
+        confirmationSender.sendConfirmations();
 
         // THEN
         EmailMessage messageLucas = EmailMessage.of().withRecipient("houssam@lcdlv.fr")

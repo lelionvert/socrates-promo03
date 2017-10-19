@@ -2,6 +2,7 @@ package com.lacombe.promo3.communication;
 
 import com.lacombe.promo3.registration.EmailsStatus;
 import com.lacombe.promo3.shared.model.Candidate;
+import com.lacombe.promo3.shared.model.Candidates;
 import com.lacombe.promo3.shared.model.Email;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.Collections;
 
 public class EmailSenderDefault implements EmailSender {
 
+    private final EmailMessageCreator emailMessageCreator = new EmailMessageCreator();
     private Collection<EmailMessage> messages = new ArrayList<>();
 
     public Collection<EmailMessage> getMessages() {
@@ -17,10 +19,10 @@ public class EmailSenderDefault implements EmailSender {
     }
 
     @Override
-    public EmailsStatus sendToMany(Collection<Candidate> candidates) {
+    public EmailsStatus sendToMany(Candidates candidates) {
         Collection<EmailsStatus> emailsStatus = new ArrayList<>();
         candidates.forEach( candidate -> {
-                    EmailsStatus emailStatus = sendToOne(candidate);
+                    EmailsStatus emailStatus = send(candidate);
                     emailsStatus.add(emailStatus);
                 }
         );
@@ -28,21 +30,13 @@ public class EmailSenderDefault implements EmailSender {
     }
 
     @Override
-    public EmailsStatus sendToOne(Candidate candidate) {
-        EmailMessage confirmationMessage = getEmailMessage(candidate);
+    public EmailsStatus send(Candidate candidate) {
+        EmailMessage confirmationMessage = emailMessageCreator.getEmailMessage(candidate);
         /*TODO Send the email*/
 
         this.messages.add(confirmationMessage);
 
         Email email = candidate.getEmail();
         return new EmailsStatus(Collections.singletonList(email));
-    }
-
-    private EmailMessage getEmailMessage(Candidate candidate) {
-        return EmailMessage.of().withSender("houssam@lcdlv.fr")
-                    .withRecipient(candidate.getEmailAddress())
-                    .withObject("Confirmation")
-                    .withCore("Hello " + candidate.getFirstName() + ", please confirm or pay.")
-                    .build();
     }
 }

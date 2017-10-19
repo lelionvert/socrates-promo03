@@ -1,11 +1,10 @@
-package com.lacombe.promo3.registration;
+package com.lacombe.promo3.communication;
 
-import com.lacombe.promo3.communication.EmailSender;
 import com.lacombe.promo3.communication.repository.ConfirmationRepositoryWriter;
-import com.lacombe.promo3.shared.model.Candidate;
+import com.lacombe.promo3.registration.CandidateConfirmationChecker;
+import com.lacombe.promo3.registration.EmailsStatus;
+import com.lacombe.promo3.shared.model.Candidates;
 import com.lacombe.promo3.shared.model.Email;
-
-import java.util.Collection;
 
 public class ConfirmationSender {
 
@@ -26,15 +25,26 @@ public class ConfirmationSender {
         this.candidateConfirmationChecker = candidateConfirmationChecker;
     }
 
-    public void execute() {
-        Collection<Candidate> candidates = candidateConfirmationChecker.getCandidates();
-        if(candidates.isEmpty())
-            return;
-        EmailsStatus emailsStatus = emailSender.sendToMany(candidates);
-        saveConfirmationSent(emailsStatus);
+    public void sendConfirmations() {
+        Candidates candidates = retrieveCandidateWaitingForConfirmation();
+        EmailsStatus emailsStatus = sendEmails(candidates);
+        saveConfirmations(emailsStatus);
     }
 
-    private void saveConfirmationSent(EmailsStatus emailsStatus) {
+    private EmailsStatus sendEmails(Candidates candidates) {
+        if(candidates.isEmpty())
+            return new EmailsStatus();
+        return emailSender.sendToMany(candidates);
+    }
+
+    private Candidates retrieveCandidateWaitingForConfirmation() {
+        return candidateConfirmationChecker.getCandidates();
+    }
+
+    private void saveConfirmations(EmailsStatus emailsStatus) {
+        if(emailsStatus.isEmpty()){
+                return;
+        }
         for(Email email : emailsStatus.getEmailsSent()) {
             confirmationRepositoryWriter.add(email);
         }

@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.*;
@@ -17,17 +18,13 @@ public class InMemoryCheckInProviderTest {
 
     private CheckInProvider checkInProvider;
 
-    @Before
-    public void setUp() throws Exception {
-        checkInProvider = InMemoryCheckInProvider.of(checkIns);
-    }
-
     @Test
     public void should_have_one_checkIn_when_add_a_checkin_in_an_empty_list() throws Exception {
         //Arrange
         CheckIn checkIn = MealsUtils.checkInWithoutDate("test@gmail.fr");
-        doCallRealMethod().when(checkIns).add(checkIn);
+
         when(checkIns.size()).thenReturn(1);
+        checkInProvider = InMemoryCheckInProvider.of(checkIns);
 
         //Act
         checkInProvider.add(checkIn);

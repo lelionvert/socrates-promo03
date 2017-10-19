@@ -1,6 +1,7 @@
 package com.lacombe.promo3.meals;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
@@ -23,10 +24,12 @@ public class CheckIns {
 
     void add(CheckIn checkIn) {
         CheckIn existingCheckIn = getCheckInForEmail(checkIn);
+
         if (existingCheckIn != null) {
             checkIns.remove(existingCheckIn);
-            checkIns.add(checkIn);
         }
+
+        checkIns.add(checkIn);
     }
 
     CheckIn getCheckInForEmail(CheckIn checkIn) {

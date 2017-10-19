@@ -1,4 +1,4 @@
-package com.lacombe.promo3.communication;
+package com.lacombe.promo3.communication.repository;
 
 import com.lacombe.promo3.registration.model.Email;
 
@@ -34,6 +34,8 @@ public class DefaultLogger implements Logger{
     @Override
     public void log(Email emailAddress) {
 
-        messagesLog.add(MessageFormat.format(PATTERN_LOG_WHEN_MESSAGE_SENT,emailAddress.toString()));
+        final String emailToPrint = emailAddress.toString();
+        final String formatMessage = MessageFormat.format(PATTERN_LOG_WHEN_MESSAGE_SENT, emailToPrint);
+        messagesLog.add(formatMessage);
     }
 }

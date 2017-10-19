@@ -1,11 +1,15 @@
 package com.lacombe.promo3.communication;
 
+import com.lacombe.promo3.communication.model.Emails;
+import com.lacombe.promo3.communication.model.MessageTemplate;
+import com.lacombe.promo3.communication.repository.EmailArchiver;
+import com.lacombe.promo3.communication.repository.EmailSender;
+import com.lacombe.promo3.communication.repository.Logger;
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
 import com.lacombe.promo3.registration.repository.CandidateRepository;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -24,23 +28,31 @@ public class ConfirmationSender {
         this.emailArchiver = EmailArchiver;
     }
 
-    public void send() {
+    public EmailStatus send() {
 
-        for (Candidate candidate : getCandidatesThatDidNotReceiveTheConfirmationMessage()) {
+        final List<Candidate> candidates = getCandidatesThatDidNotReceiveTheConfirmationMessage();
+
+        if(candidates.isEmpty())
+            return EmailStatus.NO_EMAIL_SENT;
+
+        for (Candidate candidate : candidates) {
+
+            final Email email = candidate.getEmail();
 
             emailSender.send(MessageTemplate.createMessage(candidate));
 
-            logger.log(candidate.getEmail());
+            logger.log(email);
 
-            emailArchiver.add(candidate.getEmail());
+            emailArchiver.add(email);
         }
+        return EmailStatus.ALL_EMAIL_SENT;
     }
 
     private List<Candidate> getCandidatesThatDidNotReceiveTheConfirmationMessage() {
-        Collection<Email> emailsAlreadyUsed = emailArchiver.retrieveEmails();
+        Emails emailsArchived = emailArchiver.retrieveEmails();
         List<Candidate> candidates = new ArrayList<>(candidateRepository.getCandidates());
 
-        final Predicate<Candidate> confirmationNotSentPredicate = candidate -> !emailsAlreadyUsed.contains(candidate.getEmail());
+        final Predicate<Candidate> confirmationNotSentPredicate = candidate -> !candidate.isContainedIn(emailsArchived);
         return candidates.stream().filter(confirmationNotSentPredicate).collect(Collectors.toList());
 
     }

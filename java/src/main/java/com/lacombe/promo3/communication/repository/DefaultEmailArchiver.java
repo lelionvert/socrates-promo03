@@ -1,14 +1,13 @@
-package com.lacombe.promo3.communication;
+package com.lacombe.promo3.communication.repository;
 
+import com.lacombe.promo3.communication.model.Emails;
 import com.lacombe.promo3.registration.model.Email;
-
-import java.util.*;
 
 public class DefaultEmailArchiver implements EmailArchiver {
 
     private Emails emails;
 
-    DefaultEmailArchiver() {
+    public DefaultEmailArchiver() {
         this.emails = new Emails();
     }
 
@@ -23,7 +22,7 @@ public class DefaultEmailArchiver implements EmailArchiver {
     }
 
     @Override
-    public Collection<Email> retrieveEmails() {
-        return emails.retrieveEmails();
+    public Emails retrieveEmails() {
+        return emails;
     }
 }

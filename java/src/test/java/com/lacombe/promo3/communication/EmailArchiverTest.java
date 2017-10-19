@@ -1,5 +1,7 @@
 package com.lacombe.promo3.communication;
 
+import com.lacombe.promo3.communication.model.Emails;
+import com.lacombe.promo3.communication.repository.DefaultEmailArchiver;
 import com.lacombe.promo3.registration.model.Email;
 import org.junit.Test;
 
@@ -19,9 +21,7 @@ public class EmailArchiverTest {
         defaultArchiveEmail.add(CYRIL_EMAIL_ADDRESS);
 
         //THEN
-        assertThat(defaultArchiveEmail.retrieveEmails())
-            .hasSize(1)
-            .contains(CYRIL_EMAIL_ADDRESS);
+        assertThat(defaultArchiveEmail.retrieveEmails()).isEqualTo(Emails.with(CYRIL_EMAIL_ADDRESS));
     }
 
     @Test
@@ -33,8 +33,6 @@ public class EmailArchiverTest {
         defaultArchiveEmail.add(VALENTIN_EMAIL_ADDRESS);
 
         //THEN
-        assertThat(defaultArchiveEmail.retrieveEmails())
-            .hasSize(2)
-            .containsExactlyInAnyOrder(CYRIL_EMAIL_ADDRESS, VALENTIN_EMAIL_ADDRESS);
+        assertThat(defaultArchiveEmail.retrieveEmails()).isEqualTo(Emails.with(CYRIL_EMAIL_ADDRESS, VALENTIN_EMAIL_ADDRESS));
     }
 }

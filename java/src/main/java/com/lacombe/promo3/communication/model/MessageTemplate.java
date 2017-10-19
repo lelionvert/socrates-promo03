@@ -1,4 +1,4 @@
-package com.lacombe.promo3.communication;
+package com.lacombe.promo3.communication.model;
 
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
@@ -11,12 +11,15 @@ public class MessageTemplate {
     public static final String OBJECT = "Confirmation";
     public static final String PATTERN_BODY = "Hello {0},\n Can you confirm me that you are coming at Socrates?\n Regards,\n Houssam Fakih";
 
-    static Message createMessage(Candidate candidate) {
+    public static Message createMessage(Candidate candidate) {
+
+        final String candidateFirstName = candidate.getFirstName();
+        final String formatBody = MessageFormat.format(PATTERN_BODY, candidateFirstName);
 
         return Message.MessageBuilder.aMessage()
                     .withSender(SENDER)
                     .withRecipient(candidate.getEmail())
-                    .withBody(MessageFormat.format(PATTERN_BODY, candidate.getFirstName()))
+                    .withBody(formatBody)
                     .withObject(OBJECT)
                     .build();
     }

@@ -1,5 +1,6 @@
 package com.lacombe.promo3.communication;
 
+import com.lacombe.promo3.communication.repository.DefaultLogger;
 import com.lacombe.promo3.registration.model.Email;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;

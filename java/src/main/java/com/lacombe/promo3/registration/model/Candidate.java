@@ -1,5 +1,7 @@
 package com.lacombe.promo3.registration.model;
 
+import com.lacombe.promo3.communication.model.Emails;
+
 public class Candidate {
 
     private final Email email;
@@ -32,5 +34,9 @@ public class Candidate {
     @Override
     public int hashCode() {
         return email != null ? email.hashCode() : 0;
+    }
+
+    public boolean isContainedIn(Emails emails) {
+        return emails.contains(email);
     }
 }

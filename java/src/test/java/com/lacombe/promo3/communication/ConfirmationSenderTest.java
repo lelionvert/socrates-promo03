@@ -1,5 +1,10 @@
 package com.lacombe.promo3.communication;
 
+import com.lacombe.promo3.communication.model.Emails;
+import com.lacombe.promo3.communication.model.MessageTemplate;
+import com.lacombe.promo3.communication.repository.EmailArchiver;
+import com.lacombe.promo3.communication.repository.EmailSender;
+import com.lacombe.promo3.communication.repository.Logger;
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
 import com.lacombe.promo3.registration.repository.CandidateRepository;
@@ -50,7 +55,7 @@ public class ConfirmationSenderTest {
         confirmationSender.send();
 
         //THEN
-        Assertions.assertThat(emailArchiver.retrieveEmails()).isEmpty();
+        Assertions.assertThat(emailArchiver.retrieveEmails()).isNull();
     }
 
     @Test
@@ -58,6 +63,7 @@ public class ConfirmationSenderTest {
         //GIVEN
         confirmationSender = new ConfirmationSender(candidateRepository, emailSender, logger, emailArchiver);
         when(candidateRepository.getCandidates()).thenReturn(Arrays.asList(SABINE_CANDIDATE));
+        when(emailArchiver.retrieveEmails()).thenReturn(new Emails());
 
         //WHEN
         confirmationSender.send();
@@ -73,7 +79,7 @@ public class ConfirmationSenderTest {
         //GIVEN
         confirmationSender = new ConfirmationSender(candidateRepository, emailSender, logger, emailArchiver);
         when(candidateRepository.getCandidates()).thenReturn(Arrays.asList(SABINE_CANDIDATE, MELODY_CANDIDATE));
-
+        when(emailArchiver.retrieveEmails()).thenReturn(new Emails());
         //WHEN
         confirmationSender.send();
 
@@ -90,11 +96,12 @@ public class ConfirmationSenderTest {
         //GIVEN
         confirmationSender = new ConfirmationSender(candidateRepository, emailSender, logger, emailArchiver);
         when(candidateRepository.getCandidates()).thenReturn(Arrays.asList(SABINE_CANDIDATE,MELODY_CANDIDATE));
-        when(emailArchiver.retrieveEmails()).thenReturn(Arrays.asList(SABINE_EMAIL_ADDRESS));
+        when(emailArchiver.retrieveEmails()).thenReturn(Emails.with(SABINE_EMAIL_ADDRESS));
+
 
         //WHEN
         confirmationSender.send();
-        when(emailArchiver.retrieveEmails()).thenReturn(Arrays.asList(SABINE_EMAIL_ADDRESS, MELODY_EMAIL_ADDRESS));
+        when(emailArchiver.retrieveEmails()).thenReturn(Emails.with(SABINE_EMAIL_ADDRESS, MELODY_EMAIL_ADDRESS));
 
         //THEN
         Mockito.verify(candidateRepository, times(1)).getCandidates();
@@ -103,8 +110,7 @@ public class ConfirmationSenderTest {
         Mockito.verify(emailSender, never()).send(MessageTemplate.createMessage(SABINE_CANDIDATE));
         Mockito.verify(logger, never()).log(SABINE_EMAIL_ADDRESS);
 
-        Assertions.assertThat(emailArchiver.retrieveEmails())
-            .containsExactlyInAnyOrder(SABINE_EMAIL_ADDRESS, MELODY_EMAIL_ADDRESS);
+        Assertions.assertThat(emailArchiver.retrieveEmails()).isEqualTo(Emails.with(SABINE_EMAIL_ADDRESS, MELODY_EMAIL_ADDRESS));
     }
 
 }

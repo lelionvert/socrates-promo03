@@ -3,10 +3,6 @@ package com.lacombe.promo3.registration.service;
 import com.lacombe.promo3.registration.CandidateRegistrationManager;
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
-import com.lacombe.promo3.registration.repository.CandidateRepository;
-import com.lacombe.promo3.registration.repository.CandidateRepositoryDB;
-import com.lacombe.promo3.registration.repository.DefaultCandidateRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

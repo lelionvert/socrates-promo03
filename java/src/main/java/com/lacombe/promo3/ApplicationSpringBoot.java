@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @EnableCircuitBreaker
-@EnableJpaRepositories
+@EnableJpaRepositories(basePackages = "com.lacombe.promo3.registration.repository")
 @EnableAutoConfiguration
 @SpringBootApplication
 public class ApplicationSpringBoot {

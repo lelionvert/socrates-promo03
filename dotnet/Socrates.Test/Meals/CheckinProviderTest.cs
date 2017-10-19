@@ -8,7 +8,6 @@ namespace Socrates.Test.Meals
 {
     internal class CheckinProviderTest
     {
-        
         [Test]
         public void GetCheckins_Should_Return_Zero_When_Zero_Checkin()
         {

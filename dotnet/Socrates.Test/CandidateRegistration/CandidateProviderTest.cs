@@ -64,7 +64,7 @@ namespace Socrates.Test.CandidateRegistration
             candidateProvider.AddCandidate(new Candidate(Email.Of(FannyDuboisEmail)));
             candidateProvider.AddCandidate(new Candidate(Email.Of(RegisDuboisEmail)));
 
-            Check.That(candidateProvider.GetCandidateEmails()).ContainsExactly(Email.Of(FannyDuboisEmail), Email.Of(RegisDuboisEmail));
+            Check.That(candidateProvider.ContainsEmailsExactly(Email.Of(FannyDuboisEmail), Email.Of(RegisDuboisEmail))).IsTrue();
         }
     }
 }

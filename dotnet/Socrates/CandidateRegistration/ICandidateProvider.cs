@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Socrates.CandidateRegistration
+﻿namespace Socrates.CandidateRegistration
 {
     public interface ICandidateProvider
     {
@@ -8,6 +6,8 @@ namespace Socrates.CandidateRegistration
 
         void AddCandidate(Candidate candidate);
 
-        IList<Email> GetCandidateEmails();
+        bool ContainsEmailsExactly(params Email[] emails);
+
+        Emails GetEmails();
     }
 }

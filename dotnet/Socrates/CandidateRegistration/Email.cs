@@ -1,5 +1,4 @@
-﻿using Socrates.CandidateRegistration;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -15,6 +14,7 @@ namespace Socrates.CandidateRegistration
             {
                 throw new InvalidEmailException("Email format is invalid");
             }
+
             _emailAddress = emailAddress;
         }
 
@@ -36,8 +36,6 @@ namespace Socrates.CandidateRegistration
             
             return new Email(emailAddress);
         }
-
-
 
         public override bool Equals(object obj)
         {

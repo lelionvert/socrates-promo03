@@ -5,20 +5,21 @@ namespace Socrates.Test.Services
 {
     internal class MockCandidateProvider : ICandidateProvider
     {
-        internal bool GetCandidateEmailsReturn { get; set; }
+        internal bool GetEmailsReturn { get; set; }
         internal bool HasAlreadyWasCalled { get; private set; }
         internal bool AddCandidateWasCalled { get; private set; }
+        internal bool ContainsEmailsExactlyReturnWasCalled { get; private set; }
         internal bool HasAlreadyReturn { get; set; }
-       
+        internal bool ContainsEmailsExactlyReturn { get; set; }
 
         public void AddCandidate(Candidate candidate)
         {
             AddCandidateWasCalled = true;
         }
 
-        public IList<Email> GetCandidateEmails()
+        public Emails GetEmails()
         {
-            GetCandidateEmailsReturn = true;
+            GetEmailsReturn = true;
             return null;
         }
 
@@ -27,6 +28,13 @@ namespace Socrates.Test.Services
             HasAlreadyWasCalled = true;
 
             return HasAlreadyReturn;
+        }
+
+        public bool ContainsEmailsExactly(params Email[] emails)
+        {
+            ContainsEmailsExactlyReturnWasCalled = true;
+
+            return ContainsEmailsExactlyReturn;
         }
     }
 }

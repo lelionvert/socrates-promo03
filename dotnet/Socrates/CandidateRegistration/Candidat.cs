@@ -1,5 +1,4 @@
-﻿using Socrates.CandidateRegistration;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Socrates.CandidateRegistration
 {

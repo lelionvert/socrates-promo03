@@ -59,7 +59,7 @@ namespace Socrates.Test.Services
             
             var candidateRegister = new CandidateRegister(candidateProvider);
             candidateRegister.GetCandidateEmails();
-            Check.That(candidateProvider.GetCandidateEmailsReturn).IsTrue();
+            Check.That(candidateProvider.GetEmailsReturn).IsTrue();
         }
 
         [Test]
@@ -96,7 +96,7 @@ namespace Socrates.Test.Services
             var emailsReceiveFromTheFirstCalled = candidateRegister.GetCandidateEmails();
             var emailsReceiveFromTheSecondCalled = candidateRegister.GetCandidateEmails();
 
-            Check.That(candidateProvider.GetCandidateCallCount).IsEqualTo(2);         
+            Check.That(candidateProvider.GetEmailsCallCount).IsEqualTo(2);         
         }
     }
 }

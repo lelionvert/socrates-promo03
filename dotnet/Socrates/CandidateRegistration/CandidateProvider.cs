@@ -1,21 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 
 namespace Socrates.CandidateRegistration
 {
     public class CandidateProvider : ICandidateProvider
     {
-        private IList<Candidate> candidates = new List<Candidate>();
+        private Candidates candidates;
         
         public CandidateProvider(params Candidate[] candidates)
         {
-            foreach (var candidat in candidates)
-            {
-                this.candidates.Add(candidat);
-            }
+            this.candidates = Candidates.FromList(candidates.ToList());
         }
 
-        public IList<Candidate> GetCandidates()
+        public Candidates GetCandidates()
         {
             return candidates;
         }
@@ -27,17 +23,22 @@ namespace Socrates.CandidateRegistration
 
         public bool IsEmpty()
         {
-            return candidates.Count == 0;
+            return candidates.IsEmpty();
         }
 
         public bool HasAlready(params Candidate[] candidates)
         {
-            return candidates.All(this.candidates.Contains) && this.candidates.All(candidates.Contains);
+            return this.candidates.Contains(candidates);
         }
 
-        public IList<Email> GetCandidateEmails()
+        public bool ContainsEmailsExactly(params Email[] emails)
         {
-            return candidates.Select(candidate => candidate.Email).ToList();
+            return candidates.ContainsEmails(emails);
+        }
+
+        public Emails GetEmails()
+        {
+            return candidates.GetEmails();
         }
     }
 }

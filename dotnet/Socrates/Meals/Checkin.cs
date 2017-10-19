@@ -8,7 +8,6 @@ namespace Socrates.Meals
         private Email email;
         private DateTime participantCheckinDate;
     
-
         public Checkin(Email email, DateTime participantCheckinDate)
         {
             this.email = email;
@@ -19,8 +18,6 @@ namespace Socrates.Meals
         {
             return participantCheckinDate >= startingDate;
         }
-
-       
 
         public bool IsBetween(DateTime startingDate, DateTime endingDate)
         {

@@ -12,13 +12,16 @@ public class CommunicationAcceptanceTest {
     private static final String LOG_SABINE_MESSAGE_WAS_SENT = "An email was sent to Email{email='sabine@lcdlv.fr'}";
     private static final String LOG_GABRIEL_MESSAGE_WAS_SENT = "An email was sent to Email{email='gabriel@lcdlv.fr'}";
 
-    private static final Candidate SABINE_CANDIDATE = new Candidate(Email.of("sabine@lcdlv.fr"), "Sabine");
-    private static final Candidate GABRIEL_CANDIDATE = new Candidate(Email.of("gabriel@lcdlv.fr"), "Gabriel");
+    public static final Email SABINE_EMAIL_ADDRESS = Email.of("sabine@lcdlv.fr");
+    private static final Candidate SABINE_CANDIDATE = new Candidate(SABINE_EMAIL_ADDRESS, "Sabine");
+    public static final Email GABRIEL_EMAIL_ADDRESS = Email.of("gabriel@lcdlv.fr");
+    private static final Candidate GABRIEL_CANDIDATE = new Candidate(GABRIEL_EMAIL_ADDRESS, "Gabriel");
 
-    private static DefaultEmailSender defaultEmailSender;
-    private static DefaultLogger defaultLogger;
-    private static DefaultCandidateRepository defaultCandidateRepository;
-    private static ConfirmationSender confirmationSender;
+    private DefaultEmailSender defaultEmailSender;
+    private DefaultLogger defaultLogger;
+    private DefaultCandidateRepository defaultCandidateRepository;
+    private ConfirmationSender confirmationSender;
+    private DefaultArchiveEmail defaultArchiveEmail;
 
     @Test
     public void should_send_email_to_one_candidate() throws Exception {
@@ -26,25 +29,27 @@ public class CommunicationAcceptanceTest {
         defaultCandidateRepository = DefaultCandidateRepository.withExisting(SABINE_CANDIDATE);
         defaultEmailSender = new DefaultEmailSender();
         defaultLogger = new DefaultLogger();
-        confirmationSender = new ConfirmationSender(defaultCandidateRepository, defaultEmailSender, defaultLogger);
+        defaultArchiveEmail = new DefaultArchiveEmail();
+        confirmationSender = new ConfirmationSender(defaultCandidateRepository, defaultEmailSender, defaultLogger, defaultArchiveEmail);
 
         //WHEN
         confirmationSender.send();
 
         //THEN
         assertThat(defaultLogger.print()).isEqualTo(LOG_SABINE_MESSAGE_WAS_SENT);
-        assertThat(defaultEmailSender.getMessagesSent())
+        assertThat(defaultArchiveEmail.retrieveEmails())
             .hasSize(1)
-            .contains(MessageTemplate.createMessage(SABINE_CANDIDATE));
+            .contains(SABINE_EMAIL_ADDRESS);
     }
 
     @Test
     public void should_send_email_to_the_only_candidate_that_did_not_receive_the_message() {
         //GIVEN
         defaultCandidateRepository = DefaultCandidateRepository.withExisting(SABINE_CANDIDATE, GABRIEL_CANDIDATE);
-        defaultEmailSender = DefaultEmailSender.with(MessageTemplate.createMessage(SABINE_CANDIDATE));
+        defaultEmailSender = new DefaultEmailSender();
         defaultLogger = DefaultLogger.with(LOG_SABINE_MESSAGE_WAS_SENT);
-        confirmationSender = new ConfirmationSender(defaultCandidateRepository, defaultEmailSender, defaultLogger);
+        defaultArchiveEmail = DefaultArchiveEmail.with(SABINE_EMAIL_ADDRESS);
+        confirmationSender = new ConfirmationSender(defaultCandidateRepository, defaultEmailSender, defaultLogger, defaultArchiveEmail);
 
         //WHEN
         confirmationSender.send();
@@ -53,18 +58,20 @@ public class CommunicationAcceptanceTest {
         assertThat(defaultLogger.print())
             .containsOnlyOnce(LOG_SABINE_MESSAGE_WAS_SENT)
             .containsOnlyOnce(LOG_GABRIEL_MESSAGE_WAS_SENT);
-        assertThat(defaultEmailSender.getMessagesSent())
+        assertThat(defaultArchiveEmail.retrieveEmails())
             .hasSize(2)
-            .containsExactlyInAnyOrder(MessageTemplate.createMessage(SABINE_CANDIDATE), MessageTemplate.createMessage(GABRIEL_CANDIDATE));
+            .containsExactlyInAnyOrder(SABINE_EMAIL_ADDRESS, GABRIEL_EMAIL_ADDRESS);
     }
 
     @Test
     public void should_send_a_warning_message_when_all_candidates_already_received_the_message() {
         //GIVEN
         defaultCandidateRepository = DefaultCandidateRepository.withExisting(SABINE_CANDIDATE, GABRIEL_CANDIDATE);
-        defaultEmailSender = DefaultEmailSender.with(MessageTemplate.createMessage(SABINE_CANDIDATE), MessageTemplate.createMessage(GABRIEL_CANDIDATE));
+        defaultEmailSender = new DefaultEmailSender();
+        defaultArchiveEmail = DefaultArchiveEmail.with(SABINE_EMAIL_ADDRESS, GABRIEL_EMAIL_ADDRESS);
         defaultLogger = DefaultLogger.with(LOG_SABINE_MESSAGE_WAS_SENT, LOG_GABRIEL_MESSAGE_WAS_SENT);
-        confirmationSender = new ConfirmationSender(defaultCandidateRepository, defaultEmailSender, defaultLogger);
+        DefaultArchiveEmail defaultArchiveEmail = new DefaultArchiveEmail();
+        confirmationSender = new ConfirmationSender(defaultCandidateRepository, defaultEmailSender, defaultLogger, defaultArchiveEmail);
 
         //WHEN
         confirmationSender.send();

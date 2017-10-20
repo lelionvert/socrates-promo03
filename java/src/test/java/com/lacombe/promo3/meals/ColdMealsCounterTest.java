@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static com.lacombe.promo3.meals.ColdMealsCounter.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -21,6 +22,8 @@ public class ColdMealsCounterTest {
     private CheckIn checkIn;
 
     private ColdMealsCounter counter;
+
+    @Mock
     private RegistrationBook registrationBook;
 
     @Before
@@ -32,6 +35,7 @@ public class ColdMealsCounterTest {
     public void should_have_zero_cold_meal_when_there_is_no_check_in() throws Exception {
         //Arrange
         when(checkInProvider.getRegistrationBook()).thenReturn(registrationBook);
+        when(registrationBook.isEmpty()).thenReturn(false);
 
         //Act
         int nbColdMeals = counter.count();
@@ -45,14 +49,14 @@ public class ColdMealsCounterTest {
     public void should_have_one_cold_meal_when_there_is_one_late_check_in() throws Exception {
         //Arrange
         registrationBook = RegistrationBook.of(checkIn);
-        when(checkIn.isBetween(ColdMealsCounter.BEGIN_DATE, ColdMealsCounter.END_DATE)).thenReturn(true);
+        when(checkIn.isBetween(BEGIN_DATE, END_DATE)).thenReturn(true);
         when(checkInProvider.getRegistrationBook()).thenReturn(registrationBook);
 
         //Act
         int nbColdMeals = counter.count();
 
         //Assert
-        verify(checkIn).isBetween(ColdMealsCounter.BEGIN_DATE, ColdMealsCounter.END_DATE);
+        verify(checkIn).isBetween(BEGIN_DATE, END_DATE);
         assertThat(nbColdMeals).isEqualTo(1);
     }
 
@@ -60,7 +64,7 @@ public class ColdMealsCounterTest {
     public void should_have_zero_cold_meal_when_check_in_date_is_before_begin_cold_meals_date() throws Exception {
         //Arrange
         registrationBook = RegistrationBook.of(checkIn);
-        when(checkIn.isBetween(ColdMealsCounter.BEGIN_DATE, ColdMealsCounter.END_DATE)).thenReturn(false);
+        when(checkIn.isBetween(BEGIN_DATE, END_DATE)).thenReturn(false);
         when(checkInProvider.getRegistrationBook()).thenReturn(registrationBook);
 
         //Act

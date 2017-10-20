@@ -14,7 +14,10 @@ class ColdMealsCounter {
     }
 
     int count() {
+
         RegistrationBook registrationBook = checkInProvider.getRegistrationBook();
-        return (registrationBook == null) ? 0: registrationBook.countBetween(BEGIN_DATE, END_DATE);
+        // objet period
+        // wrapper int
+        return registrationBook.countBetween(BEGIN_DATE, END_DATE);
     }
 }

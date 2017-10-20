@@ -18,6 +18,8 @@ public class RegistrationBook {
     }
 
     Integer countBetween(LocalDateTime begin, LocalDateTime end) {
+        //TODO remplacer le collect par count
+        if(isEmpty()) return 0;
         return checkIns.stream().filter(checkIn -> checkIn.isBetween(begin, end)).collect(Collectors.toList()).size();
     }
 
@@ -42,4 +44,7 @@ public class RegistrationBook {
     }
 
 
+    public boolean isEmpty() {
+        return checkIns.isEmpty();
+    }
 }

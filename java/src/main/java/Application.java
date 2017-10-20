@@ -21,6 +21,8 @@ public class Application {
     private static final String CANDIDATE_EMAIL_MESSAGE = "Email du candidat :";
     private static final String NO_FOUND_CANDIDATE_MESSAGE = "Aucun candidat trouvé.";
     public static final String CANDIDATE_FIRST_NAME = "Prénom du candidat :";
+    public static final String CONFIRMATIONS_EMAIL_ARE_SENT = "Les emails de confirmation ont été envoyés.";
+    public static final String NO_CONFIRMATIONS_EMAIL_SENT = "A jour. Aucun mails de confirmation à envoyer.";
 
     private static CandidateRegistrationManager candidateRegistrationManager;
     private static final Scanner scanner = new Scanner(System.in);
@@ -67,9 +69,9 @@ public class Application {
     private static void sendConfirmations() {
         String message;
         if (confirmationSender.send() == EmailStatus.NO_EMAIL_SENT) {
-            message = "A jour. Aucun mails de confirmation à envoyer.";
+            message = NO_CONFIRMATIONS_EMAIL_SENT;
         } else {
-            message = "Les emails de confirmation ont été envoyés.";
+            message = CONFIRMATIONS_EMAIL_ARE_SENT;
         }
         System.out.println(message);
     }
@@ -97,14 +99,21 @@ public class Application {
         System.out.println(CANDIDATE_EMAIL_MESSAGE);
         String emailValue = scanner.nextLine();
         Email email;
+        boolean isAdded = false;
         try {
             email = Email.of(emailValue);
             Candidate candidate = new Candidate(email, firstNameValue);
-            candidateRegistrationManager.register(candidate);
-            System.out.println(CANDIDATE_ADDED_MESSAGE);
+            isAdded = candidateRegistrationManager.register(candidate);
         } catch (Exception e) {
             System.out.println(NOT_VALID_EMAIL_MESSAGE);
         }
+        String message;
+        if(isAdded)
+            message = CANDIDATE_ADDED_MESSAGE;
+        else
+            message = "Il existe déjà un candidat avec cet email.";
+        System.out.println(message);
+
     }
 
     private static void showCandidatesEmail() {

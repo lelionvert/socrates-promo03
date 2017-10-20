@@ -18,15 +18,21 @@ public class CandidateRegistrationManager {
         return candidateRepository.getEmails();
     }
 
-    public void register(Candidate... candidates) {
+    public boolean register(Candidate... candidates) {
+        boolean allIsAdded = true;
         for (Candidate candidate : candidates){
-            registerOne(candidate);
+            if(!registerOne(candidate))
+                allIsAdded = false;
         }
+        return allIsAdded;
     }
 
-    private void registerOne(Candidate candidate) {
+    private boolean registerOne(Candidate candidate) {
+        boolean isAdded = false;
         if (!candidateRepository.hasAlready(candidate)) {
             candidateRepository.add(candidate);
+            isAdded = true;
         }
+        return isAdded;
     }
 }

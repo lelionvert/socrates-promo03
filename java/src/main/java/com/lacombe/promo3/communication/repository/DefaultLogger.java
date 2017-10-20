@@ -10,7 +10,7 @@ import java.util.Collection;
 public class DefaultLogger implements Logger{
 
     private static final String CARRIAGE_RETURN_DELIMITER = "\n";
-    private static final String PATTERN_LOG_WHEN_MESSAGE_SENT = "An email was sent to {0}";
+    private static final String PATTERN_LOG_WHEN_MESSAGE_SENT = "Un email a été envoyé à {0}";
 
     private final Collection<String> messagesLog;
 

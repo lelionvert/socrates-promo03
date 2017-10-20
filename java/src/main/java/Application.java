@@ -18,6 +18,7 @@ import java.util.Scanner;
 
 class Application {
 
+    public static final String NO_EMAIL_SENT_MESSAGE = "Aucun email n'a été envoyé.";
     private final PrintStream out;
     private final Scanner in;
     private final String CANDIDATE_FIRST_NAME = "Prénom du candidat :";
@@ -27,6 +28,7 @@ class Application {
     private CandidateRegistrationManager candidateRegistrationManager;
     private ConfirmationSender confirmationSender;
     private final InputStream in1;
+    private final DefaultLogger defaultLogger = new DefaultLogger();
 
     public static void main(String[] args) throws IOException {
         Application application = new Application(System.out, System.in);
@@ -51,6 +53,7 @@ class Application {
             out.println("** 1 - Récupérer la liste des emails candidat **");
             out.println("** 2 - Ajouter un candidat                    **");
             out.println("** 3 - Envoyer les emails de confirmation     **");
+            out.println("** 4 - Afficher les logs d'envoi d'emails     **");
             out.println("** 0 - Quitter                                **");
             out.println("**                                            **");
             out.println("************************************************");
@@ -68,11 +71,22 @@ class Application {
                 case 3:
                     sendConfirmations();
                     break;
+                case 4:
+                    showEmailConfirmationLog();
+                    break;
             }
 
             out.println("Taper Entrer pour continuer ........\n");
             in1.read();
         } while (choice != 0);
+    }
+
+    private void showEmailConfirmationLog() {
+        String log = defaultLogger.print();
+        if(log.isEmpty()) {
+            log = NO_EMAIL_SENT_MESSAGE;
+        }
+        out.println(log);
     }
 
     private void sendConfirmations() {
@@ -97,7 +111,6 @@ class Application {
         properties.put("mail.smtp.port", "587");
 
         EmailSender emailSender = new SMTPEmailSender(properties);
-        DefaultLogger defaultLogger = new DefaultLogger();
         DefaultEmailArchiver defaultArchiveEmail = new DefaultEmailArchiver();
         confirmationSender = new ConfirmationSender(defaultCandidateRepository, emailSender, defaultLogger, defaultArchiveEmail);
     }

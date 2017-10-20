@@ -22,8 +22,8 @@ import static org.mockito.Mockito.times;
 @RunWith(MockitoJUnitRunner.class)
 public class CommunicationAcceptanceTest {
 
-    private static final String LOG_SABINE_MESSAGE_WAS_SENT = "An email was sent to Email{email='sabine@lcdlv.fr'}";
-    private static final String LOG_GABRIEL_MESSAGE_WAS_SENT = "An email was sent to Email{email='gabriel@lcdlv.fr'}";
+    private static final String LOG_SABINE_MESSAGE_WAS_SENT = "Un email a été envoyé à Email{email='sabine@lcdlv.fr'}";
+    private static final String LOG_GABRIEL_MESSAGE_WAS_SENT = "Un email a été envoyé à Email{email='gabriel@lcdlv.fr'}";
 
     private static final Email SABINE_EMAIL_ADDRESS = Email.of("sabine@lcdlv.fr");
     private static final Candidate SABINE_CANDIDATE = new Candidate(SABINE_EMAIL_ADDRESS, "Sabine");

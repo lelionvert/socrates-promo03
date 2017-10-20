@@ -14,17 +14,11 @@ public class SMTPEmailSender implements EmailSender {
 
     Session session;
 
-    public SMTPEmailSender() {
+    public SMTPEmailSender(Properties properties) {
         final String username = "lacombe.smtp@gmail.com";
         final String password = "LaCombePromo03";
 
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
-
-        session = Session.getInstance(props,
+        session = Session.getInstance(properties,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication(username, password);

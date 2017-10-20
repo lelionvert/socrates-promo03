@@ -4,6 +4,7 @@ import com.lacombe.promo3.communication.model.EmailMessage;
 import com.lacombe.promo3.communication.repository.SMTPEmailSender;
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class SMTPEmailSenderTest {
@@ -20,6 +21,7 @@ public class SMTPEmailSenderTest {
                                                                 .withBody("test")
                                                                 .build();
 
+    @Ignore
     @Test
     public void should_send_an_email() throws Exception {
         SMTPEmailSender smtpEmailSender = new SMTPEmailSender();

@@ -13,6 +13,11 @@ public class Candidate {
         this.firstName = firstName;
     }
 
+    public Candidate(Email email) {
+        this.email = email;
+        this.firstName = "";
+    }
+
     public Email getEmail() {
         return email;
     }

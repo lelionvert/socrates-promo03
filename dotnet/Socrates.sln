@@ -1,21 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socrates", "Socrates\Socrates.csproj", "{6F81E0B6-1E07-466C-908C-F384BA8A85F1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socrates.Test", "Socrates.Test\Socrates.Test.csproj", "{064019A4-9710-47F4-9943-1AAABF8D5ED5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socrates.Web", "Socrates.Web\Socrates.Web.csproj", "{4A178C0A-0D57-4ABD-80A3-772D08AB75E3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socrates.Api", "Socrates.Api\Socrates.Api.csproj", "{49CA37D8-ECCF-44A4-9882-C55A92A6E715}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocratesLibrary", "SocratesLibrary\SocratesLibrary.csproj", "{73EEC144-E3F9-4AFB-BAA0-1F3965D4A2FE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsumPostgresql", "ConsumPostgresql\ConsumPostgresql.csproj", "{424742A2-A22E-4107-BC14-1255CAB6A23E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsumEntityFramework", "ConsumEntityFramework\ConsumEntityFramework.csproj", "{175ADBED-ACD2-4ED4-AB2E-DC5E8183E232}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,26 +21,6 @@ Global
 		{064019A4-9710-47F4-9943-1AAABF8D5ED5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{064019A4-9710-47F4-9943-1AAABF8D5ED5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{064019A4-9710-47F4-9943-1AAABF8D5ED5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4A178C0A-0D57-4ABD-80A3-772D08AB75E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A178C0A-0D57-4ABD-80A3-772D08AB75E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A178C0A-0D57-4ABD-80A3-772D08AB75E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A178C0A-0D57-4ABD-80A3-772D08AB75E3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{49CA37D8-ECCF-44A4-9882-C55A92A6E715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{49CA37D8-ECCF-44A4-9882-C55A92A6E715}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{49CA37D8-ECCF-44A4-9882-C55A92A6E715}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{49CA37D8-ECCF-44A4-9882-C55A92A6E715}.Release|Any CPU.Build.0 = Release|Any CPU
-		{73EEC144-E3F9-4AFB-BAA0-1F3965D4A2FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{73EEC144-E3F9-4AFB-BAA0-1F3965D4A2FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{73EEC144-E3F9-4AFB-BAA0-1F3965D4A2FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{73EEC144-E3F9-4AFB-BAA0-1F3965D4A2FE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{424742A2-A22E-4107-BC14-1255CAB6A23E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{424742A2-A22E-4107-BC14-1255CAB6A23E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{424742A2-A22E-4107-BC14-1255CAB6A23E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{424742A2-A22E-4107-BC14-1255CAB6A23E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{175ADBED-ACD2-4ED4-AB2E-DC5E8183E232}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{175ADBED-ACD2-4ED4-AB2E-DC5E8183E232}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{175ADBED-ACD2-4ED4-AB2E-DC5E8183E232}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{175ADBED-ACD2-4ED4-AB2E-DC5E8183E232}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

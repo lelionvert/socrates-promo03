@@ -19,7 +19,7 @@ namespace Socrates.Test.Meals
             var period = new Period(startingDate,endingDate);
 
             // RUN
-            var isSpecificDateContainedInPeriod = period.IsContainedWith(inRangeDate);
+            var isSpecificDateContainedInPeriod = period.Contains(inRangeDate);
 
             // ASSERT
             Check.That(isSpecificDateContainedInPeriod).IsTrue();
@@ -36,7 +36,7 @@ namespace Socrates.Test.Meals
             var period = new Period(startingDate, endingDate);
 
             // RUN
-            var isSpecificDateContainedInPeriod = period.IsContainedWith(notInRangeDate);
+            var isSpecificDateContainedInPeriod = period.Contains(notInRangeDate);
 
             // ASSERT
             Check.That(isSpecificDateContainedInPeriod).IsFalse();

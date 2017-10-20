@@ -4,8 +4,8 @@ namespace Socrates.Meals
 {
     public class Period
     {
-        private DateTime startingDate;
-        private DateTime endingDate;
+        private readonly DateTime startingDate;
+        private readonly DateTime endingDate;
 
         public Period(DateTime startingDate, DateTime endingDate)
         {
@@ -13,7 +13,7 @@ namespace Socrates.Meals
             this.endingDate = endingDate;
         }
 
-        public bool IsContainedWith(DateTime specificDate)
+        public bool Contains(DateTime specificDate)
         {
             return specificDate >= startingDate && specificDate < endingDate;
         }

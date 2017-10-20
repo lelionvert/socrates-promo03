@@ -14,7 +14,7 @@ class ColdMealsCounter {
     }
 
     int count() {
-        CheckIns checkIns = checkInProvider.getCheckIns();
-        return (checkIns == null) ? 0: checkIns.countBetween(BEGIN_DATE, END_DATE);
+        RegistrationBook registrationBook = checkInProvider.getRegistrationBook();
+        return (registrationBook == null) ? 0: registrationBook.countBetween(BEGIN_DATE, END_DATE);
     }
 }

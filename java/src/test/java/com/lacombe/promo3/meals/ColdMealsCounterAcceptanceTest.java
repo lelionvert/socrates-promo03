@@ -5,15 +5,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockitoAnnotations;
 
-import static com.lacombe.promo3.meals.MealsUtils.checkInOnFirstDay;
-import static com.lacombe.promo3.meals.MealsUtils.checkInWithoutDate;
+import static com.lacombe.promo3.meals.CheckInGenerator.checkInOnFirstDay;
+import static com.lacombe.promo3.meals.CheckInGenerator.checkInWithoutDate;
 
 public class ColdMealsCounterAcceptanceTest {
     private CheckIn regisCheckIn;
     private CheckIn fannyCheckIn;
     private CheckIn emilieCheckIn;
     private CheckIn julesCheckIn;
-    private CheckIns checkIns;
+    private RegistrationBook registrationBook;
 
     @Before
     public void setUp() throws Exception {
@@ -27,9 +27,9 @@ public class ColdMealsCounterAcceptanceTest {
         fannyCheckIn = checkInOnFirstDay(18, 30, "fanny.dubois@crafts.com");
         emilieCheckIn = checkInOnFirstDay(19, 0, "emilie.dupuy@testing.fr");
         julesCheckIn = checkInOnFirstDay(20, 45, "jules.fournier@xp.com");
-        checkIns = CheckIns.of(regisCheckIn, fannyCheckIn, emilieCheckIn, julesCheckIn);
+        registrationBook = RegistrationBook.of(regisCheckIn, fannyCheckIn, emilieCheckIn, julesCheckIn);
 
-        CheckInProvider checkInProvider = InMemoryCheckInProvider.of(checkIns);
+        CheckInProvider checkInProvider = InMemoryCheckInProvider.of(registrationBook);
         ColdMealsCounter coldMealsCounter = new ColdMealsCounter(checkInProvider);
 
         // Act
@@ -46,9 +46,9 @@ public class ColdMealsCounterAcceptanceTest {
         fannyCheckIn = checkInOnFirstDay(17, 30, "fanny.dubois@crafts.com");
         emilieCheckIn = checkInOnFirstDay(11, 0, "emilie.dupuy@testing.fr");
         julesCheckIn = checkInOnFirstDay(21, 15, "jules.fournier@xp.com");
-        checkIns = CheckIns.of(regisCheckIn, fannyCheckIn, emilieCheckIn, julesCheckIn);
+        registrationBook = RegistrationBook.of(regisCheckIn, fannyCheckIn, emilieCheckIn, julesCheckIn);
 
-        CheckInProvider checkInProvider = InMemoryCheckInProvider.of(checkIns);
+        CheckInProvider checkInProvider = InMemoryCheckInProvider.of(registrationBook);
         ColdMealsCounter coldMealsCounter = new ColdMealsCounter(checkInProvider);
 
         // Act
@@ -65,9 +65,9 @@ public class ColdMealsCounterAcceptanceTest {
         fannyCheckIn = checkInWithoutDate("fanny.dubois@crafts.com");
         emilieCheckIn = checkInWithoutDate("emilie.dupuy@testing.fr");
         julesCheckIn = checkInOnFirstDay(20, 45, "jules.fournier@xp.com");
-        checkIns = CheckIns.of(regisCheckIn, fannyCheckIn, emilieCheckIn, julesCheckIn);
+        registrationBook = RegistrationBook.of(regisCheckIn, fannyCheckIn, emilieCheckIn, julesCheckIn);
 
-        CheckInProvider checkInProvider = InMemoryCheckInProvider.of(checkIns);
+        CheckInProvider checkInProvider = InMemoryCheckInProvider.of(registrationBook);
         ColdMealsCounter coldMealsCounter = new ColdMealsCounter(checkInProvider);
 
         // Act

@@ -1,28 +1,27 @@
 package com.lacombe.promo3.meals;
 
 public class InMemoryCheckInProvider implements CheckInProvider {
-    private final CheckIns checkIns;
+    private final RegistrationBook registrationBook;
 
-    private InMemoryCheckInProvider(CheckIns checkIns) {
-        this.checkIns = checkIns;
+    private InMemoryCheckInProvider(RegistrationBook registrationBook) {
+        this.registrationBook = registrationBook;
     }
 
-    static InMemoryCheckInProvider of(CheckIns checkIns) {
-        return new InMemoryCheckInProvider(checkIns);
+    static InMemoryCheckInProvider of(RegistrationBook registrationBook) {
+        return new InMemoryCheckInProvider(registrationBook);
     }
 
-    @Override
-    public CheckIns getCheckIns() {
-        return checkIns;
+    public RegistrationBook getRegistrationBook() {
+        return registrationBook;
     }
 
     @Override
     public void add(CheckIn checkIn) {
-        checkIns.add(checkIn);
+        registrationBook.add(checkIn);
     }
 
     @Override
     public int size() {
-        return checkIns.size();
+        return registrationBook.size();
     }
 }

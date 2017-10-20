@@ -11,7 +11,7 @@ public class CheckInTest {
     @Test
     public void should_not_be_between_when_check_in_date_is_not_given() throws Exception {
         // Arrange
-        regisCheckIn = MealsUtils.checkInWithoutDate("regis.dubois@socrates.com");
+        regisCheckIn = CheckInGenerator.checkInWithoutDate("regis.dubois@socrates.com");
 
         // Act
         Boolean checkInBetween = regisCheckIn.isBetween(ColdMealsCounter.BEGIN_DATE, ColdMealsCounter.END_DATE);

@@ -21,7 +21,7 @@ public class ColdMealsCounterTest {
     private CheckIn checkIn;
 
     private ColdMealsCounter counter;
-    private CheckIns checkIns;
+    private RegistrationBook registrationBook;
 
     @Before
     public void setUp() throws Exception {
@@ -31,22 +31,22 @@ public class ColdMealsCounterTest {
     @Test
     public void should_have_zero_cold_meal_when_there_is_no_check_in() throws Exception {
         //Arrange
-        when(checkInProvider.getCheckIns()).thenReturn(checkIns);
+        when(checkInProvider.getRegistrationBook()).thenReturn(registrationBook);
 
         //Act
         int nbColdMeals = counter.count();
 
         //Assert
-        verify(checkInProvider).getCheckIns();
+        verify(checkInProvider).getRegistrationBook();
         assertThat(nbColdMeals).isEqualTo(0);
     }
 
     @Test
     public void should_have_one_cold_meal_when_there_is_one_late_check_in() throws Exception {
         //Arrange
-        checkIns = CheckIns.of(checkIn);
+        registrationBook = RegistrationBook.of(checkIn);
         when(checkIn.isBetween(ColdMealsCounter.BEGIN_DATE, ColdMealsCounter.END_DATE)).thenReturn(true);
-        when(checkInProvider.getCheckIns()).thenReturn(checkIns);
+        when(checkInProvider.getRegistrationBook()).thenReturn(registrationBook);
 
         //Act
         int nbColdMeals = counter.count();
@@ -59,9 +59,9 @@ public class ColdMealsCounterTest {
     @Test
     public void should_have_zero_cold_meal_when_check_in_date_is_before_begin_cold_meals_date() throws Exception {
         //Arrange
-        checkIns = CheckIns.of(checkIn);
+        registrationBook = RegistrationBook.of(checkIn);
         when(checkIn.isBetween(ColdMealsCounter.BEGIN_DATE, ColdMealsCounter.END_DATE)).thenReturn(false);
-        when(checkInProvider.getCheckIns()).thenReturn(checkIns);
+        when(checkInProvider.getRegistrationBook()).thenReturn(registrationBook);
 
         //Act
         int nbColdMeals = counter.count();

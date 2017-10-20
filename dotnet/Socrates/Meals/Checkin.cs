@@ -14,15 +14,6 @@ namespace Socrates.Meals
             this.participantCheckinDate = participantCheckinDate;
         }
 
-        private bool IsAfter(DateTime startingDate)
-        {
-            return participantCheckinDate >= startingDate;
-        }
-
-        public bool IsBetween(DateTime startingDate, DateTime endingDate)
-        {
-            return IsAfter(startingDate) && !IsAfter(endingDate);
-        }
 
         public bool IsContainedBy(Period period)
         {

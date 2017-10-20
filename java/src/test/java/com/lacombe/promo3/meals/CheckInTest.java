@@ -1,5 +1,6 @@
 package com.lacombe.promo3.meals;
 
+import com.lacombe.promo3.Period;
 import com.lacombe.promo3.registration.model.Email;
 import org.junit.Test;
 
@@ -15,6 +16,19 @@ public class CheckInTest {
 
         // Act
         Boolean checkInBetween = regisCheckIn.isBetween(ColdMealsCounter.BEGIN_DATE, ColdMealsCounter.END_DATE);
+
+        // Assert
+        assertThat(checkInBetween).isFalse();
+    }
+
+    @Test
+    public void should_not_be_include_in_period_when_check_in_date_is_not_given() throws Exception {
+        // Arrange
+        regisCheckIn = CheckInGenerator.checkInWithoutDate("regis.dubois@socrates.com");
+        Period period = new Period(ColdMealsCounter.BEGIN_DATE, ColdMealsCounter.END_DATE);
+
+        // Act
+        Boolean checkInBetween = regisCheckIn.isIncludedIn(period);
 
         // Assert
         assertThat(checkInBetween).isFalse();

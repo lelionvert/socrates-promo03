@@ -1,5 +1,6 @@
 package com.lacombe.promo3.meals;
 
+import com.lacombe.promo3.Period;
 import com.lacombe.promo3.registration.model.Email;
 
 import java.time.LocalDateTime;
@@ -25,5 +26,9 @@ class CheckIn {
 
     boolean hasSameEmail(CheckIn checkIn) {
         return this.email.equals(checkIn.email);
+    }
+
+    public Boolean isIncludedIn(Period period) {
+        return false;
     }
 }

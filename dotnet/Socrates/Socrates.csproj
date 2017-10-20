@@ -52,6 +52,7 @@
     <Compile Include="Meals\Checkins.cs" />
     <Compile Include="Meals\ColdMealsCounter.cs" />
     <Compile Include="Meals\ICheckinProvider.cs" />
+    <Compile Include="Meals\Period.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CandidateRegistration\Candidat.cs" />

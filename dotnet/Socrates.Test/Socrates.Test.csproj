@@ -126,6 +126,7 @@
     <Compile Include="Meals\CheckinTest.cs" />
     <Compile Include="Meals\ColdMealsCounterAcceptanceTest.cs" />
     <Compile Include="Meals\ColdMealsCounterTest.cs" />
+    <Compile Include="Meals\PeriodTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -18,13 +18,14 @@ namespace Socrates.Meals
             return new Checkins(list);
         }
 
-        public int GiveCheckinsNumberBetween(DateTime startingDate, DateTime endingDate)
+        
+
+        public int GiveCheckinsNumberBetween(Period period)
         {
-            return checkinList.Where(checkin => checkin.IsBetween(startingDate, endingDate)).Count();
+            return checkinList.Where(checkin => checkin.IsContainedBy(period)).Count();
         }
 
 
-        
 
         public int CountCheckins()
         {

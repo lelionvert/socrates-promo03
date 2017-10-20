@@ -14,7 +14,7 @@ namespace Socrates.Meals
             this.participantCheckinDate = participantCheckinDate;
         }
 
-        public bool IsAfter(DateTime startingDate)
+        private bool IsAfter(DateTime startingDate)
         {
             return participantCheckinDate >= startingDate;
         }

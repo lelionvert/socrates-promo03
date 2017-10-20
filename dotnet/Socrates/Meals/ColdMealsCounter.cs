@@ -7,17 +7,19 @@ namespace Socrates.Meals
         private ICheckinProvider checkinProvider;
         private DateTime startingDate = new DateTime(2017, 10, 27, 21, 00, 00);
         private DateTime endingDate = new DateTime(2017, 10, 27, 23, 59, 59);
+        private readonly Period coldMealsPeriod;
 
         public ColdMealsCounter(ICheckinProvider checkinProvider)
         {
             this.checkinProvider = checkinProvider;
+            this.coldMealsPeriod = new Period(startingDate, endingDate);
         }
 
         public int CountColdMeals()
         {
             var checkins = checkinProvider.GetCheckins();
 
-            var checkinsNumber = checkins.GiveCheckinsNumberBetween(startingDate, endingDate);
+            var checkinsNumber = checkins.GiveCheckinsNumberBetween(coldMealsPeriod);
 
             return checkinsNumber;
         }

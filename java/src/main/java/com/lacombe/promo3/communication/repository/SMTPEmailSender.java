@@ -43,10 +43,8 @@ public class SMTPEmailSender implements EmailSender {
 
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(
                     emailMessage.getRecipient().getEmailAddress(), false));
-            System.out.println("EmailMessage is ready");
             Transport.send(msg);
 
-            System.out.println("EMail Sent Successfully!!");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import java.util.Properties;
 
-public class SMTPEmailSenderTest {
+public class SMTPEmailSenderIntegrationTest {
 
     private static final Email HOUSSAM_EMAIL = Email.of("houssam@lcdlv.fr");
 

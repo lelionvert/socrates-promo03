@@ -8,7 +8,7 @@ import java.util.Collection;
 
 public class MockCandidateRepository implements CandidateRepository {
 
-    private Candidate existingCandidate;
+    private final Candidate existingCandidate;
     private boolean isGetEmailCalled;
     private boolean isAddCalled;
     private boolean isMethodHasAlreadyCalled;
@@ -25,10 +25,7 @@ public class MockCandidateRepository implements CandidateRepository {
     @Override
     public boolean hasAlready(Candidate candidate) {
         isMethodHasAlreadyCalled = true;
-        if(existingCandidate.equals(candidate)) {
-            return true;
-        }
-        return false;
+        return existingCandidate.equals(candidate);
     }
 
     @Override

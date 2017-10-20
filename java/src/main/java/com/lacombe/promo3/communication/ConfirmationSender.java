@@ -16,10 +16,10 @@ import java.util.stream.Collectors;
 
 public class ConfirmationSender {
 
-    private CandidateRepository candidateRepository;
-    private EmailSender emailSender;
-    private Logger logger;
-    private EmailArchiver emailArchiver;
+    private final CandidateRepository candidateRepository;
+    private final EmailSender emailSender;
+    private final Logger logger;
+    private final EmailArchiver emailArchiver;
 
     public ConfirmationSender(CandidateRepository candidateRepository, EmailSender emailSender, Logger logger, EmailArchiver EmailArchiver) {
         this.candidateRepository = candidateRepository;

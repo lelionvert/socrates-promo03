@@ -10,42 +10,53 @@ import com.lacombe.promo3.registration.model.Email;
 import com.lacombe.promo3.registration.repository.DefaultCandidateRepository;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Collection;
 import java.util.Properties;
 import java.util.Scanner;
 
-public class Application {
+class Application {
 
-    private static final String CANDIDATE_ADDED_MESSAGE = "Le candidat a été ajouté.";
-    private static final String NOT_VALID_EMAIL_MESSAGE = "L'email n'est pas valide.";
-    private static final String CANDIDATE_EMAIL_MESSAGE = "Email du candidat :";
-    private static final String NO_FOUND_CANDIDATE_MESSAGE = "Aucun candidat trouvé.";
-    public static final String CANDIDATE_FIRST_NAME = "Prénom du candidat :";
-    public static final String CONFIRMATIONS_EMAIL_ARE_SENT = "Les emails de confirmation ont été envoyés.";
-    public static final String NO_CONFIRMATIONS_EMAIL_SENT = "A jour. Aucun mails de confirmation à envoyer.";
+    private final PrintStream out;
+    private final Scanner in;
+    private final String CANDIDATE_FIRST_NAME = "Prénom du candidat :";
+    private final String CONFIRMATIONS_EMAIL_ARE_SENT = "Les emails de confirmation ont été envoyés.";
 
-    private static CandidateRegistrationManager candidateRegistrationManager;
-    private static final Scanner scanner = new Scanner(System.in);
-    private static ConfirmationSender confirmationSender;
+    private final String NO_CONFIRMATIONS_EMAIL_SENT = "A jour. Aucun mails de confirmation à envoyer.";
+    private CandidateRegistrationManager candidateRegistrationManager;
+    private ConfirmationSender confirmationSender;
+    private final InputStream in1;
 
     public static void main(String[] args) throws IOException {
+        Application application = new Application(System.out, System.in);
+        application.mainBlock();
+    }
+
+    Application(PrintStream out, InputStream in2) {
+        this.out = out;
+        this.in1 = in2;
+        this.in = new Scanner(in1);
+    }
+
+    void mainBlock() throws IOException {
         init();
 
         int choice;
         do {
-            System.out.println("************************************************");
-            System.out.println("**              SOCRATES FR                   **");
-            System.out.println("************************************************");
-            System.out.println("**                                            **");
-            System.out.println("** 1 - Récupérer la liste des emails candidat **");
-            System.out.println("** 2 - Ajouter un candidat                    **");
-            System.out.println("** 3 - Envoyer les emails de confirmation     **");
-            System.out.println("** 0 - Quitter                                **");
-            System.out.println("**                                            **");
-            System.out.println("************************************************");
+            out.println("************************************************");
+            out.println("**              SOCRATES FR                   **");
+            out.println("************************************************");
+            out.println("**                                            **");
+            out.println("** 1 - Récupérer la liste des emails candidat **");
+            out.println("** 2 - Ajouter un candidat                    **");
+            out.println("** 3 - Envoyer les emails de confirmation     **");
+            out.println("** 0 - Quitter                                **");
+            out.println("**                                            **");
+            out.println("************************************************");
 
-            choice = scanner.nextInt();
-            scanner.nextLine(); // retrieve \n from the previous nextInt()
+            choice = in.nextInt();
+            in.nextLine(); // retrieve \n from the previous nextInt()
 
             switch (choice) {
                 case 1:
@@ -59,24 +70,22 @@ public class Application {
                     break;
             }
 
-            System.out.println("Taper Entrer pour continuer ........\n");
-            System.in.read();
+            out.println("Taper Entrer pour continuer ........\n");
+            in1.read();
         } while (choice != 0);
-
-        System.exit(0);
     }
 
-    private static void sendConfirmations() {
+    private void sendConfirmations() {
         String message;
         if (confirmationSender.send() == EmailStatus.NO_EMAIL_SENT) {
             message = NO_CONFIRMATIONS_EMAIL_SENT;
         } else {
             message = CONFIRMATIONS_EMAIL_ARE_SENT;
         }
-        System.out.println(message);
+        out.println(message);
     }
 
-    private static void init() {
+    private void init() {
         DefaultCandidateRepository defaultCandidateRepository = new DefaultCandidateRepository();
 
         candidateRegistrationManager = new CandidateRegistrationManager(defaultCandidateRepository);
@@ -93,11 +102,12 @@ public class Application {
         confirmationSender = new ConfirmationSender(defaultCandidateRepository, emailSender, defaultLogger, defaultArchiveEmail);
     }
 
-    private static void addCandidate() throws IOException {
-        System.out.println(CANDIDATE_FIRST_NAME);
-        String firstNameValue = scanner.nextLine();
-        System.out.println(CANDIDATE_EMAIL_MESSAGE);
-        String emailValue = scanner.nextLine();
+    private void addCandidate() {
+        out.println(CANDIDATE_FIRST_NAME);
+        String firstNameValue = in.nextLine();
+        String CANDIDATE_EMAIL_MESSAGE = "Email du candidat :";
+        out.println(CANDIDATE_EMAIL_MESSAGE);
+        String emailValue = in.nextLine();
         Email email;
         boolean isAdded = false;
         try {
@@ -105,23 +115,26 @@ public class Application {
             Candidate candidate = new Candidate(email, firstNameValue);
             isAdded = candidateRegistrationManager.register(candidate);
         } catch (Exception e) {
-            System.out.println(NOT_VALID_EMAIL_MESSAGE);
+            String NOT_VALID_EMAIL_MESSAGE = "L'email n'est pas valide.";
+            out.println(NOT_VALID_EMAIL_MESSAGE);
         }
         String message;
-        if(isAdded)
+        String CANDIDATE_ADDED_MESSAGE = "Le candidat a été ajouté.";
+        if (isAdded)
             message = CANDIDATE_ADDED_MESSAGE;
         else
             message = "Il existe déjà un candidat avec cet email.";
-        System.out.println(message);
+        out.println(message);
 
     }
 
-    private static void showCandidatesEmail() {
+    private void showCandidatesEmail() {
         Collection<Email> emails = candidateRegistrationManager.findEmails();
         if (emails.isEmpty()) {
-            System.out.println(NO_FOUND_CANDIDATE_MESSAGE);
+            String NO_FOUND_CANDIDATE_MESSAGE = "Aucun candidat trouvé.";
+            out.println(NO_FOUND_CANDIDATE_MESSAGE);
         } else {
-            emails.forEach(System.out::println);
+            emails.forEach(out::println);
         }
     }
 }

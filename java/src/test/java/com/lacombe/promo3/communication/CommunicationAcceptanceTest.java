@@ -4,7 +4,6 @@ import com.lacombe.promo3.communication.model.Emails;
 import com.lacombe.promo3.communication.model.MessageTemplate;
 import com.lacombe.promo3.communication.repository.DefaultEmailArchiver;
 import com.lacombe.promo3.communication.repository.DefaultLogger;
-import com.lacombe.promo3.communication.repository.EmailArchiver;
 import com.lacombe.promo3.communication.repository.EmailSender;
 import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
@@ -26,9 +25,9 @@ public class CommunicationAcceptanceTest {
     private static final String LOG_SABINE_MESSAGE_WAS_SENT = "An email was sent to Email{email='sabine@lcdlv.fr'}";
     private static final String LOG_GABRIEL_MESSAGE_WAS_SENT = "An email was sent to Email{email='gabriel@lcdlv.fr'}";
 
-    public static final Email SABINE_EMAIL_ADDRESS = Email.of("sabine@lcdlv.fr");
+    private static final Email SABINE_EMAIL_ADDRESS = Email.of("sabine@lcdlv.fr");
     private static final Candidate SABINE_CANDIDATE = new Candidate(SABINE_EMAIL_ADDRESS, "Sabine");
-    public static final Email GABRIEL_EMAIL_ADDRESS = Email.of("gabriel@lcdlv.fr");
+    private static final Email GABRIEL_EMAIL_ADDRESS = Email.of("gabriel@lcdlv.fr");
     private static final Candidate GABRIEL_CANDIDATE = new Candidate(GABRIEL_EMAIL_ADDRESS, "Gabriel");
 
     private DefaultLogger defaultLogger;
@@ -37,6 +36,7 @@ public class CommunicationAcceptanceTest {
     private DefaultEmailArchiver defaultArchiveEmail;
 
     @Mock
+    private
     EmailSender emailSender;
 
     @Test

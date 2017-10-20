@@ -4,10 +4,10 @@ import com.lacombe.promo3.registration.model.Email;
 
 public class EmailMessage {
 
-    private Email sender;
-    private Email recipient;
-    private String object;
-    private String body;
+    private final Email sender;
+    private final Email recipient;
+    private final String object;
+    private final String body;
 
     private EmailMessage(Email sender, Email recipient, String object, String body) {
         this.sender = sender;
@@ -78,9 +78,9 @@ public class EmailMessage {
         EmailMessage emailMessage = (EmailMessage) o;
 
         if (sender != null ? !sender.equals(emailMessage.sender) : emailMessage.sender != null) return false;
-        if (recipient != null ? !recipient.equals(emailMessage.recipient) : emailMessage.recipient != null) return false;
-        if (object != null ? !object.equals(emailMessage.object) : emailMessage.object != null) return false;
-        return body != null ? body.equals(emailMessage.body) : emailMessage.body == null;
+        if (recipient != null ? !recipient.equals(emailMessage.recipient) : emailMessage.recipient != null)
+            return false;
+        return (object != null ? object.equals(emailMessage.object) : emailMessage.object == null) && (body != null ? body.equals(emailMessage.body) : emailMessage.body == null);
     }
 
     @Override

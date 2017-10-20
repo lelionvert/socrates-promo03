@@ -7,9 +7,9 @@ import java.text.MessageFormat;
 
 public class MessageTemplate {
 
-    public static final Email SENDER = Email.of("houssam@lcdlv.fr");
-    public static final String OBJECT = "Confirmation";
-    public static final String PATTERN_BODY = "Hello {0},\n Can you confirm me that you are coming at Socrates?\n Regards,\n Houssam Fakih";
+    private static final Email SENDER = Email.of("houssam@lcdlv.fr");
+    private static final String OBJECT = "Confirmation";
+    private static final String PATTERN_BODY = "Hello {0},\n Can you confirm me that you are coming at Socrates?\n Regards,\n Houssam Fakih";
 
     public static EmailMessage createMessage(Candidate candidate) {
 

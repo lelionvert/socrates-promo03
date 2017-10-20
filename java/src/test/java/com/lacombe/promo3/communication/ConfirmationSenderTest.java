@@ -34,15 +34,19 @@ public class ConfirmationSenderTest {
     private ConfirmationSender confirmationSender;
 
     @Mock
+    private
     CandidateRepository candidateRepository;
 
     @Mock
+    private
     EmailSender emailSender;
 
     @Mock
+    private
     Logger logger;
 
     @Mock
+    private
     EmailArchiver emailArchiver;
 
     @Test
@@ -62,7 +66,7 @@ public class ConfirmationSenderTest {
     public void should_send_email_to_one_candidate() {
         //GIVEN
         confirmationSender = new ConfirmationSender(candidateRepository, emailSender, logger, emailArchiver);
-        when(candidateRepository.getCandidates()).thenReturn(Arrays.asList(SABINE_CANDIDATE));
+        when(candidateRepository.getCandidates()).thenReturn(Collections.singletonList(SABINE_CANDIDATE));
         when(emailArchiver.retrieveEmails()).thenReturn(new Emails());
 
         //WHEN

@@ -1,16 +1,15 @@
 package com.lacombe.promo3.communication.model;
 
-import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
 
 import java.util.*;
 
 public class Emails {
 
-    private List<Email> emails;
+    private final List<Email> emails;
 
     public Emails() {
-        this.emails = new ArrayList<Email>();
+        this.emails = new ArrayList<>();
     }
 
     private Emails(List<Email> emails) {

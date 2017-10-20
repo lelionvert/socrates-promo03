@@ -4,7 +4,6 @@ import com.lacombe.promo3.registration.model.Candidate;
 import com.lacombe.promo3.registration.model.Email;
 
 import java.util.Collection;
-import java.util.List;
 
 public interface CandidateRepository {
 

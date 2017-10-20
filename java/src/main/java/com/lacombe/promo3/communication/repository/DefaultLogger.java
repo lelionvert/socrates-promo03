@@ -9,10 +9,10 @@ import java.util.Collection;
 
 public class DefaultLogger implements Logger{
 
-    public static final String CARRIAGE_RETURN_DELIMITER = "\n";
-    public static final String PATTERN_LOG_WHEN_MESSAGE_SENT = "An email was sent to {0}";
+    private static final String CARRIAGE_RETURN_DELIMITER = "\n";
+    private static final String PATTERN_LOG_WHEN_MESSAGE_SENT = "An email was sent to {0}";
 
-    Collection<String> messagesLog;
+    private final Collection<String> messagesLog;
 
     public DefaultLogger() {
         this.messagesLog = new ArrayList<>();

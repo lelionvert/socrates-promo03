@@ -12,7 +12,7 @@ import java.util.Properties;
 
 public class SMTPEmailSender implements EmailSender {
 
-    Session session;
+    private final Session session;
 
     public SMTPEmailSender(Properties properties) {
         final String username = "lacombe.smtp@gmail.com";

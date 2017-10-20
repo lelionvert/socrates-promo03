@@ -24,7 +24,7 @@ public class SMTPEmailSenderIntegrationTest {
                                                                 .withBody("test")
                                                                 .build();
     @Rule
-    public FakeSmtpRule smtpServer = new FakeSmtpRule(ServerConfiguration.create().port(2525).charset("UTF-8"));
+    public final FakeSmtpRule smtpServer = new FakeSmtpRule(ServerConfiguration.create().port(2525).charset("UTF-8"));
 
     @Test
     public void should_send_an_email() throws Exception {

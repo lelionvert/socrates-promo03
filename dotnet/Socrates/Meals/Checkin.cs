@@ -23,5 +23,10 @@ namespace Socrates.Meals
         {
             return IsAfter(startingDate) && !IsAfter(endingDate);
         }
+
+        public bool IsContainedBy(Period period)
+        {
+            return period.Contains(participantCheckinDate);
+        }
     }
 }

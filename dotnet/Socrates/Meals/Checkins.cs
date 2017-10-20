@@ -6,11 +6,11 @@ namespace Socrates.Meals
 {
     public class Checkins
     {
-        private IList<Checkin> values;
+        private IList<Checkin> checkinList;
 
         private Checkins(IList<Checkin> list)
         {
-            values = list;
+            checkinList = list;
         }
 
         public static Checkins FromList(IList<Checkin> list)
@@ -20,12 +20,15 @@ namespace Socrates.Meals
 
         public int GiveCheckinsNumberBetween(DateTime startingDate, DateTime endingDate)
         {
-            return values.Where(checkin => checkin.IsBetween(startingDate, endingDate)).Count();
+            return checkinList.Where(checkin => checkin.IsBetween(startingDate, endingDate)).Count();
         }
+
+
+        
 
         public int CountCheckins()
         {
-            return values.Count;
+            return checkinList.Count;
         }
     }
 }

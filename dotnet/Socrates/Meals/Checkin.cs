@@ -23,5 +23,7 @@ namespace Socrates.Meals
         {
             return IsAfter(startingDate) && !IsAfter(endingDate);
         }
+
+      
     }
 }

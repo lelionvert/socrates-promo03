@@ -1,6 +1,7 @@
 package com.lacombe.promo3.meals;
 
 import com.lacombe.promo3.Period;
+import com.lacombe.promo3.PeriodBuilder;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
@@ -13,7 +14,7 @@ public class PeriodTest {
         //Arrange
         LocalDateTime begin = LocalDateTime.of(2017, 10, 20, 21, 30);
         LocalDateTime end = begin.plusDays(1);
-        Period period = new Period(begin, end);
+        Period period = PeriodBuilder.from(begin).to(end);
 
         //Act
         LocalDateTime dateTime = begin.plusHours(1);
@@ -26,13 +27,12 @@ public class PeriodTest {
     @Test
     public void should_not_be_included_in_the_period() throws Exception {
         //Arrange
-        LocalDateTime begin = LocalDateTime.of(2017, 10, 20, 21, 30);
-        LocalDateTime end = begin.plusDays(1);
-        Period period = new Period(begin, end);
-
+        LocalDateTime today = LocalDateTime.of(2017, 10, 20, 21, 30);
+        LocalDateTime tomorrow = today.plusDays(1);
+        Period periodTodayToTomorrowAtTheSameHour = PeriodBuilder.from(today).to(tomorrow);
         //Act
-        LocalDateTime dateTime = begin.minusHours(1);
-        Boolean isIncluded = period.include(dateTime);
+        LocalDateTime aLittleBitBeforeToday = today.minusHours(1);
+        Boolean isIncluded = periodTodayToTomorrowAtTheSameHour.include(aLittleBitBeforeToday);
 
         //Assert
         Assertions.assertThat(isIncluded).isFalse();

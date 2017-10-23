@@ -17,7 +17,7 @@ public class InMemoryCheckInProvider implements CheckInProvider {
 
     @Override
     public void add(CheckIn checkIn) {
-        registrationBook.add(checkIn);
+       // registrationBook.add(checkIn);
     }
 
     @Override

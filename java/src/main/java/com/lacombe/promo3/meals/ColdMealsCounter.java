@@ -1,5 +1,7 @@
 package com.lacombe.promo3.meals;
 
+import com.lacombe.promo3.PeriodBuilder;
+
 import java.time.LocalDateTime;
 import java.time.Month;
 
@@ -18,6 +20,6 @@ class ColdMealsCounter {
         RegistrationBook registrationBook = checkInProvider.getRegistrationBook();
         // objet period
         // wrapper int
-        return registrationBook.countBetween(BEGIN_DATE, END_DATE);
+        return registrationBook.countIncludedIn(PeriodBuilder.from(BEGIN_DATE).to(END_DATE));
     }
 }

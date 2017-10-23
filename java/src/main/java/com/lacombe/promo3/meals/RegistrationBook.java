@@ -1,36 +1,27 @@
 package com.lacombe.promo3.meals;
 
-import java.time.LocalDateTime;
+import com.lacombe.promo3.Period;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class RegistrationBook {
     private final Collection<CheckIn> checkIns;
 
-    private RegistrationBook(Collection<CheckIn> checkIns) {
+    RegistrationBook(Collection<CheckIn> checkIns) {
         this.checkIns = checkIns;
     }
 
     public static RegistrationBook of(CheckIn... checkIns) {
-        return new RegistrationBook(Arrays.asList(checkIns));
+        return new RegistrationBook(new ArrayList<CheckIn>(Arrays.asList(checkIns)));
     }
 
-    Integer countBetween(LocalDateTime begin, LocalDateTime end) {
+    Integer countIncludedIn(Period checkinPeriod) {
         //TODO remplacer le collect par count
         if(isEmpty()) return 0;
-        return checkIns.stream().filter(checkIn -> checkIn.isBetween(begin, end)).collect(Collectors.toList()).size();
-    }
-
-    void add(CheckIn checkIn) {
-        CheckIn existingCheckIn = getCheckInForEmail(checkIn);
-
-        if (existingCheckIn != null) {
-            checkIns.remove(existingCheckIn);
-        }
-
-        checkIns.add(checkIn);
+        return Math.toIntExact(checkIns.stream().filter(checkIn -> checkIn.isIncludedIn(checkinPeriod)).count());
     }
 
     CheckIn getCheckInForEmail(CheckIn checkIn) {
@@ -46,5 +37,19 @@ public class RegistrationBook {
 
     public boolean isEmpty() {
         return checkIns.isEmpty();
+    }
+
+    public void register(CheckIn checkIn) {
+        CheckIn existingCheckIn = getCheckInForEmail(checkIn);
+
+        if (existingCheckIn != null) {
+            checkIns.remove(existingCheckIn);
+        }
+
+        checkIns.add(checkIn);
+    }
+
+    public boolean contains(CheckIn checkIn) {
+        return checkIns.contains(checkIn);
     }
 }

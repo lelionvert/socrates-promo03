@@ -1,12 +1,14 @@
 
 package com.lacombe.promo3.meals;
 
+import com.lacombe.promo3.Period;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static com.lacombe.promo3.PeriodBuilder.from;
 import static com.lacombe.promo3.meals.ColdMealsCounter.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
@@ -25,10 +27,12 @@ public class ColdMealsCounterTest {
 
     @Mock
     private RegistrationBook registrationBook;
+    private Period period;
 
     @Before
     public void setUp() throws Exception {
         counter = new ColdMealsCounter(checkInProvider);
+        period = from(BEGIN_DATE).to(END_DATE);
     }
 
     @Test
@@ -49,14 +53,14 @@ public class ColdMealsCounterTest {
     public void should_have_one_cold_meal_when_there_is_one_late_check_in() throws Exception {
         //Arrange
         registrationBook = RegistrationBook.of(checkIn);
-        when(checkIn.isBetween(BEGIN_DATE, END_DATE)).thenReturn(true);
+        when(checkIn.isIncludedIn(period)).thenReturn(true);
         when(checkInProvider.getRegistrationBook()).thenReturn(registrationBook);
 
         //Act
         int nbColdMeals = counter.count();
 
         //Assert
-        verify(checkIn).isBetween(BEGIN_DATE, END_DATE);
+        verify(checkIn).isIncludedIn(period);
         assertThat(nbColdMeals).isEqualTo(1);
     }
 
@@ -64,7 +68,7 @@ public class ColdMealsCounterTest {
     public void should_have_zero_cold_meal_when_check_in_date_is_before_begin_cold_meals_date() throws Exception {
         //Arrange
         registrationBook = RegistrationBook.of(checkIn);
-        when(checkIn.isBetween(BEGIN_DATE, END_DATE)).thenReturn(false);
+        when(checkIn.isIncludedIn(period)).thenReturn(false);
         when(checkInProvider.getRegistrationBook()).thenReturn(registrationBook);
 
         //Act

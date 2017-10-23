@@ -19,7 +19,6 @@ public class RegistrationBook {
     }
 
     Integer countIncludedIn(Period checkinPeriod) {
-        //TODO remplacer le collect par count
         if(isEmpty()) return 0;
         return Math.toIntExact(checkIns.stream().filter(checkIn -> checkIn.isIncludedIn(checkinPeriod)).count());
     }

@@ -6,7 +6,7 @@ import com.lacombe.promo3.registration.model.Email;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-class CheckIn {
+public class CheckIn {
     private final Email email;
     private final LocalDateTime checkInDate;
 

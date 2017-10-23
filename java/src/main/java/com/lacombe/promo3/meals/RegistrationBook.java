@@ -10,7 +10,7 @@ import java.util.Optional;
 public class RegistrationBook {
     private final Collection<CheckIn> checkIns;
 
-    RegistrationBook(Collection<CheckIn> checkIns) {
+    public RegistrationBook(Collection<CheckIn> checkIns) {
         this.checkIns = checkIns;
     }
 

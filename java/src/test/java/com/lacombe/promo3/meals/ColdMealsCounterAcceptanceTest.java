@@ -39,6 +39,7 @@ public class ColdMealsCounterAcceptanceTest {
         Assertions.assertThat(countColdMeals).isEqualTo(0);
     }
 
+
     @Test
     public void should_have_one_or_several_cold_meals_when_one_or_several_participants_are_late() throws Exception {
         // Arrange

@@ -7,7 +7,7 @@ public class InMemoryCheckInProvider implements CheckInProvider {
         this.registrationBook = registrationBook;
     }
 
-    static InMemoryCheckInProvider of(RegistrationBook registrationBook) {
+    public static InMemoryCheckInProvider of(RegistrationBook registrationBook) {
         return new InMemoryCheckInProvider(registrationBook);
     }
 

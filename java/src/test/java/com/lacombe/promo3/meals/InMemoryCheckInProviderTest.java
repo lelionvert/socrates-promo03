@@ -28,7 +28,6 @@ public class InMemoryCheckInProviderTest {
         checkInProvider.add(checkIn);
 
         //Assert
-        //TODO
         verify(registrationBook).register(checkIn);
         Assertions.assertThat(checkInProvider.size()).isEqualTo(1);
     }

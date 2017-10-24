@@ -3,7 +3,7 @@ package com.lacombe.promo3.meals;
 public class InMemoryCheckInProvider implements CheckInProvider {
     private final RegistrationBook registrationBook;
 
-    private InMemoryCheckInProvider(RegistrationBook registrationBook) {
+    public InMemoryCheckInProvider(RegistrationBook registrationBook) {
         this.registrationBook = registrationBook;
     }
 

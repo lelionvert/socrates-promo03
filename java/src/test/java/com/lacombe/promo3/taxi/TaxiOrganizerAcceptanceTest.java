@@ -20,10 +20,10 @@ public class TaxiOrganizerAcceptanceTest {
         final Period bookingPeriod = PeriodBuilder
             .from(LocalDateTime.of(2017, Month.OCTOBER, 27, 12, 00))
             .to(LocalDateTime.of(2017, Month.OCTOBER, 27, 12, 30));
-        final InMemoryTaxiProvider inMemoryTaxiProvider = new InMemoryTaxiProvider();
+        final TaxiProvider taxiProvider = new InMemoryTaxiProvider();
         final CheckInProvider inMemoryCheckInProvider = new InMemoryCheckInProvider(RegistrationBook.of());
 
-        final TaxiOrganizer taxiOrganizer = new TaxiOrganizer(inMemoryTaxiProvider, inMemoryCheckInProvider);
+        final TaxiOrganizer taxiOrganizer = new TaxiOrganizer(taxiProvider, inMemoryCheckInProvider);
 
         //WHEN
         final TaxiBookings bookings = taxiOrganizer.getBookings(bookingPeriod);

@@ -1,10 +1,6 @@
 package com.lacombe.promo3.taxi;
 
-import com.lacombe.promo3.Period;
 import com.lacombe.promo3.meals.CheckInProvider;
-import com.lacombe.promo3.meals.InMemoryCheckInProvider;
-import org.junit.runner.RunWith;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class TaxiOrganizer {
 
@@ -15,9 +11,9 @@ public class TaxiOrganizer {
         this.checkInProvider = checkInProvider;
     }
 
-    public TaxiBookings getBookings(Period period) {
+    public TaxiBookingsResult getBookings() {
         checkInProvider.getRegistrationBook();
 
-        return null;
+        return TaxiBookingsResult.notFound();
     }
 }

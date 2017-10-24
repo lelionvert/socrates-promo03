@@ -5,6 +5,7 @@ import com.lacombe.promo3.PeriodBuilder;
 import com.lacombe.promo3.meals.CheckInProvider;
 import com.lacombe.promo3.meals.InMemoryCheckInProvider;
 import com.lacombe.promo3.meals.RegistrationBook;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
@@ -15,20 +16,34 @@ import static org.assertj.core.api.Assertions.*;
 public class TaxiOrganizerAcceptanceTest {
 
     @Test
-    public void should_have_no_taxi_for_no_checkin() throws Exception {
+    public void should_have_no_taxi_without_checkin() throws Exception {
         //GIVEN
-        final Period bookingPeriod = PeriodBuilder
-            .from(LocalDateTime.of(2017, Month.OCTOBER, 27, 12, 00))
-            .to(LocalDateTime.of(2017, Month.OCTOBER, 27, 12, 30));
         final TaxiProvider taxiProvider = new InMemoryTaxiProvider();
         final CheckInProvider inMemoryCheckInProvider = new InMemoryCheckInProvider(RegistrationBook.of());
 
         final TaxiOrganizer taxiOrganizer = new TaxiOrganizer(taxiProvider, inMemoryCheckInProvider);
 
         //WHEN
-        final TaxiBookings bookings = taxiOrganizer.getBookings(bookingPeriod);
+        final TaxiBookingsResult taxiBookingsResult = taxiOrganizer.getBookings();
 
         //THEN
-        assertThat(bookings).isEqualTo(new TaxiBookings());
+        assertThat(taxiBookingsResult).isEqualTo(TaxiBookingsResult.notFound());
+    }
+
+    @Test
+    public void should_book_one_regular_taxi_for_period_with_three_checkins() throws Exception {
+        //GIVEN
+        final TaxiProvider taxiProvider = new InMemoryTaxiProvider();
+        final CheckInProvider inMemoryCheckInProvider = new InMemoryCheckInProvider(RegistrationBook.of());
+
+        final TaxiOrganizer taxiOrganizer = new TaxiOrganizer(taxiProvider, inMemoryCheckInProvider);
+
+        //WHEN
+        final TaxiBookingsResult taxiBookingsResult = taxiOrganizer.getBookings();
+
+        //THEN
+        /*Taxi taxi = Taxi.asRegular();
+        Collection<TaxiBooking> taxiBookings = Arrays.asList(new TaxiBooking());
+        assertThat(taxiBookingsResult).isEqualTo(TaxiBookingsResult.found());*/
     }
 }

@@ -11,6 +11,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.time.LocalDateTime;
 import java.time.Month;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -30,10 +31,27 @@ public class TaxiOrganizerTest {
         final Period bookingPeriod = PeriodBuilder
             .from(LocalDateTime.of(2017, Month.OCTOBER, 27, 12, 00))
             .to(LocalDateTime.of(2017, Month.OCTOBER, 27, 12, 30));
+
         // WHEN
-        taxiOrganizer.getBookings(bookingPeriod);
+        taxiOrganizer.getBookings();
+
         // THEN
         verify(checkInProvider, times(1)).getRegistrationBook();
+    }
+
+    @Test
+    public void getBookings_should_not_found_bookings_when_no_checkin() throws Exception {
+        final Period bookingPeriod = PeriodBuilder
+            .from(LocalDateTime.of(2017, Month.OCTOBER, 27, 12, 00))
+            .to(LocalDateTime.of(2017, Month.OCTOBER, 27, 12, 30));
+
+        final TaxiOrganizer taxiOrganizer = new TaxiOrganizer(taxiProvider, checkInProvider);
+
+        //WHEN
+        final TaxiBookingsResult taxiBookingsResult = taxiOrganizer.getBookings();
+
+        //THEN
+        assertThat(taxiBookingsResult).isEqualTo(TaxiBookingsResult.notFound());
 
     }
 }

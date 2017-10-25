@@ -128,11 +128,6 @@
     <Compile Include="Meals\ColdMealsCounterTest.cs" />
     <Compile Include="Meals\PeriodTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TaxisOrganization\Taxi.cs" />
-    <Compile Include="TaxisOrganization\TaxiProvider.cs" />
-    <Compile Include="TaxisOrganization\Taxis.cs" />
-    <Compile Include="TaxisOrganization\TaxisOrganizer.cs" />
-    <Compile Include="TaxisOrganization\TaxisOrganizerAcceptancesTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

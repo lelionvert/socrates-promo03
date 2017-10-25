@@ -9,10 +9,18 @@ import java.util.Objects;
 public class CheckIn {
     private final Email email;
     private final LocalDateTime checkInDate;
+    private final String passengerName;
 
-    private CheckIn(Email email, LocalDateTime checkInDate) {
+    public CheckIn(Email email, LocalDateTime checkInDate) {
         this.email = email;
         this.checkInDate = checkInDate;
+        this.passengerName = "";
+    }
+
+    public CheckIn(LocalDateTime checkInDate, String passengerName) {
+        this.checkInDate = checkInDate;
+        this.passengerName = passengerName;
+        email = null;
     }
 
     public static CheckIn of(Email email, LocalDateTime checkInDate) {

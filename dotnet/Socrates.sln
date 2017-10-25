@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2002
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socrates", "Socrates\Socrates.csproj", "{6F81E0B6-1E07-466C-908C-F384BA8A85F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socrates.Test", "Socrates.Test\Socrates.Test.csproj", "{064019A4-9710-47F4-9943-1AAABF8D5ED5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socrates.Web", "Socrates.Web\Socrates.Web.csproj", "{79D359F3-EA02-4727-AC10-A443180CB79E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socrates.Web.Tests", "Socrates.Web.Tests\Socrates.Web.Tests.csproj", "{7CA597A4-1747-4EF5-BEF2-88279A2A652E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socrates.Api", "Socrates.Api\Socrates.Api.csproj", "{DD5C1E1C-4F5B-4884-8F28-7B730672FCD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socrates.Api.Tests", "Socrates.Api.Tests\Socrates.Api.Tests.csproj", "{04C3E868-1934-44A4-946A-C2AB9507F0CA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{71D1AF6E-D024-4BA9-AB26-66CA7653B3B3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F81E0B6-1E07-466C-908C-F384BA8A85F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F81E0B6-1E07-466C-908C-F384BA8A85F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F81E0B6-1E07-466C-908C-F384BA8A85F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F81E0B6-1E07-466C-908C-F384BA8A85F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{064019A4-9710-47F4-9943-1AAABF8D5ED5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{064019A4-9710-47F4-9943-1AAABF8D5ED5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{064019A4-9710-47F4-9943-1AAABF8D5ED5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{064019A4-9710-47F4-9943-1AAABF8D5ED5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79D359F3-EA02-4727-AC10-A443180CB79E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79D359F3-EA02-4727-AC10-A443180CB79E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79D359F3-EA02-4727-AC10-A443180CB79E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79D359F3-EA02-4727-AC10-A443180CB79E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CA597A4-1747-4EF5-BEF2-88279A2A652E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CA597A4-1747-4EF5-BEF2-88279A2A652E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CA597A4-1747-4EF5-BEF2-88279A2A652E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CA597A4-1747-4EF5-BEF2-88279A2A652E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD5C1E1C-4F5B-4884-8F28-7B730672FCD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD5C1E1C-4F5B-4884-8F28-7B730672FCD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD5C1E1C-4F5B-4884-8F28-7B730672FCD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD5C1E1C-4F5B-4884-8F28-7B730672FCD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04C3E868-1934-44A4-946A-C2AB9507F0CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04C3E868-1934-44A4-946A-C2AB9507F0CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04C3E868-1934-44A4-946A-C2AB9507F0CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04C3E868-1934-44A4-946A-C2AB9507F0CA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{064019A4-9710-47F4-9943-1AAABF8D5ED5} = {71D1AF6E-D024-4BA9-AB26-66CA7653B3B3}
+		{7CA597A4-1747-4EF5-BEF2-88279A2A652E} = {71D1AF6E-D024-4BA9-AB26-66CA7653B3B3}
+		{04C3E868-1934-44A4-946A-C2AB9507F0CA} = {71D1AF6E-D024-4BA9-AB26-66CA7653B3B3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {16F40533-CC6C-4CBC-9FC0-196F679BD624}
+	EndGlobalSection
+EndGlobal

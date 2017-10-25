@@ -58,6 +58,10 @@
     <Compile Include="CandidateRegistration\Candidat.cs" />
     <Compile Include="CandidateRegistration\CandidateProvider.cs" />
     <Compile Include="CandidateRegistration\CandidateRegister.cs" />
+    <Compile Include="Taxi\InMemoryTaxiProvider.cs" />
+    <Compile Include="Taxi\ITaxiProvider.cs" />
+    <Compile Include="Taxi\TaxiBookingsResult.cs" />
+    <Compile Include="Taxi\TaxiOrganizer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

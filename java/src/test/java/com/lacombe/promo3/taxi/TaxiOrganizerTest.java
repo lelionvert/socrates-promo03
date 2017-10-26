@@ -4,7 +4,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,7 +26,9 @@ public class TaxiOrganizerTest {
         TaxiBooking booking = new TaxiOrganizer(arrivals).getBookings();
 
         //THEN
-        assertThat(booking).isEqualTo(new TaxiBooking(new Taxi("Taxi_12h"), "12", "Thierry de Pauw"));
+        Collection<Passenger> expectedPassengers = new ArrayList<Passenger>();
+        expectedPassengers.add(new Passenger("Thierry de Pauw"));
+        assertThat(booking).isEqualTo(new TaxiBooking(new Taxi("Taxi_12h"), "12", expectedPassengers));
     }
 
     @Test
@@ -39,7 +43,9 @@ public class TaxiOrganizerTest {
         TaxiBooking booking = new TaxiOrganizer(arrivals).getBookings();
 
         //THEN
-        assertThat(booking).isEqualTo(new TaxiBooking(new Taxi("Taxi_13h"), "13", "Thierry de Pauw"));
+        Collection<Passenger> expectedPassengers = new ArrayList<Passenger>();
+        expectedPassengers.add(new Passenger("Thierry de Pauw"));
+        assertThat(booking).isEqualTo(new TaxiBooking(new Taxi("Taxi_13h"), "13", expectedPassengers));
     }
 
     @Test
@@ -66,41 +72,4 @@ public class TaxiOrganizerTest {
 
         assertThat(booking).isEqualTo(new TaxiBooking(new Taxi("Taxi_15h"), "15", passengersExpected));
     }
-
-    /*@Mock
-    CheckInProvider checkInProvider;
-
-    @Mock
-    TaxiProvider taxiProvider;
-
-    @Test
-    public void getBookings_should_call_getRegistrationBook_once() throws Exception {
-        // GIVEN
-        final TaxiOrganizer taxiOrganizer = new TaxiOrganizer(taxiProvider, checkInProvider);
-        final Period bookingPeriod = PeriodBuilder
-            .from(LocalDateTime.of(2017, Month.OCTOBER, 27, 12, 00))
-            .to(LocalDateTime.of(2017, Month.OCTOBER, 27, 12, 30));
-
-        // WHEN
-        taxiOrganizer.getBookings();
-
-        // THEN
-        verify(checkInProvider, times(1)).getRegistrationBook();
-    }
-
-    @Test
-    public void getBookings_should_not_found_bookings_when_no_checkin() throws Exception {
-        final Period bookingPeriod = PeriodBuilder
-            .from(LocalDateTime.of(2017, Month.OCTOBER, 27, 12, 00))
-            .to(LocalDateTime.of(2017, Month.OCTOBER, 27, 12, 30));
-
-        final TaxiOrganizer taxiOrganizer = new TaxiOrganizer(taxiProvider, checkInProvider);
-
-        //WHEN
-        final TaxiBookingsResult taxiBookingsResult = taxiOrganizer.getBookings();
-
-        //THEN
-        assertThat(taxiBookingsResult).isEqualTo(TaxiBookingsResult.notFound());
-
-    }*/
 }

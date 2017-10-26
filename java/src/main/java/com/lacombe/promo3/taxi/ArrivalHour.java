@@ -6,4 +6,9 @@ public class ArrivalHour {
     public ArrivalHour(int hour) {
         this.hour = hour;
     }
+
+    @Override
+    public String toString() {
+        return Integer.toString(hour);
+    }
 }

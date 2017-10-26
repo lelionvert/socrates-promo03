@@ -1,11 +1,38 @@
 package com.lacombe.promo3.taxi;
 
-public class TaxiBooking {
-    private boolean taxiName;
-    private boolean horaire;
-    private boolean passager;
+import java.time.LocalDateTime;
+import java.time.Month;
 
-    public TaxiBooking(String taxiName, String time, String passengerName) {
+public class TaxiBooking {
+
+    private final Taxi taxi;
+    private final LocalDateTime time;
+    private final Passenger passenger;
+
+    public TaxiBooking(Taxi taxi, String time, String passengerName) {
+        this.taxi = taxi;
+        this.time = LocalDateTime.of(2017, Month.OCTOBER, 26, Integer.parseInt(time), 0);
+        this.passenger = new Passenger(passengerName);
+    }
+
+    public Taxi getTaxi() {
+        return taxi;
+    }
+
+    public LocalDateTime getHoraire() {
+        return time;
+    }
+
+    public String getPassengerName() {
+        return passenger.getPassengerName();
+    }
+
+    @Override
+    public int hashCode() {
+        int result = taxi != null ? taxi.hashCode() : 0;
+        result = 31 * result + (time != null ? time.hashCode() : 0);
+        result = 31 * result + (passenger != null ? passenger.hashCode() : 0);
+        return result;
     }
 
     @Override
@@ -15,28 +42,8 @@ public class TaxiBooking {
 
         TaxiBooking that = (TaxiBooking) o;
 
-        if (taxiName != that.taxiName) return false;
-        if (horaire != that.horaire) return false;
-        return passager == that.passager;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (taxiName ? 1 : 0);
-        result = 31 * result + (horaire ? 1 : 0);
-        result = 31 * result + (passager ? 1 : 0);
-        return result;
-    }
-
-    public String getTaxiName() {
-        return "Taxi_12h";
-    }
-
-    public String getHoraire() {
-        return "12h";
-    }
-
-    public String getPassager() {
-        return "Thierry de Pauw";
+        if (taxi != null ? !taxi.equals(that.taxi) : that.taxi != null) return false;
+        if (time != null ? !time.equals(that.time) : that.time != null) return false;
+        return passenger != null ? passenger.equals(that.passenger) : that.passenger == null;
     }
 }

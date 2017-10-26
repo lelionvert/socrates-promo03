@@ -8,4 +8,13 @@ public class Arrival {
         this.hour = hour;
         this.participant = participant;
     }
+
+    public ArrivalHour getHour() {
+        return hour;
+    }
+
+
+    public String getPassengerName() {
+        return participant.getName();
+    }
 }

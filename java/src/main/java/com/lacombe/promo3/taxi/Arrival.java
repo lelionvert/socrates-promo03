@@ -14,7 +14,7 @@ public class Arrival {
     }
 
 
-    public String getPassengerName() {
+    public String getParticipantName() {
         return participant.getName();
     }
 }

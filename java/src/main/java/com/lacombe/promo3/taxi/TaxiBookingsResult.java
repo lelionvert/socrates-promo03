@@ -2,24 +2,9 @@ package com.lacombe.promo3.taxi;
 
 public abstract class TaxiBookingsResult {
 
-    private String taxiName;
-    private boolean horaire;
-    private boolean passager;
 
     public static TaxiBookingsResult notFound() {
         return new NotFound();
-    }
-
-    public String getTaxiName() {
-        return taxiName;
-    }
-
-    public boolean getHoraire() {
-        return horaire;
-    }
-
-    public boolean getPassager() {
-        return passager;
     }
 
     private static class NotFound extends TaxiBookingsResult{

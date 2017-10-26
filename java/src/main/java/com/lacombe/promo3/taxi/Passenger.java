@@ -7,10 +7,6 @@ public class Passenger {
         this.passengerName = passengerName;
     }
 
-    public String getPassengerName() {
-        return passengerName;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

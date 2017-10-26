@@ -31,14 +31,6 @@ public class TaxiBooking {
         return taxi;
     }
 
-    public LocalDateTime getHoraire() {
-        return time;
-    }
-
-    public String getPassengerName() {
-        return passenger.getPassengerName();
-    }
-
     @Override
     public int hashCode() {
         int result = taxi != null ? taxi.hashCode() : 0;
@@ -59,7 +51,4 @@ public class TaxiBooking {
         return passenger != null ? passenger.equals(that.passenger) : that.passenger == null;
     }
 
-    public Collection<Passenger> getPassengers() {
-        return passengers;
-    }
 }

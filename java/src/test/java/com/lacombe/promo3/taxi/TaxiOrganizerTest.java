@@ -17,10 +17,11 @@ public class TaxiOrganizerTest {
         //GIVEN
         Participant participant = new Participant("Thierry de Pauw");
         ArrivalHour arrivalHour = new ArrivalHour(12);
-        Arrival arrival = new Arrival(arrivalHour, participant);
+        Arrivals arrivals = new Arrivals();
+        arrivals.add(new Arrival(arrivalHour, participant));
 
         //WHEN
-        TaxiBooking booking = new TaxiOrganizer(arrival).getBookingsWithoutProvider();
+        TaxiBooking booking = new TaxiOrganizer(arrivals).getBookings();
 
         //THEN
         assertThat(booking).isEqualTo(new TaxiBooking(new Taxi("Taxi_12h"), "12", "Thierry de Pauw"));
@@ -31,10 +32,11 @@ public class TaxiOrganizerTest {
         //GIVEN
         Participant participant = new Participant("Thierry de Pauw");
         ArrivalHour arrivalHour = new ArrivalHour(13);
-        Arrival arrival = new Arrival(arrivalHour, participant);
+        Arrivals arrivals = new Arrivals();
+        arrivals.add(new Arrival(arrivalHour, participant));
 
         //WHEN
-        TaxiBooking booking = new TaxiOrganizer(arrival).getBookingsWithoutProvider();
+        TaxiBooking booking = new TaxiOrganizer(arrivals).getBookings();
 
         //THEN
         assertThat(booking).isEqualTo(new TaxiBooking(new Taxi("Taxi_13h"), "13", "Thierry de Pauw"));
@@ -55,7 +57,7 @@ public class TaxiOrganizerTest {
         arrivals.add(arrival2);
 
         //WHEN
-        TaxiBooking booking = new TaxiOrganizer(arrivals).getBookingsWithoutProvider();
+        TaxiBooking booking = new TaxiOrganizer(arrivals).getBookings();
 
         //THEN
         List<Passenger> passengersExpected = Arrays.asList(

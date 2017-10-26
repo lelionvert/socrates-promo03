@@ -1,6 +1,8 @@
 package com.lacombe.promo3.taxi;
 
-public class ArrivalHour {
+import java.util.Comparator;
+
+public class ArrivalHour implements Comparable<ArrivalHour>{
     private final int hour;
 
     public ArrivalHour(int hour) {
@@ -25,5 +27,10 @@ public class ArrivalHour {
     @Override
     public String toString() {
         return Integer.toString(hour);
+    }
+
+    @Override
+    public int compareTo(ArrivalHour o) {
+        return this.hour - o.hour;
     }
 }

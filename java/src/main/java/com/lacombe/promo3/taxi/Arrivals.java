@@ -8,6 +8,10 @@ public class Arrivals {
 
     private Collection<Arrival> arrivals = new ArrayList<>();
 
+    public ArrivalHour getLastArrivalTime() {
+        return getArrivals().iterator().next().getHour();
+    }
+
     public void add(Arrival arrival) {
         arrivals.add(arrival);
     }

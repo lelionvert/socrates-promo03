@@ -12,10 +12,9 @@ public class TaxiOrganizer {
     }
 
     public TaxiBooking getBookings() {
-        Arrival firstArrival = arrivals.getArrivals().iterator().next();
 
-        Taxi taxi = new Taxi("Taxi_"+firstArrival.getHour()+"h");
-        String time = String.valueOf(firstArrival.getHour());
+        Taxi taxi = new Taxi("Taxi_"+ arrivals.getLastArrivalTime() +"h");
+        String time = String.valueOf(arrivals.getLastArrivalTime());
         Collection<Passenger> passengers = new ArrayList<>();
 
         for (Arrival arrival : arrivals.getArrivals()) {
@@ -24,4 +23,5 @@ public class TaxiOrganizer {
 
         return new TaxiBooking(taxi, time, passengers);
     }
+
 }

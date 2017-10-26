@@ -8,6 +8,21 @@ public class ArrivalHour {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ArrivalHour that = (ArrivalHour) o;
+
+        return hour == that.hour;
+    }
+
+    @Override
+    public int hashCode() {
+        return hour;
+    }
+
+    @Override
     public String toString() {
         return Integer.toString(hour);
     }

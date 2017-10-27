@@ -17,7 +17,22 @@ public class TaxiOrganizer {
         final ArrivalHour lastArrivalTime = arrivals.getLastArrivalTime();
 
         Taxi taxi = new Taxi("Taxi_"+ lastArrivalTime +"h");
-        LocalTime departureTime = lastArrivalTime.getArrivalTime();
+        String time = String.valueOf(lastArrivalTime);
+        Collection<Passenger> passengers = new ArrayList<>();
+
+        for (Arrival arrival : arrivals.getArrivals()) {
+            passengers.add(new Passenger(arrival.getParticipantName()));
+        }
+
+        return new TaxiBooking(taxi, time, passengers);
+    }
+
+    public TaxiBooking getBookingsBis() {
+
+        final ArrivalHour lastArrivalTime = arrivals.getLastArrivalTime();
+
+        Taxi taxi = new Taxi("Taxi_"+ lastArrivalTime +"h");
+        LocalTime departureTime = lastArrivalTime.generateLocalTime();
         Collection<Passenger> passengers = new ArrayList<>();
 
         for (Arrival arrival : arrivals.getArrivals()) {

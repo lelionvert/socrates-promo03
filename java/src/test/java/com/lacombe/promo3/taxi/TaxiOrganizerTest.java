@@ -22,7 +22,7 @@ public class TaxiOrganizerTest {
         TaxiBooking booking = new TaxiOrganizer(arrivals).getBookings();
 
         //THEN
-        Collection<Passenger> expectedPassengers = new ArrayList<Passenger>();
+        Passengers expectedPassengers = new Passengers();
         expectedPassengers.add(new Passenger("Thierry de Pauw"));
         assertThat(booking).isEqualTo(new TaxiBooking(new Taxi("Taxi_12h"), LocalTime.of(12, 0), expectedPassengers));
     }
@@ -39,9 +39,9 @@ public class TaxiOrganizerTest {
         TaxiBooking booking = new TaxiOrganizer(arrivals).getBookings();
 
         //THEN
-        List<Passenger> expectedPassengers = Arrays.asList(
-                new Passenger("Thierry de Pauw"),
-                new Passenger("Houssam"));
+        Passengers expectedPassengers = new Passengers(Arrays.asList(
+            new Passenger("Thierry de Pauw"),
+            new Passenger("Houssam")));
         assertThat(booking).isEqualTo(new TaxiBooking(new Taxi("Taxi_15h"), LocalTime.of(15, 0), expectedPassengers));
     }
 
@@ -57,11 +57,11 @@ public class TaxiOrganizerTest {
         TaxiBooking booking = new TaxiOrganizer(arrivals).getBookings();
 
         //THEN
-        List<Passenger> passengersExpected = Arrays.asList(
+        Passengers expectedPassengers = new Passengers(Arrays.asList(
             new Passenger("Thierry de Pauw"),
             new Passenger("Houssam"),
-            new Passenger("Arnaud Lemaire"));
-        assertThat(booking).isEqualTo(new TaxiBooking(new Taxi("Taxi_12h"), LocalTime.of(12, 30), passengersExpected));
+            new Passenger("Arnaud Lemaire")));
+        assertThat(booking).isEqualTo(new TaxiBooking(new Taxi("Taxi_12h"), LocalTime.of(12, 30), expectedPassengers));
     }
 
     

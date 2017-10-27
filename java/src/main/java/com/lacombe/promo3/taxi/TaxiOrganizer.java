@@ -1,8 +1,6 @@
 package com.lacombe.promo3.taxi;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Collection;
 
 public class TaxiOrganizer {
 
@@ -18,7 +16,7 @@ public class TaxiOrganizer {
 
         Taxi taxi = new Taxi("Taxi_"+ lastArrivalTime +"h");
         LocalTime departureTime = lastArrivalTime.getArrivalTime();
-        Collection<Passenger> passengers = new ArrayList<>();
+        Passengers passengers = new Passengers();
 
         for (Arrival arrival : arrivals.getArrivals()) {
             passengers.add(new Passenger(arrival.getParticipantName()));

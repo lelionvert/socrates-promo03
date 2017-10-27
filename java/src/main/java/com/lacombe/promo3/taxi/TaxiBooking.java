@@ -1,15 +1,12 @@
 package com.lacombe.promo3.taxi;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.Month;
 import java.util.Collection;
-import java.util.List;
 
 public class TaxiBooking {
 
     private final Taxi taxi;
-    private final LocalTime departureTime;
     private final LocalDateTime time;
     private final Collection<Passenger> passengers;
 
@@ -17,14 +14,6 @@ public class TaxiBooking {
         this.taxi = taxi;
         this.time = LocalDateTime.of(2017, Month.OCTOBER, 26, Integer.parseInt(time), 0);
         this.passengers = passengers;
-        departureTime = null;
-    }
-
-    public TaxiBooking(Taxi taxi, LocalTime departureTime, Collection<Passenger> passengers) {
-        this.taxi = taxi;
-        this.departureTime = departureTime;
-        this.passengers = passengers;
-        time = null;
     }
 
     @Override
@@ -47,4 +36,7 @@ public class TaxiBooking {
         return result;
     }
 
+    public Taxi getTaxi() {
+        return taxi;
+    }
 }

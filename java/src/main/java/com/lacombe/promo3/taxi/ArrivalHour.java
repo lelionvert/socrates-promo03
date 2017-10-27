@@ -1,24 +1,12 @@
 package com.lacombe.promo3.taxi;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Comparator;
 
 public class ArrivalHour implements Comparable<ArrivalHour>{
     private final int hour;
-    private final int minute;
 
     public ArrivalHour(int hour) {
-        this(hour, 0);
-    }
-
-    public ArrivalHour(int hour, int minute) {
         this.hour = hour;
-        this.minute = minute;
-    }
-
-    public LocalTime generateLocalTime() {
-        return LocalTime.of(hour,minute);
     }
 
     @Override
@@ -28,15 +16,12 @@ public class ArrivalHour implements Comparable<ArrivalHour>{
 
         ArrivalHour that = (ArrivalHour) o;
 
-        if (hour != that.hour) return false;
-        return minute == that.minute;
+        return hour == that.hour;
     }
 
     @Override
     public int hashCode() {
-        int result = hour;
-        result = 31 * result + minute;
-        return result;
+        return hour;
     }
 
     @Override

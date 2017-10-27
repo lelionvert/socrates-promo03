@@ -58,10 +58,14 @@
     <Compile Include="CandidateRegistration\Candidat.cs" />
     <Compile Include="CandidateRegistration\CandidateProvider.cs" />
     <Compile Include="CandidateRegistration\CandidateRegister.cs" />
-    <Compile Include="Taxi\InMemoryTaxiProvider.cs" />
-    <Compile Include="Taxi\ITaxiProvider.cs" />
-    <Compile Include="Taxi\TaxiBookingsResult.cs" />
-    <Compile Include="Taxi\TaxiOrganizer.cs" />
+    <Compile Include="TaxiOrganization\Arrival.cs" />
+    <Compile Include="TaxiOrganization\Arrivals.cs" />
+    <Compile Include="TaxiOrganization\ArrivalHour.cs" />
+    <Compile Include="TaxiOrganization\Participant.cs" />
+    <Compile Include="TaxiOrganization\Passenger.cs" />
+    <Compile Include="TaxiOrganization\Taxi.cs" />
+    <Compile Include="TaxiOrganization\TaxiBooking.cs" />
+    <Compile Include="TaxiOrganization\TaxiOrganizer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

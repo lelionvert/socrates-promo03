@@ -128,8 +128,8 @@
     <Compile Include="Meals\ColdMealsCounterTest.cs" />
     <Compile Include="Meals\PeriodTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Taxi\TaxiOrganizerAcceptanceTest.cs" />
-    <Compile Include="Taxi\TaxiOrganizerTest.cs" />
+    <Compile Include="TaxiOrganization\ArrivalsTest.cs" />
+    <Compile Include="TaxiOrganization\TaxiOrganizerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -5,20 +5,15 @@ import java.time.LocalTime;
 import java.util.Comparator;
 
 public class ArrivalHour implements Comparable<ArrivalHour>{
-    private final int hour;
-    private final int minute;
 
-    public ArrivalHour(int hour) {
-        this(hour, 0);
+    private LocalTime arrivalTime;
+
+    public ArrivalHour(LocalTime arrivalTime) {
+        this.arrivalTime = arrivalTime;
     }
 
-    public ArrivalHour(int hour, int minute) {
-        this.hour = hour;
-        this.minute = minute;
-    }
-
-    public LocalTime generateLocalTime() {
-        return LocalTime.of(hour,minute);
+    public LocalTime getArrivalTime() {
+        return arrivalTime;
     }
 
     @Override
@@ -28,24 +23,21 @@ public class ArrivalHour implements Comparable<ArrivalHour>{
 
         ArrivalHour that = (ArrivalHour) o;
 
-        if (hour != that.hour) return false;
-        return minute == that.minute;
+        return arrivalTime != null ? arrivalTime.equals(that.arrivalTime) : that.arrivalTime == null;
     }
 
     @Override
     public int hashCode() {
-        int result = hour;
-        result = 31 * result + minute;
-        return result;
+        return arrivalTime != null ? arrivalTime.hashCode() : 0;
     }
 
     @Override
     public String toString() {
-        return Integer.toString(hour);
+        return Integer.toString(arrivalTime.getHour());
     }
 
     @Override
     public int compareTo(ArrivalHour o) {
-        return this.hour - o.hour;
+        return this.arrivalTime.compareTo(o.arrivalTime);
     }
 }

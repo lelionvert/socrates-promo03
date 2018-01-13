@@ -17,6 +17,8 @@ namespace Socrates.Consoles
             {
                 Console.WriteLine("************************************************");
                 Console.WriteLine("**              SOCRATES FR                   **");
+                Console.WriteLine("**              EDITION 2018                  **");
+                Console.WriteLine("**            27 Octobre 2018                 **");
                 Console.WriteLine("************************************************");
                 Console.WriteLine("**                                            **");
                 Console.WriteLine("** 1 - Ajouter des participants               **");

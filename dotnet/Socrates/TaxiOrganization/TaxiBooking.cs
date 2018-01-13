@@ -39,5 +39,13 @@ namespace Socrates.TaxiOrganization
         {
             return taxi;
         }
+
+        public IEnumerable<Passenger> GetPassengers()
+        {
+            foreach (var passenger in passengers)
+            {
+                yield return passenger;
+            }
+        }
     }
 }

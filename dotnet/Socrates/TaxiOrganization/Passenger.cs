@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Socrates.TaxiOrganization
 {
@@ -25,6 +22,11 @@ namespace Socrates.TaxiOrganization
         public override int GetHashCode()
         {
             return 1158908920 + EqualityComparer<string>.Default.GetHashCode(passengerName);
+        }
+
+        public override string ToString()
+        {
+            return passengerName;
         }
     }
 }

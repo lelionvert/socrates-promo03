@@ -48,6 +48,11 @@ namespace Socrates.CandidateRegistration
         {
             return -358254024 + EqualityComparer<string>.Default.GetHashCode(_emailAddress);
         }
+
+        public override string ToString()
+        {
+            return _emailAddress;
+        }
     }
 }
     

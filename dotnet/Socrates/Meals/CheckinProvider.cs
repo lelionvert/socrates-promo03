@@ -11,6 +11,16 @@ namespace Socrates.Meals
             participantCheckins = Checkins.FromList(checkins.ToList());
         }
 
+        public void Add(Checkin checkin)
+        {
+            if (checkin == null)
+            {
+                return;
+            }
+
+            participantCheckins.Add(checkin);
+        }
+
         public Checkins GetCheckins()
         {
             return participantCheckins;

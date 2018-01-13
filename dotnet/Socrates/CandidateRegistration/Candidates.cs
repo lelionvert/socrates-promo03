@@ -43,7 +43,7 @@ namespace Socrates.CandidateRegistration
 
         public Emails GetEmails()
         {
-            List<Email> candidateEmails = values.Select(candidate => candidate.Email).ToList();
+           List<Email> candidateEmails = values.Select(candidate => candidate.Email).ToList();
            return Emails.FromList(candidateEmails);
         }
 

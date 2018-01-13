@@ -23,6 +23,16 @@ namespace Socrates.Meals
             return checkinList.Where(checkin => checkin.IsContainedBy(period)).Count();
         }
 
+        public void Add(Checkin checkin)
+        {
+            if (checkinList == null)
+            {
+                return;
+            }
+
+            checkinList.Add(checkin);
+        }
+
         public int CountCheckins()
         {
             return checkinList.Count;

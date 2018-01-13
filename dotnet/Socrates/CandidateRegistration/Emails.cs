@@ -15,5 +15,18 @@ namespace Socrates.CandidateRegistration
         {
             return new Emails(candidateEmails);
         }
+
+        public IEnumerable<Email> ToList()
+        {
+            foreach (var email in candidateEmails)
+            {
+                yield return email;
+            }
+        }
+
+        public bool IsEmpty()
+        {
+            return candidateEmails.Count == 0;
+        }
     }
 }

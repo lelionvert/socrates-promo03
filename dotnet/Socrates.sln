@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+VisualStudioVersion = 15.0.27130.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socrates", "Socrates\Socrates.csproj", "{6F81E0B6-1E07-466C-908C-F384BA8A85F1}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socrates.Api.Tests", "Socrates.Api.Tests\Socrates.Api.Tests.csproj", "{04C3E868-1934-44A4-946A-C2AB9507F0CA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{71D1AF6E-D024-4BA9-AB26-66CA7653B3B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socrates.Console.Meals", "Socrates.Console.Meals\Socrates.Console.Meals.csproj", "{ABA9857C-92E1-46B4-A238-DE717A9E98D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{04C3E868-1934-44A4-946A-C2AB9507F0CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04C3E868-1934-44A4-946A-C2AB9507F0CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04C3E868-1934-44A4-946A-C2AB9507F0CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABA9857C-92E1-46B4-A238-DE717A9E98D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABA9857C-92E1-46B4-A238-DE717A9E98D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABA9857C-92E1-46B4-A238-DE717A9E98D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABA9857C-92E1-46B4-A238-DE717A9E98D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

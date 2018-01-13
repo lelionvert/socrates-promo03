@@ -48,5 +48,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Socrates\Socrates.csproj">
+      <Project>{6f81e0b6-1e07-466c-908c-f384ba8a85f1}</Project>
+      <Name>Socrates</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

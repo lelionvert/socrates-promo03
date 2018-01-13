@@ -13,7 +13,7 @@ namespace Socrates.TaxiOrganization
         public TaxiBooking(Taxi taxi, String time, IList<Passenger> passengers)
         {
             this.taxi = taxi;
-            this.time = new DateTime(2017, 10, 26, int.Parse(time), 00, 00);
+            this.time = new DateTime(2018, 10, 26, int.Parse(time), 00, 00);
             this.passengers = passengers;
         }
 

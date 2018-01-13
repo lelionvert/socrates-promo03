@@ -30,8 +30,8 @@ namespace Socrates.Test.Meals
         {
             // SETUP
             var checkins = new List<Checkin>();
-            var firstParticipantCheckin = new Checkin(Email.Of("regis.dubois@socrates.com"), new DateTime(2017, 10, 27, 20, 59, 59));
-            var secondParticipantCheckin = new Checkin(Email.Of("fanny.dubois@socrates.com"), new DateTime(2017, 10, 27, 17, 13, 00));
+            var firstParticipantCheckin = new Checkin(Email.Of("regis.dubois@socrates.com"), new DateTime(2018, 10, 27, 20, 59, 59));
+            var secondParticipantCheckin = new Checkin(Email.Of("fanny.dubois@socrates.com"), new DateTime(2018, 10, 27, 17, 13, 00));
             checkins.Add(firstParticipantCheckin);
             checkins.Add(secondParticipantCheckin);
 
@@ -50,9 +50,9 @@ namespace Socrates.Test.Meals
         {
             // SETUP
             var checkins = new List<Checkin>();
-            var firstParticipantCheckin = new Checkin(Email.Of("regis.dubois@socrates.com"), new DateTime(2017, 10, 27, 21, 59, 59));
-            var secondParticipantCheckin = new Checkin(Email.Of("fanny.dubois@socrates.com"), new DateTime(2017, 10, 27, 20, 13, 00));
-            var thirdParticipantCheckin = new Checkin(Email.Of("Nany.dubois@socrates.com"), new DateTime(2017, 10, 27, 21, 13, 00));
+            var firstParticipantCheckin = new Checkin(Email.Of("regis.dubois@socrates.com"), new DateTime(2018, 10, 27, 21, 59, 59));
+            var secondParticipantCheckin = new Checkin(Email.Of("fanny.dubois@socrates.com"), new DateTime(2018, 10, 27, 20, 13, 00));
+            var thirdParticipantCheckin = new Checkin(Email.Of("Nany.dubois@socrates.com"), new DateTime(2018, 10, 27, 21, 13, 00));
 
             checkins.Add(firstParticipantCheckin);
             checkins.Add(secondParticipantCheckin);
@@ -73,9 +73,9 @@ namespace Socrates.Test.Meals
         {
             // SETUP
             var checkins = new List<Checkin>();
-            var firstParticipantCheckin = new Checkin(Email.Of("regis.dubois@socrates.com"), new DateTime(2017, 10, 28, 00, 00, 00));
-            var secondParticipantCheckin = new Checkin(Email.Of("fanny.dubois@socrates.com"), new DateTime(2017, 10, 28, 09, 20, 00));
-            var thirdParticipantCheckin = new Checkin(Email.Of("Nany.dubois@socrates.com"), new DateTime(2017, 10, 29, 21, 13, 00));
+            var firstParticipantCheckin = new Checkin(Email.Of("regis.dubois@socrates.com"), new DateTime(2018, 10, 28, 00, 00, 00));
+            var secondParticipantCheckin = new Checkin(Email.Of("fanny.dubois@socrates.com"), new DateTime(2018, 10, 28, 09, 20, 00));
+            var thirdParticipantCheckin = new Checkin(Email.Of("Nany.dubois@socrates.com"), new DateTime(2018, 10, 29, 21, 13, 00));
 
             checkins.Add(firstParticipantCheckin);
             checkins.Add(secondParticipantCheckin);

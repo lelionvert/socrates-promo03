@@ -12,10 +12,10 @@ namespace Socrates.Test.Meals
         public void Should_Verify_Date_Is_In_Period()
         {
             // SETUP
-            var inRangeDate = new DateTime(2017,10,10,09,00,00);
+            var inRangeDate = new DateTime(2018,10,10,09,00,00);
 
-            var startingDate = new DateTime(2017, 10, 01);
-            var endingDate = new DateTime(2017, 10, 30);
+            var startingDate = new DateTime(2018, 10, 01);
+            var endingDate = new DateTime(2018, 10, 30);
             var period = new Period(startingDate,endingDate);
 
             // RUN
@@ -31,8 +31,8 @@ namespace Socrates.Test.Meals
             // SETUP
             var notInRangeDate = new DateTime(2018, 05, 21, 10, 00, 00);
 
-            var startingDate = new DateTime(2017, 10, 01);
-            var endingDate = new DateTime(2017, 10, 30);
+            var startingDate = new DateTime(2018, 10, 01);
+            var endingDate = new DateTime(2018, 10, 30);
             var period = new Period(startingDate, endingDate);
 
             // RUN

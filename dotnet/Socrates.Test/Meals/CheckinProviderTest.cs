@@ -25,7 +25,7 @@ namespace Socrates.Test.Meals
         public void GetCheckins_Should_Return_Zero_When_1_Checkin_Already_Exists()
         {
             // SETUP
-            var participantCheckinDate = new DateTime(2017, 10, 27, 16, 30, 00);
+            var participantCheckinDate = new DateTime(2018, 10, 27, 16, 30, 00);
             var participantCheckin = new Checkin(Email.Of("Ismail@lcdlv.fr"), participantCheckinDate);
             var checkinProvider = new CheckinProvider(participantCheckin);
 
